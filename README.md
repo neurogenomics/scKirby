@@ -1,20 +1,45 @@
 scKirby
 ================
 <h4>
-Author:
+Author: <i>Brian M. Schilder</i>
 </h4>
-Brian M. Schilder
-
 <h4>
-Most recent update:
+Most recent update: <i>Jun-14-2021</i>
 </h4>
-Jun-14-2021
 
-# scKirby
+<img src="./images/buff_kirby.jpeg" height="400">
 
-Automated ingestion and conversion of various single-cell data formats.
+## Supported input formats
 
-<img src="./images/buff_kirby.jpeg" height="500">
+-   [Seurat](https://satijalab.org/seurat/index.html)  
+-   [H5Seurat](https://mojaveazure.github.io/seurat-disk/articles/convert-anndata.html)
+-   [anndata](https://github.com/rcannood/anndata)
+-   [loom](http://loompy.org/)
+-   [loomR](https://satijalab.org/loomR/loomR_tutorial.html)
+-   [EWCE](https://github.com/NathanSkene/EWCE)
+-   [matrix](https://cran.r-project.org/web/packages/Matrix/index.html)
+-   [sparseMatrix
+    (dgTMatrix/dgCMatrix)](https://slowkow.com/notes/sparse-matrix/)
+-   [DelayedArray](https://petehaitch.github.io/BioC2020_DelayedArray_workshop/articles/Effectively_using_the_DelayedArray_framework_for_users.html)
+
+## Supported output formats
+
+**Note**: Currently, all files are converted to
+[SingleCellExperiment](https://bioconductor.org/packages/release/bioc/vignettes/SingleCellExperiment/inst/doc/intro.html)
+(sce) format.
+
+For exporting sce to other file types, see these following packages:
+
+-   [sceasy](https://github.com/cellgeni/sceasy)  
+-   [zellkonverter](https://theislab.github.io/zellkonverter/articles/zellkonverter.html)
+
+## Installation
+
+``` r
+if(!"remotes" %in% rownames(install.packages())){install.packages("remotes")}
+
+remotes::install_github("bschilder/scKirby")
+```
 
 ## Examples
 
