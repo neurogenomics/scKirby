@@ -9,6 +9,8 @@ Most recent update: <i>Jun-14-2021</i>
 
 <img src="./images/buff_kirby.jpeg" height="400">
 
+## Automated ingestion and conversion of various single-cell data formats.
+
 ## Supported input formats
 
 -   [Seurat](https://satijalab.org/seurat/index.html)  
@@ -24,14 +26,18 @@ Most recent update: <i>Jun-14-2021</i>
 
 ## Supported output formats
 
-**Note**: Currently, all files are converted to
-[SingleCellExperiment](https://bioconductor.org/packages/release/bioc/vignettes/SingleCellExperiment/inst/doc/intro.html)
-(sce) format.
+**Notes**:
 
-For exporting sce to other file types, see these following packages:
-
--   [sceasy](https://github.com/cellgeni/sceasy)  
--   [zellkonverter](https://theislab.github.io/zellkonverter/articles/zellkonverter.html)
+-   Currently, all files are converted to
+    [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/vignettes/SingleCellExperiment/inst/doc/intro.html)
+    (sce) format. For exporting sce to other file types, see these
+    following packages:
+    -   [sceasy](https://github.com/cellgeni/sceasy)  
+    -   [zellkonverter](https://theislab.github.io/zellkonverter/articles/zellkonverter.html)
+-   Currently, some (but not all) conversions carry over:
+    -   Multiple assays per experiment.
+    -   Additional objects like dimensionality reduction projections
+        (e.g. PCA, tSNE, UMAP) or graphs (e.g. K-nearest neighbors).
 
 ## Installation
 
