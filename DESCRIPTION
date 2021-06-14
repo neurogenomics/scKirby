@@ -40,6 +40,5 @@ Imports:
     loomR
 Remotes:
   github::mojaveazure/seurat-disk, 
-  github::mojaveazure/loomR,
-  github::cellgeni/sceasy   
+  github::mojaveazure/loomR 
 VignetteBuilder: knitr
