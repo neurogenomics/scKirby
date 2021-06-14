@@ -1,0 +1,6 @@
+exportPattern("^[[:alpha:]]+")
+importFrom(magrittr,"%>%")
+importFrom(data.table,":=")
+importFrom(DescTools,"%like%")
+import(dplyr)
+import(ggplot2)

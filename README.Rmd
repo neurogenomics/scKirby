@@ -1,0 +1,142 @@
+---
+title: "scKirby"  
+author: "<h4>Author:</h4>Brian M. Schilder" 
+date: "<h4>Most recent update:</h4>`r format( Sys.Date(), '%b-%d-%Y')`"
+output:
+  github_document:
+    toc: false
+    toc_depth: 3
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=F}
+knitr::opts_chunk$set(echo = T)
+```
+
+
+Automated ingestion and conversion of various single-cell data formats. 
+
+<img src="./images/buff_kirby.jpeg" height="500">
+
+## Examples  
+
+```{r Examples, message=F, warning=F}
+library(scKirby)
+library(SummarizedExperiment)
+library(Seurat)
+data("pbmc_small")
+pbmc_small <- Seurat::UpdateSeuratObject(pbmc_small)
+```
+
+
+### Ingest expression matrix
+
+```{r expression matrix}
+sce <- ingest_data(obj=pbmc_small@assays$RNA@counts)
+```
+
+### Ingest EWCElist
+
+```{r EWCElist} 
+library(ewceData)
+### Example requires  data from \code{ewceData} package
+cortex_mrna <- ewceData::cortex_mrna()
+sce <- ingest_data(obj=cortex_mrna)
+```
+
+### Ingest Seurat 
+
+In-memory
+
+```{r Seurat}
+sce <- ingest_data(obj=pbmc_small)
+```
+
+### Ingest H5Seurat  
+
+On-disk 
+
+```{r H5Seurat} 
+library(SeuratDisk)
+SaveH5Seurat(pbmc_small, filename = "./pbmc_small.h5Seurat", overwrite = T)
+sce <- ingest_data(obj="./pbmc_small.h5Seurat")
+```
+
+
+### Ingest HDF5 SingleCellExperiment 
+
+```{r HDF5}
+sce <- HDF5Array::saveHDF5SummarizedExperiment(sce, dir = "./pbmc_small_h5", replace=T)
+## Read in the sce object directly
+sce <- ingest_data(obj=sce)
+
+## Read it from disk
+sce_dir <- dirname(sce_filepath(sce))
+# sce <- ingest_data(obj=sce_dir)
+```
+
+### Ingest AnnData 
+
+```{r AnnData}
+library(anndata)
+## Can point to where anndata is installed (or should be installed)
+## Can also just run anndata::install_anndata() and will install via miniconda
+conda_dir <- dirname(dirname(reticulate::conda_list()[1,]$python))
+reticulate::use_condaenv(condaenv = conda_dir)
+reticulate::conda_install(conda = conda_dir, packages = "loompy", pip = T)
+# anndata::install_anndata(method = "conda", conda=conda_dir)
+
+# Convert Seurat object to AnnData for example data
+adata <- anndata::AnnData(X = t(Seurat::GetAssay(pbmc_small)@counts), 
+                          obs = pbmc_small@meta.data, 
+                          var = GetAssay(pbmc_small)@meta.features )
+## In memory
+sce <- ingest_data(obj=adata)
+## On disk
+adata$write_h5ad(filename = "./pbmc_small.h5ad")
+sce <- ingest_data(obj = "./pbmc_small.h5ad")
+```
+
+### Ingest loom
+
+From [loomR](https://github.com/mojaveazure/loomR) package
+
+```{r loom}  
+library(loomR)
+loom <- loomR::create(data=adata, filename = "./pbmc_small.loom", overwrite = T)
+## In memory
+print(loom)
+sce <- ingest_data(obj=loom) 
+
+## From disk
+print(loom$filename)
+sce <- ingest_data(obj=loom$filename)
+```
+
+# Cleanup 
+
+Remove example files 
+
+```{r}
+try({ file.remove("./pbmc_small.h5Seurat", showWarnings=F) })
+try({ unlink("./pbmc_small_h5/", recursive = T) })
+try({ file.remove("./pbmc_small.h5ad") })
+try({ file.remove("./pbmc_small.loom")  })
+```
+
+
+# Session Info
+
+<details>
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>
+
+
+
