@@ -1,15 +1,15 @@
 scKirby
 ================
-<h4>
+<h5>
 Author: <i>Brian M. Schilder</i>
-</h4>
-<h4>
+</h5>
+<h5>
 Most recent update: <i>Jun-14-2021</i>
-</h4>
-
-<img src="./images/buff_kirby.jpeg" height="400">
+</h5>
 
 ## Automated ingestion and conversion of various single-cell data formats.
+
+<img src="./images/buff_kirby.jpeg" height="400">
 
 ## Supported input formats
 
