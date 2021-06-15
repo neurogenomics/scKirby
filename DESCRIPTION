@@ -1,12 +1,12 @@
 Package: scKirby
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Automated ingestion and conversion of various single-cell data formats.
 Version: 0.1.0
-Author: as.person(c(
-    "Brian Schilder <brian_schilder@alumni.brown.edu> [aut, cre]",
-    "Jack Humphrey [ctb]"
-  ))
-Maintainer: The package maintainer <yourself@somewhere.net>
+Authors@R: c(person(given = "Brian",
+                    family = "Schilder",
+                    role = c("cre"),
+                    email = "brian_schilder@alumni.brown.edu",
+                    comment = c(ORCID = "0000-0001-5949-2191")) )
 Description: Automated ingestion and conversion of various single-cell data formats.
 License: MIT + file LICENSE
 URL: https://github.com/bschilder/scKirby 
@@ -36,9 +36,9 @@ Imports:
     BiocParallel,
     parallel,
     HDF5Array,
-    rhdf5,
-    loomR
+    rhdf5
 Remotes:
   github::mojaveazure/seurat-disk, 
   github::mojaveazure/loomR 
 VignetteBuilder: knitr
+RoxygenNote: 7.1.1
