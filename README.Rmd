@@ -10,17 +10,32 @@ output:
 knitr::opts_chunk$set(echo = T)
 ```
 
-## Automated ingestion and conversion of various single-cell data formats.
+## Automated ingestion and conversion of various single-cell data formats. 
+
+
+There's a lot of single-cell omics file/object formats out there, and not all tools support all of these formats. `scKirby` aims to make switching between these formats much easier by running several steps within a single function: `ingest_data()`. Alternatively, users can run any of these steps separately using the designated sub-functions. 
+
+1. **Read**: Automatically infers the file/object type and loads it (sub-function: `read_data()`).  
+2. **Convert**: Converts it to the desired file/object type (sub-function: `to_<format>`). 
+3. **Save**: Saves the converted file/object (sub-function: `save_data()`).
+
+
 
 <img src="./images/buff_kirby.jpeg" height="400">
 
+# i/o formats 
+
 ## Supported input formats
 
+- [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html) 
+- [SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html)  
+- [HDF5SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/HDF5Array.html) 
 - [Seurat](https://satijalab.org/seurat/index.html)  
 - [H5Seurat](https://mojaveazure.github.io/seurat-disk/articles/convert-anndata.html) 
 - [anndata](https://github.com/rcannood/anndata) 
 - [loom](http://loompy.org/) 
 - [loomR](https://satijalab.org/loomR/loomR_tutorial.html) 
+- [list](https://github.com/NathanSkene/EWCE) 
 - [EWCE](https://github.com/NathanSkene/EWCE) 
 - [matrix](https://cran.r-project.org/web/packages/Matrix/index.html)
 - [sparseMatrix (dgTMatrix/dgCMatrix)](https://slowkow.com/notes/sparse-matrix/) 
@@ -28,16 +43,29 @@ knitr::opts_chunk$set(echo = T)
 
 ## Supported output formats 
 
+- [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html)  
+- [SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html) 
+- [HDF5SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/HDF5Array.html)  
+- [Seurat](https://satijalab.org/seurat/index.html)   
+- [H5Seurat](https://mojaveazure.github.io/seurat-disk/articles/convert-anndata.html)  
+
+## Planned output formats 
+
+- [anndata](https://github.com/rcannood/anndata) 
+- [loom](http://loompy.org/) 
+
 **Notes**: 
 
-- Currently, all files are converted to [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/vignettes/SingleCellExperiment/inst/doc/intro.html) (sce) format. For exporting sce to other file types, see these following packages:  
+- For exporting to additional formats, see these following packages:  
   + [sceasy](https://github.com/cellgeni/sceasy)  
   + [zellkonverter](https://theislab.github.io/zellkonverter/articles/zellkonverter.html) 
+  
 - Currently, some (but not all) conversions carry over: 
   + Multiple assays per experiment. 
   + Additional objects like dimensionality reduction projections (e.g. PCA, tSNE, UMAP) or graphs (e.g. K-nearest neighbors). 
 
-## Installation 
+
+# Installation 
 
 ```{r Installation, eval=F}
 if(!"remotes" %in% rownames(install.packages())){install.packages("remotes")}
@@ -46,38 +74,69 @@ remotes::install_github("bschilder/scKirby")
 ```
 
 
-## Examples  
+# Examples  
 
 ```{r Examples, message=F, warning=F}
 library(scKirby)
-library(SummarizedExperiment)
-library(Seurat)
-data("pbmc_small")
-pbmc_small <- Seurat::UpdateSeuratObject(pbmc_small)
 ```
 
 
-### Ingest expression matrix
+## Ingest expression matrix  
+
+### As `SingleCellExperiment`  
 
 ```{r expression matrix}
-sce <- ingest_data(obj=pbmc_small@assays$RNA@counts)
+data("example_seurat")
+
+sce <- ingest_data(obj=example_seurat@assays$RNA@counts)
 ```
 
-### Ingest EWCElist
+### As `Seurat` 
+
+```{r}
+seurat <- ingest_data(obj=example_seurat@assays$RNA@counts, 
+                      output_type = "Seurat") 
+```
+
+
+
+## Ingest list 
+
+`scKirby` can ingest a named list (i.e. `list(exp=..., annot=...)`) with the following items:
+- `exp`: Expression matrix with *rows/genes x cols/cells*. 
+Can be a variety of matrix classes, including dense or sparse. 
+- `annot`: Cell annotation `data.frame` with one cell per row. 
+`rownames(annot)` should be the same as `colnames(exp)`. 
+
+This happens to be the format that the example data in [`EWCE`](https://github.com/NathanSkene/EWCE) uses, but any user-supplied data will work. 
+
+### As `SingleCellExperiment`  
 
 ```{r EWCElist} 
-library(ewceData)
-### Example requires  data from \code{ewceData} package
-cortex_mrna <- ewceData::cortex_mrna()
-sce <- ingest_data(obj=cortex_mrna)
+data("example_EWCElist")
+
+sce <- ingest_data(obj=example_EWCElist)
 ```
 
-### Ingest Seurat 
+### As `Seurat` 
+
+```{r} 
+seurat <- ingest_data(obj=example_EWCElist, 
+                      output_type = "Seurat")
+```
+
+
+
+## Ingest Seurat 
+
+### As `SingleCellExperiment`  
 
 In-memory
 
 ```{r Seurat}
-sce <- ingest_data(obj=pbmc_small)
+data("example_seurat")
+
+sce <- ingest_data(obj=example_seurat)
 ```
 
 ### Ingest H5Seurat  
@@ -86,52 +145,82 @@ On-disk
 
 ```{r H5Seurat} 
 library(SeuratDisk)
-SaveH5Seurat(pbmc_small, filename = "./pbmc_small.h5Seurat", overwrite = T)
-sce <- ingest_data(obj="./pbmc_small.h5Seurat")
+data("example_seurat")
+
+SaveH5Seurat(example_seurat, filename = "./pbmc_small.h5Seurat", overwrite = T)
+seurat <- ingest_data(obj="./pbmc_small.h5Seurat")
 ```
 
 
-### Ingest HDF5 SingleCellExperiment 
+## Ingest HDF5 SingleCellExperiment 
+
+### As `SingleCellExperiment`  
 
 ```{r HDF5}
-sce <- HDF5Array::saveHDF5SummarizedExperiment(sce, dir = "./pbmc_small_h5", replace=T)
+data("example_sce")
+
+sce <- HDF5Array::saveHDF5SummarizedExperiment(example_sce, dir = "./pbmc_small_h5", replace=T)
 ## Read in the sce object directly
 sce <- ingest_data(obj=sce)
 
 ## Read it from disk
 sce_dir <- dirname(sce_filepath(sce))
-# sce <- ingest_data(obj=sce_dir)
+sce <- ingest_data(obj=sce_dir)
 ```
 
-### Ingest AnnData 
+### As `Seurat` 
+
+```{r}
+sce <- HDF5Array::saveHDF5SummarizedExperiment(example_sce, dir = "./pbmc_small_h5", replace=T)
+## Read in the sce object directly
+seurat <- ingest_data(obj=sce,
+                      output_type = "Seurat") 
+```
+
+
+
+## Ingest AnnData 
+
+For info on setting up anndata (e.g. with `conda`), see 
+
+Note that some objects need to be loaded via functions instead of `data(<name>)` 
+(e.g. `example_anndata()` and `example_loom()`). 
+This is because file types like `loom` and `anndata` must be stored on-disk.  
+
+### As `SingleCellExperiment`  
 
 ```{r AnnData}
-library(anndata)
-## Can point to where anndata is installed (or should be installed)
-## Can also just run anndata::install_anndata() and will install via miniconda
-conda_dir <- dirname(dirname(reticulate::conda_list()[1,]$python))
-reticulate::use_condaenv(condaenv = conda_dir)
-reticulate::conda_install(conda = conda_dir, packages = "loompy", pip = T)
-# anndata::install_anndata(method = "conda", conda=conda_dir)
+reticulate::use_condaenv(condaenv = "echoR")
 
 # Convert Seurat object to AnnData for example data
-adata <- anndata::AnnData(X = t(Seurat::GetAssay(pbmc_small)@counts), 
-                          obs = pbmc_small@meta.data, 
-                          var = GetAssay(pbmc_small)@meta.features )
+adata <- example_anndata()
 ## In memory
 sce <- ingest_data(obj=adata)
+
 ## On disk
 adata$write_h5ad(filename = "./pbmc_small.h5ad")
 sce <- ingest_data(obj = "./pbmc_small.h5ad")
 ```
 
-### Ingest loom
+### As `Seurat` 
+
+```{r}
+seurat <- ingest_data(obj=adata, 
+                      output_type = "Seurat")
+```
+
+
+
+
+
+## Ingest loom
 
 From [loomR](https://github.com/mojaveazure/loomR) package
 
+### As `SingleCellExperiment`  
+
 ```{r loom}  
-library(loomR)
-loom <- loomR::create(data=adata, filename = "./pbmc_small.loom", overwrite = T)
+loom <- example_loom()
 ## In memory
 print(loom)
 sce <- ingest_data(obj=loom) 
@@ -140,6 +229,23 @@ sce <- ingest_data(obj=loom)
 print(loom$filename)
 sce <- ingest_data(obj=loom$filename)
 ```
+
+### As `Seurat`  
+
+```{r} 
+loom <- example_loom()
+## In memory 
+seurat <- ingest_data(obj=loom, 
+                      output_type = "Seurat") 
+
+## From disk
+print(loom$filename)
+seurat <- ingest_data(obj=loom$filename,
+                      output_type = "Seurat")
+```
+
+
+
 
 # Cleanup 
 

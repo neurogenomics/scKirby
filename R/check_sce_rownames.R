@@ -2,7 +2,7 @@ check_sce_rownames <- function(sce,
                                rownames_var=NULL,
                                remove_duplicates=T,
                                verbose=T){
-  printer("Checking SCE rownames...",v=verbose)
+  printer("+ Checking SCE rownames.",v=verbose)
   rowDat <- SummarizedExperiment::rowData(sce)
   rownames_var <- if(is.null(rownames_var)) "Gene" else rownames_var
   if( is.null( S4Vectors::rownames(rowDat)) ){
@@ -15,8 +15,11 @@ check_sce_rownames <- function(sce,
     }
   }
   if(remove_duplicates){
-    printer("+ Removing duplicate gene rows.",v=verbose)
-    sce <- sce[!base::duplicated(S4Vectors::rownames(sce)),]
+    dup_rows <- base::duplicated(S4Vectors::rownames(sce))
+    if(sum(dup_rows)>0){
+      printer("+ Removing duplicate gene rows.",v=verbose)
+      sce <- sce[!dup_rows,]
+    }
   }
   return(sce)
 }

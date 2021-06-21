@@ -24,6 +24,7 @@ Imports:
     tibble,
     data.table,
     Matrix,
+    SparseM,
     DescTools,
     reticulate,
     S4Vectors, 
@@ -39,6 +40,7 @@ Imports:
     rhdf5
 Remotes:
   github::mojaveazure/seurat-disk, 
-  github::mojaveazure/loomR 
+  github::mojaveazure/loomR,
+  github::cellgeni/sceasy 
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1

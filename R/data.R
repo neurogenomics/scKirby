@@ -1,8 +1,8 @@
 
 
-#' Subsetted mouse ESC \code{SingleCellExperiment}  object
+#' Example \code{SingleCellExperiment}
 #'
-#' A dataset containing 300 cells and 2026 genes from two batches of mouse ESC data.
+#' A subsetted dataset containing 300 cells and 2026 genes from two batches of mouse ESC data.
 #'
 #' Copied from the R package \pkg{scMerge}.
 #'
@@ -18,3 +18,47 @@
 #' }
 #' @export
 "example_sce"
+
+
+
+#' Example \code{Seurat}
+#'
+#' @examples
+#' \dontrun{
+#' library(Seurat)
+#' data("pbmc_small")
+#' example_seurat <- Seurat::UpdateSeuratObject(pbmc_small)
+#' usethis::use_data(example_seurat, overwrite = T)
+#' }
+#' @export
+"example_seurat"
+
+
+
+#' Example \code{EWCElist}
+#'
+#' @examples
+#' \dontrun{
+#' example_EWCElist <- ewceData::cortex_mrna()
+#' usethis::use_data(example_EWCElist, overwrite = T)
+#' }
+#' @export
+"example_EWCElist"
+
+
+#' Example \code{CellTypeDataset}
+#'
+#' @examples
+#' \dontrun{
+#' example_ctd <- ewceData::ctd()
+#' ### Remove dendrograms to reduce file size
+#' example_ctd[[1]]$plotting <- NULL
+#' example_ctd[[2]]$plotting <- NULL
+#' usethis::use_data(example_ctd, overwrite = T)
+#' }
+#' @export
+"example_ctd"
+
+
+
+

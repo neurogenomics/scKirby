@@ -3,7 +3,6 @@ hdf5_hard_save <- function(sce,
                            save_dir,
                            overwrite=T,
                            verbose=T){
-  messager("+ Writing new HDF5...",v=verbose)
   # DON'T create the HDF5 dir itself (will return an error about overwriting)
   dir.create(dirname(save_dir), showWarnings = F, recursive = T)
   # IMPORTANT!: set as.sparse=T if you have the latest version of HDF5Array (1.8.11)

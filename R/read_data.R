@@ -1,11 +1,11 @@
 
 read_data <- function(obj,
-                         filetype="guess",
-                         custom_reader=NULL,
-                         sce_save_dir=NULL,
-                         overwrite=F,
-                         verbose=T,
-                         ...){
+                       filetype="guess",
+                       custom_reader=NULL,
+                       save_dir=NULL,
+                       overwrite=F,
+                       verbose=T,
+                       ...){
   if(!is.null(custom_reader)){
     messager("+ Reading in with custom_reader function...")
     object <- custom_reader(obj, ...)
@@ -67,7 +67,7 @@ read_data <- function(obj,
       ## SeuratDisk is currently broken, with no word from the developer...
       ## https://github.com/mojaveazure/seurat-disk/issues/41
       # object <- SeuratDisk::Convert(source = obj,
-      #                               dest = sce_save_dir,
+      #                               dest = save_dir,
       #                               overwrite = overwrite,
       #                               verbose = verbose,
       #                               ...)
