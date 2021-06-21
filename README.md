@@ -100,7 +100,7 @@ sce <- ingest_data(obj=example_seurat@assays$RNA@counts)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/scKirby_output.rds
 
 ### As `Seurat`
 
@@ -122,10 +122,13 @@ seurat <- ingest_data(obj=example_seurat@assays$RNA@counts,
 ## Ingest list
 
 `scKirby` can ingest a named list (i.e. `list(exp=..., annot=...)`) with
-the following items: - `exp`: Expression matrix with *rows/genes x
-cols/cells*. Can be a variety of matrix classes, including dense or
-sparse. - `annot`: Cell annotation `data.frame` with one cell per row.
-`rownames(annot)` should be the same as `colnames(exp)`.
+the following items:
+
+-   `exp`: Expression matrix with *rows/genes x cols/cells*. Can be a
+    variety of matrix classes, including dense or sparse.
+
+-   `annot`: Cell annotation `data.frame` with one cell per row.
+    `rownames(annot)` should be the same as `colnames(exp)`.
 
 This happens to be the format that the example data in
 [`EWCE`](https://github.com/NathanSkene/EWCE) uses, but any
@@ -149,7 +152,7 @@ sce <- ingest_data(obj=example_EWCElist)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/scKirby_output.rds
 
 ### As `Seurat`
 
@@ -193,7 +196,7 @@ sce <- ingest_data(obj=example_seurat)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/scKirby_output.rds
 
 ### Ingest H5Seurat
 
@@ -216,8 +219,6 @@ data("example_seurat")
 
 SaveH5Seurat(example_seurat, filename = "./pbmc_small.h5Seurat", overwrite = T)
 ```
-
-    ## Warning: Overwriting previous file ./pbmc_small.h5Seurat
 
     ## Creating h5Seurat file for version 3.1.5.9900
 
@@ -311,7 +312,7 @@ seurat <- ingest_data(obj="./pbmc_small.h5Seurat")
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/scKirby_output.rds
 
 ## Ingest HDF5 SingleCellExperiment
 
@@ -353,7 +354,7 @@ sce <- ingest_data(obj=sce)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/scKirby_output.rds
 
 ``` r
 ## Read it from disk
@@ -369,7 +370,7 @@ sce <- ingest_data(obj=sce_dir)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/scKirby_output.rds
 
 ### As `Seurat`
 
@@ -409,6 +410,8 @@ seurat <- ingest_data(obj=sce,
 
 ## Ingest AnnData
 
+For info on setting up anndata (e.g. with `conda`), see
+
 Note that some objects need to be loaded via functions instead of
 `data(<name>)` (e.g. `example_anndata()` and `example_loom()`). This is
 because file types like `loom` and `anndata` must be stored on-disk.
@@ -416,12 +419,14 @@ because file types like `loom` and `anndata` must be stored on-disk.
 ### As `SingleCellExperiment`
 
 ``` r
+### Set condaenv= to the name of a conda env you've made 
 reticulate::use_condaenv(condaenv = "echoR")
+
 # Convert Seurat object to AnnData for example data
 adata <- example_anndata()
 ```
 
-    ## [1] "+ Creating new anndata object: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/pbmc_small.h5ad"
+    ## [1] "+ Creating new anndata object: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/pbmc_small.h5ad"
 
 ``` r
 ## In memory
@@ -438,7 +443,7 @@ sce <- ingest_data(obj=adata)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/scKirby_output.rds
 
 ``` r
 ## On disk
@@ -463,7 +468,7 @@ sce <- ingest_data(obj = "./pbmc_small.h5ad")
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/scKirby_output.rds
 
 ### As `Seurat`
 
@@ -526,7 +531,7 @@ print(loom)
 ```
 
     ## Class: loom
-    ## Filename: /private/var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T/RtmpedBO0n/pbmc_small.loom
+    ## Filename: /private/var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T/Rtmp6w9LGw/pbmc_small.loom
     ## Access type: H5F_ACC_RDWR
     ## Listing:
     ##        name    obj_type dataset.dims dataset.type_class
@@ -560,14 +565,14 @@ sce <- ingest_data(obj=loom)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/scKirby_output.rds
 
 ``` r
 ## From disk
 print(loom$filename)
 ```
 
-    ## [1] "/var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/pbmc_small.loom"
+    ## [1] "/var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/pbmc_small.loom"
 
 ``` r
 sce <- ingest_data(obj=loom$filename)
@@ -593,7 +598,7 @@ sce <- ingest_data(obj=loom$filename)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/scKirby_output.rds
 
 ### As `Seurat`
 
@@ -602,7 +607,7 @@ loom <- example_loom()
 ```
 
     ## Warning: Overwriting previous file /var/folders/zq/
-    ## h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/pbmc_small.loom
+    ## h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/pbmc_small.loom
 
     ## Saving data from RNA as /matrix
 
@@ -657,7 +662,7 @@ seurat <- ingest_data(obj=loom,
 print(loom$filename)
 ```
 
-    ## [1] "/var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpedBO0n/pbmc_small.loom"
+    ## [1] "/var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//Rtmp6w9LGw/pbmc_small.loom"
 
 ``` r
 seurat <- ingest_data(obj=loom$filename,
@@ -692,9 +697,6 @@ Remove example files
 try({ file.remove("./pbmc_small.h5Seurat", showWarnings=F) })
 ```
 
-    ## Warning in file.remove("./pbmc_small.h5Seurat", showWarnings = F): cannot remove
-    ## file 'FALSE', reason 'No such file or directory'
-
     ## [1]  TRUE FALSE
 
 ``` r
@@ -707,9 +709,6 @@ try({ file.remove("./pbmc_small.h5ad") })
 ``` r
 try({ file.remove("./pbmc_small.loom")  })
 ```
-
-    ## Warning in file.remove("./pbmc_small.loom"): cannot remove file './
-    ## pbmc_small.loom', reason 'No such file or directory'
 
     ## [1] FALSE
 

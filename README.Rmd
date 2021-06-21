@@ -102,9 +102,11 @@ seurat <- ingest_data(obj=example_seurat@assays$RNA@counts,
 
 ## Ingest list 
 
-`scKirby` can ingest a named list (i.e. `list(exp=..., annot=...)`) with the following items:
+`scKirby` can ingest a named list (i.e. `list(exp=..., annot=...)`) with the following items:  
+
 - `exp`: Expression matrix with *rows/genes x cols/cells*. 
-Can be a variety of matrix classes, including dense or sparse. 
+Can be a variety of matrix classes, including dense or sparse.  
+
 - `annot`: Cell annotation `data.frame` with one cell per row. 
 `rownames(annot)` should be the same as `colnames(exp)`. 
 
@@ -190,6 +192,7 @@ This is because file types like `loom` and `anndata` must be stored on-disk.
 ### As `SingleCellExperiment`  
 
 ```{r AnnData}
+### Set condaenv= to the name of a conda env you've made 
 reticulate::use_condaenv(condaenv = "echoR")
 
 # Convert Seurat object to AnnData for example data
@@ -251,7 +254,7 @@ seurat <- ingest_data(obj=loom$filename,
 
 Remove example files 
 
-```{r}
+```{r, warning=F, message=F}
 try({ file.remove("./pbmc_small.h5Seurat", showWarnings=F) })
 try({ unlink("./pbmc_small_h5/", recursive = T) })
 try({ file.remove("./pbmc_small.h5ad") })
