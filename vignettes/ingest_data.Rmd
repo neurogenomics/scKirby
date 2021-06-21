@@ -1,0 +1,220 @@
+---
+title: "ingest_data"
+author: "<h5>Author: <i>Brian M. Schilder</i></h5>" 
+date: "<h5>Most recent update: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h5>"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{ingest_data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(scKirby)
+```
+
+# Intro 
+
+`ingest_data()` runs three main steps:
+
+1. **Read**: Automatically infers the file/object type and loads it (sub-function: `read_data()`).  
+2. **Convert**: Converts it to the desired file/object type (sub-function: `to_<format>`). 
+3. **Save**: Saves the converted file/object (sub-function: `save_data()`).
+
+# Examples 
+
+## Ingest expression matrix  
+
+### As `SingleCellExperiment`  
+
+```{r expression matrix}
+data("example_seurat")
+
+sce <- ingest_data(obj=example_seurat@assays$RNA@counts)
+```
+
+### As `Seurat` 
+
+```{r}
+seurat <- ingest_data(obj=example_seurat@assays$RNA@counts, 
+                      output_type = "Seurat") 
+```
+
+
+
+## Ingest list 
+
+`scKirby` can ingest a named list (i.e. `list(exp=..., annot=...)`) with the following items:  
+
+- `exp`: Expression matrix with *rows/genes x cols/cells*. 
+Can be a variety of matrix classes, including dense or sparse.  
+
+- `annot`: Cell annotation `data.frame` with one cell per row. 
+`rownames(annot)` should be the same as `colnames(exp)`. 
+
+This happens to be the format that the example data in [`EWCE`](https://github.com/NathanSkene/EWCE) uses, but any user-supplied data will work. 
+
+### As `SingleCellExperiment`  
+
+```{r EWCElist} 
+data("example_EWCElist")
+
+sce <- ingest_data(obj=example_EWCElist)
+```
+
+### As `Seurat` 
+
+```{r} 
+seurat <- ingest_data(obj=example_EWCElist, 
+                      output_type = "Seurat")
+```
+
+
+
+## Ingest Seurat 
+
+### As `SingleCellExperiment`  
+
+In-memory
+
+```{r Seurat}
+data("example_seurat")
+
+sce <- ingest_data(obj=example_seurat)
+```
+
+### Ingest H5Seurat  
+
+On-disk 
+
+```{r H5Seurat} 
+library(SeuratDisk)
+data("example_seurat")
+
+SaveH5Seurat(example_seurat, filename = "./pbmc_small.h5Seurat", overwrite = T)
+seurat <- ingest_data(obj="./pbmc_small.h5Seurat")
+```
+
+
+## Ingest HDF5 SingleCellExperiment 
+
+### As `SingleCellExperiment`  
+
+```{r HDF5}
+data("example_sce")
+
+sce <- HDF5Array::saveHDF5SummarizedExperiment(example_sce, dir = "./pbmc_small_h5", replace=T)
+## Read in the sce object directly
+sce <- ingest_data(obj=sce)
+
+## Read it from disk
+sce_dir <- dirname(sce_filepath(sce))
+sce <- ingest_data(obj=sce_dir)
+```
+
+### As `Seurat` 
+
+```{r}
+sce <- HDF5Array::saveHDF5SummarizedExperiment(example_sce, dir = "./pbmc_small_h5", replace=T)
+## Read in the sce object directly
+seurat <- ingest_data(obj=sce,
+                      output_type = "Seurat") 
+```
+
+
+
+## Ingest AnnData 
+
+For info on setting up anndata (e.g. with `conda`), see 
+
+Note that some objects need to be loaded via functions instead of `data(<name>)` 
+(e.g. `example_anndata()` and `example_loom()`). 
+This is because file types like `loom` and `anndata` must be stored on-disk.  
+
+### As `SingleCellExperiment`  
+
+```{r AnnData}
+### Set condaenv= to the name of a conda env you've made 
+reticulate::use_condaenv(condaenv = "echoR")
+
+# Convert Seurat object to AnnData for example data
+adata <- example_anndata()
+## In memory
+sce <- ingest_data(obj=adata)
+
+## On disk
+adata$write_h5ad(filename = "./pbmc_small.h5ad")
+sce <- ingest_data(obj = "./pbmc_small.h5ad")
+```
+
+### As `Seurat` 
+
+```{r}
+seurat <- ingest_data(obj=adata, 
+                      output_type = "Seurat")
+```
+
+
+
+
+
+## Ingest loom
+
+From [loomR](https://github.com/mojaveazure/loomR) package
+
+### As `SingleCellExperiment`  
+
+```{r loom}  
+loom <- example_loom()
+## In memory
+print(loom)
+sce <- ingest_data(obj=loom) 
+
+## From disk
+print(loom$filename)
+sce <- ingest_data(obj=loom$filename)
+```
+
+### As `Seurat`  
+
+```{r} 
+loom <- example_loom()
+## In memory 
+seurat <- ingest_data(obj=loom, 
+                      output_type = "Seurat") 
+
+## From disk
+print(loom$filename)
+seurat <- ingest_data(obj=loom$filename,
+                      output_type = "Seurat")
+```
+
+
+# Cleanup 
+
+Remove example files 
+
+```{r, warning=F, message=F}
+try({ file.remove("./pbmc_small.h5Seurat", showWarnings=F) })
+try({ unlink("./pbmc_small_h5/", recursive = T) })
+try({ file.remove("./pbmc_small.h5ad") })
+try({ file.remove("./pbmc_small.loom")  })
+```
+
+
+# Session Info
+
+<details>
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>

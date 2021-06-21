@@ -12,13 +12,14 @@ knitr::opts_chunk$set(echo = T)
 
 ## Automated ingestion and conversion of various single-cell data formats. 
 
-
 There's a lot of single-cell omics file/object formats out there, and not all tools support all of these formats. `scKirby` aims to make switching between these formats much easier by running several steps within a single function: `ingest_data()`. Alternatively, users can run any of these steps separately using the designated sub-functions. 
 
 1. **Read**: Automatically infers the file/object type and loads it (sub-function: `read_data()`).  
 2. **Convert**: Converts it to the desired file/object type (sub-function: `to_<format>`). 
 3. **Save**: Saves the converted file/object (sub-function: `save_data()`).
 
+
+## [Documentation website](https://bschilder.github.io/scKirby) 
 
 
 <img src="./images/buff_kirby.jpeg" height="400">
@@ -74,28 +75,13 @@ remotes::install_github("bschilder/scKirby")
 ```
 
 
-# Examples  
+# Quick examples  
+
+
+Here are several quick examples of how one can use `scKirby`. For a complete list of examples please see the [documentation website](https://bschilder.github.io/scKirby).
 
 ```{r Examples, message=F, warning=F}
 library(scKirby)
-```
-
-
-## Ingest expression matrix  
-
-### As `SingleCellExperiment`  
-
-```{r expression matrix}
-data("example_seurat")
-
-sce <- ingest_data(obj=example_seurat@assays$RNA@counts)
-```
-
-### As `Seurat` 
-
-```{r}
-seurat <- ingest_data(obj=example_seurat@assays$RNA@counts, 
-                      output_type = "Seurat") 
 ```
 
 
@@ -141,125 +127,6 @@ data("example_seurat")
 sce <- ingest_data(obj=example_seurat)
 ```
 
-### Ingest H5Seurat  
-
-On-disk 
-
-```{r H5Seurat} 
-library(SeuratDisk)
-data("example_seurat")
-
-SaveH5Seurat(example_seurat, filename = "./pbmc_small.h5Seurat", overwrite = T)
-seurat <- ingest_data(obj="./pbmc_small.h5Seurat")
-```
-
-
-## Ingest HDF5 SingleCellExperiment 
-
-### As `SingleCellExperiment`  
-
-```{r HDF5}
-data("example_sce")
-
-sce <- HDF5Array::saveHDF5SummarizedExperiment(example_sce, dir = "./pbmc_small_h5", replace=T)
-## Read in the sce object directly
-sce <- ingest_data(obj=sce)
-
-## Read it from disk
-sce_dir <- dirname(sce_filepath(sce))
-sce <- ingest_data(obj=sce_dir)
-```
-
-### As `Seurat` 
-
-```{r}
-sce <- HDF5Array::saveHDF5SummarizedExperiment(example_sce, dir = "./pbmc_small_h5", replace=T)
-## Read in the sce object directly
-seurat <- ingest_data(obj=sce,
-                      output_type = "Seurat") 
-```
-
-
-
-## Ingest AnnData 
-
-For info on setting up anndata (e.g. with `conda`), see 
-
-Note that some objects need to be loaded via functions instead of `data(<name>)` 
-(e.g. `example_anndata()` and `example_loom()`). 
-This is because file types like `loom` and `anndata` must be stored on-disk.  
-
-### As `SingleCellExperiment`  
-
-```{r AnnData}
-### Set condaenv= to the name of a conda env you've made 
-reticulate::use_condaenv(condaenv = "echoR")
-
-# Convert Seurat object to AnnData for example data
-adata <- example_anndata()
-## In memory
-sce <- ingest_data(obj=adata)
-
-## On disk
-adata$write_h5ad(filename = "./pbmc_small.h5ad")
-sce <- ingest_data(obj = "./pbmc_small.h5ad")
-```
-
-### As `Seurat` 
-
-```{r}
-seurat <- ingest_data(obj=adata, 
-                      output_type = "Seurat")
-```
-
-
-
-
-
-## Ingest loom
-
-From [loomR](https://github.com/mojaveazure/loomR) package
-
-### As `SingleCellExperiment`  
-
-```{r loom}  
-loom <- example_loom()
-## In memory
-print(loom)
-sce <- ingest_data(obj=loom) 
-
-## From disk
-print(loom$filename)
-sce <- ingest_data(obj=loom$filename)
-```
-
-### As `Seurat`  
-
-```{r} 
-loom <- example_loom()
-## In memory 
-seurat <- ingest_data(obj=loom, 
-                      output_type = "Seurat") 
-
-## From disk
-print(loom$filename)
-seurat <- ingest_data(obj=loom$filename,
-                      output_type = "Seurat")
-```
-
-
-
-
-# Cleanup 
-
-Remove example files 
-
-```{r, warning=F, message=F}
-try({ file.remove("./pbmc_small.h5Seurat", showWarnings=F) })
-try({ unlink("./pbmc_small_h5/", recursive = T) })
-try({ file.remove("./pbmc_small.h5ad") })
-try({ file.remove("./pbmc_small.loom")  })
-```
 
 
 # Session Info

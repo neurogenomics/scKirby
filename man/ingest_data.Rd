@@ -15,14 +15,39 @@
 \usage{
 ingest_data(
   obj,
-  filetype = "guess",
+  input_type = "guess",
+  output_type = "SingleCellExperiment",
   custom_reader = NULL,
-  sce_save_dir = NULL,
-  quicksave_HDF5 = T,
+  save_dir = tempdir(),
+  filename = "scKirby_output",
+  save_output = T,
   overwrite = F,
+  return_filepath = F,
   verbose = T,
   ...
 )
+}
+\arguments{
+\item{obj}{Single-cell data object or path to saved single-cell data.}
+
+\item{input_type}{Format of \code{obj}. By default, the type will be inferred.}
+
+\item{output_type}{Format to convert \code{obj} to.}
+
+\item{custom_reader}{Custom function to read \code{obj} into R.}
+
+\item{save_dir}{Directory to save the converted \code{obj}.}
+
+\item{filename}{Name to save the converted \code{obj}.}
+
+\item{save_output}{Whether or not to save the converted \code{obj}.}
+
+\item{overwrite}{If a file of the same name exists, overwrite it.}
+
+\item{return_filepath}{If \code{TRUE}, a list with both the converted object
+and the saved file path will be returned (instead of just the converted object).}
+
+\item{...}{Additional arguments to be passed to \code{scKirby::read_data()}.}
 }
 \description{
 Automatically infers data format of scRNAseq object, or a path to that object.

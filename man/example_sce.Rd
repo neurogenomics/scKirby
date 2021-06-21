@@ -3,7 +3,7 @@
 \docType{data}
 \name{example_sce}
 \alias{example_sce}
-\title{Subsetted mouse ESC \code{SingleCellExperiment}  object}
+\title{Example \code{SingleCellExperiment}}
 \format{
 A \code{SingleCellExperiment} object
 }
@@ -14,7 +14,7 @@ A \code{SingleCellExperiment} object
 example_sce
 }
 \description{
-A dataset containing 300 cells and 2026 genes from two batches of mouse ESC data.
+A subsetted dataset containing 300 cells and 2026 genes from two batches of mouse ESC data.
 }
 \details{
 Copied from the R package \pkg{scMerge}.
