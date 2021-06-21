@@ -1,7 +1,7 @@
 ---
 title: "ingest_data"
-author: "<h5>Author: <i>Brian M. Schilder</i></h5>" 
-date: "<h5>Most recent update: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h5>"
+author: "<h5>Author: <i>Brian M. Schilder</i></h5>"  
+date: "<h5>Most recent update: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h5>" 
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{ingest_data}
@@ -13,7 +13,7 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
-)
+) 
 ```
 
 ```{r setup}
