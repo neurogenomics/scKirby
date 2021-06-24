@@ -9,7 +9,7 @@ anndata_to_seurat <- function(object,
                               save_dir=tempdir(),
                               verbose=T){
   messager("+ AnnData ==> Seurat",v=verbose)
-  seurat <- anndata2seurat(inFile = object, outFile = tempfile())
+  seurat <- anndata2seurat(inFile = object)
   return(seurat)
 }
 
@@ -18,6 +18,7 @@ anndata_to_seurat <- function(object,
 
 # Modified from sceasy: https://github.com/cellgeni/sceasy/blob/f8f0628a280e0880ea94b00100b463e1f6ba1994/R/functions.R#L187
 anndata2seurat <- function(inFile, outFile = NULL, main_layer = 'counts', assay = 'RNA', use_seurat = FALSE, lzf = FALSE) {
+  # outFile = NULL;main_layer = 'counts';assay = 'RNA';use_seurat = FALSE;lzf = FALSE
   main_layer <- match.arg(main_layer, c('counts', 'data', 'scale.data'))
   is_robject <- any(class(inFile) %in% c("AnnDataR6","R6"))
   if(is_robject){
@@ -105,7 +106,7 @@ anndata2seurat <- function(inFile, outFile = NULL, main_layer = 'counts', assay 
       #### Handle R version of anndata ####
       embeddings <- sapply(embed_names, function(x){
         if(is_robject){
-          ad$obsm[x]
+          ad$obsm[[x]]
         }else { reticulate::py_to_r(ad$obsm[x]) }
         }, simplify = FALSE, USE.NAMES = TRUE)
       names(embeddings) <- embed_names

@@ -4,7 +4,7 @@ scKirby
 Author: <i>Brian M. Schilder</i>
 </h5>
 <h5>
-Most recent update: <i>Jun-21-2021</i>
+Most recent update: <i>Jun-24-2021</i>
 </h5>
 
 ## Automated ingestion and conversion of various single-cell data formats.
@@ -23,6 +23,8 @@ any of these steps separately using the designated sub-functions.
     `save_data()`).
 
 ## [Documentation website](https://bschilder.github.io/scKirby)
+
+## [Vignette](https://bschilder.github.io/scKirby/articles/ingest_data.html)
 
 <img src="./images/buff_kirby.jpeg" height="400">
 
@@ -119,7 +121,7 @@ sce <- ingest_data(obj=example_EWCElist)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpmsKvKY/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpzgAlBR/scKirby_output.rds
 
 ### As `Seurat`
 
@@ -139,7 +141,7 @@ seurat <- ingest_data(obj=example_EWCElist,
     ## Warning: Feature names cannot have underscores ('_'), replacing with dashes
     ## ('-')
 
-    ## + Saving Seurat: scKirby_output
+    ## + Saving Seurat: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpzgAlBR/scKirby_output.rds
 
 ## Ingest Seurat
 
@@ -163,7 +165,7 @@ sce <- ingest_data(obj=example_seurat)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpmsKvKY/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpzgAlBR/scKirby_output.rds
 
 # Session Info
 
@@ -192,7 +194,7 @@ utils::sessionInfo()
     ## 
     ## loaded via a namespace (and not attached):
     ##   [1] Seurat_4.0.3                Rtsne_0.15                 
-    ##   [3] colorspace_2.0-1            deldir_0.2-10              
+    ##   [3] colorspace_2.0-2            deldir_0.2-10              
     ##   [5] ellipsis_0.3.2              class_7.3-19               
     ##   [7] ggridges_0.5.3              XVector_0.32.0             
     ##   [9] GenomicRanges_1.44.0        gld_2.6.2                  
@@ -215,12 +217,12 @@ utils::sessionInfo()
     ##  [43] gtable_0.3.0                glue_1.4.2                 
     ##  [45] lmom_2.8                    GenomeInfoDbData_1.2.6     
     ##  [47] reshape2_1.4.4              RANN_2.6.1                 
-    ##  [49] dplyr_1.0.6                 Rcpp_1.0.6                 
+    ##  [49] dplyr_1.0.7                 Rcpp_1.0.6                 
     ##  [51] scattermore_0.7             Biobase_2.52.0             
     ##  [53] vctrs_0.3.8                 nlme_3.1-152               
     ##  [55] lmtest_0.9-38               xfun_0.24                  
     ##  [57] stringr_1.4.0               globals_0.14.0             
-    ##  [59] mime_0.10                   miniUI_0.1.1.1             
+    ##  [59] mime_0.11                   miniUI_0.1.1.1             
     ##  [61] lifecycle_1.0.0             irlba_2.3.3                
     ##  [63] goftest_1.2-2               future_1.21.0              
     ##  [65] zlibbioc_1.38.0             MASS_7.3-54                
@@ -254,7 +256,7 @@ utils::sessionInfo()
     ## [121] tibble_3.1.2                future.apply_1.7.0         
     ## [123] crayon_1.4.1                KernSmooth_2.23-20         
     ## [125] utf8_1.2.1                  spatstat.geom_2.2-0        
-    ## [127] plotly_4.9.4                rmarkdown_2.9              
+    ## [127] plotly_4.9.4.1              rmarkdown_2.9              
     ## [129] grid_4.1.0                  data.table_1.14.0          
     ## [131] digest_0.6.27               xtable_1.8-4               
     ## [133] tidyr_1.1.3                 httpuv_1.6.1               

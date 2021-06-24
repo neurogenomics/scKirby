@@ -9,7 +9,7 @@
 sce_to_seurat <- function(object,
                           verbose=T){
   messager("+ SingleCellExperiment ==> Seurat",v=verbose)
-  seurat <- Seurat::as.Seurat(example_sce)
+  seurat <- Seurat::as.Seurat(object)
   return(seurat)
 }
 

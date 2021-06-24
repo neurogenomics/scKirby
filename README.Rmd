@@ -19,7 +19,8 @@ There's a lot of single-cell omics file/object formats out there, and not all to
 3. **Save**: Saves the converted file/object (sub-function: `save_data()`).
 
 
-## [Documentation website](https://bschilder.github.io/scKirby) 
+## [Documentation website](https://bschilder.github.io/scKirby)  
+## [Vignette](https://bschilder.github.io/scKirby/articles/ingest_data.html)  
 
 
 <img src="./images/buff_kirby.jpeg" height="400">
@@ -126,7 +127,6 @@ data("example_seurat")
 
 sce <- ingest_data(obj=example_seurat)
 ```
-
 
 
 # Session Info
