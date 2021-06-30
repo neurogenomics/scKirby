@@ -1,0 +1,33 @@
+name: pegasus
+channels:
+  - conda-forge
+  - bioconda 
+  - plotly 
+  - nodefaults  
+dependencies: 
+  # Python
+  - python=3.8 
+  - numba<=0.52.0  
+  - "umap-learn<0.5,>=0.4" 
+  - pegasuspy 
+  - harmony-pytorch<=0.1.5  
+  - psutil 
+  - cython 
+  - anndata  
+  - matplotlib 
+  - seaborn 
+  - plotly 
+  - chart-studio 
+  - glob2   
+  # Jupyter
+  - jupyter
+  ## nbconvert >=6.0 causes problems
+  - nbconvert=5.6.1
+  - nb_conda_kernels
+  ## After install jupyter_contrib_nbextensions, run: jupyter nbextensions_configurator enable --user
+  - jupyter_contrib_nbextensions 
+  - pip   
+  - pip:
+  # NOTE!: If `import hnswlib` crashes Jupyter, try `pip install hnswlib --force-reinstall --no-cache-dir` 
+  # See Issue here: https://github.com/klarman-cell-observatory/pegasus/issues/185  
+    - hnswlib

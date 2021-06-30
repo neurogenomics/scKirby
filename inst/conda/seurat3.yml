@@ -1,0 +1,10 @@
+name: seurat3
+channels:
+  - conda-forge
+  - bioconda 
+  - nodefaults
+dependencies: 
+  # R
+  - r-base  
+  - r-seurat>=3.0.0   
+  - radian
