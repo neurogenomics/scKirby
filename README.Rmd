@@ -20,7 +20,8 @@ There's a lot of single-cell omics file/object formats out there, and not all to
 
 
 ## [Documentation website](https://bschilder.github.io/scKirby)  
-## [Vignette](https://bschilder.github.io/scKirby/articles/ingest_data.html)  
+## [Vignette: data ingestion](https://bschilder.github.io/scKirby/articles/ingest_data.html)  
+## [Vignette: conda environments](https://bschilder.github.io/scKirby/articles/conda.html)  
 
 
 <img src="./images/buff_kirby.jpeg" height="400">
@@ -129,6 +130,16 @@ sce <- ingest_data(obj=example_seurat)
 ```
 
 
+
+# Conda environments  
+
+## Updating Seurat objects 
+
+Seurat's `UpdateSeuratObject()` can only update objects from the version immediately previous to the version of Seurat you currently have installed (e.g. Seurat v2 --> v3). This means you can't import an object created in Seurat v1 and directly upgrade it to Seurat v3. We have provided yaml files when can be used to create separate envs for each version of Seurat [here](https://github.com/bschilder/scKirby/tree/main/inst/conda).  
+
+For more details, see the [scKirby conda env tutorial](https://bschilder.github.io/scKirby/articles/conda.html). 
+  
+  
 # Session Info
 
 <details>

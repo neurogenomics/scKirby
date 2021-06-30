@@ -4,7 +4,7 @@ scKirby
 Author: <i>Brian M. Schilder</i>
 </h5>
 <h5>
-Most recent update: <i>Jun-24-2021</i>
+Most recent update: <i>Jun-30-2021</i>
 </h5>
 
 ## Automated ingestion and conversion of various single-cell data formats.
@@ -24,7 +24,9 @@ any of these steps separately using the designated sub-functions.
 
 ## [Documentation website](https://bschilder.github.io/scKirby)
 
-## [Vignette](https://bschilder.github.io/scKirby/articles/ingest_data.html)
+## [Vignette: data ingestion](https://bschilder.github.io/scKirby/articles/ingest_data.html)
+
+## [Vignette: conda environments](https://bschilder.github.io/scKirby/articles/conda.html)
 
 <img src="./images/buff_kirby.jpeg" height="400">
 
@@ -121,7 +123,7 @@ sce <- ingest_data(obj=example_EWCElist)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpzgAlBR/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmplQASgm/scKirby_output.rds
 
 ### As `Seurat`
 
@@ -141,7 +143,7 @@ seurat <- ingest_data(obj=example_EWCElist,
     ## Warning: Feature names cannot have underscores ('_'), replacing with dashes
     ## ('-')
 
-    ## + Saving Seurat: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpzgAlBR/scKirby_output.rds
+    ## + Saving Seurat: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmplQASgm/scKirby_output.rds
 
 ## Ingest Seurat
 
@@ -165,7 +167,22 @@ sce <- ingest_data(obj=example_seurat)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpzgAlBR/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmplQASgm/scKirby_output.rds
+
+# Conda environments
+
+## Updating Seurat objects
+
+Seurat’s `UpdateSeuratObject()` can only update objects from the version
+immediately previous to the version of Seurat you currently have
+installed (e.g. Seurat v2 –&gt; v3). This means you can’t import an
+object created in Seurat v1 and directly upgrade it to Seurat v3. We
+have provided yaml files when can be used to create separate envs for
+each version of Seurat
+[here](https://github.com/bschilder/scKirby/tree/main/inst/conda).
+
+For more details, see the [scKirby conda env
+tutorial](https://bschilder.github.io/scKirby/articles/conda.html).
 
 # Session Info
 
@@ -234,7 +251,7 @@ utils::sessionInfo()
     ##  [77] SingleCellExperiment_1.14.1 yaml_2.2.1                 
     ##  [79] Exact_2.1                   gridExtra_2.3              
     ##  [81] pbapply_1.4-3               reticulate_1.20            
-    ##  [83] ggplot2_3.3.4               rpart_4.1-15               
+    ##  [83] ggplot2_3.3.5               rpart_4.1-15               
     ##  [85] stringi_1.6.2               S4Vectors_0.30.0           
     ##  [87] e1071_1.7-7                 BiocGenerics_0.38.0        
     ##  [89] boot_1.3-28                 BiocParallel_1.26.0        

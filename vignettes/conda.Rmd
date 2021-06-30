@@ -1,0 +1,100 @@
+---
+title: "conda"
+author: "<h5>Author: <i>Brian M. Schilder</i></h5>"  
+date: "<h5>Most recent update: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h5>" 
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{conda}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+) 
+```
+
+```{r setup}
+library(scKirby)
+```
+
+# Updating Seurat objects 
+ 
+Seurat's `UpdateSeuratObject()` can only update objects from the version immediately previous to the version of Seurat you currently have installed (e.g. Seurat v2 --> v3). This means you can't import an object created in Seurat v1 and directly upgrade it to Seurat v3. 
+
+Until this problem is fixed by the Seurat developers, an intermediate solution is to create separate [conda](https://conda.io/projects/conda/en/latest/index.html) environments for each Seurat version (rather then sequentially installing and uninstalling each version of Seurat whenever you want to update an object). We have provided yaml files when can be used to create separate envs for each version of Seurat [here](https://github.com/bschilder/scKirby/tree/main/inst/conda). 
+
+Beyond object updating, having envs for each legacy version of Seurat might be helpful when running old scripts, as many of the function names and basic functionality changed across Seurat versions. 
+
+For more details, see the [scKirby conda env tutorial](https://bschilder.github.io/scKirby/articles/conda.html)
+
+## 1. Create each conda env in command line:  
+
+```
+#### Seurat v1 #### 
+conda env create -f https://github.com/bschilder/scKirby/raw/main/inst/conda/seurat1.yml
+
+#### Seurat v2 #### 
+conda env create -f https://github.com/bschilder/scKirby/raw/main/inst/conda/seurat2.yml
+
+#### Seurat v3 #### 
+conda env create -f https://github.com/bschilder/scKirby/raw/main/inst/conda/seurat3.yml
+
+#### Seurat v4 #### 
+conda env create -f https://github.com/bschilder/scKirby/raw/main/inst/conda/seurat4.yml
+```
+
+## 2. Activate conda env
+
+```
+conda activate seurat3
+```
+
+## 3. Activate conda env and start radian 
+
+Each conda env comes with [radian](https://github.com/randy3k/radian), a command line interface for R that's much more user-friendly than the default.  
+
+```
+conda activate seurat3
+radian 
+```
+
+## 4. Update object in R
+
+```R
+library(Seurat) 
+#### Confirm Seurat version ####
+packageVersion("Seurat")
+
+#### Load object ####
+
+obj <- readRDS("<path_to_old_seurat_object>")
+
+#### Update object ####
+new_obj <- Seurat::UpdateSeuratObject(obj)
+```
+
+# Additional conda envs
+
+We also provide conda envs for the single-cell analysis softwares [Pegasus](https://pegasus.readthedocs.io/en/stable/#) and [Cell BLAST](https://github.com/gao-lab/Cell_BLAST).  
+
+```
+#### Pegasus #### 
+conda env create -f https://github.com/bschilder/scKirby/raw/main/inst/conda/pegasus.yml
+
+#### Cell BLAST #### 
+conda env create -f https://github.com/bschilder/scKirby/raw/main/inst/conda/cellblast.yml
+```
+
+
+# Session Info
+
+<details>
+
+```{r Session Info}
+utils::sessionInfo()
+```
+
+</details>
