@@ -9,9 +9,10 @@ class_dictionary <- function(){
   anndata_classes <- c("AnnData","AnnDataR6","AnnDataR6R6")
   seurat_classes <- c("Seurat","SeuratObject")
   seurath5_classes <- c("h5Seurat","scdisk")
+  cds_classes <- c("ExpressionSet","CellDataSet","monocle","monocle3")
   #### Aggregate ####
-  supported_classes <- c(matrix_classes, loom_classes, sce_classes, hdf5se_classes, anndata_classes, seurat_classes, seurath5_classes, ewce_classes)
-  supported_classes_print <- c("matrix (any subclass)",loom_classes, sce_classes, hdf5se_classes, anndata_classes, seurat_classes, ewce_classes)
+  supported_classes <- c(matrix_classes, loom_classes, sce_classes, hdf5se_classes, anndata_classes, seurat_classes, seurath5_classes, ewce_classes, cds_classes)
+  supported_classes_print <- c("matrix (any subclass)",loom_classes, sce_classes, hdf5se_classes, anndata_classes, seurat_classes, ewce_classes, cds_classes)
 
   return(list(ewce=ewce_classes,
               matrix=matrix_classes,
@@ -21,6 +22,7 @@ class_dictionary <- function(){
               anndata=anndata_classes,
               seurat=seurat_classes,
               h5seurat=seurath5_classes,
+              cds=cds_classes,
 
               supported_classes=supported_classes,
               supported_classes_print=supported_classes_print

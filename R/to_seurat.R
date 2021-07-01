@@ -51,4 +51,9 @@ to_seurat <- function(object,
     seurat <- sce_to_seurat(object, verbose)
     return(seurat)
   }
+  #### CellDataSet ####
+  if(class(object)[1] %in% cdict$cds){
+    seurat <- cds_to_seurat(object, verbose)
+    return(seurat)
+  }
 }

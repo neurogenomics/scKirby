@@ -4,7 +4,7 @@ scKirby
 Author: <i>Brian M. Schilder</i>
 </h5>
 <h5>
-Most recent update: <i>Jun-30-2021</i>
+Most recent update: <i>Jul-01-2021</i>
 </h5>
 
 ## Automated ingestion and conversion of various single-cell data formats.
@@ -42,6 +42,8 @@ any of these steps separately using the designated sub-functions.
 -   [anndata](https://github.com/rcannood/anndata)
 -   [loom](http://loompy.org/)
 -   [loomR](https://satijalab.org/loomR/loomR_tutorial.html)
+-   [CellDataSet/monocle](http://cole-trapnell-lab.github.io/monocle-release/docs/#getting-started-with-monocle)
+-   [ExpressionSet](https://www.rdocumentation.org/packages/Biobase/versions/2.32.0/topics/ExpressionSet)
 -   [list](https://github.com/NathanSkene/EWCE)
 -   [EWCE](https://github.com/NathanSkene/EWCE)
 -   [matrix](https://cran.r-project.org/web/packages/Matrix/index.html)
@@ -52,7 +54,6 @@ any of these steps separately using the designated sub-functions.
 ## Supported output formats
 
 -   [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html)  
--   [SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html)
 -   [HDF5SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/HDF5Array.html)  
 -   [Seurat](https://satijalab.org/seurat/index.html)  
 -   [H5Seurat](https://mojaveazure.github.io/seurat-disk/articles/convert-anndata.html)
@@ -61,6 +62,7 @@ any of these steps separately using the designated sub-functions.
 
 -   [anndata](https://github.com/rcannood/anndata)
 -   [loom](http://loompy.org/)
+-   [CellDataSet/monocle](http://cole-trapnell-lab.github.io/monocle-release/docs/#getting-started-with-monocle)
 
 **Notes**:
 
@@ -123,7 +125,7 @@ sce <- ingest_data(obj=example_EWCElist)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmplQASgm/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpioIIU7/scKirby_output.rds
 
 ### As `Seurat`
 
@@ -143,7 +145,7 @@ seurat <- ingest_data(obj=example_EWCElist,
     ## Warning: Feature names cannot have underscores ('_'), replacing with dashes
     ## ('-')
 
-    ## + Saving Seurat: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmplQASgm/scKirby_output.rds
+    ## + Saving Seurat: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpioIIU7/scKirby_output.rds
 
 ## Ingest Seurat
 
@@ -167,7 +169,7 @@ sce <- ingest_data(obj=example_seurat)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmplQASgm/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpioIIU7/scKirby_output.rds
 
 # Conda environments
 
@@ -262,7 +264,7 @@ utils::sessionInfo()
     ##  [99] ROCR_1.0-11                 purrr_0.3.4                
     ## [101] htmlwidgets_1.5.3           patchwork_1.1.1            
     ## [103] cowplot_1.1.1               tidyselect_1.1.1           
-    ## [105] parallelly_1.26.0           RcppAnnoy_0.0.18           
+    ## [105] parallelly_1.26.1           RcppAnnoy_0.0.18           
     ## [107] plyr_1.8.6                  magrittr_2.0.1             
     ## [109] R6_2.5.0                    IRanges_2.26.0             
     ## [111] DescTools_0.99.42           generics_0.1.0             

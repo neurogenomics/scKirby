@@ -29,21 +29,29 @@ Imports:
     reticulate,
     S4Vectors, 
     Seurat,
+    SeuratDisk, 
     anndata,
     SummarizedExperiment,
-    SingleCellExperiment,
-    LoomExperiment,
+    SingleCellExperiment, 
     DelayedArray,
     BiocParallel,
     parallel,
     HDF5Array,
-    rhdf5
+    rhdf5 
 Remotes:
   github::mojaveazure/seurat-disk, 
   github::mojaveazure/loomR,
-  github::cellgeni/sceasy 
-VignetteBuilder: knitr
-RoxygenNote: 7.1.1
+  github::cellgeni/sceasy,
+  github::cole-trapnell-lab/leidenbase, 
+  github::cole-trapnell-lab/monocle3 
 Suggests: 
-    rmarkdown,
-    knitr
+  rmarkdown,
+  knitr, 
+  loomR,
+  LoomExperiment,
+  sceasy, 
+  leidenbase, 
+  monocle3,
+  monocle 
+VignetteBuilder: knitr
+RoxygenNote: 7.1.1 

@@ -4,7 +4,7 @@
 save_data <- function(object,
                       output_type,
                       save_dir=tempdir(),
-                      filename="scKirby_output",
+                      filename=paste("scKirby_output",output_type,sep="."),
                       quicksave_HDF5=T,
                       overwrite=T,
                       verbose=T){

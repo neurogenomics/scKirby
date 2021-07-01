@@ -28,7 +28,6 @@ Until this problem is fixed by the Seurat developers, an intermediate solution i
 
 Beyond object updating, having envs for each legacy version of Seurat might be helpful when running old scripts, as many of the function names and basic functionality changed across Seurat versions. 
 
-For more details, see the [scKirby conda env tutorial](https://bschilder.github.io/scKirby/articles/conda.html)
 
 ## 1. Create each conda env in command line:  
 

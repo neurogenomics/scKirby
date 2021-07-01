@@ -86,7 +86,7 @@
 #' @export
 ingest_data <- function(obj,
                         input_type="guess",
-                        output_type="SingleCellExperiment",
+                        output_type=c("SingleCellExperiment","Seurat","CellDataSet"),
                         custom_reader=NULL,
                         save_dir=tempdir(),
                         filename="scKirby_output",
@@ -97,6 +97,7 @@ ingest_data <- function(obj,
                         ...){
     # output_type="SingleCellExperiment";custom_reader=NULL;save_dir=tempdir();filename="scKirby_output"; overwrite=F; return_filepath=F;verbose=T;
     cdict <- class_dictionary()
+    output_type <-output_type[1]
     output_types <- list(sce=tolower(cdict$sce),
                          hdf5se=tolower(cdict$hdf5se),
                          seurat=tolower(cdict$seurat),

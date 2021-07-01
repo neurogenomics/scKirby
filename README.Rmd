@@ -38,6 +38,8 @@ There's a lot of single-cell omics file/object formats out there, and not all to
 - [anndata](https://github.com/rcannood/anndata) 
 - [loom](http://loompy.org/) 
 - [loomR](https://satijalab.org/loomR/loomR_tutorial.html) 
+- [CellDataSet/monocle](http://cole-trapnell-lab.github.io/monocle-release/docs/#getting-started-with-monocle) 
+- [ExpressionSet](https://www.rdocumentation.org/packages/Biobase/versions/2.32.0/topics/ExpressionSet)
 - [list](https://github.com/NathanSkene/EWCE) 
 - [EWCE](https://github.com/NathanSkene/EWCE) 
 - [matrix](https://cran.r-project.org/web/packages/Matrix/index.html)
@@ -46,8 +48,7 @@ There's a lot of single-cell omics file/object formats out there, and not all to
 
 ## Supported output formats 
 
-- [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html)  
-- [SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/SummarizedExperiment.html) 
+- [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html)   
 - [HDF5SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/HDF5Array.html)  
 - [Seurat](https://satijalab.org/seurat/index.html)   
 - [H5Seurat](https://mojaveazure.github.io/seurat-disk/articles/convert-anndata.html)  
@@ -56,6 +57,7 @@ There's a lot of single-cell omics file/object formats out there, and not all to
 
 - [anndata](https://github.com/rcannood/anndata) 
 - [loom](http://loompy.org/) 
+- [CellDataSet/monocle](http://cole-trapnell-lab.github.io/monocle-release/docs/#getting-started-with-monocle) 
 
 **Notes**: 
 
@@ -65,7 +67,7 @@ There's a lot of single-cell omics file/object formats out there, and not all to
   
 - Currently, some (but not all) conversions carry over: 
   + Multiple assays per experiment. 
-  + Additional objects like dimensionality reduction projections (e.g. PCA, tSNE, UMAP) or graphs (e.g. K-nearest neighbors). 
+  + Additional objects like dimensionality reduction projections (e.g. PCA, tSNE, UMAP) or graphs (e.g. K-nearest neighbors). This feature will be added in the future.   
 
 
 # Installation 

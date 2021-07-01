@@ -16,7 +16,7 @@
 ingest_data(
   obj,
   input_type = "guess",
-  output_type = "SingleCellExperiment",
+  output_type = c("SingleCellExperiment", "Seurat", "CellDataSet"),
   custom_reader = NULL,
   save_dir = tempdir(),
   filename = "scKirby_output",

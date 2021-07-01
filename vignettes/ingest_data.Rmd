@@ -128,6 +128,15 @@ seurat <- ingest_data(obj=sce,
                       output_type = "Seurat") 
 ```
 
+## Ingest CellDataSet 
+
+```{r}
+data("example_cds") 
+
+seurat <- ingest_data(obj=example_cds,
+                      output_type = "Seurat") 
+```
+
 
 
 ## Ingest AnnData 

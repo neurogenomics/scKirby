@@ -12,5 +12,5 @@ Convert: \code{loom} ==> \code{Seurat}
 \examples{
 library(scKirby)
 loom <- example_loom()
-sce <- loom_to_seurat(loom)
+seurat <- loom_to_seurat(loom)
 }

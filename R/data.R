@@ -61,4 +61,18 @@
 
 
 
+#' Example \code{CellDataSet}
+#'
+#' @examples
+#' \dontrun{
+#' library(Seurat)
+#' data("pbmc_small")
+#' example_seurat <- Seurat::UpdateSeuratObject(pbmc_small)
+#' example_cds <- Seurat::as.CellDataSet(example_seurat)
+#' usethis::use_data(example_cds, overwrite = T)
+#' }
+#' @export
+"example_cds"
+
+
 
