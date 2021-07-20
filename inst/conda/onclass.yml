@@ -1,0 +1,15 @@
+name: onclass
+channels:
+  - conda-forge
+  - bioconda 
+  - nodefaults
+dependencies:
+  # Python
+  - python>=3.6.1 
+  - anaconda::tensorflow=2.0  
+  - pandas 
+  - openpyxl 
+  - anndata 
+  - pip  
+  - pip:
+    - OnClass==1.2 
