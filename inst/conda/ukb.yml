@@ -1,0 +1,33 @@
+name: ukb
+channels:
+  - conda-forge
+  - bioconda
+  - plotly 
+  - nodefaults
+dependencies:
+  # Python
+  - python>=3.6.1
+  - pandas 
+  - openpyxl
+  - matplotlib
+  - seaborn 
+  - fastcluster 
+  - mygene
+  - scikit-learn 
+  - umap-learn  
+  - chart-studio  
+  - pip 
+   # Jupyter
+  - jupyter 
+  # nbconvert >=6.0 causes problems
+  - nbconvert=5.6.1
+  - nb_conda_kernels 
+  - jupyter_contrib_nbextensions 
+  ## After install jupyter_contrib_nbextensions, run: jupyter nbextensions_configurator enable --user
+  - nodejs
+  ## bokehheat installation instructions: https://docs.bokeh.org/en/latest/docs/user_guide/jupyter.html#userguide-jupyter
+  ## After install nodejs: jupyter labextension install @jupyter-widgets/jupyterlab-manager
+  ## And: jupyter labextension install @bokeh/jupyter_bokeh
+  - pip:
+    - bokehheat 
+    - gene-outlier-detection
