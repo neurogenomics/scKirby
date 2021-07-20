@@ -60,19 +60,19 @@
 "example_ctd"
 
 
-
-#' Example \code{CellDataSet}
-#'
-#' @examples
-#' \dontrun{
-#' library(Seurat)
-#' data("pbmc_small")
-#' example_seurat <- Seurat::UpdateSeuratObject(pbmc_small)
-#' example_cds <- Seurat::as.CellDataSet(example_seurat)
-#' usethis::use_data(example_cds, overwrite = T)
-#' }
-#' @export
-"example_cds"
+#### Removing for now, bc it makes scKirby require monocle (which can be hard to install)
+##' Example \code{CellDataSet}
+##'
+##' @examples
+##' \dontrun{
+##' library(Seurat)
+##' data("pbmc_small")
+##' example_seurat <- Seurat::UpdateSeuratObject(pbmc_small)
+##' example_cds <- Seurat::as.CellDataSet(example_seurat)
+##' usethis::use_data(example_cds, overwrite = T)
+##' }
+##' @export
+#"example_cds"
 
 
 
