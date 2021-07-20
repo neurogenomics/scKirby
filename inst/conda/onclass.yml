@@ -5,11 +5,11 @@ channels:
   - nodefaults
 dependencies:
   # Python
-  - python>=3.6.1 
+  - python>=3.7
   - anaconda::tensorflow=2.0  
   - pandas 
   - openpyxl 
   - anndata 
   - pip  
   - pip:
-    - OnClass==1.2 
+    - OnClass 
