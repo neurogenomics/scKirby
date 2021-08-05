@@ -14,8 +14,7 @@ dependencies:
   - harmony-pytorch<=0.1.5  
   - psutil 
   - cython 
-  - anndata  
-  - matplotlib 
+  - anndata   
   - seaborn 
   - plotly 
   - chart-studio 

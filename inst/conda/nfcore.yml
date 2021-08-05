@@ -1,0 +1,32 @@
+name: nfcore
+channels:
+  - conda-forge
+  - bioconda 
+  - nodefaults
+dependencies:
+  # Nextflow
+  - nf-core 
+  - nextflow 
+  # Python
+  - python>=3.6.1
+  - pandas 
+  - openpyxl 
+  - seaborn
+  # Command line
+  - wget
+  # R
+  - r-base>=4.0.0
+  - r-essentials
+  - r-devtools
+  - r-reticulate  
+  - r-gert 
+  - r-usethis
+  - r-here
+  - r-openxlsx
+  - r-r.utils
+  - r-data.table
+  - r-ggplot2
+  - r-tidyverse  
+  - r-biocmanager
+  - radian
+  - pip

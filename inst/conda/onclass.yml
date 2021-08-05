@@ -9,7 +9,10 @@ dependencies:
   - anaconda::tensorflow=2.0  
   - pandas 
   - openpyxl 
-  - anndata 
+  - anndata  
+  - seaborn 
+  - plotly 
+  - chart-studio 
   - pip  
   - pip:
     - OnClass 
