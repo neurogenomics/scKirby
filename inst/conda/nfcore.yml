@@ -21,7 +21,6 @@ dependencies:
   - r-essentials
   - r-devtools
   - r-reticulate  
-  - r-optparse 
   - r-gert 
   - r-usethis
   - r-here
