@@ -6,19 +6,22 @@ channels:
 dependencies:
   # Nextflow
   - nf-core 
-  - nextflow 
+  - openjdk 
+  - "nextflow>=21.04.0-0"
+  # Command line
+  - "singularity>=3.0.1" 
+  - wget
   # Python
   - python>=3.6.1
   - pandas 
   - openpyxl 
   - seaborn
-  # Command line
-  - wget
   # R
   - r-base>=4.0.0
   - r-essentials
   - r-devtools
   - r-reticulate  
+  - r-optparse 
   - r-gert 
   - r-usethis
   - r-here
