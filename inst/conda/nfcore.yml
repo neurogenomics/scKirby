@@ -7,9 +7,9 @@ dependencies:
   # Nextflow
   - nf-core 
   - openjdk 
-  - "nextflow>=21.04.0-0"
+  - nextflow>=21.04.0-0
   # Command line
-  - "singularity>=3.0.1" 
+  - singularity>=3.0.1 
   - wget
   # Python
   - python>=3.6.1
