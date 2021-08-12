@@ -9,7 +9,10 @@ dependencies:
   - openjdk 
   - nextflow>=21.04.0-0
   # Command line
-  - singularity>=3.0.1 
+  ### Note that installing singularity this way can cause issues with root permissions.
+  ### Might be best to intall directly from site (though this can be a bit complicated):
+  ###  https://sylabs.io/guides/3.0/user-guide/installation.html
+  #- singularity>=3.0.1 
   - wget
   # Python
   - python>=3.6.1
