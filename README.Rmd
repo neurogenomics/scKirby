@@ -20,7 +20,7 @@ There's a lot of single-cell omics file/object formats out there, and not all to
 
 
 ## [Documentation website](https://bschilder.github.io/scKirby)  
-## [Vignette: data ingestion](https://bschilder.github.io/scKirby/articles/ingest_data.html)  
+## [Vignette: data ingestion](https://bschilder.github.io/scKirby/articles/scKirby.html)  
 ## [Vignette: conda environments](https://bschilder.github.io/scKirby/articles/conda.html)  
 
 
