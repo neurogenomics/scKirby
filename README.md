@@ -1,13 +1,14 @@
-scKirby
+Automated ingestion and conversion of various single-cell data formats
 ================
-<h5>
+<img src='https://github.com/bschilder/scKirby/blob/main/inst/hex/scKirby.png?raw=true' height='400'>
+<h4>
 Author: <i>Brian M. Schilder</i>
-</h5>
-<h5>
-Most recent update: <i>Jul-01-2021</i>
-</h5>
+</h4>
+<h4>
+Most recent update: <i>Sep-02-2021</i>
+</h4>
 
-## Automated ingestion and conversion of various single-cell data formats.
+# Intro
 
 There’s a lot of single-cell omics file/object formats out there, and
 not all tools support all of these formats. `scKirby` aims to make
@@ -24,11 +25,9 @@ any of these steps separately using the designated sub-functions.
 
 ## [Documentation website](https://bschilder.github.io/scKirby)
 
-## [Vignette: data ingestion](https://bschilder.github.io/scKirby/articles/ingest_data.html)
+## [Vignette: data ingestion](https://bschilder.github.io/scKirby/articles/scKirby.html)
 
 ## [Vignette: conda environments](https://bschilder.github.io/scKirby/articles/conda.html)
-
-<img src="./images/buff_kirby.jpeg" height="400">
 
 # i/o formats
 
@@ -73,6 +72,7 @@ any of these steps separately using the designated sub-functions.
     -   Multiple assays per experiment.
     -   Additional objects like dimensionality reduction projections
         (e.g. PCA, tSNE, UMAP) or graphs (e.g. K-nearest neighbors).
+        This feature will be added in the future.
 
 # Installation
 
@@ -125,7 +125,7 @@ sce <- ingest_data(obj=example_EWCElist)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpioIIU7/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /tmp/RtmpQGwA8v/scKirby_output.rds
 
 ### As `Seurat`
 
@@ -145,7 +145,7 @@ seurat <- ingest_data(obj=example_EWCElist,
     ## Warning: Feature names cannot have underscores ('_'), replacing with dashes
     ## ('-')
 
-    ## + Saving Seurat: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpioIIU7/scKirby_output.rds
+    ## + Saving Seurat: /tmp/RtmpQGwA8v/scKirby_output.rds
 
 ## Ingest Seurat
 
@@ -169,7 +169,7 @@ sce <- ingest_data(obj=example_seurat)
 
     ## [1] "+ Checking SCE rownames."
 
-    ## + Saving SingleCellExperiment: /var/folders/zq/h7mtybc533b1qzkys_ttgpth0000gn/T//RtmpioIIU7/scKirby_output.rds
+    ## + Saving SingleCellExperiment: /tmp/RtmpQGwA8v/scKirby_output.rds
 
 # Conda environments
 
@@ -195,15 +195,19 @@ utils::sessionInfo()
 ```
 
     ## R version 4.1.0 (2021-05-18)
-    ## Platform: x86_64-apple-darwin17.0 (64-bit)
-    ## Running under: macOS Big Sur 10.16
+    ## Platform: x86_64-pc-linux-gnu (64-bit)
+    ## Running under: Ubuntu 20.04.2 LTS
     ## 
     ## Matrix products: default
-    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.dylib
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
+    ## BLAS/LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.8.so
     ## 
     ## locale:
-    ## [1] en_GB.UTF-8/en_GB.UTF-8/en_GB.UTF-8/C/en_GB.UTF-8/en_GB.UTF-8
+    ##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+    ##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+    ##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=C             
+    ##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+    ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+    ## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
     ## 
     ## attached base packages:
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -215,17 +219,17 @@ utils::sessionInfo()
     ##   [1] Seurat_4.0.3                Rtsne_0.15                 
     ##   [3] colorspace_2.0-2            deldir_0.2-10              
     ##   [5] ellipsis_0.3.2              class_7.3-19               
-    ##   [7] ggridges_0.5.3              XVector_0.32.0             
-    ##   [9] GenomicRanges_1.44.0        gld_2.6.2                  
+    ##   [7] ggridges_0.5.3              XVector_0.33.0             
+    ##   [9] GenomicRanges_1.45.0        gld_2.6.2                  
     ##  [11] spatstat.data_2.1-0         rstudioapi_0.13            
-    ##  [13] proxy_0.4-26                leiden_0.3.8               
+    ##  [13] proxy_0.4-26                leiden_0.3.9               
     ##  [15] listenv_0.8.0               ggrepel_0.9.1              
     ##  [17] fansi_0.5.0                 mvtnorm_1.1-2              
     ##  [19] codetools_0.2-18            splines_4.1.0              
-    ##  [21] rootSolve_1.8.2.1           knitr_1.33                 
+    ##  [21] rootSolve_1.8.2.2           knitr_1.33                 
     ##  [23] polyclip_1.10-0             jsonlite_1.7.2             
     ##  [25] ica_1.0-2                   cluster_2.1.2              
-    ##  [27] png_0.1-7                   uwot_0.1.10                
+    ##  [27] png_0.1-7                   uwot_0.1.10.9000           
     ##  [29] spatstat.sparse_2.0-0       sctransform_0.3.2          
     ##  [31] shiny_1.6.0                 compiler_4.1.0             
     ##  [33] httr_1.4.2                  lazyeval_0.2.2             
@@ -236,46 +240,46 @@ utils::sessionInfo()
     ##  [43] gtable_0.3.0                glue_1.4.2                 
     ##  [45] lmom_2.8                    GenomeInfoDbData_1.2.6     
     ##  [47] reshape2_1.4.4              RANN_2.6.1                 
-    ##  [49] dplyr_1.0.7                 Rcpp_1.0.6                 
-    ##  [51] scattermore_0.7             Biobase_2.52.0             
+    ##  [49] dplyr_1.0.7                 Rcpp_1.0.7                 
+    ##  [51] scattermore_0.7             Biobase_2.53.0             
     ##  [53] vctrs_0.3.8                 nlme_3.1-152               
-    ##  [55] lmtest_0.9-38               xfun_0.24                  
+    ##  [55] lmtest_0.9-38               xfun_0.25                  
     ##  [57] stringr_1.4.0               globals_0.14.0             
     ##  [59] mime_0.11                   miniUI_0.1.1.1             
     ##  [61] lifecycle_1.0.0             irlba_2.3.3                
     ##  [63] goftest_1.2-2               future_1.21.0              
-    ##  [65] zlibbioc_1.38.0             MASS_7.3-54                
+    ##  [65] zlibbioc_1.39.0             MASS_7.3-54                
     ##  [67] zoo_1.8-9                   scales_1.1.1               
-    ##  [69] spatstat.core_2.2-0         spatstat.utils_2.2-0       
-    ##  [71] promises_1.2.0.1            MatrixGenerics_1.4.0       
-    ##  [73] parallel_4.1.0              SummarizedExperiment_1.22.0
+    ##  [69] spatstat.core_2.3-0         spatstat.utils_2.2-0       
+    ##  [71] promises_1.2.0.1            MatrixGenerics_1.5.3       
+    ##  [73] parallel_4.1.0              SummarizedExperiment_1.23.1
     ##  [75] expm_0.999-6                RColorBrewer_1.1-2         
-    ##  [77] SingleCellExperiment_1.14.1 yaml_2.2.1                 
+    ##  [77] SingleCellExperiment_1.15.1 yaml_2.2.1                 
     ##  [79] Exact_2.1                   gridExtra_2.3              
     ##  [81] pbapply_1.4-3               reticulate_1.20            
     ##  [83] ggplot2_3.3.5               rpart_4.1-15               
-    ##  [85] stringi_1.6.2               S4Vectors_0.30.0           
-    ##  [87] e1071_1.7-7                 BiocGenerics_0.38.0        
-    ##  [89] boot_1.3-28                 BiocParallel_1.26.0        
-    ##  [91] GenomeInfoDb_1.28.0         rlang_0.4.11               
-    ##  [93] pkgconfig_2.0.3             matrixStats_0.59.0         
+    ##  [85] stringi_1.7.4               S4Vectors_0.31.0           
+    ##  [87] e1071_1.7-8                 BiocGenerics_0.39.1        
+    ##  [89] boot_1.3-28                 BiocParallel_1.27.3        
+    ##  [91] GenomeInfoDb_1.29.3         rlang_0.4.11               
+    ##  [93] pkgconfig_2.0.3             matrixStats_0.60.0         
     ##  [95] bitops_1.0-7                evaluate_0.14              
     ##  [97] lattice_0.20-44             tensor_1.5                 
     ##  [99] ROCR_1.0-11                 purrr_0.3.4                
     ## [101] htmlwidgets_1.5.3           patchwork_1.1.1            
     ## [103] cowplot_1.1.1               tidyselect_1.1.1           
-    ## [105] parallelly_1.26.1           RcppAnnoy_0.0.18           
+    ## [105] parallelly_1.27.0           RcppAnnoy_0.0.19           
     ## [107] plyr_1.8.6                  magrittr_2.0.1             
-    ## [109] R6_2.5.0                    IRanges_2.26.0             
+    ## [109] R6_2.5.1                    IRanges_2.27.0             
     ## [111] DescTools_0.99.42           generics_0.1.0             
-    ## [113] DelayedArray_0.18.0         DBI_1.1.1                  
-    ## [115] mgcv_1.8-36                 pillar_1.6.1               
+    ## [113] DelayedArray_0.19.1         DBI_1.1.1                  
+    ## [115] mgcv_1.8-36                 pillar_1.6.2               
     ## [117] fitdistrplus_1.1-5          abind_1.4-5                
-    ## [119] survival_3.2-11             RCurl_1.98-1.3             
-    ## [121] tibble_3.1.2                future.apply_1.7.0         
+    ## [119] survival_3.2-12             RCurl_1.98-1.4             
+    ## [121] tibble_3.1.4                future.apply_1.8.1         
     ## [123] crayon_1.4.1                KernSmooth_2.23-20         
-    ## [125] utf8_1.2.1                  spatstat.geom_2.2-0        
-    ## [127] plotly_4.9.4.1              rmarkdown_2.9              
+    ## [125] utf8_1.2.2                  spatstat.geom_2.2-2        
+    ## [127] plotly_4.9.4.9000           rmarkdown_2.10             
     ## [129] grid_4.1.0                  data.table_1.14.0          
     ## [131] digest_0.6.27               xtable_1.8-4               
     ## [133] tidyr_1.1.3                 httpuv_1.6.1               

@@ -33,9 +33,10 @@ You can make awesome hex stickers for your R packages using [hexSticker](https:/
 img1 <- here::here("inst/hex/buff_kirby.jpeg")
 
 hex <- hexSticker::sticker(subplot = img1, 
-                    package="scKirby", p_color="black", p_size=20,
+                    package="scKirby", p_color="black", p_size=20, p_y = 1.5,
                     s_x = 1, s_y = .8,  s_width = .5, s_height = .5, 
-                    h_fill = "white", h_color = "#eb6ebd", spotlight = FALSE,
+                    h_fill = "white", h_color = "#eb6ebd", h_size = 3,
+                    spotlight = FALSE,
                     filename = here::here("inst/hex/scKirby.png"))
 print(hex)
 ```

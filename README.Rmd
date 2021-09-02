@@ -1,7 +1,7 @@
 ---
-title: "scKirby"
-author: "<h5>Author: <i>Brian M. Schilder</i></h5>" 
-date: "<h5>Most recent update: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h5>"
+title: "Automated ingestion and conversion of various single-cell data formats"
+author: "<img src='https://github.com/bschilder/scKirby/blob/main/inst/hex/scKirby.png?raw=true' height='400'><h4>Author: <i>Brian M. Schilder</i></h4>" 
+date: "<h4>Most recent update: <i>`r format( Sys.Date(), '%b-%d-%Y')`</i></h4>"
 output:
   github_document 
 ---
@@ -10,7 +10,7 @@ output:
 knitr::opts_chunk$set(echo = T)
 ```
 
-## Automated ingestion and conversion of various single-cell data formats. 
+# Intro
 
 There's a lot of single-cell omics file/object formats out there, and not all tools support all of these formats. `scKirby` aims to make switching between these formats much easier by running several steps within a single function: `ingest_data()`. Alternatively, users can run any of these steps separately using the designated sub-functions. 
 
@@ -22,9 +22,6 @@ There's a lot of single-cell omics file/object formats out there, and not all to
 ## [Documentation website](https://bschilder.github.io/scKirby)  
 ## [Vignette: data ingestion](https://bschilder.github.io/scKirby/articles/scKirby.html)  
 ## [Vignette: conda environments](https://bschilder.github.io/scKirby/articles/conda.html)  
-
-
-<img src="./images/buff_kirby.jpeg" height="400">
 
 # i/o formats 
 
@@ -72,7 +69,7 @@ There's a lot of single-cell omics file/object formats out there, and not all to
 
 # Installation 
 
-```{r Installation, eval=F}
+```{r Installation, eval=FALSE}
 if(!"remotes" %in% rownames(install.packages())){install.packages("remotes")}
 
 remotes::install_github("bschilder/scKirby")
@@ -84,7 +81,7 @@ remotes::install_github("bschilder/scKirby")
 
 Here are several quick examples of how one can use `scKirby`. For a complete list of examples please see the [documentation website](https://bschilder.github.io/scKirby).
 
-```{r Examples, message=F, warning=F}
+```{r Examples, message=FALSE, warning=FALSE}
 library(scKirby)
 ```
 
