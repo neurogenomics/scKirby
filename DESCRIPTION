@@ -1,7 +1,7 @@
 Package: scKirby
 Type: Package
 Title: Automated ingestion and conversion of various single-cell data formats.
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(person(given = "Brian",
                     family = "Schilder",
                     role = c("cre"),
@@ -38,12 +38,6 @@ Imports:
     parallel,
     HDF5Array,
     rhdf5 
-Remotes:
-  github::mojaveazure/seurat-disk, 
-  github::mojaveazure/loomR,
-  github::cellgeni/sceasy,
-  github::cole-trapnell-lab/leidenbase, 
-  github::cole-trapnell-lab/monocle3 
 Suggests: 
   rmarkdown,
   knitr, 
@@ -52,6 +46,13 @@ Suggests:
   sceasy, 
   leidenbase, 
   monocle3,
-  monocle 
+  monocle,
+  rworkflows
+Remotes:
+  github::mojaveazure/seurat-disk, 
+  github::mojaveazure/loomR,
+  github::cellgeni/sceasy,
+  github::cole-trapnell-lab/leidenbase, 
+  github::cole-trapnell-lab/monocle3
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1 
