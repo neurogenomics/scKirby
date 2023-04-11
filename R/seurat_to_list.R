@@ -1,8 +1,8 @@
 #' Convert: \code{Seurat} ==> \code{list}
 #'
 #' @export
-#' @import methods
-#' @import stats
+#' @importFrom methods .hasSlot slot
+#' @importFrom stats setNames
 #' @examples
 #' obj <- example_obj("seurat")
 #' obj2 <- seurat_to_list(obj)

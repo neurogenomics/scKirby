@@ -1,7 +1,7 @@
 check_se_rownames <- function(obj,
-                               rownames_var=NULL,
-                               remove_duplicates=TRUE,
-                               verbose=TRUE){
+                              rownames_var=NULL,
+                              remove_duplicates=TRUE,
+                              verbose=TRUE){
 
   messager("+ Checking obj rownames.",v=verbose)
   rowDat <- SummarizedExperiment::rowData(obj)
@@ -12,12 +12,9 @@ check_se_rownames <- function(obj,
       # IMPORTANT! only S4Vectors::rownames can assign row names.
       # Automatically assigns same rownames to assay and rowData
       S4Vectors::rownames(obj) <- rowDat[[rownames_var]]
-    }else {
-      wrn <- paste(
-        "Cannot identify rownames.",
-        "Please set rownames (rowDat) first with:",
-        "S4Vectors::rownames(obj) <- gene_names")
-      warning(wrn)
+
+    } else {
+      S4Vectors::rownames(obj) <- rownames(obj@assays@data[[1]])
     }
   }
   if(isTRUE(remove_duplicates)){

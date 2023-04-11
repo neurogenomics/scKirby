@@ -52,4 +52,4 @@ Remotes:
   github::cran/speedglm,
   github::cole-trapnell-lab/monocle3
 VignetteBuilder: knitr
-RoxygenNote: 7.1.1 
+RoxygenNote: 7.2.3

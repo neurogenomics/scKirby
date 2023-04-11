@@ -14,8 +14,8 @@ Automated ingestion and conversion of various single-cell data formats.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/bschilder/scKirby}
-  \item Report bugs at \url{https://github.com/bschilder/scKirby/issues}
+  \item \url{https://github.com/neurogenomics/scKirby}
+  \item Report bugs at \url{https://github.com/neurogenomics/scKirby/issues}
 }
 
 }
