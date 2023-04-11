@@ -1,15 +1,15 @@
 Automated ingestion and conversion of various single-cell data formats
 ================
-NULL [![License: GPL (\>= 3) + file
-LICENSE.md](https://img.shields.io/badge/license-GPL%20(%3E=%203)%20+%20file%20LICENSE.md-blue.svg)](https://cran.r-project.org/web/licenses/GPL%20(%3E=%203)%20+%20file%20LICENSE.md)
-[![](https://img.shields.io/badge/devel%20version-0.1.2-black.svg)](https://github.com/bschilder/scKirby)
-[![](https://img.shields.io/github/languages/code-size/bschilder/scKirby.svg)](https://github.com/bschilder/scKirby)
-[![](https://img.shields.io/github/last-commit/bschilder/scKirby.svg)](https://github.com/bschilder/scKirby/commits/master)
+NULL [![License: GPL (\>=
+3)](https://img.shields.io/badge/license-GPL%20(%3E=%203)-blue.svg)](https://cran.r-project.org/web/licenses/GPL%20(%3E=%203))
+[![](https://img.shields.io/badge/devel%20version-0.1.2-black.svg)](https://github.com/neurogenomics/scKirby)
+[![](https://img.shields.io/github/languages/code-size/neurogenomics/scKirby.svg)](https://github.com/neurogenomics/scKirby)
+[![](https://img.shields.io/github/last-commit/neurogenomics/scKirby.svg)](https://github.com/neurogenomics/scKirby/commits/master)
 <br> [![R build
-status](https://github.com/bschilder/scKirby/workflows/rworkflows/badge.svg)](https://github.com/bschilder/scKirby/actions)
-[![](https://codecov.io/gh/bschilder/scKirby/branch/master/graph/badge.svg)](https://codecov.io/gh/bschilder/scKirby)
+status](https://github.com/neurogenomics/scKirby/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/scKirby/actions)
+[![](https://codecov.io/gh/neurogenomics/scKirby/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/scKirby)
 <br>
-<a href='https://app.codecov.io/gh/bschilder/scKirby/tree/master' target='_blank'><img src='https://codecov.io/gh/bschilder/scKirby/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>  
+<a href='https://app.codecov.io/gh/neurogenomics/scKirby/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/scKirby/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>  
 <h4>  
 Authors: <i>Brian Schilder</i>  
 </h4>
@@ -86,7 +86,7 @@ any of these steps separately using the designated sub-functions.
 # Installation
 
 ``` r
-if(!"remotes" %in% rownames(install.packages())){install.packages("remotes")}
+if(!require("remotes")) install.packages("remotes")
 
 remotes::install_github("neurogenomics/scKirby")
 ```

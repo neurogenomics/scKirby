@@ -66,7 +66,7 @@ There's a lot of single-cell omics file/object formats out there, and not all to
 # Installation 
 
 ```R
-if(!"remotes" %in% rownames(install.packages())){install.packages("remotes")}
+if(!require("remotes")) install.packages("remotes")
 
 remotes::install_github("neurogenomics/scKirby")
 ```
