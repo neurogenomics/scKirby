@@ -18,7 +18,7 @@
 #'                obj[,obj$batch=='batch3'])
 #' obj2 <- sce_merge(sce_list, batch_names = batch_names)
 sce_merge <- function(sce_list,
-                      method = "intersect",
+                      method = "union",
                       cut_off_batch = 0.01,
                       cut_off_overall = 0.01,
                       use_assays = NULL,
