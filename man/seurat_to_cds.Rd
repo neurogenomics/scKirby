@@ -10,6 +10,6 @@ seurat_to_cds(obj, verbose = TRUE)
 Convert: \code{Seurat} ==> \code{CellDataSet}
 }
 \examples{
-obj <- example_obj("Seurat")
+obj <- example_obj("seurat")
 obj2 <- seurat_to_cds(obj)
 }

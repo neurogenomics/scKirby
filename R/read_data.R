@@ -16,8 +16,8 @@
 #' @export
 #' @examples
 #' library(Seurat)
-#' path <- example_obj("loom")
-#' obj <- read_data(path$filename)
+#' obj <- example_obj("loom")
+#' obj2 <- read_data(obj$filename)
 read_data <- function(path,
                       filetype="guess",
                       custom_reader=NULL,
@@ -53,7 +53,7 @@ read_data <- function(path,
   #### Generic RDS ####
   if(is_suffix(path,"rdata") ||
      is_filetype(filetype,"rdata")){
-    messager("+ Reading in .rda file of unknown type...")
+    messager("+ Reading in .rda file of unknown type.")
     obj <- load_rdata(path)
     return(obj)
   }
@@ -61,7 +61,7 @@ read_data <- function(path,
   if((is_suffix(path,"matrix")  && dir.exists(path)) ||
      is_filetype(filetype,"matrix_dir")){
     messager("+ Matrix folder format (.mtx) detected.",
-             "Importing as Seurat obj...")
+             "Importing as Seurat.")
     obj <- Seurat::CreateSeuratObject(
       counts = Seurat::Read10X(data.dir = path,
                                ...)
@@ -73,18 +73,18 @@ read_data <- function(path,
      is_filetype(filetype,"matrix") ||
      is_filetype(filetype,"data.table")){
     messager("+ Expression matrix (.mtx) detected.",
-             "Importing as sparse dgCMatrix...",v=verbose)
+             "Importing as sparse matrix.",v=verbose)
     obj <- data.table::fread(path,
                              data.table = FALSE)
-    obj <- obj |> tibble::column_to_rownames(colnames(obj)[1]) |>
-      as.matrix() |> Matrix::Matrix(sparse=TRUE)
-    return(obj)
+    obj2 <- as.matrix(obj[,-1], obj[[1]]) |>
+      Matrix::Matrix(sparse=TRUE)
+    return(obj2)
   }
   #### AnnData ####
   if(is_suffix(path,"anndata") ||
      is_filetype(filetype,"anndata")){
     messager("+ AnnData format (.h5ad) detected.",
-             "Importing as AnnData obj...",v=verbose)
+             "Importing as AnnData.",v=verbose)
     #### anndata method
     # Anndata adds another dependency, but at least it works unlike
     obj <- anndata::read_h5ad(filename = path)
@@ -110,7 +110,7 @@ read_data <- function(path,
   if(is_suffix(path,"h5seurat") ||
      is_filetype(filetype,"h5seurat")){
     messager("+ h5Seurat format (.h5Seurat) detected.",
-             "Importing as Seurat obj...",v=verbose)
+             "Importing as Seurat.",v=verbose)
     obj <- SeuratDisk::LoadH5Seurat(file = path,
                                     ...)
     return(obj)
@@ -121,7 +121,7 @@ read_data <- function(path,
     if(file.exists(file.path(path,"assays.h5")) &&
        file.exists(file.path(path,"se.rds")) ){
       messager("+ HDF5Array format (.h5) detected.",
-               "Importing as SingleCellExperiment obj...",v=verbose)
+               "Importing as SingleCellExperiment.",v=verbose)
       obj <- HDF5Array::loadHDF5SummarizedExperiment(path,
                                                      ...)
       return(obj)
@@ -131,7 +131,7 @@ read_data <- function(path,
   if(is_suffix(path,"loom") ||
      is_filetype(filetype,"loom")){
     messager("+ Loom format (.loom) detected.",
-             "Importing as SingleCellLoomExperiment obj...",v=verbose)
+             "Importing as SingleCellLoomExperiment.",v=verbose)
     #### anndata method
     ## anndata::read_loom has difficulties identifying right loompy location.
     # anndata::read_loom(filename=obj, validate=F, ...)

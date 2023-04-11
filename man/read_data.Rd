@@ -29,6 +29,6 @@ how to read it into R.
 }
 \examples{
 library(Seurat)
-path <- example_obj("loom")
-obj <- read_data(path$filename)
+obj <- example_obj("loom")
+obj2 <- read_data(obj$filename)
 }

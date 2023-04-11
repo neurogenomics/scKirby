@@ -6,12 +6,12 @@
 \usage{
 sce_merge(
   sce_list,
-  method = "intersect",
+  method = "union",
   cut_off_batch = 0.01,
   cut_off_overall = 0.01,
   use_assays = NULL,
   colData_names = NULL,
-  batch_names = NULL,
+  batch_names = names(sce_list),
   verbose = TRUE
 )
 }

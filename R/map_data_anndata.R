@@ -28,13 +28,13 @@ map_data_anndata <- function(obj,
                              as_DelayedArray = FALSE,
                              sort_rows = FALSE,
                              test_species = NULL,
-                             verbose = TRUE,
-                             ...){
+                             verbose = TRUE){
   # devoptera::args2vars(map_data_anndata)
   # obj <- example_obj("anndata")
 
   assays <- map_data_assays(
-    assays = SummarizedExperiment::assays(obj),
+    assays = list(X=Matrix::t(obj$X),
+                  raw=if(!is.null(obj$raw))Matrix::t(obj$raw)),
     gene_map=gene_map,
     input_col=input_col,
     output_col=output_col,
@@ -50,23 +50,23 @@ map_data_anndata <- function(obj,
     as_DelayedArray=as_DelayedArray,
     sort_rows=sort_rows,
     test_species=test_species,
-    verbose=verbose,
-    ...)
+    verbose=verbose)
   #### Construct row data using gene map ####
-  genes <- rownames(assays[[1]])
-  rd <- data.frame(input_gene=names(genes),
-                   ortholog_gene=unname(genes)) |>
-    #### merge with the original metadata ####
-  merge(y = SummarizedExperiment::rowData(obj),
-        all.x = TRUE,
-        by.x = "input_gene",
-        by.y = 0)
-  rownames(rd) <- rd$ortholog_gene
+  rd <- map_data_rowdata(
+    genes = rownames(assays[[1]]),
+    original_rowdata = obj$var)
   #### Construct new SummarizedExperiment ####
-  obj2 <- SummarizedExperiment::SummarizedExperiment(
-    assays = assays,
-    rowData = rd[rownames(assays[[1]]),],
-    colData = obj@colData,
-    metadata = obj@metadata)
+  obj2 <- anndata::AnnData(
+    X = Matrix::t(assays$X),
+    raw = if(!is.null(assays$raw))Matrix::t(assays$raw),
+    obs = obj$obs,
+    obsm = obj$obsm,
+    obsp = obj$obsp,
+    var = rd,
+    varm = obj$varm,
+    varp = obj$varp,
+    uns = obj$uns,
+    layers = obj$layers,
+    filename = obj$filename)
   return(obj2)
 }

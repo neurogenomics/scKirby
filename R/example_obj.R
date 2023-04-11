@@ -1,15 +1,7 @@
 #' Example single-cell data object
 #'
 #' Create a small example object
-#' of scRNA-seq data, in one of the following formats:
-#' \itemize{
-#' \item \link[SummarizedExperiment]{SummarizedExperiment}
-#' \item \link[SeuratObject]{Seurat-class}
-#' \item \link[SeuratObject]{Seurat-class}
-#' \item \link[anndata]{AnnData}
-#' }
-#' ,
-#'
+#' of scRNA-seq data.
 #'
 #' \emph{NOTE:} If you get the error
 #'  \code{Error: ModuleNotFoundError: No module named 'anndata'},
@@ -37,8 +29,13 @@ example_obj <- function(class=c("SummarizedExperiment",
                                 "h5Seurat",
                                 "CellDataSet",
                                 "matrix",
+                                "data.table",
+                                "data.frame",
                                 "loom",
-                                "anndata"),
+                                "LoomExperiment",
+                                "SingleCellLoomExperiment",
+                                "anndata",
+                                "EWCE"),
                         save_path = file.path(tempdir(),"example"),
                         verbose = TRUE){
 
@@ -47,10 +44,21 @@ example_obj <- function(class=c("SummarizedExperiment",
     #### matrix ####
     if(class %in% c("matrix","m")){
       obj <- SeuratObject::pbmc_small@assays$RNA@counts
+    #### data.frame ####
+    } else if(class %in% c("data.frame","df")){
+      obj <- as.data.frame(
+        x = SeuratObject::pbmc_small@assays$RNA@counts,
+        keep.rownames = TRUE)
+    #### data.table ####
+    } else if(class %in% c("data.table","dt")){
+      obj <- data.table::as.data.table(
+        x = SeuratObject::pbmc_small@assays$RNA@counts,
+        keep.rownames = TRUE)
     #### SummarizedExperiment ####
     } else if(class %in% c("summarizedexperiment","se")){
-      obj <- seurat_to_se(SeuratObject::pbmc_small)
-      obj <- sce_to_se(obj = obj, verbose = verbose)
+      obj <- seurat_to_se(SeuratObject::pbmc_small,
+                          as_sce = FALSE,
+                          verbose = verbose)
     } else if(class %in% c("singellcellexperiment","sce")){
       obj <- seurat_to_se(SeuratObject::pbmc_small)
     #### SingleCellExperiment ####
@@ -73,13 +81,24 @@ example_obj <- function(class=c("SummarizedExperiment",
       } else {
         obj <- SeuratDisk::as.loom(x = SeuratObject::pbmc_small)
       }
-    #### anndata ####
+    #### LoomExperiment ####
+    } else if(class %in% c("LoomExperiment","le")){
+      obj <- seurat_to_le(obj =  SeuratObject::pbmc_small,
+                          as_scle = FALSE,
+                          verbose = verbose)
+    #### SingleCellLoomExperiment ####
+    } else if(class %in% c("SingleCellLoomExperiment","scle")){
+      obj <- seurat_to_le(obj =  SeuratObject::pbmc_small,
+                          as_scle = TRUE,
+                          verbose = verbose)
+    #### hdf5array ####
     } else if(class %in% c("hdf5array","h5")){
       obj <- seurat_to_se(SeuratObject::pbmc_small)
       obj <- save_hdf5se(obj = obj,
                          save_dir = paste0(save_path,"_h5"),
                          verbose = verbose)
-    }else if(class %in% c("anndata","ad")){
+    #### anndata ####
+    } else if(class %in% c("anndata","ad")){
         obj <- example_anndata(save_path = save_path,
                                verbose = verbose)
     #### EWCE CelltypeDataset ####

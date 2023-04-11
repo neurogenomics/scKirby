@@ -2,7 +2,7 @@
 % Please edit documentation in R/map_data.R
 \name{map_data}
 \alias{map_data}
-\title{Convert \link[SummarizedExperiment]{SummarizedExperiment}}
+\title{Convert single-cell data}
 \usage{
 map_data(
   obj,
@@ -26,7 +26,19 @@ map_data(
 )
 }
 \arguments{
-\item{obj}{A \link[SummarizedExperiment]{SummarizedExperiment} object.}
+\item{obj}{A single-cell data object belonging to one of the
+following classes:
+\itemize{
+\item \link[SummarizedExperiment]{SummarizedExperiment}
+\item \link[SingleCellExperiment]{SingleCellExperiment}
+\item \link[SeuratObject]{Seurat}
+\item \link[AnnData]{AnnData}
+\item{
+\link[Matrix]{Matrix} or
+\link[data.frame]{data.frame} or
+\link[data.table]{data.table}
+}
+}}
 
 \item{gene_map}{A \link[base]{data.frame} that maps the current gene names
 to new gene names. 
@@ -158,15 +170,15 @@ This procedure tends to yield a greater number of returned genes but at
  here}.}
 }
 \value{
-\link[SummarizedExperiment]{SummarizedExperiment}
+An aggregated/expanded version of the input single-cell data object.
 }
 \description{
-Convert a \link[SummarizedExperiment]{SummarizedExperiment} object
+Convert a single-cell data object
 across-species (gene orthologs) or within-species (gene synonyms).
-Also works for \code{SingleCellExperiment} objects, or any other extensions
-of the \link[SummarizedExperiment]{SummarizedExperiment} class.
 }
 \examples{
 obj <- example_obj("se")
-obj2 <- map_data(obj = obj)
+obj2 <- map_data(obj = obj,
+                 input_species = "human",
+                 output_species = "mouse")
 }

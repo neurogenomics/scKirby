@@ -1,20 +1,32 @@
-#' Convert \link[SummarizedExperiment]{SummarizedExperiment}
+#' Convert single-cell data
 #'
-#' Convert a \link[SummarizedExperiment]{SummarizedExperiment} object
+#' Convert a single-cell data object
 #' across-species (gene orthologs) or within-species (gene synonyms).
-#' Also works for \code{SingleCellExperiment} objects, or any other extensions
-#' of the \link[SummarizedExperiment]{SummarizedExperiment} class.
-#' @param obj A \link[SummarizedExperiment]{SummarizedExperiment} object.
+#' @param obj A single-cell data object belonging to one of the
+#' following classes:
+#' \itemize{
+#' \item \link[SummarizedExperiment]{SummarizedExperiment}
+#' \item \link[SingleCellExperiment]{SingleCellExperiment}
+#' \item \link[SeuratObject]{Seurat}
+#' \item \link[AnnData]{AnnData}
+#' \item{
+#' \link[Matrix]{Matrix} or
+#' \link[data.frame]{data.frame} or
+#' \link[data.table]{data.table}
+#' }
+#' }
 #' @inheritParams orthogene::infer_species
 #' @inheritParams orthogene::convert_orthologs
 #' @inheritParams orthogene::aggregate_mapped_genes
-#' @returns \link[SummarizedExperiment]{SummarizedExperiment}
+#' @returns An aggregated/expanded version of the input single-cell data object.
 #'
 #' @export
 #' @import orthogene
 #' @examples
 #' obj <- example_obj("se")
-#' obj2 <- map_data(obj = obj)
+#' obj2 <- map_data(obj = obj,
+#'                  input_species = "human",
+#'                  output_species = "mouse")
 map_data <- function(obj,
                      gene_map = NULL,
                      input_col = "input_gene",
@@ -77,7 +89,7 @@ map_data <- function(obj,
           standardise_genes = standardise_genes,
           input_species = input_species,
           output_species = output_species,
-          method = output_species,
+          method = method,
           drop_nonorths = drop_nonorths,
           non121_strategy = non121_strategy,
           agg_fun = agg_fun,
@@ -86,8 +98,28 @@ map_data <- function(obj,
           as_DelayedArray = as_DelayedArray,
           sort_rows = sort_rows,
           test_species = test_species,
-          verbose = verbose,
-          ...)
+          verbose = verbose)
+  } else if(is_class(obj,"seurat")){
+    obj2 <- map_data_seurat(
+      obj = obj,
+      gene_map = gene_map,
+      input_col = input_col,
+      output_col = output_col,
+      standardise_genes = standardise_genes,
+      input_species = input_species,
+      output_species = output_species,
+      method = method,
+      drop_nonorths = drop_nonorths,
+      non121_strategy = non121_strategy,
+      agg_fun = agg_fun,
+      mthreshold = mthreshold,
+      as_sparse = as_sparse,
+      as_DelayedArray = as_DelayedArray,
+      sort_rows = sort_rows,
+      test_species = test_species,
+      verbose = verbose)
+  }else if(is_class(obj,"matrix")){
+
   }
   return(obj2)
 }

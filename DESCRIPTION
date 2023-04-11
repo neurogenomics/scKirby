@@ -18,16 +18,19 @@ SystemRequirements: Python (>= 3.7.0)
 biocViews:
 Imports: 
   orthogene, 
-  tibble,
+  EWCE,
+  ewceData, 
   data.table,
   Matrix,  
   reticulate,
   S4Vectors, 
   Seurat,
+  SeuratObject,
   SeuratDisk, 
   anndata,
   SummarizedExperiment,
-  SingleCellExperiment, 
+  SingleCellExperiment,
+  LoomExperiment,
   DelayedArray,
   BiocParallel,
   parallel,
@@ -37,13 +40,11 @@ Suggests:
   rmarkdown,
   knitr, 
   loomR,
-  LoomExperiment,
   sceasy, 
   leidenbase, 
   speedglm,
   monocle3,
-  monocle,
-  ewceData
+  monocle 
 Remotes:
   github::mojaveazure/seurat-disk, 
   github::mojaveazure/loomR,

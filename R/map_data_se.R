@@ -56,20 +56,18 @@ map_data_se <- function(obj,
       test_species=test_species,
       verbose=verbose)
     #### Construct row data using gene map ####
-    genes <- rownames(assays[[1]])
-    rd <- data.frame(input_gene=names(genes),
-                     ortholog_gene=unname(genes)) |>
-        #### merge with the original metadata ####
-    merge(y = SummarizedExperiment::rowData(obj),
-          all.x = TRUE,
-          by.x = "input_gene",
-          by.y = 0)
-    rownames(rd) <- rd$ortholog_gene
+    rd <- map_data_rowdata(
+      genes = rownames(assays[[1]]),
+      original_rowdata = SummarizedExperiment::rowData(obj))
     #### Construct new SummarizedExperiment ####
     obj2 <- SummarizedExperiment::SummarizedExperiment(
         assays = assays,
         rowData = rd[rownames(assays[[1]]),],
         colData = obj@colData,
         metadata = obj@metadata)
+    #### Convert back to originla subclass ###
+    if(methods::is(obj,"SingleCellExperiment")){
+      obj2 <- se_to_sce(obj = obj2, verbose = FALSE)
+    }
     return(obj2)
 }

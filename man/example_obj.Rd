@@ -6,7 +6,8 @@
 \usage{
 example_obj(
   class = c("SummarizedExperiment", "SingleCellExperiment", "Seurat", "h5Seurat",
-    "CellDataSet", "matrix", "loom", "anndata"),
+    "CellDataSet", "matrix", "data.table", "data.frame", "loom", "LoomExperiment",
+    "SingleCellLoomExperiment", "anndata", "EWCE"),
   save_path = file.path(tempdir(), "example"),
   verbose = TRUE
 )
@@ -16,14 +17,7 @@ Single-cell object.
 }
 \description{
 Create a small example object
-of scRNA-seq data, in one of the following formats:
-\itemize{
-\item \link[SummarizedExperiment]{SummarizedExperiment}
-\item \link[SeuratObject]{Seurat-class}
-\item \link[SeuratObject]{Seurat-class}
-\item \link[anndata]{AnnData}
-}
-,
+of scRNA-seq data.
 }
 \details{
 \emph{NOTE:} If you get the error

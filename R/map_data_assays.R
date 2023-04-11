@@ -15,7 +15,14 @@ map_data_assays <- function(assays,
                             sort_rows,
                             test_species,
                             verbose){
- lapply(assays, function(gene_df){
+
+ lapply(stats::setNames(seq_len(length(assays)),
+                        names(assays)),
+        function(i){
+   gene_df <- assays[[i]]
+   messager("---> Converting assay: ",names(assays)[i],parallel = TRUE,
+            v=verbose)
+   if(is.null(gene_df)) return(NULL)
    #### Better for user-supplied gene mapping ####
    if(!is.null(gene_map)){
      orthogene::aggregate_mapped_genes(gene_df = gene_df,

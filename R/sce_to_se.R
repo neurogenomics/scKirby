@@ -7,5 +7,8 @@
 sce_to_se <- function(obj,
                       verbose=TRUE){
   messager("+ SingleCellExperiment ==> SummarizedExperiment",v=verbose)
-  methods::as(obj,"SummarizedExperiment")
+  obj2 <- methods::as(obj,"SummarizedExperiment")
+  #### Rownames don't get transferred correctly during conversion ####
+  S4Vectors::rownames(obj2) <- S4Vectors::rownames(obj)
+  return(obj2)
 }
