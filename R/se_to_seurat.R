@@ -15,8 +15,8 @@ se_to_seurat <- function(obj,
   }
   #### Ensure "logcounts" assay is present ####
   if(!"logcounts" %in% names(obj@assays)){
-    obj@assays@data$counts <- Seurat::LogNormalize(obj@assays@data$counts,
-                                                   verbose = verbose)
+    obj@assays@data$logcounts <- Seurat::LogNormalize(obj@assays@data$counts,
+                                                      verbose = verbose)
   }
   Seurat::as.Seurat(obj)
 }
