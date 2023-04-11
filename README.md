@@ -88,7 +88,7 @@ any of these steps separately using the designated sub-functions.
 ``` r
 if(!"remotes" %in% rownames(install.packages())){install.packages("remotes")}
 
-remotes::install_github("bschilder/scKirby")
+remotes::install_github("neurogenomics/scKirby")
 ```
 
 # Conda environments
@@ -101,10 +101,10 @@ installed (e.g. Seurat v2 –\> v3). This means you can’t import an object
 created in Seurat v1 and directly upgrade it to Seurat v3. We have
 provided yaml files when can be used to create separate envs for each
 version of Seurat
-[here](https://github.com/bschilder/scKirby/tree/main/inst/conda).
+[here](https://github.com/RajLabMSSM/echoconda/tree/main/inst/conda).
 
 For more details, see the [scKirby conda env
-tutorial](https://bschilder.github.io/scKirby/articles/conda.html).
+tutorial](https://neurogenomics.github.io/scKirby/articles/conda.html).
 
 # Session Info
 
@@ -160,3 +160,4 @@ utils::sessionInfo()
     ## [85] knitr_1.42
 
 </details>
+<hr>

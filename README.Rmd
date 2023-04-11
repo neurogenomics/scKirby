@@ -6,10 +6,6 @@ output:
   github_document 
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Intro
 
 There's a lot of single-cell omics file/object formats out there, and not all tools support all of these formats. `scKirby` aims to make switching between these formats much easier by running several steps within a single function: `ingest_data()`. Alternatively, users can run any of these steps separately using the designated sub-functions. 
@@ -72,16 +68,16 @@ There's a lot of single-cell omics file/object formats out there, and not all to
 ```R
 if(!"remotes" %in% rownames(install.packages())){install.packages("remotes")}
 
-remotes::install_github("bschilder/scKirby")
+remotes::install_github("neurogenomics/scKirby")
 ```
 
 # Conda environments  
 
 ## Updating Seurat objects 
 
-Seurat's `UpdateSeuratObject()` can only update objects from the version immediately previous to the version of Seurat you currently have installed (e.g. Seurat v2 --> v3). This means you can't import an object created in Seurat v1 and directly upgrade it to Seurat v3. We have provided yaml files when can be used to create separate envs for each version of Seurat [here](https://github.com/bschilder/scKirby/tree/main/inst/conda).  
+Seurat's `UpdateSeuratObject()` can only update objects from the version immediately previous to the version of Seurat you currently have installed (e.g. Seurat v2 --> v3). This means you can't import an object created in Seurat v1 and directly upgrade it to Seurat v3. We have provided yaml files when can be used to create separate envs for each version of Seurat [here](https://github.com/RajLabMSSM/echoconda/tree/main/inst/conda).  
 
-For more details, see the [scKirby conda env tutorial](https://bschilder.github.io/scKirby/articles/conda.html). 
+For more details, see the [scKirby conda env tutorial](https://neurogenomics.github.io/scKirby/articles/conda.html). 
   
   
 # Session Info
@@ -93,6 +89,4 @@ utils::sessionInfo()
 ```
 
 </details>
-
-
-
+<hr>
