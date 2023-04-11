@@ -1,9 +1,22 @@
-
-
-convert_to_loom <- function(object,
-                            outFile='filename.loom',
-                            verbose=T){
-  if(class(object)[1] %in% loom_classes){
-    return(loom)
+#' Convert: to \code{loom}
+#'
+#' Convert any object to \code{loom} format.
+#' @export
+#' @examples
+#' obj <- example_obj("seurat")
+#' obj2 <- to_loom(obj)
+to_loom <- function(obj,
+                    save_path = file.path(tempdir(),
+                                          "scKirby.loom"),
+                    verbose=TRUE){
+  if(is_class(obj,"loom")){
+    return(obj)
+  #### OTHER ####
+  } else {
+  obj <- ingest_data(obj = obj)
+  obj2 <- se_to_loom(obj = obj,
+                     save_path = save_path,
+                     verbose = verbose)
   }
+  return(obj2)
 }

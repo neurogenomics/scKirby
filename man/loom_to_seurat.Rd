@@ -4,13 +4,13 @@
 \alias{loom_to_seurat}
 \title{Convert: \code{loom} ==> \code{Seurat}}
 \usage{
-loom_to_seurat(object, verbose = T)
+loom_to_seurat(obj, verbose = TRUE)
 }
 \description{
 Convert: \code{loom} ==> \code{Seurat}
 }
 \examples{
-library(scKirby)
-loom <- example_loom()
-seurat <- loom_to_seurat(loom)
+library(Seurat)
+obj <- example_obj("loom")
+obj2 <- loom_to_seurat(obj)
 }

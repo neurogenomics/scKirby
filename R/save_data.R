@@ -1,39 +1,49 @@
+#' Save data
+#'
+#' Save a variety of single-cell data formats.
+#' @inheritParams ingest_data
+#' @export
+#' @examples
+#' obj <- example_obj("cds")
+#' filepath <- save_data(obj)
+save_data <- function(obj,
+                      filetype = c("h5","h5seurat","h5ad","rda","rds"),
+                      save_path = file.path(tempdir(),
+                                          paste("scKirby_output",
 
+                                                filetype,sep=".")),
+                      quicksave_HDF5 = TRUE,
+                      overwrite = TRUE,
+                      verbose = TRUE){
 
-
-save_data <- function(object,
-                      output_type,
-                      save_dir=tempdir(),
-                      filename=paste("scKirby_output",output_type,sep="."),
-                      quicksave_HDF5=T,
-                      overwrite=T,
-                      verbose=T){
-  cdict <- class_dictionary()
-  if(tolower(output_type)  %in% tolower(cdict$sce)){
-    filepath <- save_sce(object=object,
-                         save_dir=save_dir,
-                         filename=filename,
-                         verbose=verbose)
-  }
-  if(tolower(output_type)  %in% tolower(cdict$hdf5se)){
-    filepath <- save_hdf5se(sce=object,
-                            save_dir=save_dir,
-                            quicksave_HDF5=quicksave_HDF5,
-                            overwrite=overwrite,
-                            verbose=verbose)
-  }
-  if(tolower(output_type)  %in% tolower(cdict$seurat)){
-    filepath <- save_seurat(object=object,
-                            save_dir=save_dir,
-                            filename=filename,
-                            verbose=verbose)
-  }
-  if(tolower(output_type) %in% tolower(cdict$h5seurat)){
-    object_filepath <- save_h5seurat(object=object,
-                                     save_dir=save_dir,
-                                     filename=filename,
+  #### Setup dir ####
+  dir.create(dirname(save_path), showWarnings = FALSE, recursive = TRUE)
+  #### hdf5se ####
+  if(is_filetype(filetype,"h5")){
+    save_path <- save_hdf5se(obj=obj,
+                             save_dir=save_path,
+                             quicksave_HDF5=quicksave_HDF5,
+                             overwrite=overwrite,
+                             verbose=verbose)
+  #### h5seurat ####
+  } else if(is_filetype(filetype,"h5seurat")){
+    object_filepath <- save_h5seurat(obj=obj,
+                                     save_path=save_path,
                                      verbose=verbose)
-    filepath <- object_filepath$filepath
-    }
-  return(filepath)
+    save_path <- object_filepath$save_path
+  #### h5ad ####
+  } else if(is_filetype(filetype,"anndata")){
+    save_anndata(obj = obj,
+                 save_path = save_path,
+                 verbose = verbose)
+  #### rda ####
+  } else if(is_filetype(filetype,"rda")){
+    messager("+ Saving RData:",save_path,v=verbose)
+    save(obj,file = save_path)
+  #### rds ####
+  } else {
+    messager("+ Saving RDS:",save_path,v=verbose)
+    saveRDS(obj,save_path)
+  }
+  return(save_path)
 }

@@ -25,19 +25,26 @@ library(ggplot2)
 
 You can make awesome hex stickers for your R packages using [hexSticker](https://github.com/GuangchuangYu/hexSticker). 
 
+
+```{r}
+img1 <- here::here("inst/hex/buff_kirby.png") 
+# img2 <- magick::image_transparent( magick::image_read(img1), color = "white")
+# magick::image_write(img2,path = here::here("inst/hex/buff_kirby_nobg.png") )
+```
+
+
 # scKirby
 
 [Original image credit](https://i.redd.it/4um5onzwssl21.jpg)
 
 ```{r, eval=F}   
-img1 <- here::here("inst/hex/buff_kirby.jpeg")
-
+s_size <- .65
 hex <- hexSticker::sticker(subplot = img1, 
-                    package="scKirby", p_color="black", p_size=20, p_y = 1.5,
-                    s_x = 1, s_y = .8,  s_width = .5, s_height = .5, 
-                    h_fill = "white", h_color = "#eb6ebd", h_size = 3,
-                    spotlight = FALSE,
-                    filename = here::here("inst/hex/scKirby.png"))
+                    package="scKirby", p_color="#faca11", p_size=20, p_y = 1.65,
+                    s_x = 1, s_y = .88,  s_width = s_size, s_height = s_size*.75, 
+                    h_fill ="#3fb9ef", h_color = "#ef66aa", h_size = 3,
+                    spotlight = TRUE,l_y = 1.5, l_x=.8, l_width = 2,
+                    filename = here::here("inst/hex/hex.png"))
 print(hex)
 ```
 

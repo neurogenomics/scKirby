@@ -1,23 +1,26 @@
-
 #' Convert: \code{Anndata} ==> \code{Seurat}
 #'
+#' @export
 #' @examples
-#' library(scKirby)
-#' seurat <- anndata_to_seurat(object=example_anndata())
-#' @examples
-anndata_to_seurat <- function(object,
-                              save_dir=tempdir(),
-                              verbose=T){
+#' obj <- example_obj("anndata")
+#' seurat <- anndata_to_seurat(obj)
+anndata_to_seurat <- function(obj,
+                              verbose=TRUE,
+                              ...){
   messager("+ AnnData ==> Seurat",v=verbose)
-  seurat <- anndata2seurat(inFile = object)
-  return(seurat)
+  anndata2seurat(inFile = obj, ...)
 }
 
 
 
 
 # Modified from sceasy: https://github.com/cellgeni/sceasy/blob/f8f0628a280e0880ea94b00100b463e1f6ba1994/R/functions.R#L187
-anndata2seurat <- function(inFile, outFile = NULL, main_layer = 'counts', assay = 'RNA', use_seurat = FALSE, lzf = FALSE) {
+anndata2seurat <- function(inFile,
+                           outFile = NULL,
+                           main_layer = 'counts',
+                           assay = 'RNA',
+                           use_seurat = FALSE,
+                           lzf = FALSE) {
   # outFile = NULL;main_layer = 'counts';assay = 'RNA';use_seurat = FALSE;lzf = FALSE
   main_layer <- match.arg(main_layer, c('counts', 'data', 'scale.data'))
   is_robject <- any(class(inFile) %in% c("AnnDataR6","R6"))
@@ -196,7 +199,7 @@ anndata2seurat <- function(inFile, outFile = NULL, main_layer = 'counts', assay 
 
   if (is_sparse) {
     if(is_robject){
-      X <- SparseM::t(X)
+      X <- Matrix::t(X)
     } else {
       X <- Matrix::t(reticulate::py_to_r(sp$csc_matrix(X)))
     }

@@ -18,17 +18,16 @@ ingest_data(
   input_type = "guess",
   output_type = c("SingleCellExperiment", "Seurat", "CellDataSet"),
   custom_reader = NULL,
-  save_dir = tempdir(),
-  filename = "scKirby_output",
-  save_output = T,
-  overwrite = F,
-  return_filepath = F,
-  verbose = T,
+  filetype = c("h5", "h5seurat", "h5ad", "rda", "rds"),
+  save_path = NULL,
+  overwrite = FALSE,
+  return_save_path = FALSE,
+  verbose = TRUE,
   ...
 )
 }
 \arguments{
-\item{obj}{Single-cell data object or path to saved single-cell data.}
+\item{obj}{A single-cell data object, or a path to saved single-cell data.}
 
 \item{input_type}{Format of \code{obj}. By default, the type will be inferred.}
 
@@ -36,18 +35,21 @@ ingest_data(
 
 \item{custom_reader}{Custom function to read \code{obj} into R.}
 
+\item{overwrite}{If a file of the same name exists, overwrite it.}
+
+\item{return_save_path}{If \code{TRUE}, a list with both the converted object
+and the saved file path will be returned (instead of just the converted object).}
+
+\item{...}{Additional arguments to be passed to \link[scKirby]{read_data}.}
+
 \item{save_dir}{Directory to save the converted \code{obj}.}
 
 \item{filename}{Name to save the converted \code{obj}.}
 
 \item{save_output}{Whether or not to save the converted \code{obj}.}
-
-\item{overwrite}{If a file of the same name exists, overwrite it.}
-
-\item{return_filepath}{If \code{TRUE}, a list with both the converted object
-and the saved file path will be returned (instead of just the converted object).}
-
-\item{...}{Additional arguments to be passed to \code{scKirby::read_data()}.}
+}
+\value{
+Converted single-cell object.
 }
 \description{
 Automatically infers data format of scRNAseq object, or a path to that object.

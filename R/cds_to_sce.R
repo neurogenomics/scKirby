@@ -1,28 +1,26 @@
-
-
-#' Convert: \code{CellDataSet} ==> \code{SingleCellExperiment}
+#' Convert: \code{CellDataSet} ==> \code{SummarizedExperiment}
 #'
+#' @export
 #' @examples
-#' library(scKirby)
-#' data("example_cds")
-#' sce <- cds_to_sce(object=example_cds)
-#' @examples
-cds_to_sce <- function(object,
-                       verbose=T,
-                       as_sparse=T,
-                       as_DelayedArray=F){
-  messager("+ CellDataSet ==> SingleCellExperiment",v=verbose)
-  X <- Biobase::exprs(object)
-  obs <- Biobase::pData(object)
-  var <- Biobase::fData(object)
-  if(as_sparse) X <- as(X,"sparseMatrix")
-  if(as_DelayedArray) X <- DelayedArray::DelayedArray(X)
+#' obj <- example_obj("cds")
+#' obj2 <- cds_to_se(obj)
+cds_to_se <- function(obj,
+                      as_sce=FALSE,
+                      as_sparse=TRUE,
+                      as_DelayedArray=FALSE,
+                      verbose=TRUE){
+  messager("+ CellDataSet ==> SummarizedExperiment",v=verbose)
+  X <- Biobase::exprs(obj)
+  obs <- Biobase::pData(obj)
+  var <- Biobase::fData(obj)
+  if(isTRUE(as_sparse)) X <- as(X,"sparseMatrix")
+  if(isTRUE(as_DelayedArray)) X <- DelayedArray::DelayedArray(X)
 
-  sce <- SingleCellExperiment::SingleCellExperiment(
-    assays      = list(raw = X),
-    colData     = obs,
-    rowData     = var
+  obj2 <- SummarizedExperiment::SummarizedExperiment(
+    assays = list(raw = X),
+    colData = obs,
+    rowData = var
   )
-  sce <- check_sce_rownames(sce, verbose = verbose)
-  return(sce)
+  obj2 <- check_se_rownames(obj2, verbose = verbose)
+  return(obj2)
 }

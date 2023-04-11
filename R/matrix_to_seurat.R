@@ -1,17 +1,16 @@
-
-
-
 #' Convert: \code{matrix} ==> \code{Seurat}
 #'
+#' @export
 #' @examples
-#' library(scKirby)
-#' data("example_seurat")
-#' sce <- matrix_to_seurat(object=example_seurat@assays$RNA@counts)
-matrix_to_seurat <- function(object,
-                          verbose=T){
+#' obj <- example_obj("matrix")
+#' obj2 <- matrix_to_seurat(obj)
+matrix_to_seurat <- function(obj,
+                          verbose=TRUE){
   messager("+ Matrix ==> Seurat",v=verbose)
-  seurat <- Seurat::CreateSeuratObject(counts = object,
-                                       meta.data = data.frame(cellid=colnames(object),
-                                                              row.names = colnames(object)))
-  return(seurat)
+  obj2 <- Seurat::CreateSeuratObject(
+    counts = obj,
+    meta.data = data.frame(cellid=colnames(object),
+                           row.names = colnames(object))
+  )
+  return(obj2)
 }

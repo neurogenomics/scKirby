@@ -1,14 +1,14 @@
-save_h5seurat <- function(object,
-                          save_dir=tempdir(),
-                          filename="scKirby_output",
-                          verbose=T){
-  filepath <- file.path(save_dir,filename)
-  dir.create(dirname(filepath), showWarnings = F, recursive = T)
-  messager("+ Seurat ==> h5Seurat",v=verbose)
-  messager("+ Saving h5Seurat:",filepath,v=verbose)
-  object_out <- SeuratDisk::as.h5Seurat(object,
-                                        filename=filepath,
-                                        overwrite=overwrite)
-  return(list(object=object_out,
-              filepath=filepath))
+save_h5seurat <- function(obj,
+                          save_path,
+                          overwrite=TRUE,
+                          verbose=TRUE){
+  if(!is_class(obj,"seurat")){
+    stopper("obj must be a Seurat object.")
+  }
+  messager("+ Saving h5Seurat:",save_path,v=verbose)
+  obj_out <- SeuratDisk::as.h5Seurat(x = obj,
+                                     filename = save_path,
+                                     overwrite = overwrite)
+  return(list(obj=obj_out,
+              save_path=save_path))
 }

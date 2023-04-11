@@ -1,0 +1,37 @@
+filetype_dict <- function(){
+  sdict <- suffix_dict()
+  list(rds=c(sdict$rds,
+             gsub("^\\.","",sdict$rds)
+             ),
+       rdata=c(sdict$rdata,
+               gsub("^\\.","",sdict$rdata)
+               ),
+       matrix=c("matrix",
+                sdict$matrix,
+                gsub("^\\.","",sdict$matrix)
+                ),
+       matrix_dir=c("matrix_dir","mtx_dir"),
+       data.table=c("table",
+                    "data.table",
+                    sdict$data.table,
+                    gsub("^\\.","",sdict$data.table)
+                    ),
+       anndata=c("anndata",
+                 sdict$anndata,
+                 gsub("^\\.","",sdict$anndata)
+                 ),
+       loom=c(sdict$loom,
+              gsub("^\\.","",sdict$loom)
+       ),
+       seurat=c(sdict$seurat,
+              gsub("^\\.","",sdict$seurat)
+       ),
+       h5seurat=c(sdict$h5seurat,
+                  gsub("^\\.","",sdict$h5seurat)
+                  ),
+       h5=c(sdict$h5,
+            gsub("^\\.","",sdict$h5),
+            "HDF5Array","SummarizedExperiment",
+            "SingleCellExperiment","SingleCellLoomExperiment")
+       )
+}

@@ -3,22 +3,8 @@
 \name{example_anndata}
 \alias{example_anndata}
 \title{Example \code{anndata}}
-\usage{
-example_anndata(
-  return_path = F,
-  save_dir = tempdir(),
-  backed = c("r", "r+"),
-  overwrite = T,
-  add_filename = F,
-  verbose = T
-)
-}
-\description{
-\href{https://github.com/dynverse/anndata/issues/1}{anndata R package has a major bug currently.}
-Thus, \code{add_filename} must be kept \code{False} until this is fixed.
-}
-\examples{
-\dontrun{
+\source{
+\code{
 #### Setup conda env ####
 ## Option 1: Point to where anndata is installed (or should be installed)
 conda_dir <- dirname(dirname(reticulate::conda_list()[1,]$python))
@@ -26,8 +12,24 @@ reticulate::use_condaenv(condaenv = conda_dir)
 reticulate::conda_install(conda = conda_dir, packages = "loompy", pip = T)
 ## Option 2: Just run anndata::install_anndata() and will install via miniconda
 anndata::install_anndata(method = "conda", conda=conda_dir)
-
 #### Usage ####
 adata <- example_anndata()
 }
 }
+\usage{
+example_anndata(
+  obj = SeuratObject::pbmc_small,
+  return_path = FALSE,
+  backed = c("r", "r+"),
+  overwrite = TRUE,
+  add_filename = FALSE,
+  save_path = file.path(tempdir, "example.h5ad"),
+  verbose = TRUE
+)
+}
+\description{
+\href{https://github.com/dynverse/anndata/issues/1}{
+anndata R package has a major bug currently.}
+Thus, \code{add_filename} must be kept \code{False} until this is fixed.
+}
+\keyword{internal}

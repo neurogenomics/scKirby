@@ -4,13 +4,12 @@
 \alias{matrix_to_seurat}
 \title{Convert: \code{matrix} ==> \code{Seurat}}
 \usage{
-matrix_to_seurat(object, verbose = T)
+matrix_to_seurat(obj, verbose = TRUE)
 }
 \description{
 Convert: \code{matrix} ==> \code{Seurat}
 }
 \examples{
-library(scKirby)
-data("example_seurat")
-sce <- matrix_to_seurat(object=example_seurat@assays$RNA@counts)
+obj <- example_obj("matrix")
+obj2 <- matrix_to_seurat(obj)
 }

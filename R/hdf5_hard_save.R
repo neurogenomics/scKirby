@@ -1,25 +1,21 @@
-
-hdf5_hard_save <- function(sce,
+hdf5_hard_save <- function(obj,
                            save_dir,
-                           overwrite=T,
-                           verbose=T){
+                           overwrite=TRUE,
+                           verbose=TRUE){
   # DON'T create the HDF5 dir itself (will return an error about overwriting)
-  dir.create(dirname(save_dir), showWarnings = F, recursive = T)
-  # IMPORTANT!: set as.sparse=T if you have the latest version of HDF5Array (1.8.11)
-  pkg_ver <- packageVersion("HDF5Array")
-  pkg_ver_split <- strsplit(as.character(pkg_ver),".", fixed = T)[[1]]
-  pkg_V <- as.numeric(paste(pkg_ver_split[1], pkg_ver_split[2], sep="."))
-  if(pkg_V>=1.8){
-    sce <- HDF5Array::saveHDF5SummarizedExperiment(x=sce,
+  # IMPORTANT!:
+  ## set as.sparse=TRUE if you have the latest version of HDF5Array (1.8.11)
+  if(packageVersion("HDF5Array")>=1.8){
+    obj <- HDF5Array::saveHDF5SummarizedExperiment(x=obj,
                                                    dir=save_dir,
                                                    verbose=verbose,
-                                                   as.sparse=T,
+                                                   as.sparse=TRUE,
                                                    replace=overwrite)
   }else{
-    sce <- HDF5Array::saveHDF5SummarizedExperiment(x=sce,
+    obj <- HDF5Array::saveHDF5SummarizedExperiment(x=obj,
                                                    dir=save_dir,
                                                    verbose=verbose,
                                                    replace=overwrite)
   }
-  return(sce)
+  return(obj)
 }

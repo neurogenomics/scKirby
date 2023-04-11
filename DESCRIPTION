@@ -1,7 +1,7 @@
 Package: scKirby
 Type: Package
 Title: Automated ingestion and conversion of various single-cell data formats.
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(person(given = "Brian",
                     family = "Schilder",
                     role = c("cre"),
@@ -17,42 +17,39 @@ Depends: R (>= 3.6.0)
 SystemRequirements: Python (>= 3.7.0)
 biocViews:
 Imports: 
-    remotes,  
-    magrittr, 
-    BiocManager, 
-    dplyr, 
-    tibble,
-    data.table,
-    Matrix,
-    SparseM,
-    DescTools,
-    reticulate,
-    S4Vectors, 
-    Seurat,
-    SeuratDisk, 
-    anndata,
-    SummarizedExperiment,
-    SingleCellExperiment, 
-    DelayedArray,
-    BiocParallel,
-    parallel,
-    HDF5Array,
-    rhdf5 
+  orthogene, 
+  tibble,
+  data.table,
+  Matrix,  
+  reticulate,
+  S4Vectors, 
+  Seurat,
+  SeuratDisk, 
+  anndata,
+  SummarizedExperiment,
+  SingleCellExperiment, 
+  DelayedArray,
+  BiocParallel,
+  parallel,
+  HDF5Array
 Suggests: 
+  rworkflows,
   rmarkdown,
   knitr, 
   loomR,
   LoomExperiment,
   sceasy, 
   leidenbase, 
+  speedglm,
   monocle3,
   monocle,
-  rworkflows
+  ewceData
 Remotes:
   github::mojaveazure/seurat-disk, 
   github::mojaveazure/loomR,
   github::cellgeni/sceasy,
   github::cole-trapnell-lab/leidenbase, 
+  github::cran/speedglm,
   github::cole-trapnell-lab/monocle3
 VignetteBuilder: knitr
-RoxygenNote: 7.1.1 
+RoxygenNote: 7.2.3

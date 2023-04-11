@@ -4,14 +4,12 @@
 \alias{cds_to_seurat}
 \title{Convert: \code{CellDataSet} ==> \code{Seurat}}
 \usage{
-cds_to_seurat(object, verbose = T)
+cds_to_seurat(obj, verbose = TRUE)
 }
 \description{
 Convert: \code{CellDataSet} ==> \code{Seurat}
 }
 \examples{
-library(scKirby)
-data("example_cds")
-
-seurat <- cds_to_seurat(example_cds)
+obj <- example_obj("cds")
+obj2 <- cds_to_seurat(obj)
 }

@@ -4,12 +4,12 @@
 \alias{anndata_to_seurat}
 \title{Convert: \code{Anndata} ==> \code{Seurat}}
 \usage{
-anndata_to_seurat(object, save_dir = tempdir(), verbose = T)
+anndata_to_seurat(obj, verbose = TRUE, ...)
 }
 \description{
 Convert: \code{Anndata} ==> \code{Seurat}
 }
 \examples{
-library(scKirby)
-seurat <- anndata_to_seurat(object=example_anndata())
+obj <- example_obj("anndata")
+seurat <- anndata_to_seurat(obj)
 }

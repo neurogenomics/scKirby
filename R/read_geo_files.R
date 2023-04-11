@@ -2,10 +2,10 @@
 read_geo_files <- function(file_dir){
   # file_dir <- "~/projects/model_celltype_conservation/raw_data/scRNAseq/Raj2020/"
   file_prefixes <- list.files(file_dir,
-                              pattern = "-barcodes.tsv.gz") %>%
+                              pattern = "-barcodes.tsv.gz") |>
     gsub(pattern = "-barcodes.tsv.gz",replacement = "")
 
-  core_allocation <- assign_cores(worker_cores = .9)
+  assign_cores(workers = .9)
 
   sce_list <- parallel::mclapply(file_prefixes, function(x){
     message_parallel(x)
@@ -22,12 +22,12 @@ read_geo_files <- function(file_dir){
       colData     = colDat,
       rowData     = rowDat
     )
-    sce_sub <- check_sce_rownames(sce_sub,
+    sce_sub <- check_se_rownames(sce_sub,
                                   rownames_var = "gene_symbol",
                                   verbose = F)
     return(sce_sub)
-  }, mc.cores = core_allocation$worker_cores)
-  printer("Merging all SCE objects into one...")
+  }, mc.cores = core_allocation$workers)
+  messager("Merging all SCE objects into one...")
   sce <- do.call("cbind",sce_list)
   return(sce)
 }

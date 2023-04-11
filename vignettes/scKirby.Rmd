@@ -35,7 +35,7 @@ library(scKirby)
 ### As `SingleCellExperiment`  
 
 ```{r expression matrix}
-data("example_seurat")
+obj <- example_obj("seurat")
 
 sce <- ingest_data(obj=example_seurat@assays$RNA@counts)
 ```
@@ -85,7 +85,7 @@ seurat <- ingest_data(obj=example_EWCElist,
 In-memory
 
 ```{r Seurat}
-data("example_seurat")
+obj <- example_obj("seurat")
 
 sce <- ingest_data(obj=example_seurat)
 ```
@@ -96,7 +96,7 @@ On-disk
 
 ```{r H5Seurat} 
 library(SeuratDisk)
-data("example_seurat")
+obj <- example_obj("seurat")
 
 SaveH5Seurat(example_seurat, filename = "./pbmc_small.h5Seurat", overwrite = T)
 seurat <- ingest_data(obj="./pbmc_small.h5Seurat")
@@ -108,14 +108,14 @@ seurat <- ingest_data(obj="./pbmc_small.h5Seurat")
 ### As `SingleCellExperiment`  
 
 ```{r HDF5}
-data("example_sce")
+obj <- example_obj("sce")
 
 sce <- HDF5Array::saveHDF5SummarizedExperiment(example_sce, dir = "./pbmc_small_h5", replace=T)
 ## Read in the sce object directly
 sce <- ingest_data(obj=sce)
 
 ## Read it from disk
-sce_dir <- dirname(sce_filepath(sce))
+sce_dir <- dirname(se_filepath(sce))
 sce <- ingest_data(obj=sce_dir)
 ```
 

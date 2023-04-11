@@ -1,59 +1,45 @@
+to_seurat <- function(obj,
+                      workers=1,
+                      verbose=TRUE){
 
-
-
-to_seurat <- function(object,
-                      save_dir=tempdir(),
-                      verbose=T){
   messager("Converting formats:",v=verbose)
-  core_allocation <- assign_cores(worker_cores = .90)
-  cdict <- class_dictionary()
-  #### EWCElist class ####
-  if(is.EWCElist(object)){
-    class(object) <- "EWCElist"
-  }
-  #### CTD class ####
-  if(is.EWCEctd(object)){
-    seurat <- EWCEctd_to_seurat(object, verbose)
-    return(seurat)
-  }
+  assign_cores(workers = workers)
   #### Check if class is supported ####
-  if(!class(object)[1] %in% cdict$supported_classes){
-    stop("Unsupported class detected: ",class(object),"\n\n",
-         "Data object must be at least one of the following classes:\n\n",
-         paste(supported_classes_print, collapse = ", "))
-  }
-  ### EWCE_list ####
-  if(class(object)[1] == "EWCElist"){
-    seurat <- EWCElist_to_seurat(object, verbose)
-    return(seurat)
+  check_supported(obj)
+  #### CTD  ####
+  if(is_class(obj,"ctd")){
+    obj2 <- ctd_to_seurat(obj, verbose)
+    return(obj2)
   }
   #### Matrices ####
-  if(class(object)[1] %in% cdict$matrix){
-    seurat <- matrix_to_seurat(object, verbose)
-    return(seurat)
+  if(is_class(obj,"matrix")){
+    obj2 <- matrix_to_seurat(obj, verbose)
+    return(obj2)
   }
   #### Seurat ####
-  if(class(object)[1] %in% cdict$seurat){
-    printer("+ Object already in Seurat format. Returning as-is.")
-    return(object)
+  if(is_class(obj,"seurat")){
+    messager("+ Object already in Seurat format. Returning as-is.")
+    return(obj)
   }
-  #### AnnData ####
-  if(class(object)[1] %in% cdict$anndata){
-    seurat <- anndata_to_seurat(object, save_dir, verbose)
-    return(seurat)
+  #### anndata ####
+  if(is_class(obj,"anndata")){
+    obj2 <- anndata_to_seurat(obj,
+                              verbose)
+    return(obj2)
   }
-  if(class(object)[1] %in% cdict$loom){
-    seurat <- loom_to_seurat(object, verbose)
-    return(seurat)
+  #### loom ####
+  if(is_class(obj,"loom")){
+    obj2 <- loom_to_seurat(obj, verbose)
+    return(obj2)
   }
-  #### SingleCellExperiment/SummarizedExperiment ####
-  if(class(object)[1] %in% cdict$sce){
-    seurat <- sce_to_seurat(object, verbose)
-    return(seurat)
+  #### SummarizedExperiment ####
+  if(is_class(obj,"se")){
+    obj2 <- sce_to_seurat(obj, verbose)
+    return(obj2)
   }
   #### CellDataSet ####
-  if(class(object)[1] %in% cdict$cds){
-    seurat <- cds_to_seurat(object, verbose)
-    return(seurat)
+  if(is_class(obj,"cds")){
+    obj2 <- cds_to_seurat(obj, verbose)
+    return(obj2)
   }
 }

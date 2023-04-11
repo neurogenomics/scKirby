@@ -1,6 +1,6 @@
 
 to_anndata <- function(object,
-                       verbose=T){
+                       verbose=TRUERUE){
   sceasy::convertFormat(sce_object,
                         from="sce",
                         to="anndata",
