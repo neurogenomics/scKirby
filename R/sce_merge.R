@@ -22,14 +22,14 @@ sce_merge <- function(sce_list,
                       cut_off_batch = 0.01,
                       cut_off_overall = 0.01,
                       use_assays = NULL,
-                      colData_names = NULL,
+                      colData_names = intersect,
                       batch_names = names(sce_list),
                       verbose = TRUE) {
 
-  if(is.null(colData_names)){
+  if(is.function(colData_names)){
     colData_names <- lapply(sce_list, function(sce){
       colnames(SummarizedExperiment::colData(sce))
-    }) |> do.call(what=union)
+    }) |> do.call(what=colData_names)
   }
   EWCE::merge_sce(sce_list = sce_list,
                   method = method,
