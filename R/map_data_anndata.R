@@ -74,19 +74,25 @@ map_data_anndata <- function(obj,
     genes = rownames(assays[[1]]),
     original_rowdata = obj$var)
   #### Construct new SummarizedExperiment ####
-  obj2 <- anndata::AnnData(
-    X = Matrix::t(assays$X),
-    raw = if(!is.null(assays$raw))Matrix::t(assays$raw),
-    obs = obj$obs,
-    var = rd,
-    ### OMIT! no longer relevant for new feature dimensions
-    # obsm = obj$obsm,
-    # obsp = obj$obsp,
-    # varm = obj$varm,
-    # varp = obj$varp,
-    uns = obj$uns,
-    ## OMIT!: Causes "Error: KeyError: 1"
-    # layers = obj$layers,
-    filename = obj$filename)
+  obj2 <- tryCatch({
+    obj2 <- anndata::AnnData(
+      X = Matrix::t(assays$X),
+      raw = if(!is.null(assays$raw))Matrix::t(assays$raw),
+      obs = obj$obs,
+      var = rd[rownames(assays$X),],
+      ### OMIT! no longer relevant for new feature dimensions
+      # obsm = obj$obsm,
+      # obsp = obj$obsp,
+      # varm = obj$varm,
+      # varp = obj$varp,
+      uns = obj$uns,
+      ## OMIT!: Causes "Error: KeyError: 1"
+      # layers = obj$layers,
+      filename = obj$filename)
+  }, error = function(e){
+    message(e);
+    list(assays=assays,
+         rd=rd)
+  })
   return(obj2)
 }
