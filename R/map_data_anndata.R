@@ -32,13 +32,16 @@ map_data_anndata <- function(obj,
   # devoptera::args2vars(map_data_anndata)
   # obj <- example_obj("anndata")
 
-  assays <- list(X=Matrix::t(obj$X),
-                 raw=if(!is.null(obj$raw))Matrix::t(obj$raw))
+  assays <- list(X=obj$X,
+                 raw=obj$raw)
+  ### Convert and transpose ####
   assays <- lapply(assays, function(a){
-    if(methods::is(a,"RawR6")){
-      a <- as.matrix(a)
+    if(!is.null(a)){
+      if(methods::is(a,"RawR6")){
+        a <- as.matrix(a)
+      }
+      Matrix::t(a)
     }
-    a
   })
   assays <- map_data_assays(
     assays = ,
