@@ -34,7 +34,6 @@ map_data_anndata <- function(obj,
                              verbose = TRUE){
   # devoptera::args2vars(map_data_anndata)
   # obj <- example_obj("anndata")
-  obj <- anndata::read_h5ad("~/Downloads/Aorta_FIRM_hvg.h5ad")
 
   #### Activate conda env with anndata installed ####
   echoconda::activate_env(conda_env = conda_env,
