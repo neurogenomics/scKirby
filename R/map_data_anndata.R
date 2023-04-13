@@ -34,7 +34,7 @@ map_data_anndata <- function(obj,
 
   assays <- list(X=obj$X,
                  raw=obj$raw)
-  ### Convert and transpose ####
+  #### Convert and transpose ####
   assays <- lapply(assays, function(a){
     if(!is.null(a)){
       if(methods::is(a,"RawR6")){
@@ -44,7 +44,7 @@ map_data_anndata <- function(obj,
     }
   })
   assays <- map_data_assays(
-    assays = ,
+    assays = assays,
     gene_map=gene_map,
     input_col=input_col,
     output_col=output_col,
