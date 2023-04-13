@@ -34,14 +34,17 @@ map_data_anndata <- function(obj,
                              verbose = TRUE){
   # devoptera::args2vars(map_data_anndata)
   # obj <- example_obj("anndata")
+  obj <- anndata::read_h5ad("~/Downloads/Aorta_FIRM_hvg.h5ad")
 
   #### Activate conda env with anndata installed ####
   echoconda::activate_env(conda_env = conda_env,
                           method = "reticulate",
                           verbose = verbose)
 
-  assays <- list(X=obj$X,
-                 raw=obj$raw)
+  assays <- list(X=obj$X
+                 ### Omit! causes errors during anndatareconstruction
+                 # raw=obj$raw
+                 )
   #### Convert and transpose ####
   assays <- lapply(assays, function(a){
     if(!is.null(a)){
@@ -74,25 +77,20 @@ map_data_anndata <- function(obj,
     genes = rownames(assays[[1]]),
     original_rowdata = obj$var)
   #### Construct new SummarizedExperiment ####
-  obj2 <- tryCatch({
-    obj2 <- anndata::AnnData(
-      X = Matrix::t(assays$X),
-      raw = if(!is.null(assays$raw))Matrix::t(assays$raw),
-      obs = obj$obs,
-      var = rd[rownames(assays$X),],
-      ### OMIT! no longer relevant for new feature dimensions
-      # obsm = obj$obsm,
-      # obsp = obj$obsp,
-      # varm = obj$varm,
-      # varp = obj$varp,
-      uns = obj$uns,
-      ## OMIT!: Causes "Error: KeyError: 1"
-      # layers = obj$layers,
-      filename = obj$filename)
-  }, error = function(e){
-    message(e);
-    list(assays=assays,
-         rd=rd)
-  })
+  obj2 <-  anndata::AnnData(
+    X = Matrix::t(assays$X),
+    ### OMIT!: Causes
+    ## Error: ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all().
+    # raw = if(!is.null(assays$raw))Matrix::t(assays$raw),
+    obs = obj$obs,
+    var = rd[rownames(assays$X),],
+    obsm = obj$obsm,
+    obsp = obj$obsp,
+    varm = obj$varm,
+    varp = obj$varp,
+    uns = obj$uns,
+    ## OMIT!: Causes "Error: KeyError: 1"
+    # layers = obj$layers,
+    filename = obj$filename)
   return(obj2)
 }
