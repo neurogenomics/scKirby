@@ -4,7 +4,14 @@
 \alias{read_data}
 \title{Read data}
 \usage{
-read_data(path, filetype = "guess", custom_reader = NULL, verbose = TRUE, ...)
+read_data(
+  path,
+  filetype = "guess",
+  custom_reader = NULL,
+  conda_env = "r-reticulate",
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
 \item{path}{Path to saved single-cell data file,
@@ -17,7 +24,9 @@ made explicit by the user.
 
 \item{custom_reader}{A user-supplied function to read in the data with.}
 
-\item{verbose}{Print messages}
+\item{conda_env}{Conda environment to use.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 An single-cell data object.

@@ -15,14 +15,21 @@
 #' #### Usage ####
 #' adata <- example_anndata()
 #' }
+#' @inheritParams echoconda::activate_env
+#'
 #' @keywords internal
+#' @importFrom echoconda activate_env
 example_anndata <- function(obj = SeuratObject::pbmc_small,
                             return_path=FALSE,
                             backed=c("r","r+"),
                             overwrite=TRUE,
                             add_filename=FALSE,
                             save_path = file.path(tempdir,"example.h5ad"),
+                            conda_env = "r-reticulate",
                             verbose=TRUE){
+  echoconda::activate_env(conda_env = conda_env,
+                          method = "reticulate",
+                          verbose = verbose)
 
   backed <- backed[1]
   if(file.exists(save_path) &&

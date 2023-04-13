@@ -21,6 +21,7 @@ map_data(
   as_DelayedArray = FALSE,
   sort_rows = FALSE,
   test_species = NULL,
+  conda_env = "r-reticulate",
   verbose = TRUE,
   ...
 )
@@ -155,6 +156,8 @@ If set to \code{NULL}, will default to a list of humans and
  \item{"gprofiler" : }{700+ species}
  \item{"babelgene" : }{19 species}
  }}
+
+\item{conda_env}{Conda environment to use.}
 
 \item{verbose}{Print messages.}
 

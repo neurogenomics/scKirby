@@ -18,6 +18,7 @@ SystemRequirements: Python (>= 3.7.0)
 biocViews:
 Imports: 
   orthogene, 
+  echoconda,
   EWCE,
   ewceData, 
   data.table,
@@ -46,6 +47,7 @@ Suggests:
   monocle3,
   monocle 
 Remotes:
+  github::RajLabMSSM/echoconda, 
   github::mojaveazure/seurat-disk, 
   github::mojaveazure/loomR,
   github::cellgeni/sceasy,

@@ -4,9 +4,11 @@
 #' across-species (gene orthologs) or within-species (gene synonyms).
 #' @inheritParams orthogene::aggregate_mapped_genes
 #' @inheritParams orthogene::convert_orthologs
+#' @inheritParams echoconda::activate_env
 #' @returns \link[anndata]{AnnData}
 #'
 #' @keywords internal
+#' @importFrom echoconda activate_env
 map_data_anndata <- function(obj,
                              gene_map = NULL,
                              input_col = "input_gene",
@@ -28,9 +30,15 @@ map_data_anndata <- function(obj,
                              as_DelayedArray = FALSE,
                              sort_rows = FALSE,
                              test_species = NULL,
+                             conda_env = "r-reticulate",
                              verbose = TRUE){
   # devoptera::args2vars(map_data_anndata)
   # obj <- example_obj("anndata")
+
+  #### Activate conda env with anndata installed ####
+  echoconda::activate_env(conda_env = conda_env,
+                          method = "reticulate",
+                          verbose = verbose)
 
   assays <- list(X=obj$X,
                  raw=obj$raw)
@@ -76,7 +84,7 @@ map_data_anndata <- function(obj,
     varm = obj$varm,
     varp = obj$varp,
     uns = obj$uns,
-    layers = obj$layers,
+    # layers = obj$layers, ## OMIT!: Causes "Error: KeyError: 1"
     filename = obj$filename)
   return(obj2)
 }

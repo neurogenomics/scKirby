@@ -18,6 +18,7 @@
 #' @inheritParams orthogene::infer_species
 #' @inheritParams orthogene::convert_orthologs
 #' @inheritParams orthogene::aggregate_mapped_genes
+#' @inheritParams echoconda::activate_env
 #' @returns An aggregated/expanded version of the input single-cell data object.
 #'
 #' @export
@@ -47,6 +48,7 @@ map_data <- function(obj,
                      as_DelayedArray = FALSE,
                      sort_rows = FALSE,
                      test_species = NULL,
+                     conda_env = "r-reticulate",
                      verbose = TRUE,
                      ...){
   # devoptera::args2vars(map_data)
@@ -98,6 +100,7 @@ map_data <- function(obj,
           as_DelayedArray = as_DelayedArray,
           sort_rows = sort_rows,
           test_species = test_species,
+          conda_env = conda_env,
           verbose = verbose)
   } else if(is_class(obj,"seurat")){
     obj2 <- map_data_seurat(

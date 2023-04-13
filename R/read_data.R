@@ -9,11 +9,13 @@
 #'  made explicit by the user.
 #'  "guess" (default) will simply infer the most likely file type.
 #' @param custom_reader A user-supplied function to read in the data with.
-#' @param verbose Print messages
+#' @param verbose Print messages.
+#' @inheritParams echoconda::activate_env
 #' @returns An single-cell data object.
 #'  The object class that the data gets imported as depends on file type.
 #'
 #' @export
+#' @importFrom echoconda activate_env
 #' @examples
 #' library(Seurat)
 #' obj <- example_obj("loom")
@@ -21,6 +23,7 @@
 read_data <- function(path,
                       filetype="guess",
                       custom_reader=NULL,
+                      conda_env="r-reticulate",
                       verbose=TRUE,
                       ...){
 
@@ -85,6 +88,9 @@ read_data <- function(path,
      is_filetype(filetype,"anndata")){
     messager("+ AnnData format (.h5ad) detected.",
              "Importing as AnnData.",v=verbose)
+    echoconda::activate_env(conda_env = conda_env,
+                            method = "reticulate",
+                            verbose = verbose)
     #### anndata method
     # Anndata adds another dependency, but at least it works unlike
     obj <- anndata::read_h5ad(filename = path)
