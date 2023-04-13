@@ -78,13 +78,15 @@ map_data_anndata <- function(obj,
     X = Matrix::t(assays$X),
     raw = if(!is.null(assays$raw))Matrix::t(assays$raw),
     obs = obj$obs,
-    obsm = obj$obsm,
-    obsp = obj$obsp,
     var = rd,
-    varm = obj$varm,
-    varp = obj$varp,
+    ### OMIT! no longer relevant for new feature dimensions
+    # obsm = obj$obsm,
+    # obsp = obj$obsp,
+    # varm = obj$varm,
+    # varp = obj$varp,
     uns = obj$uns,
-    # layers = obj$layers, ## OMIT!: Causes "Error: KeyError: 1"
+    ## OMIT!: Causes "Error: KeyError: 1"
+    # layers = obj$layers,
     filename = obj$filename)
   return(obj2)
 }
