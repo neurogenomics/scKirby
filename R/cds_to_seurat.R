@@ -1,5 +1,6 @@
 #' Convert: \code{CellDataSet} ==> \code{Seurat}
 #'
+#' @export
 #' @examples
 #' obj <- example_obj("cds")
 #' obj2 <- cds_to_seurat(obj)

@@ -25,7 +25,7 @@ map_data_anndata <- function(obj,
                              non121_strategy =
                                "drop_both_species",
                              agg_fun = NULL,
-                             mthreshold = Inf,
+                             mthreshold = 1,
                              as_sparse = FALSE,
                              as_DelayedArray = FALSE,
                              sort_rows = FALSE,
@@ -41,7 +41,7 @@ map_data_anndata <- function(obj,
                           verbose = verbose)
 
   assays <- list(X=obj$X
-                 ### Omit! causes errors during anndatareconstruction
+                 ### Omit! causes errors during anndata reconstruction
                  # raw=obj$raw
                  )
   #### Convert and transpose ####
@@ -78,8 +78,8 @@ map_data_anndata <- function(obj,
   #### Construct new SummarizedExperiment ####
   obj2 <-  anndata::AnnData(
     X = Matrix::t(assays$X),
-    ### OMIT!: Causes
-    ## Error: ValueError: The truth value of an array with more than one element is ambiguous. Use a.any() or a.all().
+    ### OMIT!: Causes Error: ValueError: The truth value of an array with more
+    ## than one element is ambiguous. Use a.any() or a.all().
     # raw = if(!is.null(assays$raw))Matrix::t(assays$raw),
     obs = obj$obs,
     var = rd[rownames(assays$X),],

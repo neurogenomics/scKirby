@@ -27,6 +27,7 @@ example_anndata <- function(obj = SeuratObject::pbmc_small,
                             save_path = file.path(tempdir,"example.h5ad"),
                             conda_env = "r-reticulate",
                             verbose=TRUE){
+
   echoconda::activate_env(conda_env = conda_env,
                           method = "reticulate",
                           verbose = verbose)

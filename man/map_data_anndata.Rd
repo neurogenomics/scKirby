@@ -16,7 +16,7 @@ map_data_anndata(
   drop_nonorths = TRUE,
   non121_strategy = "drop_both_species",
   agg_fun = NULL,
-  mthreshold = Inf,
+  mthreshold = 1,
   as_sparse = FALSE,
   as_DelayedArray = FALSE,
   sort_rows = FALSE,
