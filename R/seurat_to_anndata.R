@@ -17,10 +17,14 @@ seurat_to_anndata <- function(obj,
   echoconda::activate_env(conda_env = conda_env,
                           method = "reticulate",
                           verbose = verbose)
+
   adat <- sceasy::convertFormat(obj = obj,
                                 from = "seurat",
                                 to = "anndata")
   if(isTRUE(reimport)){
+    dir.create(dirname(save_path),showWarnings = FALSE, recursive = TRUE)
+    # IMPORTANT! python cannot interpret "~"
+    save_path <- path.expand(save_path)
     adat$write_h5ad(filename = save_path)
     adat <- anndata::read_h5ad(save_path)
   }

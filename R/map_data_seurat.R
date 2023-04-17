@@ -25,7 +25,7 @@ map_data_seurat <- function(obj,
                             drop_nonorths = TRUE,
                             non121_strategy =
                               "drop_both_species",
-                            agg_fun = NULL,
+                            agg_fun = "sum",
                             mthreshold = Inf,
                             as_sparse = FALSE,
                             as_DelayedArray = FALSE,

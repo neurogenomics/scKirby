@@ -45,7 +45,8 @@ Suggests:
   leidenbase, 
   speedglm,
   monocle3,
-  monocle 
+  monocle,
+  SCopeLoomR
 Remotes:
   github::RajLabMSSM/echoconda, 
   github::mojaveazure/seurat-disk, 
@@ -53,6 +54,7 @@ Remotes:
   github::cellgeni/sceasy,
   github::cole-trapnell-lab/leidenbase, 
   github::cran/speedglm,
-  github::cole-trapnell-lab/monocle3
+  github::cole-trapnell-lab/monocle3,
+  github::aertslab/SCopeLoomR
 VignetteBuilder: knitr
 RoxygenNote: 7.2.3

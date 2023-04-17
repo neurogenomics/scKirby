@@ -33,8 +33,10 @@ example_anndata <- function(obj = SeuratObject::pbmc_small,
                           verbose = verbose)
 
   backed <- backed[1]
-  if(file.exists(save_path) &&
+  if(!is.null(save_path) &&
+     file.exists(path.expand(save_path)) &&
      isFALSE(overwrite)){
+    save_path <- path.expand(save_path)
     messager("+ Importing existing anndata object", save_path, v=verbose)
     adat <- anndata::read_h5ad(filename = save_path,
                                backed = backed)
@@ -46,10 +48,14 @@ example_anndata <- function(obj = SeuratObject::pbmc_small,
       obs = obj@meta.data[rownames(t_mat),],
       var = Seurat::GetAssay(obj)@meta.features[colnames(t_mat),]
       )
-    if(is.null(save_path)) return (adat)
-    if(isTRUE(overwrite)) out <- suppressWarnings(file.remove(save_path))
-    out <- adat$write_h5ad(filename = save_path)
-    if(isTRUE(add_filename)) adat$filename <- save_path
+    if(is.null(save_path)){
+      return (adat)
+    } else {
+      save_path <- path.expand(save_path)
+      if(isTRUE(overwrite)) out <- suppressWarnings(file.remove(save_path))
+      out <- adat$write_h5ad(filename = save_path)
+      if(isTRUE(add_filename)) adat$filename <- save_path
+    }
   }
   if(isTRUE(return_path)) return(save_path) else return(adat)
 }

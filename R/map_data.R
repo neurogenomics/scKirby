@@ -42,7 +42,7 @@ map_data <- function(obj,
                      ),
                      drop_nonorths = TRUE,
                      non121_strategy = "drop_both_species",
-                     agg_fun = NULL,
+                     agg_fun = "sum",
                      mthreshold = Inf,
                      as_sparse = FALSE,
                      as_DelayedArray = FALSE,
@@ -53,6 +53,9 @@ map_data <- function(obj,
                      ...){
   # devoptera::args2vars(map_data)
   # obj <- TabulaMurisData::TabulaMurisSmartSeq2()
+  # obj <- anndata::read_h5ad("~/Downloads/EarthwormCellLandscape.h5ad")
+  # gene_map <- orthogene:::earthworm2human_map()
+  # input_col <- "qseqid"; output_col <- "sseqid"
 
   #### Infer species ####
   if(is.null(input_species)){

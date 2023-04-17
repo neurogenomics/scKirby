@@ -15,7 +15,7 @@ map_data_anndata(
   method = c("homologene", "gprofiler", "babelgene"),
   drop_nonorths = TRUE,
   non121_strategy = "drop_both_species",
-  agg_fun = NULL,
+  agg_fun = "sum",
   mthreshold = 1,
   as_sparse = FALSE,
   as_DelayedArray = FALSE,
