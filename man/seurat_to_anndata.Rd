@@ -9,7 +9,8 @@ seurat_to_anndata(
   reimport = TRUE,
   save_path = tempfile(fileext = ".h5ad"),
   conda_env = "r-reticulate",
-  verbose = TRUE
+  verbose = TRUE,
+  ...
 )
 }
 \arguments{
@@ -20,6 +21,17 @@ all data has been converted from Python-native to R-native objects
 \item{conda_env}{Conda environment to use.}
 
 \item{verbose}{Print messages.}
+
+\item{...}{
+  Arguments passed on to \code{\link[anndata:write_h5ad]{anndata::write_h5ad}}
+  \describe{
+    \item{\code{anndata}}{An \code{\link[anndata:AnnData]{AnnData()}} object}
+    \item{\code{filename}}{Filename of data file. Defaults to backing file.}
+    \item{\code{compression}}{See the h5py \href{http://docs.h5py.org/en/latest/high/dataset.html#dataset-compression}{filter pipeline}.
+Options are \code{"gzip"}, \code{"lzf"} or \code{NULL}.}
+    \item{\code{compression_opts}}{See the h5py \href{http://docs.h5py.org/en/latest/high/dataset.html#dataset-compression}{filter pipeline}.}
+    \item{\code{as_dense}}{Sparse in AnnData object to write as dense. Currently only supports \code{"X"} and \code{"raw/X"}.}
+  }}
 }
 \description{
 Convert: \code{Seurat} ==> \code{anndata}

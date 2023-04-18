@@ -4,7 +4,22 @@
 \alias{se_to_anndata}
 \title{Convert: \code{SummarizedExperiment} ==> \code{AnnData}}
 \usage{
-se_to_anndata(obj, verbose = TRUE)
+se_to_anndata(
+  obj,
+  method = c("zellkonverter", "sceasy"),
+  reimport = TRUE,
+  save_path = tempfile(fileext = ".h5ad"),
+  verbose = TRUE
+)
+}
+\arguments{
+\item{method}{Which R package to use for the conversion.}
+
+\item{reimport}{Save and re-import the \code{anndata} object into R to ensure
+all data has been converted from Python-native to R-native objects
+(e.g. pandas data.frames vs. R data.frames).}
+
+\item{verbose}{Print messages.}
 }
 \description{
 Convert: \code{SummarizedExperiment} ==> \code{AnnData}

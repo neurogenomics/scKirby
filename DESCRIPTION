@@ -46,7 +46,8 @@ Suggests:
   speedglm,
   monocle3,
   monocle,
-  SCopeLoomR
+  SCopeLoomR,
+  zellkonverter
 Remotes:
   github::RajLabMSSM/echoconda, 
   github::mojaveazure/seurat-disk, 

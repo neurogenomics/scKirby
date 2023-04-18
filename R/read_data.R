@@ -49,120 +49,62 @@ read_data <- function(path,
   if(is_suffix(path,"rds") ||
      is_filetype(filetype,"rds")){
     messager("+ Reading in .rds file of unknown type.",v=verbose)
-    obj <- readRDS(path,
-                   ...)
-    return(obj)
+    readRDS(path,
+            ...)
   }
   #### Generic RDS ####
   if(is_suffix(path,"rdata") ||
      is_filetype(filetype,"rdata")){
-    messager("+ Reading in .rda file of unknown type.")
-    obj <- load_rdata(path)
-    return(obj)
+    messager("+ Reading in .rda file of unknown type.",v=verbose)
+    load_rdata(path)
   }
   #### .mtx folder ####
   if((is_suffix(path,"matrix")  && dir.exists(path)) ||
      is_filetype(filetype,"matrix_dir")){
-    messager("+ Matrix folder format (.mtx) detected.",
-             "Importing as Seurat.")
-    obj <- Seurat::CreateSeuratObject(
-      counts = Seurat::Read10X(data.dir = path,
-                               ...)
-    )
-    return(obj)
+    read_matrix_dir(path = path,
+                    verbose = verbose,
+                    ...)
   }
   #### .mtx/.csv/.tsv matrix ####
   if((is_suffix(path,"matrix") && !dir.exists(path) )||
      is_filetype(filetype,"matrix") ||
      is_filetype(filetype,"data.table")){
-    messager("+ Expression matrix (.mtx) detected.",
-             "Importing as sparse matrix.",v=verbose)
-    obj <- data.table::fread(path,
-                             data.table = FALSE)
-    obj2 <- as.matrix(obj[,-1], obj[[1]]) |>
-      Matrix::Matrix(sparse=TRUE)
-    return(obj2)
+    read_matrix(path = path,
+                verbose = verbose,
+                ...)
   }
   #### AnnData ####
   if(is_suffix(path,"anndata") ||
      is_filetype(filetype,"anndata")){
-    messager("+ AnnData format (.h5ad) detected.",
-             "Importing as AnnData.",v=verbose)
-    echoconda::activate_env(conda_env = conda_env,
-                            method = "reticulate",
-                            verbose = verbose)
-    #### anndata method
-    # Anndata adds another dependency, but at least it works unlike
-    obj <- anndata::read_h5ad(filename = path)
-
-    #### sceasy method
-    # obj <- sceasy::convertFormat(obj, from="anndata", to="sce")
-
-    #### Seurat method
-    ## This is now deprecated, and for some reason
-    ## doesn't offer back compatibility by calling to SeuratDisk...
-    # obj <- Seurat::ReadH5AD(obj, ...)
-
-    ## SeuratDisk is currently broken, with no word from the developer...
-    ## https://github.com/mojaveazure/seurat-disk/issues/41
-    # obj <- SeuratDisk::Convert(source = obj,
-    #                               dest = save_dir,
-    #                               overwrite = overwrite,
-    #                               verbose = verbose,
-    #                               ...)
-    return(obj)
+    read_anndata(path = path,
+                 verbose = verbose,
+                 conda_env = conda_env,
+                 ...)
   }
   #### H5Seurat ####
   if(is_suffix(path,"h5seurat") ||
      is_filetype(filetype,"h5seurat")){
-    messager("+ h5Seurat format (.h5Seurat) detected.",
-             "Importing as Seurat.",v=verbose)
-    obj <- SeuratDisk::LoadH5Seurat(file = path,
-                                    ...)
-    return(obj)
+    read_h5seurat(path = path,
+                  verbose = verbose,
+                  ...)
   }
   #### HDF5Array SummarizedExperiment/SingleCellExperiment ####
   if((is_suffix(path,"h5") || is_filetype(filetype,"h5"))  &&
      dir.exists(obj) ){
     if(file.exists(file.path(path,"assays.h5")) &&
        file.exists(file.path(path,"se.rds")) ){
-      messager("+ HDF5Array format (.h5) detected.",
-               "Importing as SingleCellExperiment.",v=verbose)
-      obj <- HDF5Array::loadHDF5SummarizedExperiment(path,
-                                                     ...)
-      return(obj)
+      read_h5(path = path,
+              verbose = verbose,
+              ...)
     }
   }
   #### Loom ####
   if(is_suffix(path,"loom") ||
      is_filetype(filetype,"loom")){
-    messager("+ Loom format (.loom) detected.",
-             "Importing as SingleCellLoomExperiment.",v=verbose)
-    #### anndata method
-    ## anndata::read_loom has difficulties identifying right loompy location.
-    # anndata::read_loom(filename=obj, validate=F, ...)
-
-    #### loomR method
-    ## skip.validate must =F, or else you won't be able to extract the matrix
-    # obj <- loomR::connect(filename=obj, skip.validate = F)
-
-    ### SeuratDisk method
-    obj <- SeuratDisk::LoadLoom(path)
-
-    #### sceasy method
-    # rhdf5::h5disableFileLocking() ## Causes error otherwise
-    # obj <- sceasy::convertFormat(obj, from="loom", to="sce", ...)
-    # outFile = gsub(".loom",".sce.rds",obj))
-    return(obj)
+    read_loom(path = path,
+              verbose = verbose,
+              ...)
   }
-  # if( endsWith(tolower(obj), suffix=c(".h5")) & (!dir.exists(obj))){
-  #     # When .h5 is a file, not a folder
-  #     # obj <- "/Volumes/bms20/projects/neurogenomics-lab/live/GitRepos/model_celltype_conservation/raw_data/scRNAseq/LaManno2020/LaManno2020_sparse.h5"
-  #     # rhdf5::h5closeAll()
-  #     # h5_contents <- rhdf5::h5ls(obj, datasetinfo=F)
-  #     # obj <- rhdf5::h5read(file =obj, name = "/")
-  #     obj <- anndata::read_hdf(obj, key = "/")
-  # }
 }
 
 
