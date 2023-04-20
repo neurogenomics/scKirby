@@ -7,7 +7,6 @@ save_anndata <- function(obj,
                          conda_env="r-reticulate",
                          verbose=TRUE,
                          ...){
-  obj <- example_obj("ad")
   method <- method[1]
   if(!is_class(obj,"anndata")){
     stopper("obj must be an anndata object.")
