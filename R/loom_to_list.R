@@ -9,5 +9,5 @@ loom_to_list <- function(obj,
                          verbose=TRUE){
   loom_to_seurat(obj,
                  verbose = verbose) |>
-    seurat_to_list()
+    seurat_to_list(verbose = verbose)
 }

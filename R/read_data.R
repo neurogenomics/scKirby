@@ -26,6 +26,7 @@ read_data <- function(path,
                       conda_env="r-reticulate",
                       verbose=TRUE,
                       ...){
+  # devoptera::args2vars(read_data)
 
   #### Use user-provided reader func ####
   if(!is.null(custom_reader)){
@@ -40,71 +41,68 @@ read_data <- function(path,
     messager("+ Returning object directly.",v=verbose)
     return(path)
   }
+  #### Infer how to read in file ####
   if(!file.exists(path)){
     stopper("Cannot find file at path:",path)
   }
-  #### Infer how to read in file ####
   messager("+ Reading from disk.",v=verbose)
   #### Generic RDS ####
   if(is_suffix(path,"rds") ||
      is_filetype(filetype,"rds")){
     messager("+ Reading in .rds file of unknown type.",v=verbose)
-    readRDS(path,
-            ...)
-  }
+    obj <- readRDS(path,
+                   ...)
   #### Generic RDS ####
-  if(is_suffix(path,"rdata") ||
+  } else if(is_suffix(path,"rdata") ||
      is_filetype(filetype,"rdata")){
     messager("+ Reading in .rda file of unknown type.",v=verbose)
-    load_rdata(path)
-  }
+    obj <- load_rdata(path)
   #### .mtx folder ####
-  if((is_suffix(path,"matrix")  && dir.exists(path)) ||
+  } else if((is_suffix(path,"matrix")  && dir.exists(path)) ||
      is_filetype(filetype,"matrix_dir")){
-    read_matrix_dir(path = path,
-                    verbose = verbose,
-                    ...)
-  }
+    obj <- read_matrix_dir(path = path,
+                           verbose = verbose,
+                           ...)
   #### .mtx/.csv/.tsv matrix ####
-  if((is_suffix(path,"matrix") && !dir.exists(path) )||
-     is_filetype(filetype,"matrix") ||
-     is_filetype(filetype,"data.table")){
-    read_matrix(path = path,
-                verbose = verbose,
-                ...)
-  }
+  } else if((is_suffix(path,"matrix") && !dir.exists(path) )||
+            is_suffix(path,"data.table") ||
+            is_filetype(filetype,"matrix") ||
+            is_filetype(filetype,"data.table")){
+    obj <- read_matrix(path = path,
+                       verbose = verbose,
+                       ...)
   #### AnnData ####
-  if(is_suffix(path,"anndata") ||
+  } else if(is_suffix(path,"anndata") ||
      is_filetype(filetype,"anndata")){
-    read_anndata(path = path,
-                 verbose = verbose,
-                 conda_env = conda_env,
-                 ...)
-  }
+    obj <- read_anndata(path = path,
+                        verbose = verbose,
+                        conda_env = conda_env,
+                        ...)
   #### H5Seurat ####
-  if(is_suffix(path,"h5seurat") ||
+  } else if(is_suffix(path,"h5seurat") ||
      is_filetype(filetype,"h5seurat")){
-    read_h5seurat(path = path,
-                  verbose = verbose,
-                  ...)
-  }
+    obj <- read_h5seurat(path = path,
+                         verbose = verbose,
+                         ...)
   #### HDF5Array SummarizedExperiment/SingleCellExperiment ####
-  if((is_suffix(path,"h5") || is_filetype(filetype,"h5"))  &&
+  } else if((is_suffix(path,"h5") || is_filetype(filetype,"h5"))  &&
      dir.exists(obj) ){
     if(file.exists(file.path(path,"assays.h5")) &&
        file.exists(file.path(path,"se.rds")) ){
-      read_h5(path = path,
-              verbose = verbose,
-              ...)
+      obj <- read_h5(path = path,
+                     verbose = verbose,
+                     ...)
     }
-  }
   #### Loom ####
-  if(is_suffix(path,"loom") ||
+  } else if(is_suffix(path,"loom") ||
      is_filetype(filetype,"loom")){
-    read_loom(path = path,
-              verbose = verbose,
-              ...)
+    obj <- read_loom(path = path,
+                     verbose = verbose,
+                     ...)
+  } else {
+    stopper("Unable to read in file.")
   }
+  return(obj)
 }
 
 

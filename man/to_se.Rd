@@ -4,7 +4,7 @@
 \alias{to_se}
 \title{Convert: ==> \code{SummarizedExperiment}}
 \usage{
-to_se(obj, as_sce = FALSE, workers = 1, verbose = TRUE)
+to_se(obj, as_sce = FALSE, verbose = TRUE)
 }
 \description{
 Convert any object to \code{SummarizedExperiment} or
@@ -12,5 +12,5 @@ Convert any object to \code{SummarizedExperiment} or
 }
 \examples{
 obj <- example_obj("seurat")
-l <- to_list(obj)
+obj2 <- to_se(obj)
 }

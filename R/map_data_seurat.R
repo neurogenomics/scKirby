@@ -54,36 +54,9 @@ map_data_seurat <- function(obj,
     sort_rows=sort_rows,
     test_species=test_species,
     verbose=verbose)
-  #### Construct list of Assay objects #####
-  aobj_list <- lapply(stats::setNames(Seurat::Assays(obj),
-                                      Seurat::Assays(obj)),
-                      function(nm){
-    prefix <- paste0("^",nm,"\\.")
-    a1 <- assays[grep(prefix, names(assays))]
-    names(a1) <- gsub(prefix,"",names(a1))
-    aobj <- SeuratObject::CreateAssayObject(counts = a1$counts,)
-    if("scale.data" %in% names(a1)){
-      aobj@scale.data <- a1$scale.data
-    }
-    if("data" %in% names(a1)){
-      aobj@data <- a1$data
-    }
-    #### Construct row data using gene map ####
-    rd <- map_data_rowdata(
-      genes = rownames(aobj@counts),
-      original_rowdata = obj@assays[[nm]]@meta.features)
-    aobj@meta.features <- rd
-    return(aobj)
-  })
   #### Construct new SeuratObject ####
-  obj2 <- SeuratObject::CreateSeuratObject(
-    counts = aobj_list[[1]],
-    assay = names(aobj_list)[[1]],
-    meta.data = obj@meta.data)
-  #### Add extra assays ####
-  if(length(aobj_list)>1){
-    for(nm in names(aobj_list)[-1])
-    obj2[[nm]] <- aobj_list[[nm]]
-  }
+  l$data <- assays
+  obj2 <- list_to_seurat(obj = l,
+                         verbose = verbose)
   return(obj2)
 }

@@ -2,12 +2,12 @@
 % Please edit documentation in R/anndata_to_list.R
 \name{anndata_to_list}
 \alias{anndata_to_list}
-\title{Convert: \code{anndata} ==> \code{list}}
+\title{Convert: \code{AnnData} ==> \code{list}}
 \usage{
-anndata_to_list(obj)
+anndata_to_list(obj, verbose = TRUE)
 }
 \description{
-Convert: \code{anndata} ==> \code{list}
+Convert: \code{AnnData} ==> \code{list}
 }
 \examples{
 obj <- example_obj("anndata")

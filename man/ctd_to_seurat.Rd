@@ -10,6 +10,6 @@ ctd_to_seurat(obj, verbose = TRUE)
 Convert: \code{CellTypeDataSet} ==> \code{Seurat}
 }
 \examples{
-data("example_ctd")
-obj2 <- ctd_to_seurat(example_ctd)
+obj <- example_obj("ctd")
+obj2 <- ctd_to_seurat(obj)
 }

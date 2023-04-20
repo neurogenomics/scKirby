@@ -7,7 +7,7 @@
 #' obj <- example_obj("cds")
 #' filepath <- save_data(obj)
 save_data <- function(obj,
-                      filetype = c("h5","h5seurat","h5ad","rda","rds"),
+                      filetype = c("h5","h5seurat","h5ad","rda","rds","anndata"),
                       save_path = file.path(tempdir(),
                                           paste("scKirby_output",
 

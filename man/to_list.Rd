@@ -11,5 +11,5 @@ Convert any object to \code{list} format.
 }
 \examples{
 obj <- example_obj("seurat")
-l <- to_list(obj)
+obj2 <- to_list(obj)
 }

@@ -4,7 +4,10 @@
 #' @examples
 #' obj <- example_obj("se")
 #' obj2 <- se_to_list(obj)
-se_to_list <- function(obj){
+se_to_list <- function(obj,
+                       verbose=TRUE){
+
+  messager("+ AnnData ==> Seurat",v=verbose)
   list(data=obj@assays,
        obs=obj@colData,
        var=SummarizedExperiment::rowData(obj))

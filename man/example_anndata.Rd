@@ -19,11 +19,7 @@ adata <- example_anndata()
 \usage{
 example_anndata(
   obj = SeuratObject::pbmc_small,
-  return_path = FALSE,
-  backed = c("r", "r+"),
-  overwrite = TRUE,
-  add_filename = FALSE,
-  save_path = file.path(tempdir, "example.h5ad"),
+  save_path = file.path(tempdir(), "example.h5ad"),
   conda_env = "r-reticulate",
   verbose = TRUE
 )

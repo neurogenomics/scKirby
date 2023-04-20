@@ -11,7 +11,8 @@ se_to_anndata <- function(obj,
                           method = c("zellkonverter","sceasy"),
                           reimport = TRUE,
                           save_path = tempfile(fileext = ".h5ad"),
-                          verbose=TRUE){
+                          verbose=TRUE,
+                          ...){
 
   method <- tolower(method[1])
   if(is_class(obj,"anndata")){

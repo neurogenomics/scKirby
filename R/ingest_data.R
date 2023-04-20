@@ -6,7 +6,7 @@
 #'
 #' @param obj A single-cell data object, or a path to saved single-cell data.
 #' @param input_type Format of \code{obj}. By default, the type will be inferred.
-#' @param output_type Format to convert \code{obj} to.
+#' @param output_class Format to convert \code{obj} to.
 #' @param custom_reader Custom function to read \code{obj} into R.
 #' @param save_dir Directory to save the converted \code{obj}.
 #' @param filename Name to save the converted \code{obj}.
@@ -85,59 +85,49 @@
 #' sce <- ingest_data(obj="~/Desktop/pbmc_small.loom")
 #' }
 ingest_data <- function(obj,
-                        input_type="guess",
-                        output_type=c("SingleCellExperiment","Seurat","CellDataSet"),
-                        custom_reader=NULL,
-                        filetype = c("h5","h5seurat","h5ad","rda","rds"),
+                        input_type = "guess",
+                        output_class = c("SingleCellExperiment",
+                                         "Seurat",
+                                         "CellDataSet",
+                                         "list"),
+                        custom_reader = NULL,
                         save_path = NULL,
-                        overwrite=FALSE,
-                        return_save_path=FALSE,
-                        verbose=TRUE,
+                        overwrite = FALSE,
+                        return_save_path = FALSE,
+                        verbose = TRUE,
                         ...){
 
-    cdict <- class_dict()
-    output_type <-output_type[1]
-    output_types <- list(sce=tolower(cdict$sce),
-                         hdf5se=tolower(cdict$hdf5se),
-                         seurat=tolower(cdict$seurat),
-                         h5seurat=tolower(cdict$h5seurat)
-                         # loom=c("loom"),
-                         # anndata=c("anndata","h5ad")
-                         )
-    if(!tolower(output_type) %in% unname(unlist(output_types))){
-        stop("output_type must be one of the following: ",
-             paste(unname(unlist(output_types)), collapse = ", "))
-    }
 
+    #### Select output type ####
+    output_class <- output_dict(output_class = output_class)
     #### Read ####
-    # Separate the reading/conversion process
-    ## bc you don't always know what kind of data you're reading in (esp .rds/.rda files).
-    obj <- read_data(obj=obj,
+    obj <- read_data(path=obj,
                      filetype=input_type,
                      custom_reader=custom_reader,
                      verbose=verbose,
                      ...)
-
     #### Convert ####
-    ####  to SingleCellExperiment ####
-    if(is_filetype(output_type,"se")){
-        obj_out <- to_sce(obj = obj,
-                              verbose = verbose)
-        if(tolower(output_type)==tolower("SummarizedExperiment")){
-            obj_out <- sce_to_se(obj=obj_out,
-                                 verbose=verbose)
-        }
-    }
+    #### to SummarizedExperiment / SingleCellExperiment ####
+    if(is_filetype(output_class,"se")){
+        obj_out <- to_se(obj = obj,
+                         as_sce = output_class=="singlecellexperiment",
+                         verbose = verbose)
     #### to Seurat ####
-    if(is_filetype(output_type,"seurat") ||
-       is_filetype(output_type,"h5seurat")){
-        obj_out <- to_seurat(obj=obj,
-                             verbose=verbose)
+    } else if(is_filetype(output_class,"seurat") ||
+              is_filetype(output_class,"h5seurat")){
+        obj_out <- to_seurat(obj = obj,
+                             as_h5seurat = is_filetype(output_class,"h5seurat"),
+                             verbose = verbose)
+    #### to Loom ####
+    } else if(is_filetype(output_class,"loom")){
+      obj_out <- to_loom(obj = obj,
+                         save_path = save_path,
+                         verbose = verbose)
     }
     #### Save ####
     if(!is.null(save_path)){
       save_path <- save_data(obj=obj_out,
-                             filetype=filetype,
+                             filetype=output_class,
                              save_path=save_path,
                              overwrite=overwrite,
                              verbose=verbose)

@@ -9,7 +9,8 @@ se_to_anndata(
   method = c("zellkonverter", "sceasy"),
   reimport = TRUE,
   save_path = tempfile(fileext = ".h5ad"),
-  verbose = TRUE
+  verbose = TRUE,
+  ...
 )
 }
 \arguments{

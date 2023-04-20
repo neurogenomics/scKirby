@@ -25,9 +25,10 @@ class_dict <- function(group=NULL){
            "SingleCellExperiment",
            "sce","se","le","scle"),
     hdf5se = c("HDF5SummarizedExperiment"),
-    anndata = c("AnnData","AnnDataR6","AnnDataR6R6"),
+    anndata = c("AnnData","AnnDataR6","AnnDataR6R6",
+                "anndata._core.anndata.AnnData"),
     seurat = c("Seurat","SeuratObject"),
-    seurath5 = c("h5Seurat","scdisk"),
+    h5seurat = c("h5Seurat","scdisk"),
     cds = c("ExpressionSet","CellDataSet","monocle","monocle3")
   )
   classes$supported <- unlist(classes, use.names = FALSE)

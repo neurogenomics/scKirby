@@ -4,8 +4,17 @@ read_anndata <- function(path,
                          conda_env,
                          ...){
 
+  method <- tolower(method)[1]
   messager("+ AnnData format (.h5ad) detected.",
            "Importing as AnnData.",v=verbose)
+  #### Expand path for python ####
+  if(!is.null(path)){
+    path <- path.expand(path)
+  }
+  if(!file.exists(path)){
+    stopper("File does not exist:",path)
+  }
+  #### Method: anndata ####
   if(method=="anndata"){
     #### anndata method
     # Anndata adds another dependency, but at least it works unlike
@@ -14,6 +23,7 @@ read_anndata <- function(path,
                             verbose = verbose)
     obj <- anndata::read_h5ad(filename = path,
                               ...)
+  #### Method: zellkonverter ####
   } else {
     requireNamespace("zellkonverter")
     #### Has to import as SCE first,

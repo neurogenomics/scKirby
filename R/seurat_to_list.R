@@ -6,7 +6,10 @@
 #' @examples
 #' obj <- example_obj("seurat")
 #' obj2 <- seurat_to_list(obj)
-seurat_to_list <- function(obj){
+seurat_to_list <- function(obj,
+                           verbose=TRUE){
+
+ messager("+ Seurat ==> list",v=verbose)
  list(
    data = lapply(obj@assays,function(a){
      slots <- c("counts","data","scale.data")

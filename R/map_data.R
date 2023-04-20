@@ -124,8 +124,8 @@ map_data <- function(obj,
       sort_rows = sort_rows,
       test_species = test_species,
       verbose = verbose)
-  }else if(is_class(obj,"matrix")){
-
+  } else {
+    stopper("Unsupported obj class.")
   }
   return(obj2)
 }

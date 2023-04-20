@@ -10,8 +10,8 @@
 #' obj <- example_obj("seurat")
 #' obj2 <- seurat_to_anndata(obj)
 seurat_to_anndata <- function(obj,
-                              reimport=TRUE,
-                              save_path= tempfile(fileext = ".h5ad"),
+                              reimport = TRUE,
+                              save_path = tempfile(fileext = ".h5ad"),
                               conda_env = "r-reticulate",
                               verbose=TRUE,
                               ...){
@@ -22,11 +22,13 @@ seurat_to_anndata <- function(obj,
 
   adat <- sceasy::convertFormat(obj = obj,
                                 from = "seurat",
-                                to = "anndata")
+                                to = "anndata",
+                                outFile = save_path)
   if(isTRUE(reimport)){
-    adat <- reimport_anndata(obj = adat,
+    adat <- reimport_anndata(adat = adat,
                              save_path = save_path,
-                             ...)
+                             verbose = verbose)
   }
+  #### Return ###
   return(adat)
 }

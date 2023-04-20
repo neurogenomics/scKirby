@@ -6,9 +6,10 @@
 \usage{
 example_obj(
   class = c("SummarizedExperiment", "SingleCellExperiment", "Seurat", "h5Seurat",
-    "CellDataSet", "matrix", "data.table", "data.frame", "loom", "LoomExperiment",
-    "SingleCellLoomExperiment", "anndata", "EWCE"),
+    "CellDataSet", "matrix", "data.table", "data.frame", "list", "loom",
+    "LoomExperiment", "SingleCellLoomExperiment", "hdf5se", "anndata", "EWCE"),
   save_path = file.path(tempdir(), "example"),
+  conda_env = "r-reticulate",
   verbose = TRUE
 )
 }

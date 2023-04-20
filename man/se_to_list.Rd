@@ -4,7 +4,7 @@
 \alias{se_to_list}
 \title{Convert: \code{SummarizedExperiment} ==> \code{list}}
 \usage{
-se_to_list(obj)
+se_to_list(obj, verbose = TRUE)
 }
 \description{
 Convert: \code{SummarizedExperiment} ==> \code{list}

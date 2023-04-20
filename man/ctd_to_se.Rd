@@ -11,5 +11,5 @@ Convert: \code{CellTypeDataset} ==> \code{SingleCellExperiment}
 }
 \examples{
 obj <- example_obj("ctd")
-obj <- ctd_to_sce(example_ctd)
+obj <- ctd_to_sce(obj)
 }

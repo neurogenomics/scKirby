@@ -6,7 +6,7 @@
 \usage{
 save_data(
   obj,
-  filetype = c("h5", "h5seurat", "h5ad", "rda", "rds"),
+  filetype = c("h5", "h5seurat", "h5ad", "rda", "rds", "anndata"),
   save_path = file.path(tempdir(), paste("scKirby_output", filetype, sep = ".")),
   quicksave_HDF5 = TRUE,
   overwrite = TRUE,

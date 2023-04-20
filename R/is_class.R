@@ -21,6 +21,9 @@ is_class <- function(obj,
     any(sapply(y, function(z){methods::is(obj,z)}))
   })
   groups <- names(matches[unlist(matches)])
+  if(is_ctd(obj)){
+    groups <- c(groups,"ewce")
+  }
   if(is.null(group)){
     return(groups)
   } else {

@@ -4,7 +4,7 @@
 \alias{seurat_to_list}
 \title{Convert: \code{Seurat} ==> \code{list}}
 \usage{
-seurat_to_list(obj)
+seurat_to_list(obj, verbose = TRUE)
 }
 \description{
 Convert: \code{Seurat} ==> \code{list}

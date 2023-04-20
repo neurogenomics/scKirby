@@ -4,11 +4,11 @@
 #' @export
 #' @examples
 #' obj <- example_obj("seurat")
-#' l <- to_list(obj)
+#' obj2 <- to_list(obj)
 to_list <- function(obj,
                     verbose=TRUE){
   #### Template ####
-  # list(assays = NULL,
+  # list(data = NULL,
   #      obs = NULL,
   #      var = NULL,
   #      var_features = NULL,
@@ -24,20 +24,26 @@ to_list <- function(obj,
                       verbose = verbose)
   #### SummarizedExperiment ####
   } else if(is_class(obj,"se")){
-    l <- se_to_list(obj = obj)
+    l <- se_to_list(obj = obj,
+                    verbose = verbose)
   #### Seurat ####
   } else if(is_class(obj,"seurat")){
-    l <- seurat_to_list(obj = obj)
+    l <- seurat_to_list(obj = obj,
+                        verbose = verbose)
   #### anndata ####
   } else if(is_class(obj,"anndata")){
-    l <- anndata_to_list(obj = obj)
-  #### OTHER ####
+    l <- anndata_to_list(obj = obj,
+                         verbose = verbose)
+  #### CellDataSet ####
   } else if(is_class(obj,"cds")){
-    l <- cds_to_list(obj = obj)
+    l <- cds_to_list(obj = obj,
+                     verbose = verbose)
+  #### OTHER ####
   } else {
     obj <- ingest_data(obj = obj,
                        verbose = verbose)
-    l <- se_to_list(obj = obj)
+    l <- se_to_list(obj = obj,
+                    verbose = verbose)
   }
   return(l)
 }

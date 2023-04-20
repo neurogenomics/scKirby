@@ -37,17 +37,18 @@ Imports:
   parallel,
   HDF5Array
 Suggests: 
-  rworkflows,
-  rmarkdown,
-  knitr, 
-  loomR,
-  sceasy, 
-  leidenbase, 
-  speedglm,
-  monocle3,
-  monocle,
-  SCopeLoomR,
-  zellkonverter
+    rworkflows,
+    rmarkdown,
+    knitr,
+    loomR,
+    sceasy,
+    leidenbase,
+    speedglm,
+    monocle3,
+    monocle,
+    SCopeLoomR,
+    zellkonverter,
+    testthat (>= 3.0.0)
 Remotes:
   github::RajLabMSSM/echoconda, 
   github::mojaveazure/seurat-disk, 
@@ -59,3 +60,4 @@ Remotes:
   github::aertslab/SCopeLoomR
 VignetteBuilder: knitr
 RoxygenNote: 7.2.3
+Config/testthat/edition: 3

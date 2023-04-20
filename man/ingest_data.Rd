@@ -16,9 +16,8 @@
 ingest_data(
   obj,
   input_type = "guess",
-  output_type = c("SingleCellExperiment", "Seurat", "CellDataSet"),
+  output_class = c("SingleCellExperiment", "Seurat", "CellDataSet", "list"),
   custom_reader = NULL,
-  filetype = c("h5", "h5seurat", "h5ad", "rda", "rds"),
   save_path = NULL,
   overwrite = FALSE,
   return_save_path = FALSE,
@@ -31,7 +30,7 @@ ingest_data(
 
 \item{input_type}{Format of \code{obj}. By default, the type will be inferred.}
 
-\item{output_type}{Format to convert \code{obj} to.}
+\item{output_class}{Format to convert \code{obj} to.}
 
 \item{custom_reader}{Custom function to read \code{obj} into R.}
 

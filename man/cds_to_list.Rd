@@ -4,7 +4,7 @@
 \alias{cds_to_list}
 \title{Convert: \code{CellDataSet} ==> \code{list}}
 \usage{
-cds_to_list(obj)
+cds_to_list(obj, verbose = TRUE)
 }
 \description{
 Convert: \code{CellDataSet} ==> \code{list}

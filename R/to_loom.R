@@ -13,7 +13,10 @@ to_loom <- function(obj,
     return(obj)
   #### OTHER ####
   } else {
-  obj <- ingest_data(obj = obj)
+  obj <- ingest_data(obj = obj,
+                     output_class = 'sce',
+                     save_path = NULL,
+                     verbose = verbose)
   obj2 <- se_to_loom(obj = obj,
                      save_path = save_path,
                      verbose = verbose)
