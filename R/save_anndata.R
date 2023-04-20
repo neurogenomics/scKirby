@@ -4,6 +4,7 @@ save_anndata <- function(obj,
                          compression = "gzip",
                          compression_opts = NULL,
                          as_dense = list(),
+                         conda_env="r-reticulate",
                          verbose=TRUE,
                          ...){
   obj <- example_obj("ad")
@@ -13,6 +14,9 @@ save_anndata <- function(obj,
   }
   messager("+ Saving anndata:",save_path,v=verbose)
   if(method=="anndata"){
+    echoconda::activate_env(conda_env = conda_env,
+                            method = "reticulate",
+                            verbose = verbose)
     anndata::write_h5ad(anndata = obj,
                         filename = save_path,
                         compression = compression,

@@ -24,7 +24,7 @@ seurat_to_anndata <- function(obj,
                                 from = "seurat",
                                 to = "anndata")
   if(isTRUE(reimport)){
-    adat <- reimport_anndata(adat = adat,
+    adat <- reimport_anndata(obj = adat,
                              save_path = save_path,
                              ...)
   }

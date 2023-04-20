@@ -1,18 +1,25 @@
 read_loom <- function(path,
-                      method = c("seuratdisk","anndata"),
-                      verbose,
+                      method = c("seuratdisk","anndata","scopeloomr"),
+                      conda_env = "r-reticulate",
+                      verbose = TRUE,
                       ...){
 
-  method <- tolower(method)
+  method <- tolower(method)[1]
 
   #### anndata method ####
   if(method=="anndata"){
+    echoconda::activate_env(conda_env = conda_env,
+                            method = "reticulate",
+                            verbose = verbose)
     # anndata::read_loom has difficulties identifying right loompy location.
     anndata::read_loom(filename=path,
                        validate=FALSE,
                        ...)
 
   ### SeuratDisk method #####
+  } else if(method=="scopeloomr"){
+
+    SCopeLoomR::open_loom(path)
   }else if(method=="seuratdisk"){
     messager("+ Loom format (.loom) detected.",
              "Importing as SingleCellLoomExperiment.",v=verbose)
