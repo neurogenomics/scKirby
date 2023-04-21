@@ -9,6 +9,7 @@
 #'
 #' @keywords internal
 #' @importFrom echoconda activate_env
+#' @importFrom orthogene map_orthologs
 map_data_anndata <- function(obj,
                              gene_map = NULL,
                              input_col = "input_gene",
@@ -25,12 +26,13 @@ map_data_anndata <- function(obj,
                              non121_strategy =
                                "drop_both_species",
                              agg_fun = "sum",
-                             mthreshold = 1,
+                             mthreshold = Inf,
                              as_sparse = FALSE,
                              as_DelayedArray = FALSE,
                              sort_rows = FALSE,
                              test_species = NULL,
                              conda_env = "r-reticulate",
+                             chunk_size = NULL,
                              verbose = TRUE){
   # devoptera::args2vars(map_data_anndata)
   # obj <- example_obj("anndata")
@@ -39,38 +41,38 @@ map_data_anndata <- function(obj,
   echoconda::activate_env(conda_env = conda_env,
                           method = "reticulate",
                           verbose = verbose)
-
-  assays <- list(X=obj$X
-                 ### Omit! causes errors during anndata reconstruction
-                 # raw=obj$raw
-                 )
-  #### Convert and transpose ####
-  assays <- lapply(assays, function(a){
-    if(!is.null(a)){
-      if(methods::is(a,"RawR6")){
-        a <- as.matrix(a)
-      }
-      Matrix::t(a)
-    }
-  })
-  assays <- map_data_assays(
-    assays = assays,
-    gene_map=gene_map,
-    input_col=input_col,
-    output_col=output_col,
-    standardise_genes=standardise_genes,
-    input_species=input_species,
-    output_species=output_species,
-    method=method,
-    drop_nonorths=drop_nonorths,
-    non121_strategy=non121_strategy,
-    agg_fun=agg_fun,
-    mthreshold=mthreshold,
-    as_sparse=as_sparse,
-    as_DelayedArray=as_DelayedArray,
-    sort_rows=sort_rows,
-    test_species=test_species,
-    verbose=verbose)
+  #### Convert orthologs ####
+  ## Use the same map for each chunk to reduce API queries.
+  gene_map  <- orthogene::map_orthologs(genes = obj$var_names,
+                                        gene_map = gene_map,
+                                        method = method,
+                                        input_species = input_species,
+                                        output_species = output_species,
+                                        standardise_genes = standardise_genes,
+                                        mthreshold = mthreshold,
+                                        input_col = input_col,
+                                        output_col = output_col,
+                                        verbose = verbose)
+  #### Split matrix into chunks and process each one ####
+  ## Improves memory efficiency
+  assays <- map_data_anndata_chunked(obj=obj,
+                                     chunk_size=chunk_size,
+                                     gene_map=gene_map,
+                                     input_col=input_col,
+                                     output_col=output_col,
+                                     standardise_genes=standardise_genes,
+                                     input_species=input_species,
+                                     output_species=output_species,
+                                     method=method,
+                                     drop_nonorths=drop_nonorths,
+                                     non121_strategy=non121_strategy,
+                                     agg_fun=agg_fun,
+                                     mthreshold=mthreshold,
+                                     as_sparse=as_sparse,
+                                     as_DelayedArray=as_DelayedArray,
+                                     sort_rows=sort_rows,
+                                     test_species=test_species,
+                                     verbose=verbose)
   #### Construct row data using gene map ####
   rd <- map_data_rowdata(
     genes = rownames(assays[[1]]),

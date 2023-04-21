@@ -16,12 +16,13 @@ map_data_anndata(
   drop_nonorths = TRUE,
   non121_strategy = "drop_both_species",
   agg_fun = "sum",
-  mthreshold = 1,
+  mthreshold = Inf,
   as_sparse = FALSE,
   as_DelayedArray = FALSE,
   sort_rows = FALSE,
   test_species = NULL,
   conda_env = "r-reticulate",
+  chunk_size = NULL,
   verbose = TRUE
 )
 }

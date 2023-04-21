@@ -21,6 +21,14 @@ test_that("map_data works", {
                    output_species = "mouse")
   testthat::expect_lt(ncol(obj2),
                       ncol(obj))
+  #### anndata: chunked ####
+  obj <- example_obj("ad")
+  obj2 <- map_data(obj = obj,
+                   input_species = "human",
+                   output_species = "mouse",
+                   chunk_size = 10)
+  testthat::expect_lt(ncol(obj2),
+                      ncol(obj))
   #### seurat ####
   obj <- example_obj("seurat")
   obj2 <- map_data(obj = obj,

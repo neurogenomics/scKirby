@@ -15,6 +15,11 @@
 #' \link[data.table]{data.table}
 #' }
 #' }
+#' @param chunk_size An integer indicating number of cells to include per chunk.
+#' This can be a more memory efficient and scalable way of aggregating on-disk
+#' data formats like \item \link[AnnData]{AnnData},
+#' rather than reading in the entire matrix into memory at once
+#'  (default: \code{NULL}).
 #' @inheritParams orthogene::infer_species
 #' @inheritParams orthogene::convert_orthologs
 #' @inheritParams orthogene::aggregate_mapped_genes
@@ -48,6 +53,7 @@ map_data <- function(obj,
                      as_DelayedArray = FALSE,
                      sort_rows = FALSE,
                      test_species = NULL,
+                     chunk_size = NULL,
                      conda_env = "r-reticulate",
                      verbose = TRUE,
                      ...){
@@ -104,9 +110,29 @@ map_data <- function(obj,
           sort_rows = sort_rows,
           test_species = test_species,
           conda_env = conda_env,
+          chunk_size = chunk_size,
           verbose = verbose)
   } else if(is_class(obj,"seurat")){
     obj2 <- map_data_seurat(
+      obj = obj,
+      gene_map = gene_map,
+      input_col = input_col,
+      output_col = output_col,
+      standardise_genes = standardise_genes,
+      input_species = input_species,
+      output_species = output_species,
+      method = method,
+      drop_nonorths = drop_nonorths,
+      non121_strategy = non121_strategy,
+      agg_fun = agg_fun,
+      mthreshold = mthreshold,
+      as_sparse = as_sparse,
+      as_DelayedArray = as_DelayedArray,
+      sort_rows = sort_rows,
+      test_species = test_species,
+      verbose = verbose)
+  } else if(is_class(obj,"h5seurat")){
+    obj2 <- map_data_h5seurat(
       obj = obj,
       gene_map = gene_map,
       input_col = input_col,

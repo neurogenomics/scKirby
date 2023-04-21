@@ -21,6 +21,7 @@ map_data(
   as_DelayedArray = FALSE,
   sort_rows = FALSE,
   test_species = NULL,
+  chunk_size = NULL,
   conda_env = "r-reticulate",
   verbose = TRUE,
   ...
@@ -156,6 +157,12 @@ If set to \code{NULL}, will default to a list of humans and
  \item{"gprofiler" : }{700+ species}
  \item{"babelgene" : }{19 species}
  }}
+
+\item{chunk_size}{An integer indicating number of cells to include per chunk.
+This can be a more memory efficient and scalable way of aggregating on-disk
+data formats like \item \link[AnnData]{AnnData},
+rather than reading in the entire matrix into memory at once
+ (default: \code{NULL}).}
 
 \item{conda_env}{Conda environment to use.}
 
