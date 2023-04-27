@@ -27,7 +27,11 @@ matrices_to_assayobjects <- function(matrices,
                 prefix <- paste0("^",nm,"\\.")
                 a1 <- matrices[grep(prefix, names(matrices))]
                 names(a1) <- gsub(prefix,"",names(a1))
-                aobj <- SeuratObject::CreateAssayObject(counts = a1$counts)
+                if("raw.data" %in% names(a1)){
+                  aobj <- SeuratObject::CreateAssayObject(counts = a1$raw.data)
+                } else {
+                  aobj <- SeuratObject::CreateAssayObject(counts = a1$counts)
+                }
                 if("scale.data" %in% names(a1)){
                   aobj@scale.data <- a1$scale.data
                 }
