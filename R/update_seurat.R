@@ -14,7 +14,8 @@ update_seurat <- function(obj,
   ## from Seurat v2 onwards.
   if (methods::is(obj,"seurat")) {
     obj <- seurat1_to_list(obj = obj,
-                           verbose = verbose)
+                           verbose = verbose) |>
+      list_to_seurat(verbose = verbose)
 
   }
   obj <- SeuratObject::UpdateSeuratObject(obj)
