@@ -19,7 +19,6 @@ seurat_to_anndata <- function(obj,
   echoconda::activate_env(conda_env = conda_env,
                           method = "reticulate",
                           verbose = verbose)
-
   adat <- sceasy::convertFormat(obj = obj,
                                 from = "seurat",
                                 to = "anndata",

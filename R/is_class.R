@@ -24,9 +24,14 @@ is_class <- function(obj,
   if(is_ctd(obj)){
     groups <- c(groups,"ewce")
   }
+  if(is_list(obj)){
+    groups <- c(groups,"list")
+  }
   if(is.null(group)){
     return(groups)
   } else {
+    #### Exceptions ####
+    if(all(c("loom","h5seurat") %in% groups)) groups <- "h5seurat"
     return(tolower(group) %in% groups)
   }
 }

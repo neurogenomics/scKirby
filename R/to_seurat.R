@@ -2,6 +2,7 @@
 #'
 #' Convert any single-cell object to \code{Seurat} format.
 #' @param as_h5seurat Convert to the \code{H5Seurat} sublass.
+#' @param update Ensure the object is updated to the latest version of Seurat.
 #' @inheritParams seurat_to_h5seurat
 #'
 #' @export
@@ -10,8 +11,9 @@
 #' obj2 <- to_seurat(obj)
 to_seurat <- function(obj,
                       as_h5seurat = FALSE,
+                      update = TRUE,
                       save_path = tempfile(fileext = ".h5seurat"),
-                      verbose=TRUE){
+                      verbose = TRUE){
 
   #### Check if class is supported ####
   check_supported(obj)
@@ -67,6 +69,11 @@ to_seurat <- function(obj,
                           verbose = verbose)
   } else {
     stopper("Unable to convert obj to Seurat.")
+  }
+  #### Update object ####
+  if(isTRUE(update)){
+    obj <- update_seurat(obj = obj,
+                         verbose = verbose)
   }
   #### Convert to h5seurat ####
   if(isTRUE(as_h5seurat)){

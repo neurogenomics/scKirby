@@ -11,21 +11,16 @@ seurat_to_list <- function(obj,
 
  messager("+ Seurat ==> list",v=verbose)
  list(
-   data = lapply(obj@assays,function(a){
-     slots <- c("counts","data","scale.data")
-     slots <- slots[sapply(slots,function(s){methods::.hasSlot(a,s)})]
-     lapply(stats::setNames(slots,slots), function(s){
-       methods::slot(a,s)
-     })
-   }) |> unlist(recursive = FALSE),
-   obs = obj@meta.data,
-   var = lapply(obj@assays,function(a){a@meta.features}),
+   data = get_data(obj = obj,
+                   verbose = verbose),
+   obs = get_obs(obj = obj,
+                 verbose = verbose),
+   var = get_var(obj = obj,
+                 verbose = verbose),
    var_features = lapply(obj@assays,function(a){a@var.features}),
-   reductions = lapply(obj@reductions,function(r){
-     list(embedding = r@cell.embeddings,
-          loadings = r@feature.loadings,
-          loadings_projected = r@feature.loadings.projected)
-   }),
-   graphs = obj@graphs
+   reductions = get_reductions(obj = obj,
+                               verbose = verbose),
+   graphs = get_graphs(obj = obj,
+                       verbose = verbose)
  )
 }

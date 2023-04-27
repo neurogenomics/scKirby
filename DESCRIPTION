@@ -35,7 +35,8 @@ Imports:
   DelayedArray,
   BiocParallel,
   parallel,
-  HDF5Array
+  HDF5Array,
+  tidyr
 Suggests: 
     rworkflows,
     rmarkdown,

@@ -22,6 +22,11 @@ se_to_anndata <- function(obj,
   #### Ensure SCE format first ####
   obj <- se_to_sce(obj = obj,
                    verbose = verbose)
+  #### Convert from HDF5Matrix ####
+  ## Neither method can convert from this data type ###
+  if(methods::is(obj@assays@data$counts,"HDF5Matrix")){
+    obj@assays@data$counts <- as(obj@assays@data$counts,'sparseMatrix')
+  }
   #### Convert ####
   messager("+ SummarizedExperiment ==> AnnData",v=verbose)
   if(method=="zellkonverter"){

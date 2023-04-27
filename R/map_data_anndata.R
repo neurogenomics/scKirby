@@ -73,6 +73,7 @@ map_data_anndata <- function(obj,
                                      sort_rows=sort_rows,
                                      test_species=test_species,
                                      verbose=verbose)
+  messager("Reconstructing anndata object.",v=verbose)
   #### Construct row data using gene map ####
   rd <- map_data_rowdata(
     genes = rownames(assays[[1]]),
@@ -84,17 +85,18 @@ map_data_anndata <- function(obj,
   obj$varm$PCs <- NULL
   obj2 <-  anndata::AnnData(
     X = Matrix::t(assays$X),
-    ### OMIT!: Causes Error: ValueError: The truth value of an array with more
+    ### OMIT! 'raw': Causes Error: ValueError: The truth value of an array with more
     ## than one element is ambiguous. Use a.any() or a.all().
     # raw = if(!is.null(assays$raw))Matrix::t(assays$raw),
     obs = obj$obs,
     var = rd[rownames(assays$X),],
     obsm = obj$obsm,
     obsp = obj$obsp,
-    varm = obj$varm,
+    ### OMIT! 'varm': Causes error due to mismatches between old and new vars
+    # varm = obj$varm,
     varp = obj$varp,
     uns = obj$uns,
-    ## OMIT!: Causes "Error: KeyError: 1"
+    ## OMIT! 'layers': Causes "Error: KeyError: 1"
     # layers = obj$layers,
     filename = obj$filename)
   return(obj2)

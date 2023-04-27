@@ -8,7 +8,7 @@ se_to_list <- function(obj,
                        verbose=TRUE){
 
   messager("+ AnnData ==> Seurat",v=verbose)
-  list(data=obj@assays,
-       obs=obj@colData,
-       var=SummarizedExperiment::rowData(obj))
+  list(data = get_data(obj, verbose = verbose),
+       obs = get_obs(obj, verbose = verbose),
+       var = get_var(obj, verbose = verbose))
 }

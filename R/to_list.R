@@ -17,7 +17,8 @@ to_list <- function(obj,
 
   #### matrix/data.frame ####
   if(is_class(obj,"matrix")){
-    l <- list(data=obj)
+    l <- list(data=to_sparse(obj = obj,
+                             verbose = verbose))
   #### loom ####
   } else if(is_class(obj,"loom")){
     l <- loom_to_list(obj = obj,

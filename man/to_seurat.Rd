@@ -7,12 +7,15 @@
 to_seurat(
   obj,
   as_h5seurat = FALSE,
+  update = TRUE,
   save_path = tempfile(fileext = ".h5seurat"),
   verbose = TRUE
 )
 }
 \arguments{
 \item{as_h5seurat}{Convert to the \code{H5Seurat} sublass.}
+
+\item{update}{Ensure the object is updated to the latest version of Seurat.}
 
 \item{save_path}{Path to save the \code{H5Seurat} to.}
 }

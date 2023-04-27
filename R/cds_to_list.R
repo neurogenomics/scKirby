@@ -7,13 +7,11 @@
 cds_to_list <- function(obj,
                         verbose = TRUE){
   messager("+ CellDataSet ==> list",v=verbose)
-  nms <- grep("^reducedDim",methods::slotNames(obj),value = TRUE)
   # Biobase::ExpressionSet()
-  reductions <- lapply(stats::setNames(nms,
-                                       nms),
-                       function(nm){ methods::slot(obj, nm)})
-  list(data=Biobase::exprs(obj),
-       obs=Biobase::pData(obj),
-       var=Biobase::fData(obj),
-       reductions=reductions)
+  list(data = get_data(obj, verbose = verbose),
+       obs = get_obs(obj, verbose = verbose),
+       var = get_var(obj, verbose = verbose),
+       reductions = get_reductions(obj,
+                                   verbose = verbose)
+       )
 }
