@@ -34,9 +34,10 @@ get_reductions <- function(obj,
   } else if (is_class(obj,"seurat")) {
     ## Seurat V1
     if(methods::is(obj,"seurat")){
-      messager("Extracting reductions from Seurat (V1).",v = verbose)
-      reductions <- list(PCA=list(embeddings=as.matrix(obj@pca.x),
-                                  loadings=as.matrix(obj@pca.rot)))
+      # messager("Extracting reductions from Seurat (V1).",v = verbose)
+      # reductions <- list(PCA=list(embeddings=as.matrix(obj@pca.x),
+      #                             loadings=as.matrix(obj@pca.rot)))
+      reductions <- NULL;
     ## Seurat V2+
     } else {
       messager("Extracting reductions from Seurat.",v = verbose)
