@@ -40,13 +40,21 @@ get_data <- function(obj,
     data <- obj@assays@data
   #### Seurat ####
   } else if(is_class(obj,"seurat")){
-    data <- lapply(obj@assays,function(a){
-      slots <- c("counts","data","scale.data")
-      slots <- slots[sapply(slots,function(s){methods::.hasSlot(a,s)})]
-      lapply(stats::setNames(slots,slots), function(s){
-        methods::slot(a,s)
-      })
-    }) |> unlist(recursive = FALSE)
+    ## Seurat V1
+    if(methods::is(obj,"seurat")){
+      data <- list(RNA.counts=obj@raw.data,
+                   RNA.data=obj@data,
+                   RNA.scale.data=obj@scale.data)
+    ## Seurat V2+
+    } else {
+      data <- lapply(obj@assays,function(a){
+        slots <- c("counts","data","scale.data")
+        slots <- slots[sapply(slots,function(s){methods::.hasSlot(a,s)})]
+        lapply(stats::setNames(slots,slots), function(s){
+          methods::slot(a,s)
+        })
+      }) |> unlist(recursive = FALSE)
+    }
   #### h5Seurat ####
   } else if(is_class(obj,"h5seurat")){
     assays <- obj[["assays"]]$ls()$name

@@ -16,7 +16,8 @@ list_to_seurat <- function(obj,
                             )
   }
   aobj_list <- matrices_to_assayobjects(matrices = obj$data,
-                                        var_features = obj$var_features)
+                                        var_features = obj$var_features,
+                                        verbose = verbose)
   obj2 <- SeuratObject::CreateSeuratObject(
     counts = aobj_list[[1]],
     assay = names(aobj_list)[[1]],
@@ -25,6 +26,14 @@ list_to_seurat <- function(obj,
   if(length(aobj_list)>1){
     for(nm in names(aobj_list)[-1])
       obj2[[nm]] <- aobj_list[[nm]]
+  }
+  #### Add reductions ####
+  for(nm in names(obj$reductions)){
+    r <- obj$reductions[[nm]]
+    obj2[[nm]] <- Seurat::CreateDimReducObject(embeddings = r$embeddings,
+                                               loadings = r$loadings,
+                                               projected = r$loadings_projected,
+                                               key = nm)
   }
   return(obj2)
 }

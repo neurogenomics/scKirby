@@ -21,13 +21,19 @@ get_var <- function(obj,
     var <- SummarizedExperiment::rowData(obj)
     #### Seurat ####
   } else if(is_class(obj,"seurat")){
-    assays <- Seurat::Assays(obj)
-    var <- lapply(stats::setNames(assays,
-                                  assays),
-                  function(a){
-                    obj@assays[[a]]@meta.features
-                  })
-    #### h5Seurat ####
+    ## Seurat V1
+    if(methods::is(obj,"seurat")){
+      var <- data.frame(row.names = rownames(obj@raw.data))
+    ## Seurat V2+
+    } else {
+      assays <- Seurat::Assays(obj)
+      var <- lapply(stats::setNames(assays,
+                                    assays),
+                    function(a){
+                      obj@assays[[a]]@meta.features
+                    })
+    }
+  #### h5Seurat ####
   } else if(is_class(obj,"h5seurat")){
     assays <- obj[["assays"]]$ls()$name
     var <- lapply(stats::setNames(assays,

@@ -20,7 +20,13 @@ get_obs <- function(obj,
     obs <- obj@colData
   #### Seurat ####
   } else if(is_class(obj,"seurat")){
-    obs <- obj@meta.data
+    ## Seurat V1
+    if(methods::is("seurat")){
+      obs <- obj@data.info
+    ## Seurat V2+
+    } else {
+      obs <- obj@meta.data
+    }
   #### h5Seurat ####
   } else if(is_class(obj,"h5seurat")){
   obs <- as.data.frame(obj[["meta.data"]])

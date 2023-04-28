@@ -32,14 +32,22 @@ get_reductions <- function(obj,
     reductions <- get_reductions_dimreduc(r = obj)
   #### Seurat ####
   } else if (is_class(obj,"seurat")) {
-    messager("Extracting reductions from Seurat.",v = verbose)
-    all_keys <- Seurat::Reductions(obj)
-    keys <- check_reduction_keys(all_keys = all_keys,
-                                 keys = keys)
-    reductions <- lapply(keys,
-                         function(nm){
-      get_reductions_dimreduc(r = obj@reductions[[nm]])
-    })
+    ## Seurat V1
+    if(methods::is(obj,"seurat")){
+      messager("Extracting reductions from Seurat (V1).",v = verbose)
+      reductions <- list(PCA=list(embeddings=obj@pca.x,
+                                  loadings=obj@pca.rot))
+    ## Seurat V2+
+    } else {
+      messager("Extracting reductions from Seurat.",v = verbose)
+      all_keys <- Seurat::Reductions(obj)
+      keys <- check_reduction_keys(all_keys = all_keys,
+                                   keys = keys)
+      reductions <- lapply(stats::setNames(keys,keys),
+                           function(nm){
+                             get_reductions_dimreduc(r = obj@reductions[[nm]])
+                           })
+    }
   #### anndata ####
   } else if(is_class(obj,"anndata")){
     all_keys <- obj$obsm_keys()

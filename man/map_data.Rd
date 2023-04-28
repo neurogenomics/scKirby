@@ -31,10 +31,10 @@ map_data(
 \item{obj}{A single-cell data object belonging to one of the
 following classes:
 \itemize{
-\item \link[SummarizedExperiment]{SummarizedExperiment}
-\item \link[SingleCellExperiment]{SingleCellExperiment}
-\item \link[SeuratObject]{Seurat}
-\item \link[AnnData]{AnnData}
+\item{\link[SummarizedExperiment]{SummarizedExperiment}}
+\item{\link[SingleCellExperiment]{SingleCellExperiment}}
+\item{\link[SeuratObject]{Seurat}}
+\item{\link[AnnData]{AnnData}}
 \item{
 \link[Matrix]{Matrix} or
 \link[data.frame]{data.frame} or

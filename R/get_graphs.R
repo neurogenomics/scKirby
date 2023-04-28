@@ -14,11 +14,18 @@ get_graphs <- function(obj,
                        verbose = TRUE) {
 
   if (is_class(obj,"seurat")) {
-    all_names <- rev(names(obj@graphs))
-    if(!is.null(names)){
-      all_names <- all_names[tolower(all_names) %in% tolower(names)]
+    ## Seurat V1
+    if(methods::is(obj,"seurat")){
+      g <- list(snn.sparse=obj@snn.sparse)
+    ## Seurat V2+
+    } else {
+      all_names <- rev(names(obj@graphs))
+      if(!is.null(names)){
+        all_names <- all_names[tolower(all_names) %in% tolower(names)]
+      }
+      g <- obj@graphs[all_names]
     }
-    g <- obj@graphs[all_names]
+
   } else if (methods::is(obj, "Graph")) {
     messager("Using obj as graph.", v = verbose)
     g <- obj
