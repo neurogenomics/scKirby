@@ -31,6 +31,6 @@ A named list with up to three elements:
 Extract dimensionality keys objects from any single-cell object class.
 }
 \examples{
-obj <- example_obj("ad")
+obj <- example_obj("seurat")
 red <- get_reductions(obj)
 }

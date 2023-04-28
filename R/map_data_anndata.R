@@ -95,9 +95,11 @@ map_data_anndata <- function(obj,
     ### OMIT! 'varm': Causes error due to mismatches between old and new vars
     # varm = obj$varm,
     varp = obj$varp,
-    uns = obj$uns,
+    uns = obj$uns
     ## OMIT! 'layers': Causes "Error: KeyError: 1"
     # layers = obj$layers,
-    filename = obj$filename)
+    ## OMIT! 'filename' can cause issues
+    # filename = obj$filename
+    )
   return(obj2)
 }
