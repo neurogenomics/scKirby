@@ -21,7 +21,7 @@ get_obs <- function(obj,
   #### Seurat ####
   } else if(is_class(obj,"seurat")){
     ## Seurat V1
-    if(methods::is("seurat")){
+    if(methods::is(obj,"seurat")){
       obs <- obj@data.info
     ## Seurat V2+
     } else {
