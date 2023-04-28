@@ -30,10 +30,15 @@ list_to_seurat <- function(obj,
   #### Add reductions ####
   for(nm in names(obj$reductions)){
     r <- obj$reductions[[nm]]
-    obj2[[nm]] <- Seurat::CreateDimReducObject(embeddings = r$embeddings,
-                                               loadings = r$loadings,
-                                               projected = r$loadings_projected,
-                                               key = nm)
+    obj2[[nm]] <- Seurat::CreateDimReducObject(
+      embeddings = r$embeddings,
+      loadings = r$loadings,
+      projected = if(is.null(r$loadings_projected)) {
+        r$loadings
+      } else {
+        r$loadings_projected
+      },
+      key = nm)
   }
   return(obj2)
 }

@@ -20,7 +20,7 @@
 #' @export
 #' @importFrom methods is
 #' @examples
-#' obj <- example_obj("ad")
+#' obj <- example_obj("seurat")
 #' red <- get_reductions(obj)
 get_reductions <- function(obj,
                            keys = NULL,
