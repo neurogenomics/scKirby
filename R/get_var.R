@@ -23,7 +23,7 @@ get_var <- function(obj,
   } else if(is_class(obj,"seurat")){
     ## Seurat V1
     if(methods::is(obj,"seurat")){
-      var <- data.frame(row.names = rownames(obj@raw.data))
+      var <- list(RNA=data.frame(row.names = rownames(obj@raw.data)))
     ## Seurat V2+
     } else {
       assays <- Seurat::Assays(obj)
