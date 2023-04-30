@@ -14,7 +14,7 @@ list_to_anndata <- function(obj,
   if(length(obj$data)>1){
     messager("Only first assay being used:",names(obj$data)[1],v=verbose)
   }
-  X <- to_sparse(obj = Matrix::t(obj$data[[1]]))
+  X <- to_sparse(obj =obj$data[[1]]) |>  Matrix::t()
   #### Get var ####
   if(is.null(obj$var)){
     var <- data.frame(id=colnames(X),row.names = colnames(X))
@@ -42,8 +42,8 @@ list_to_anndata <- function(obj,
   messager("Constructing new AnnData object.",v=verbose)
   obj2 <- anndata::AnnData(
     X = X,
-    obs = obs[rownames(X),],
-    var = var[colnames(X),],
+    obs = obs[rownames(X),,drop=FALSE],
+    var = var[colnames(X),,drop=FALSE],
     obsm = obsm,
     varm = varm,
     uns = obj$uns)

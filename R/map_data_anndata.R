@@ -84,7 +84,7 @@ map_data_anndata <- function(obj,
     ## than one element is ambiguous. Use a.any() or a.all().
     # raw = if(!is.null(assays$raw))Matrix::t(assays$raw),
     obs = obj$obs,
-    var = rd[rownames(assays$X),],
+    var = rd[rownames(assays$X),,drop=FALSE],
     obsm = obj$obsm,
     obsp = obj$obsp,
     ### OMIT! 'varm': Causes error due to mismatches between old and new vars

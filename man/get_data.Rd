@@ -4,7 +4,13 @@
 \alias{get_data}
 \title{Get data}
 \usage{
-get_data(obj, transpose = TRUE, simplify = FALSE, verbose = TRUE)
+get_data(
+  obj,
+  transpose = TRUE,
+  simplify = FALSE,
+  as_sparse = FALSE,
+  verbose = TRUE
+)
 }
 \description{
 Extract expression matrix metadata from any single-cell object.

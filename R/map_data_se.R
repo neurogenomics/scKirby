@@ -62,7 +62,7 @@ map_data_se <- function(obj,
     #### Construct new SummarizedExperiment ####
     obj2 <- SummarizedExperiment::SummarizedExperiment(
         assays = assays,
-        rowData = rd[rownames(assays[[1]]),],
+        rowData = rd[rownames(assays[[1]]),,drop=FALSE],
         colData = obj@colData,
         metadata = obj@metadata)
     #### Convert back to originla subclass ###

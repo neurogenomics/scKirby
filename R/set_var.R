@@ -27,7 +27,7 @@ set_var <- function(obj,
   } else if(is_class(obj,"seurat")){
     for(a in names(obj@assays)){
       if(a %in% names(var)){
-        obj@assays[[a]]@meta.features <- var[[a]][rownames(obj),]
+        obj@assays[[a]]@meta.features <- var[[a]][rownames(obj),,drop=FALSE]
       }
     }
   }
