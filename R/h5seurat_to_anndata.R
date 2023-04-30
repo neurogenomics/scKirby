@@ -1,6 +1,5 @@
 #' Convert: \code{h5Seurat} ==> \code{anndata}
 #'
-#' @inheritParams echoconda::activate_env
 #' @inheritParams SeuratDisk::Convert
 #' @inheritDotParams anndata::write_h5ad
 #' @export
@@ -10,7 +9,6 @@
 h5seurat_to_anndata <- function(obj,
                               reimport = TRUE,
                               save_path = tempfile(fileext = ".h5ad"),
-                              conda_env = "r-reticulate",
                               overwrite = FALSE,
                               verbose=TRUE,
                               ...){
@@ -19,8 +17,7 @@ h5seurat_to_anndata <- function(obj,
                       overwrite = overwrite,
                       verbose = verbose)
   adat <- read_anndata(path = save_path,
-                       verbose = verbose,
-                       conda_env = conda_env)
+                       verbose = verbose)
   #### Return ###
   return(adat)
 }

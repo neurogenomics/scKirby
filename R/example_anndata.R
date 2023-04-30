@@ -15,13 +15,11 @@
 #' #### Usage ####
 #' adata <- example_anndata()
 #' }
-#' @inheritParams echoconda::activate_env
 #'
 #' @keywords internal
 #' @importFrom echoconda activate_env
 example_anndata <- function(obj = SeuratObject::pbmc_small,
                             save_path = file.path(tempdir(),"example.h5ad"),
-                            conda_env = "r-reticulate",
                             verbose = TRUE){
   # devoptera::args2vars(example_anndata)
 
@@ -29,13 +27,11 @@ example_anndata <- function(obj = SeuratObject::pbmc_small,
   if(!is.null(save_path) &&
      file.exists(save_path)){
     adat <- read_anndata(path = save_path,
-                         conda_env = conda_env,
                          verbose = verbose)
   } else {
     #### Create new  anndata file ####
     adat <- seurat_to_anndata(obj = obj,
                               save_path = save_path,
-                              conda_env = conda_env,
                               reimport = TRUE,
                               verbose = verbose)
   }

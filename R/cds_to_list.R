@@ -11,7 +11,7 @@ cds_to_list <- function(obj,
   list(data = get_data(obj, verbose = verbose),
        obs = get_obs(obj, verbose = verbose),
        var = get_var(obj, verbose = verbose),
-       reductions = get_reductions(obj,
-                                   verbose = verbose)
+       obsm = get_obsm(obj,
+                       verbose = verbose)
        )
 }

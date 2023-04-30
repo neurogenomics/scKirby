@@ -1,6 +1,5 @@
 read_loom <- function(path,
                       method = c("seuratdisk","anndata","scopeloomr"),
-                      conda_env = "r-reticulate",
                       verbose = TRUE,
                       ...){
 
@@ -8,9 +7,7 @@ read_loom <- function(path,
 
   #### anndata method ####
   if(method=="anndata"){
-    echoconda::activate_env(conda_env = conda_env,
-                            method = "reticulate",
-                            verbose = verbose)
+    activate_conda(verbose=verbose)
     # anndata::read_loom has difficulties identifying right loompy location.
     anndata::read_loom(filename=path,
                        validate=FALSE,

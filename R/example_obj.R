@@ -39,7 +39,6 @@ example_obj <- function(class=c("SummarizedExperiment",
                                 "anndata",
                                 "EWCE"),
                         save_path = file.path(tempdir(),"example"),
-                        conda_env = "r-reticulate",
                         verbose = TRUE){
 
   class <- tolower(class[[1]])
@@ -109,7 +108,6 @@ example_obj <- function(class=c("SummarizedExperiment",
   #### anndata ####
   } else if(class %in% c("anndata","ad")){
       obj <- example_anndata(save_path = save_path,
-                             conda_env = conda_env,
                              verbose = verbose)
   #### EWCE CelltypeDataset ####
   } else if(class %in% c("celltypedataset","celltypedata","ctd","ewce")){

@@ -10,7 +10,6 @@
 #'  "guess" (default) will simply infer the most likely file type.
 #' @param custom_reader A user-supplied function to read in the data with.
 #' @param verbose Print messages.
-#' @inheritParams echoconda::activate_env
 #' @returns An single-cell data object.
 #'  The object class that the data gets imported as depends on file type.
 #'
@@ -23,7 +22,6 @@
 read_data <- function(path,
                       filetype="guess",
                       custom_reader=NULL,
-                      conda_env="r-reticulate",
                       verbose=TRUE,
                       ...){
   # devoptera::args2vars(read_data)
@@ -76,7 +74,6 @@ read_data <- function(path,
      is_filetype(filetype,"anndata")){
     obj <- read_anndata(path = path,
                         verbose = verbose,
-                        conda_env = conda_env,
                         ...)
   #### H5Seurat ####
   } else if(is_suffix(path,"h5seurat") ||

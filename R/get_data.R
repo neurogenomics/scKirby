@@ -8,6 +8,7 @@
 get_data <- function(obj,
                      transpose=TRUE,
                      simplify=FALSE,
+                     as_sparse=FALSE,
                      verbose=TRUE){
   # devoptera::args2vars(get_data)
 
@@ -83,6 +84,10 @@ get_data <- function(obj,
     #### OTHER ####
   } else {
     stopper("Unable to get data from object.")
+  }
+  #### Conver to sparse matrices ####
+  if(isTRUE(as_sparse)){
+    data <- lapply(data,to_sparse, verbose=verbose)
   }
   #### Return as a named list (1 per assay), unless there's only 1 assay ####
   if(isTRUE(simplify)){

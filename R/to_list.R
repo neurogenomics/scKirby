@@ -11,9 +11,10 @@ to_list <- function(obj,
   # list(data = NULL,
   #      obs = NULL,
   #      var = NULL,
-  #      var_features = NULL,
-  #      reductions = NULL,
-  #      graphs = NULL)
+  #      obsm = NULL,
+  #      varm = NULL,
+  #      graphs = NULL,
+  #      uns = NULL)
 
   #### matrix/data.frame ####
   if(is_class(obj,"matrix")){

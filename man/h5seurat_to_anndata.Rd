@@ -8,18 +8,15 @@ h5seurat_to_anndata(
   obj,
   reimport = TRUE,
   save_path = tempfile(fileext = ".h5ad"),
-  conda_env = "r-reticulate",
   overwrite = FALSE,
   verbose = TRUE,
   ...
 )
 }
 \arguments{
-\item{conda_env}{Conda environment to use.}
-
 \item{overwrite}{Overwrite existing \code{dest}}
 
-\item{verbose}{Print messages.}
+\item{verbose}{Show progress updates}
 
 \item{...}{
   Arguments passed on to \code{\link[anndata:write_h5ad]{anndata::write_h5ad}}

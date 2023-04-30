@@ -4,7 +4,6 @@ save_anndata <- function(adat,
                          compression = "gzip",
                          compression_opts = NULL,
                          as_dense = list(),
-                         conda_env="r-reticulate",
                          verbose=TRUE,
                          ...){
   # devoptera::args2vars(save_anndata)
@@ -20,9 +19,7 @@ save_anndata <- function(adat,
   #### Save anndata ####
   messager("+ Saving anndata -->",save_path,v=verbose)
   if(method=="anndata"){
-    echoconda::activate_env(conda_env = conda_env,
-                            method = "reticulate",
-                            verbose = verbose)
+    activate_conda(verbose=verbose)
     adat$write_h5ad(filename = save_path,
                     compression = compression,
                     compression_opts = compression_opts,

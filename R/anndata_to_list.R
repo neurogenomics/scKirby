@@ -13,8 +13,9 @@ anndata_to_list <- function(obj,
                      verbose = verbose),
        var = get_var(obj = obj,
                      verbose = verbose),
-       var_features = obj$varm,
-       reductions = get_reductions(obj = obj,
-                                   verbose = verbose),
+       obsm = get_obsm(obj = obj,
+                             verbose = verbose),
+       varm = get_varm(obj = obj,
+                       verbose = verbose),
        uns = obj$uns)
 }

@@ -18,9 +18,7 @@ read_anndata <- function(path,
   if(method=="anndata"){
     #### anndata method
     # Anndata adds another dependency, but at least it works unlike
-    echoconda::activate_env(conda_env = conda_env,
-                            method = "reticulate",
-                            verbose = verbose)
+    activate_conda(verbose=verbose)
     obj <- anndata::read_h5ad(filename = path,
                               ...)
   #### Method: zellkonverter ####

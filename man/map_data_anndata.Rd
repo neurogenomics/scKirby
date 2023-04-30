@@ -21,7 +21,6 @@ map_data_anndata(
   as_DelayedArray = FALSE,
   sort_rows = FALSE,
   test_species = NULL,
-  conda_env = "r-reticulate",
   chunk_size = NULL,
   verbose = TRUE
 )
@@ -115,8 +114,6 @@ Return only the most "popular" interspecies ortholog mappings.
 \link[DelayedArray]{DelayedArray}.}
 
 \item{sort_rows}{Sort \code{gene_df} rows alphanumerically.}
-
-\item{conda_env}{Conda environment to use.}
 
 \item{verbose}{Print messages.}
 }

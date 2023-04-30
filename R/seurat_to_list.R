@@ -22,11 +22,13 @@ seurat_to_list <- function(obj,
                     verbose = verbose),
       var = get_var(obj = obj,
                     verbose = verbose),
-      var_features = lapply(obj@assays,function(a){a@var.features}),
-      reductions = get_reductions(obj = obj,
-                                  verbose = verbose),
+      obsm = get_obsm(obj = obj,
+                      verbose = verbose),
+      varm = get_varm(obj = obj,
+                      verbose = verbose),
       graphs = get_graphs(obj = obj,
-                          verbose = verbose)
+                          verbose = verbose),
+      uns = list(var_features=lapply(obj@assays,function(a){a@var.features}))
     )
   }
 

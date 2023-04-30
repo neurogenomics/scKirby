@@ -2,12 +2,12 @@
 % Please edit documentation in R/list_to_seurat.R
 \name{list_to_seurat}
 \alias{list_to_seurat}
-\title{Convert: \code{matrix} ==> \code{Seurat}}
+\title{Convert: \code{list} ==> \code{Seurat}}
 \usage{
 list_to_seurat(obj, verbose = TRUE)
 }
 \description{
-Convert: \code{matrix} ==> \code{Seurat}
+Convert: \code{list} ==> \code{Seurat}
 }
 \examples{
 obj <- example_obj("list")

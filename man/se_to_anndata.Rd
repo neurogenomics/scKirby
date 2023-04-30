@@ -19,8 +19,6 @@ se_to_anndata(
 \item{reimport}{Save and re-import the \code{anndata} object into R to ensure
 all data has been converted from Python-native to R-native objects
 (e.g. pandas data.frames vs. R data.frames).}
-
-\item{verbose}{Print messages.}
 }
 \description{
 Convert: \code{SummarizedExperiment} ==> \code{AnnData}

@@ -20,14 +20,8 @@ adata <- example_anndata()
 example_anndata(
   obj = SeuratObject::pbmc_small,
   save_path = file.path(tempdir(), "example.h5ad"),
-  conda_env = "r-reticulate",
   verbose = TRUE
 )
-}
-\arguments{
-\item{conda_env}{Conda environment to use.}
-
-\item{verbose}{Print messages.}
 }
 \description{
 \href{https://github.com/dynverse/anndata/issues/1}{

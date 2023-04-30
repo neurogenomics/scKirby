@@ -22,7 +22,6 @@ map_data(
   sort_rows = FALSE,
   test_species = NULL,
   chunk_size = NULL,
-  conda_env = "r-reticulate",
   verbose = TRUE,
   ...
 )
@@ -163,8 +162,6 @@ This can be a more memory efficient and scalable way of aggregating on-disk
 data formats like \item \link[AnnData]{AnnData},
 rather than reading in the entire matrix into memory at once
  (default: \code{NULL}).}
-
-\item{conda_env}{Conda environment to use.}
 
 \item{verbose}{Print messages.}
 

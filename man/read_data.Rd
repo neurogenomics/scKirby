@@ -4,14 +4,7 @@
 \alias{read_data}
 \title{Read data}
 \usage{
-read_data(
-  path,
-  filetype = "guess",
-  custom_reader = NULL,
-  conda_env = "r-reticulate",
-  verbose = TRUE,
-  ...
-)
+read_data(path, filetype = "guess", custom_reader = NULL, verbose = TRUE, ...)
 }
 \arguments{
 \item{path}{Path to saved single-cell data file,
@@ -23,8 +16,6 @@ made explicit by the user.
 "guess" (default) will simply infer the most likely file type.}
 
 \item{custom_reader}{A user-supplied function to read in the data with.}
-
-\item{conda_env}{Conda environment to use.}
 
 \item{verbose}{Print messages.}
 }

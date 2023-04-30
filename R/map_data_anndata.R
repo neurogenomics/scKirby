@@ -4,11 +4,9 @@
 #' across-species (gene orthologs) or within-species (gene synonyms).
 #' @inheritParams orthogene::aggregate_mapped_genes
 #' @inheritParams orthogene::convert_orthologs
-#' @inheritParams echoconda::activate_env
 #' @returns \link[anndata]{AnnData}
 #'
 #' @keywords internal
-#' @importFrom echoconda activate_env
 #' @importFrom orthogene map_orthologs
 map_data_anndata <- function(obj,
                              gene_map = NULL,
@@ -31,16 +29,13 @@ map_data_anndata <- function(obj,
                              as_DelayedArray = FALSE,
                              sort_rows = FALSE,
                              test_species = NULL,
-                             conda_env = "r-reticulate",
                              chunk_size = NULL,
                              verbose = TRUE){
   # devoptera::args2vars(map_data_anndata)
   # obj <- example_obj("anndata")
 
   #### Activate conda env with anndata installed ####
-  echoconda::activate_env(conda_env = conda_env,
-                          method = "reticulate",
-                          verbose = verbose)
+  activate_conda(verbose=verbose)
   #### Convert orthologs ####
   ## Use the same map for each chunk to reduce API queries.
   gene_map  <- orthogene::map_orthologs(genes = obj$var_names,

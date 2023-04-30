@@ -8,7 +8,6 @@ cds_to_anndata(
   obj,
   reimport = TRUE,
   save_path = tempfile(fileext = ".h5ad"),
-  conda_env = "r-reticulate",
   verbose = TRUE
 )
 }
@@ -16,10 +15,6 @@ cds_to_anndata(
 \item{reimport}{Save and re-import the \code{anndata} object into R to ensure
 all data has been converted from Python-native to R-native objects
 (e.g. pandas data.frames vs. R data.frames).}
-
-\item{conda_env}{Conda environment to use.}
-
-\item{verbose}{Print messages.}
 }
 \description{
 Convert: \code{CellDataSet} ==> \code{AnnData}
