@@ -159,7 +159,7 @@ If set to \code{NULL}, will default to a list of humans and
 
 \item{chunk_size}{An integer indicating number of cells to include per chunk.
 This can be a more memory efficient and scalable way of aggregating on-disk
-data formats like \item \link[AnnData]{AnnData},
+data formats like \link[AnnData]{AnnData},
 rather than reading in the entire matrix into memory at once
  (default: \code{NULL}).}
 
@@ -184,7 +184,7 @@ Convert a single-cell data object
 across-species (gene orthologs) or within-species (gene synonyms).
 }
 \examples{
-obj <- example_obj("se")
+obj <- example_obj("ad")
 obj2 <- map_data(obj = obj,
                  input_species = "human",
                  output_species = "mouse")

@@ -17,7 +17,7 @@
 #' }
 #' @param chunk_size An integer indicating number of cells to include per chunk.
 #' This can be a more memory efficient and scalable way of aggregating on-disk
-#' data formats like \item \link[AnnData]{AnnData},
+#' data formats like \link[AnnData]{AnnData},
 #' rather than reading in the entire matrix into memory at once
 #'  (default: \code{NULL}).
 #' @inheritParams orthogene::infer_species
@@ -28,7 +28,7 @@
 #' @export
 #' @import orthogene
 #' @examples
-#' obj <- example_obj("se")
+#' obj <- example_obj("ad")
 #' obj2 <- map_data(obj = obj,
 #'                  input_species = "human",
 #'                  output_species = "mouse")
@@ -69,6 +69,11 @@ map_data <- function(obj,
         method = method,
         test_species = test_species,
         verbose = verbose)$top_match
+  }
+  if(input_species==output_species){
+    messager("Setting non121_strategy='keep_both_species'",
+             "when input_species==output_species.",v=verbose)
+    non121_strategy <- "keep_both_species"
   }
   if(is_class(obj,"se")){
       obj2 <- map_data_se(

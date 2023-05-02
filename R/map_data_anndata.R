@@ -48,7 +48,10 @@ map_data_anndata <- function(obj,
                                         input_col = input_col,
                                         output_col = output_col,
                                         verbose = verbose)
-  input_col <- "input_gene"; output_col <- "ortholog_gene";
+  #### Change back to original gene_map names ####
+  data.table::setnames(gene_map,
+                       c("input_gene","ortholog_gene"),
+                       c(input_col, output_col))
   #### Split matrix into chunks and process each one ####
   ## Improves memory efficiency
   assays <- map_data_anndata_chunked(obj=obj,
@@ -71,14 +74,9 @@ map_data_anndata <- function(obj,
                                      verbose=verbose)
   messager("Reconstructing anndata object.",v=verbose)
   #### Construct row data using gene map ####
-  original_rowdata <- if(is.null(gene_map)){
-    obj$var
-  } else {
-    gene_map
-  }
   rd <- map_data_rowdata(
     genes = rownames(assays[[1]]),
-    original_rowdata = original_rowdata)
+    original_rowdata = obj$var)
   #### Construct new SummarizedExperiment ####
   ## Remove PC slot to avoid error:
   ## Error: ValueError: Value passed for key 'PCs' is of incorrect shape.
