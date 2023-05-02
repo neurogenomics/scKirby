@@ -37,7 +37,7 @@ map_data_anndata_chunked <- function(obj,
     assays <- lapply(assays, function(a){
       if(!is.null(a)){
         if(methods::is(a,"RawR6")){
-          messager("Converting RawR6 to matrix.")
+          messager("Converting RawR6 to matrix.",v=verbose)
           a <- Matrix::Matrix(as.matrix(a),
                               sparse = TRUE)
         }

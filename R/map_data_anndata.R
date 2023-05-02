@@ -71,9 +71,14 @@ map_data_anndata <- function(obj,
                                      verbose=verbose)
   messager("Reconstructing anndata object.",v=verbose)
   #### Construct row data using gene map ####
+  original_rowdata <- if(is.null(gene_map)){
+    obj$var
+  } else {
+    gene_map
+  }
   rd <- map_data_rowdata(
     genes = rownames(assays[[1]]),
-    original_rowdata = obj$var)
+    original_rowdata = original_rowdata)
   #### Construct new SummarizedExperiment ####
   ## Remove PC slot to avoid error:
   ## Error: ValueError: Value passed for key 'PCs' is of incorrect shape.
