@@ -28,7 +28,7 @@ map_data_anndata_chunked <- function(obj,
   assay_list <- lapply(seq_len(length(chunks)), function(i){
     messager("Processing chunk: ",i,"/",length(chunks),if(verbose>1)"\n",
              parallel = TRUE, v=verbose)
-    if(i==length(chunks)) verbose <- 2
+    if(i==1) verbose <- 2
     select <- as.integer(chunks[[i]]-1) ## Python starts at 0
     assays <- list(X=obj$chunk_X(select = select))
     rownames(assays$X) <- obj$obs_names[select+1]

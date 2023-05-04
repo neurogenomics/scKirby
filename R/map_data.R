@@ -38,7 +38,7 @@ map_data <- function(obj,
                      output_col = "ortholog_gene",
                      standardise_genes = FALSE,
                      input_species = NULL,
-                     output_species = "human",
+                     output_species = input_species,
                      method = c(
                          "homologene",
                          "gprofiler",
@@ -69,6 +69,7 @@ map_data <- function(obj,
         method = method,
         test_species = test_species,
         verbose = verbose)$top_match
+      if(is.null(output_species)) output_species <- input_species
   }
   if(input_species==output_species){
     messager("Setting non121_strategy='keep_both_species'",

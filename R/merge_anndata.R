@@ -24,6 +24,7 @@ merge_anndata <- function(obj_list,
                           pairwise = FALSE,
                           verbose = TRUE){
 
+  activate_conda(verbose = verbose)
   #### Check for just one item
   if(length(obj_list)==1){
     return(obj_list[[1]])
