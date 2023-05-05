@@ -28,10 +28,9 @@ merge_seurat <- function(obj_list,
     lapply(b, function(nm){
       obj <- obj_list[[nm]]
       #### Import data #####
-      if(is.character(obj) &&
-         grepl("\\.rds$",obj,ignore.case = TRUE)){
-        cat("Importing:",basename(obj),"\n")
-        obj <- readRDS(obj)
+      if(is.character(obj)){
+        obj <- read_data(path = obj,
+                         verbose = verbose)
       }
       #### Make cell names unique across objects ####
       obj@meta.data$cellid <- paste(nm,

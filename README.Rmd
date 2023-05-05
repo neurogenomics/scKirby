@@ -33,7 +33,7 @@ There's a lot of single-cell omics file/object formats out there, and not all to
 - [loomR](https://satijalab.org/loomR/loomR_tutorial.html) 
 - [CellDataSet/monocle](http://cole-trapnell-lab.github.io/monocle-release/docs/#getting-started-with-monocle) 
 - [ExpressionSet](https://www.rdocumentation.org/packages/Biobase/versions/2.32.0/topics/ExpressionSet)
-- [list](https://github.com/NathanSkene/EWCE) 
+- list
 - [EWCE](https://github.com/NathanSkene/EWCE) 
 - [matrix](https://cran.r-project.org/web/packages/Matrix/index.html)
 - [sparseMatrix (dgTMatrix/dgCMatrix)](https://slowkow.com/notes/sparse-matrix/) 
@@ -45,10 +45,11 @@ There's a lot of single-cell omics file/object formats out there, and not all to
 - [HDF5SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/HDF5Array.html)  
 - [Seurat](https://satijalab.org/seurat/index.html)   
 - [H5Seurat](https://mojaveazure.github.io/seurat-disk/articles/convert-anndata.html)  
+- [anndata](https://github.com/rcannood/anndata) 
+- list
 
 ## Planned output formats 
-
-- [anndata](https://github.com/rcannood/anndata) 
+ 
 - [loom](http://loompy.org/) 
 - [CellDataSet/monocle](http://cole-trapnell-lab.github.io/monocle-release/docs/#getting-started-with-monocle) 
 

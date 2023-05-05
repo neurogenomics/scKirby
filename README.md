@@ -9,13 +9,9 @@ NULL [![License: GPL (\>=
 status](https://github.com/neurogenomics/scKirby/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/scKirby/actions)
 [![](https://codecov.io/gh/neurogenomics/scKirby/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/scKirby)
 <br>
-<a href='https://app.codecov.io/gh/neurogenomics/scKirby/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/scKirby/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>  
-<h4>  
-Authors: <i>Brian Schilder</i>  
-</h4>
-<h4>  
-Most recent update: <i>Apr-11-2023</i>  
-</h4>
+<a href='https://app.codecov.io/gh/neurogenomics/scKirby/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/scKirby/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>
+¶ <h4> ¶ Authors: <i>Brian Schilder</i> ¶ </h4>
+<h4> ¶ Most recent update: <i>May-05-2023</i> ¶ </h4>
 
 # Intro
 
@@ -64,7 +60,8 @@ any of these steps separately using the designated sub-functions.
 - [SingleCellExperiment](https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html)  
 - [HDF5SummarizedExperiment](https://bioconductor.org/packages/release/bioc/html/HDF5Array.html)  
 - [Seurat](https://satijalab.org/seurat/index.html)  
-- [H5Seurat](https://mojaveazure.github.io/seurat-disk/articles/convert-anndata.html)
+- [H5Seurat](https://mojaveazure.github.io/seurat-disk/articles/convert-anndata.html)  
+- [anndata](https://github.com/rcannood/anndata)
 
 ## Planned output formats
 
@@ -133,7 +130,7 @@ utils::sessionInfo()
     ##  [4] utf8_1.2.3          BiocFileCache_2.6.1 R6_2.5.1           
     ##  [7] stats4_4.2.1        RSQLite_2.3.1       evaluate_0.20      
     ## [10] httr_1.4.5          ggplot2_3.4.2       pillar_1.9.0       
-    ## [13] yulab.utils_0.0.6   rworkflows_0.99.8   biocViews_1.66.3   
+    ## [13] yulab.utils_0.0.6   rworkflows_0.99.9   biocViews_1.66.3   
     ## [16] rlang_1.1.0         curl_5.0.0          data.table_1.14.8  
     ## [19] rstudioapi_0.14     whisker_0.4.1       blob_1.2.4         
     ## [22] DT_0.27             RUnit_0.4.32        rmarkdown_2.21     

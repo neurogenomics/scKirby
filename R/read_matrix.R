@@ -20,5 +20,8 @@ read_matrix <- function(path,
     messager("Transposing matrix.",v=verbose)
     obj <- Matrix::t(obj)
   }
+  #### Report dimensions ####
+  messager("Matrix dimensions:",paste(dim(obj),sep=" x "), v=verbose)
+  #### Return ####
   return(obj)
 }
