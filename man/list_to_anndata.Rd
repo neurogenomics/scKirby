@@ -4,7 +4,7 @@
 \alias{list_to_anndata}
 \title{Convert: \code{list} ==> \code{AnnData}}
 \usage{
-list_to_anndata(obj, verbose = TRUE)
+list_to_anndata(obj, transpose = TRUE, verbose = TRUE)
 }
 \description{
 Convert: \code{list} ==> \code{AnnData}

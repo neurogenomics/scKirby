@@ -11,7 +11,7 @@ map_data(
   output_col = "ortholog_gene",
   standardise_genes = FALSE,
   input_species = NULL,
-  output_species = "human",
+  output_species = input_species,
   method = c("homologene", "gprofiler", "babelgene"),
   drop_nonorths = TRUE,
   non121_strategy = "drop_both_species",

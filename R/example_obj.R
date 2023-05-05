@@ -112,10 +112,13 @@ example_obj <- function(class=c("SummarizedExperiment",
   #### EWCE CelltypeDataset ####
   } else if(class %in% c("celltypedataset","celltypedata","ctd","ewce")){
     obj <- ewceData::ctd()
-  #### EWCE CelltypeDataset ####
+  #### list ####
   } else if(class %in% c("list","l")){
-    obj <- to_list(SeuratObject::pbmc_small,
-                   verbose = verbose)
+    obj <- example_list(verbose = verbose)
+  #### list paths ####
+  }  else if(class %in% c("list_paths","lp")){
+    obj <- example_list(as_paths = TRUE,
+                        verbose = verbose)
   #### ERROR ####
   } else {
     stp <- paste("class must be one of:",

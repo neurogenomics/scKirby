@@ -4,7 +4,14 @@
 \alias{read_data}
 \title{Read data}
 \usage{
-read_data(path, filetype = "guess", custom_reader = NULL, verbose = TRUE, ...)
+read_data(
+  path,
+  filetype = "guess",
+  custom_reader = NULL,
+  as_sparse = TRUE,
+  verbose = TRUE,
+  ...
+)
 }
 \arguments{
 \item{path}{Path to saved single-cell data file,

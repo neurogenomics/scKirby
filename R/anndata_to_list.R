@@ -6,6 +6,7 @@
 #' obj2 <- anndata_to_list(obj)
 anndata_to_list <- function(obj,
                             verbose=TRUE){
+
   messager("+ AnnData ==> list",v=verbose)
   list(data = get_data(obj = obj,
                        verbose = verbose),

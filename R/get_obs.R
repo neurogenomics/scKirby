@@ -38,10 +38,17 @@ get_obs <- function(obj,
     obs <- obj@phenoData@data
   #### list ####
   } else if(is_class(obj,"list")){
-    obs <- obj$obs
+    #### File path ####
+    if(is.character(obj$obs)){
+      obs <- read_data(path = obj$obs,
+                       verbose = verbose,
+                       as_sparse = FALSE)
+    } else {
+      obs <- obj$obs
+    }
   #### OTHER ####
   } else {
-    stopper("Unable to get metadata from object.")
+    stopper("Unable to get `obs` from object.")
   }
   #### Add rownames ####
   obs <- check_metadata_rownames(d = obs,

@@ -28,7 +28,8 @@ seurat_to_list <- function(obj,
                       verbose = verbose),
       graphs = get_graphs(obj = obj,
                           verbose = verbose),
-      uns = list(var_features=lapply(obj@assays,function(a){a@var.features}))
+      uns = get_uns(obj = obj,
+                    verbose = verbose)
     )
   }
 

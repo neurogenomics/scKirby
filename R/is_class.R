@@ -24,7 +24,7 @@ is_class <- function(obj,
   if(is_ctd(obj)){
     groups <- c(groups,"ewce")
   }
-  if(is_list(obj)){
+  if(is_list(obj, validate = TRUE)){
     groups <- c(groups,"list")
   }
   if(is.null(group)){

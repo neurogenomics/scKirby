@@ -2,7 +2,7 @@
 % Please edit documentation in R/seurat_to_anndata.R
 \name{seurat_to_anndata}
 \alias{seurat_to_anndata}
-\title{Convert: \code{Seurat} ==> \code{anndata}}
+\title{Convert: \code{Seurat} ==> \code{AnnData}}
 \usage{
 seurat_to_anndata(
   obj,
@@ -13,7 +13,7 @@ seurat_to_anndata(
 )
 }
 \arguments{
-\item{reimport}{Save and re-import the \code{anndata} object into R to ensure
+\item{reimport}{Save and re-import the \code{AnnData} object into R to ensure
 all data has been converted from Python-native to R-native objects
 (e.g. pandas data.frames vs. R data.frames).}
 
@@ -29,7 +29,7 @@ Options are \code{"gzip"}, \code{"lzf"} or \code{NULL}.}
   }}
 }
 \description{
-Convert: \code{Seurat} ==> \code{anndata}
+Convert: \code{Seurat} ==> \code{AnnData}
 }
 \examples{
 obj <- example_obj("seurat")

@@ -94,11 +94,17 @@ get_obsm <- function(obj,
   #### list ####
   } else if (is_class(obj,"list")) {
     messager("Extracting obsm from list", v = verbose)
-    if(is.null(obj$obsm)) {
-      obsm <- NULL
+    if(is.character(obj$obsm)){
+      obsm <- read_data(path = obj$obsm,
+                        as_sparse = FALSE,
+                        verbose = verbose)
     } else {
-      if(is.null(keys)) keys <- names(obj$obsm)
-      obsm <- obj$obsm[keys]
+      obsm <- obj$obsm
+    }
+    #### Get keys ####
+    if(!is.null(obsm)) {
+      if(is.null(keys)) keys <- names(obsm)
+      obsm <- obsm[keys]
     }
   } else if (is_class(obj,"matrix") ){
     messager("Interpretting obj as matrix with trait obsm.",

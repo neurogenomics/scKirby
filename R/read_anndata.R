@@ -1,7 +1,6 @@
 read_anndata <- function(path,
                          method = c("anndata","zellkonverter"),
-                         verbose,
-                         conda_env,
+                         verbose=TRUE,
                          ...){
 
   method <- tolower(method)[1]

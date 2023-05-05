@@ -4,7 +4,7 @@
 \alias{to_sparse}
 \title{To sparse matrix}
 \usage{
-to_sparse(obj, allow_delayed_array = TRUE, verbose = TRUE)
+to_sparse(obj, transpose = FALSE, allow_delayed_array = TRUE, verbose = TRUE)
 }
 \value{
 Sparse matrix

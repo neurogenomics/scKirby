@@ -10,7 +10,7 @@ h5seurat_to_anndata <- function(obj,
                               reimport = TRUE,
                               save_path = tempfile(fileext = ".h5ad"),
                               overwrite = FALSE,
-                              verbose=TRUE,
+                              verbose = TRUE,
                               ...){
   SeuratDisk::Convert(obj$filename,
                       dest = save_path,

@@ -22,6 +22,7 @@
 read_data <- function(path,
                       filetype="guess",
                       custom_reader=NULL,
+                      as_sparse=TRUE,
                       verbose=TRUE,
                       ...){
   # devoptera::args2vars(read_data)
@@ -67,6 +68,7 @@ read_data <- function(path,
             is_filetype(filetype,"matrix") ||
             is_filetype(filetype,"data.table")){
     obj <- read_matrix(path = path,
+                       as_sparse = as_sparse,
                        verbose = verbose,
                        ...)
   #### AnnData ####

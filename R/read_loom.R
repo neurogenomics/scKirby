@@ -1,5 +1,5 @@
 read_loom <- function(path,
-                      method = c("seuratdisk","anndata","scopeloomr"),
+                      method = c("anndata","seuratdisk","scopeloomr"),
                       verbose = TRUE,
                       ...){
 

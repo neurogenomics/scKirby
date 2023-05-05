@@ -49,10 +49,17 @@ get_var <- function(obj,
     var <- obj@featureData@data
     #### list ####
   } else if(is_class(obj,"list")){
-    var <- obj$var
+    #### File path ####
+    if(is.character(obj$var)){
+      var <- read_data(path = obj$var,
+                       verbose = verbose,
+                       as_sparse = FALSE)
+    } else {
+      var <- obj$var
+    }
     #### OTHER ####
   } else {
-    stopper("Unable to get metadata from object.")
+    stopper("Unable to get `var` from object.")
   }
   #### Return as a named list (1 per assay), unless there's only 1 assay ####
   if(isTRUE(simplify)){

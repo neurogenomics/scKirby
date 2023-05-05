@@ -80,7 +80,13 @@ get_data <- function(obj,
     data <- as.list(obj@assayData)
     #### list ####
   } else if(is_class(obj,"list")){
-    data <- obj$data
+    #### Read file ####
+    if(is.character(obj$data)){
+      data <- read_data(path = obj$data,
+                        verbose = verbose)
+    } else {
+      data <- obj$data
+    }
     #### OTHER ####
   } else {
     stopper("Unable to get data from object.")

@@ -90,7 +90,13 @@ get_varm <- function(obj,
   #### list ####
   } else if (is_class(obj,"list")) {
     messager("Extracting varm from list", v = verbose)
-    varm <- obj$varm
+    if(is.character(obj$varm)){
+      varm <- read_data(path = obj$varm,
+                        as_sparse = FALSE,
+                        verbose = verbose)
+    } else {
+      varm <- obj$varm
+    }
   } else if (is_class(obj,"matrix") ){
     messager("Interpretting obj as matrix with trait varm.",
              v=verbose)

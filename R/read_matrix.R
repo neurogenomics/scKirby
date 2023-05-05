@@ -1,4 +1,6 @@
 read_matrix <- function(path,
+                        transpose=FALSE,
+                        as_sparse=TRUE,
                         verbose,
                         ...){
   if(is.character(path)){
@@ -10,7 +12,13 @@ read_matrix <- function(path,
     obj <- path
   }
   #### Convert to sparse matrix ####
-  obj <- to_sparse(obj = obj,
-                   verbose = verbose)
+  if(isTRUE(as_sparse)){
+    obj <- to_sparse(obj = obj,
+                     verbose = verbose)
+  }
+  if(isTRUE(transpose)){
+    messager("Transposing matrix.",v=verbose)
+    obj <- Matrix::t(obj)
+  }
   return(obj)
 }

@@ -16,7 +16,7 @@ se_to_anndata(
 \arguments{
 \item{method}{Which R package to use for the conversion.}
 
-\item{reimport}{Save and re-import the \code{anndata} object into R to ensure
+\item{reimport}{Save and re-import the \code{AnnData} object into R to ensure
 all data has been converted from Python-native to R-native objects
 (e.g. pandas data.frames vs. R data.frames).}
 }

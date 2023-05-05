@@ -10,14 +10,14 @@ save_anndata <- function(adat,
 
   method <- method[1]
   if(!is_class(adat,"anndata")){
-    stopper("obj must be an anndata object.")
+    stopper("obj must be an AnnData object.")
   }
   # IMPORTANT! python cannot interpret "~"
   save_path <- path.expand(save_path)
   #### Make sure directory exists ####
   dir.create(dirname(save_path),showWarnings = FALSE, recursive = TRUE)
   #### Save anndata ####
-  messager("+ Saving anndata -->",save_path,v=verbose)
+  messager("+ Saving AnnData -->",save_path,v=verbose)
   if(method=="anndata"){
     activate_conda(verbose=verbose)
     adat$write_h5ad(filename = save_path,
@@ -36,6 +36,7 @@ save_anndata <- function(adat,
   #### Add filename to adat ####
   if(!is.null(save_path) &&
      file.exists(save_path)){
+    messager("Adding save_path to `filename` slot.",v=verbose)
     adat$filename <- save_path
   }
 }
