@@ -1,0 +1,69 @@
+#' To \code{AnnData}
+#'
+#' Convert any single-cell object to \code{AnnData} format.
+#'
+#' @export
+#' @examples
+#' obj <- example_obj("cds")
+#' obj2 <- to_anndata(obj)
+to_anndata <- function(obj,
+                       save_path = tempfile(fileext = ".h5ad"),
+                       reimport = FALSE,
+                       verbose = TRUE){
+
+  #### Check if class is supported ####
+  check_supported(obj)
+  #### seurat ####
+  if(is_class(obj,"seurat")){
+    obj2 <- seurat_to_anndata(obj = obj,
+                              save_path = save_path,
+                              reimport = reimport,
+                              verbose = verbose)
+  #### h5seurat  ####
+  } else if(is_class(obj,"h5seurat")){
+    obj2 <- h5seurat_to_anndata(obj = obj,
+                                save_path = save_path,
+                                reimport = reimport,
+                                verbose = verbose)
+    #### CTD  ####
+  } else if(is_class(obj,"ctd")){
+    # obj2 <- ctd_to_anndata(obj = obj,
+    #                       verbose = verbose)
+  #### Matrices ####
+  } else if(is_class(obj,"matrix")){
+    # obj2 <- matrix_to_anndata(obj = obj,
+    #                           verbose = verbose)
+  #### list ####
+  } else if(is_class(obj,"list")){
+    obj2 <- list_to_anndata(obj = obj,
+                            verbose = verbose)
+  #### anndata ####
+  } else if(is_class(obj,"anndata")){
+    messager("obj already in AnnData format.")
+    obj2 <- obj
+  #### loom ####
+  } else if(is_class(obj,"loom")){
+    # obj2 <- loom_to_anndata(obj = obj,
+    #                         verbose = verbose)
+  #### SummarizedExperiment ####
+  } else if(is_class(obj,"se")){
+    obj2 <- se_to_anndata(obj = obj,
+                          save_path = save_path,
+                          reimport = reimport,
+                          verbose = verbose)
+  #### CellDataSet ####
+  } else if(is_class(obj,"cds")){
+    obj2 <- cds_to_anndata(obj = obj,
+                           save_path = save_path,
+                           reimport = reimport,
+                           verbose = verbose)
+  #### OTHER ####
+  } else {
+    l <- to_list(obj = obj,
+                 verbose = verbose)
+    obj2 <- list_to_anndata(obj = l,
+                            verbose = verbose)
+  }
+  #### Return ####
+  return(obj2)
+}

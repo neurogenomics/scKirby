@@ -123,6 +123,11 @@ ingest_data <- function(obj,
       obj_out <- to_loom(obj = obj,
                          save_path = save_path,
                          verbose = verbose)
+    #### to AnnData ####
+    }else if(is_filetype(output_class,"anndata")){
+      obj_out <- to_anndata(obj = obj,
+                            save_path = save_path,
+                            verbose = verbose)
     }
     #### Save ####
     if(!is.null(save_path)){

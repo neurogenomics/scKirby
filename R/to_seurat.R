@@ -67,8 +67,12 @@ to_seurat <- function(obj,
   } else if(is_class(obj,"cds")){
     obj2 <- cds_to_seurat(obj = obj,
                           verbose = verbose)
+  #### OTHER ####
   } else {
-    stopper("Unable to convert obj to Seurat.")
+    l <- to_list(obj = obj,
+                 verbose = verbose)
+    obj2 <- list_to_seurat(obj = l,
+                           verbose = verbose)
   }
   #### Update object ####
   if(isTRUE(update)){

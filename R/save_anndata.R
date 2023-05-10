@@ -19,24 +19,18 @@ save_anndata <- function(adat,
   #### Save anndata ####
   messager("+ Saving AnnData -->",save_path,v=verbose)
   if(method=="anndata"){
-    activate_conda(verbose=verbose)
+    activate_conda(verbose = verbose)
     adat$write_h5ad(filename = save_path,
                     compression = compression,
                     compression_opts = compression_opts,
                     as_dense = as_dense)
   } else {
-    ### Has to convert to SCE first ####
+    #### Has to convert to SCE first ####
     obj <- zellkonverter::AnnData2SCE(adat,
                                       verbose = verbose)
     zellkonverter::writeH5AD(sce = obj,
                              file = save_path,
                              verbose = verbose,
                              ...)
-  }
-  #### Add filename to adat ####
-  if(!is.null(save_path) &&
-     file.exists(save_path)){
-    messager("Adding save_path to `filename` slot.",v=verbose)
-    adat$filename <- save_path
   }
 }
