@@ -50,6 +50,7 @@ Suggests:
   monocle,
   SCopeLoomR,
   zellkonverter,
+  future,
   testthat (>= 3.0.0)
 Remotes:
   github::RajLabMSSM/echoconda, 
