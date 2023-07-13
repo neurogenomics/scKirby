@@ -18,7 +18,8 @@ test_that("map_data works", {
   obj <- example_obj("ad")
   obj2 <- map_data(obj = obj,
                    input_species = "human",
-                   output_species = "mouse")
+                   output_species = "mouse",
+                   as_sparse = FALSE)
   testthat::expect_lt(ncol(obj2),
                       ncol(obj))
   testthat::expect_false(is(obj2$X,"dgCMatrix"))

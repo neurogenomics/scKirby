@@ -33,7 +33,8 @@ matrices_to_assayobjects <- function(matrices,
                   aobj <- SeuratObject::CreateAssayObject(counts = a1$counts)
                 }
                 if("scale.data" %in% names(a1)){
-                  aobj@scale.data <- a1$scale.data
+                  ## scale.data must be a dense matrix
+                  aobj@scale.data <- as.matrix(a1$scale.data)
                 }
                 if("data" %in% names(a1)){
                   aobj@data <- a1$data
