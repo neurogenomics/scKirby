@@ -20,8 +20,12 @@ adata <- example_anndata()
 example_anndata(
   obj = SeuratObject::pbmc_small,
   save_path = file.path(tempdir(), "example.h5ad"),
+  backed = "r",
   verbose = TRUE
 )
+}
+\arguments{
+\item{backed}{If \code{'r'}, load \code{~anndata.AnnData} in \code{backed} mode instead of fully loading it into memory (\code{memory} mode). If you want to modify backed attributes of the AnnData object, you need to choose \code{'r+'}.}
 }
 \description{
 \href{https://github.com/dynverse/anndata/issues/1}{

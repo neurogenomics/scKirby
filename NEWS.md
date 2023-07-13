@@ -1,3 +1,12 @@
+# scKirby 0.1.3
+
+## New features
+
+* `anndata_to_ctd`:
+  - New function to create CTD by chunking anndata obj.
+* `seurat_to_anndata`
+  - Add support for `anndataR` method.
+
 # scKirby 0.1.2
 
 ## New features

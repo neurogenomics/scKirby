@@ -4,7 +4,7 @@ reimport_anndata <- function(adat,
 
   if(!is.null(save_path) &&
      file.exists(save_path)){
-    messager("Reimporting adat.",v=verbose)
+    messager("Reimporting adat.", v=verbose)
     #### Read back in ####
     adat <- read_anndata(path = save_path,
                          verbose = FALSE)
