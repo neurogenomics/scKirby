@@ -21,14 +21,17 @@ test_that("map_data works", {
                    output_species = "mouse")
   testthat::expect_lt(ncol(obj2),
                       ncol(obj))
+  testthat::expect_false(is(obj2$X,"dgCMatrix"))
   #### anndata: chunked ####
   obj <- example_obj("ad")
   obj2 <- map_data(obj = obj,
                    input_species = "human",
                    output_species = "mouse",
-                   chunk_size = 10)
+                   chunk_size = 10,
+                   as_sparse = TRUE)
   testthat::expect_lt(ncol(obj2),
                       ncol(obj))
+  testthat::expect_true(is(obj2$X,"dgCMatrix"))
   #### seurat ####
   obj <- example_obj("seurat")
   obj2 <- map_data(obj = obj,

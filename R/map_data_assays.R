@@ -23,7 +23,7 @@ map_data_assays <- function(assays,
    messager("---> Converting assay: ",names(assays)[i],parallel = TRUE,
             v=verbose)
    if(is.null(gene_df)) return(NULL)
-   orthogene::convert_orthologs(
+   X <- orthogene::convert_orthologs(
      gene_df = gene_df,
      standardise_genes = standardise_genes,
      input_species = input_species,
@@ -40,5 +40,10 @@ map_data_assays <- function(assays,
      input_col = input_col,
      output_col = output_col,
      verbose = verbose)
+   if(isTRUE(as_sparse)){
+     X <- to_sparse(obj = X,
+                    verbose = verbose)
+   }
+   return(X)
  })
 }

@@ -6,6 +6,11 @@
   - New function to create CTD by chunking anndata obj.
 * `seurat_to_anndata`
   - Add support for `anndataR` method.
+  
+## Bug fixes
+
+* `map_data`
+  - Change default: `as_sparse=TRUE`
 
 # scKirby 0.1.2
 

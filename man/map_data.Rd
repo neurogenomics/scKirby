@@ -17,7 +17,7 @@ map_data(
   non121_strategy = "drop_both_species",
   agg_fun = "sum",
   mthreshold = Inf,
-  as_sparse = FALSE,
+  as_sparse = TRUE,
   as_DelayedArray = FALSE,
   sort_rows = FALSE,
   test_species = NULL,
