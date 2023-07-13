@@ -38,5 +38,5 @@ Convert: \code{AnnData} ==> \code{CellTypeDataset}
 }
 \examples{
 obj <- example_obj("anndata")
-obj2 <- anndata_to_ctd(obj)
+obj2 <- anndata_to_ctd(obj, annotLevels=list(groups=NULL))
 }

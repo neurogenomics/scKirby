@@ -1,7 +1,8 @@
 #' To \code{Seurat}
 #'
-#' Convert any single-cell object to \code{Seurat} format.
-#' @param as_h5seurat Convert to the \code{H5Seurat} sublass.
+#' @describeIn converters Convert any single-cell object to
+#' \code{Seurat} format.
+#' @param as_h5seurat Convert to the \code{H5Seurat} subclass.
 #' @param update Ensure the object is updated to the latest version of Seurat.
 #' @inheritParams seurat_to_h5seurat
 #'

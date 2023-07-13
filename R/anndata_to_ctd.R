@@ -6,7 +6,7 @@
 #' @import orthogene
 #' @examples
 #' obj <- example_obj("anndata")
-#' obj2 <- anndata_to_ctd(obj)
+#' obj2 <- anndata_to_ctd(obj, annotLevels=list(groups=NULL))
 anndata_to_ctd <- function(obj,
                            annotLevels,
                            dataset = basename(tempfile()),
@@ -34,6 +34,7 @@ anndata_to_ctd <- function(obj,
   annotLevels <- check_annotlevels(obj = obj,
                                    annotLevels = annotLevels)
   #### Aggregate cells over each level ####
+  aggregate_rows <- utils::getFromNamespace("aggregate_rows","orthogene")
   rows <- nrow(obj)
   if(is.null(chunk_size)){
     chunk_size <- rows
@@ -50,17 +51,17 @@ anndata_to_ctd <- function(obj,
                v = verbose)
       if (i == 1) verbose <- 2
       select <- as.integer(chunks[[i]])
-      orthogene::aggregate_rows(X = obj[select,]$X,
+      aggregate_rows(X = obj[select,]$X,
                                 groupings = as.character(lvl[select]),
                                 agg_fun = agg_fun,
                                 agg_method = agg_method,
-                                as_sparse = TRUE,
-                                as_DelayedArray = FALSE,
+                                as_sparse = as_sparse,
+                                as_DelayedArray = as_DelayedArray,
                                 dropNA = dropNA,
                                 verbose = verbose>1)
     })
     #### Aggregate across chunks ####
-    X_agg <- orthogene::aggregate_rows(
+    X_agg <- aggregate_rows(
       X = do.call(what = rbind, X_list),
       groupings = unlist(lapply(X_list,rownames)),
       agg_fun = agg_fun,

@@ -1,6 +1,10 @@
 #' Converters
 #'
-#' List all input/output conversions currently supported by \pkg{scKirby}.
+#' Functions to convert one single-cell format to another.
+#' @param obj A single-cell object supported by \pkg{scKirby}.
+#'  See \link[scKirby]{converters} for a table of all supported conversions.
+#' @param verbose Print messages.
+#'
 #' @export
 #' @import data.table
 #' @examples
