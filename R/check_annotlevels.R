@@ -24,5 +24,12 @@ check_annotlevels <- function(obj,
            as.character(obs[[x]])
            })
   }
+  #### Check for blanks ####
+  annotLevels <- lapply(annotLevels, function(x){
+    if("" %in% unique(x)){
+      x[x==""] <- "NA"
+    }
+    return(x)
+  })
   return(annotLevels)
 }

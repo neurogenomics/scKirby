@@ -51,14 +51,19 @@ anndata_to_ctd <- function(obj,
                v = verbose)
       if (i == 1) verbose <- 2
       select <- as.integer(chunks[[i]])
-      aggregate_rows(X = obj[select,]$X,
-                                groupings = as.character(lvl[select]),
-                                agg_fun = agg_fun,
-                                agg_method = agg_method,
-                                as_sparse = as_sparse,
-                                as_DelayedArray = as_DelayedArray,
-                                dropNA = dropNA,
-                                verbose = verbose>1)
+      X <- aggregate_rows(X = obj[select,]$X,
+                     groupings = as.character(lvl[select]),
+                     agg_fun = agg_fun,
+                     agg_method = agg_method,
+                     as_sparse = as_sparse,
+                     as_DelayedArray = as_DelayedArray,
+                     dropNA = dropNA,
+                     verbose = verbose>1)
+      if(isTRUE(as_sparse)){
+        X <- to_sparse(obj = X,
+                       verbose = verbose)
+      }
+      return(X)
     })
     #### Aggregate across chunks ####
     X_agg <- aggregate_rows(
@@ -70,6 +75,8 @@ anndata_to_ctd <- function(obj,
       as_DelayedArray = as_DelayedArray,
       dropNA = dropNA,
       verbose = verbose) |> Matrix::t()
+    ## Check for NAs
+    X_agg <- fillna_sparse(X_agg)
     remove(X_list)
     ctd_lvl <- EWCE::generate_celltype_data(
       exp = X_agg,
