@@ -8,7 +8,7 @@ save_data(
   obj,
   filetype = c("h5", "h5seurat", "h5ad", "rda", "rds", "anndata"),
   save_path = file.path(tempdir(), paste("scKirby_output", filetype, sep = ".")),
-  quicksave_HDF5 = TRUE,
+  quicksave_hdf5 = TRUE,
   overwrite = TRUE,
   verbose = TRUE
 )
@@ -16,7 +16,17 @@ save_data(
 \arguments{
 \item{obj}{A single-cell data object, or a path to saved single-cell data.}
 
+\item{filetype}{The file format to write the object as.}
+
+\item{save_path}{Path to save the converted \code{obj}.}
+
+\item{quicksave_hdf5}{When \code{filetype="h5"},
+\link[HDF5Array]{quickResaveHDF5SummarizedExperiment} will be used to save
+the data.}
+
 \item{overwrite}{If a file of the same name exists, overwrite it.}
+
+\item{verbose}{Print messages.}
 }
 \description{
 Save a variety of single-cell data formats.

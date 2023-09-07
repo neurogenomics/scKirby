@@ -6,8 +6,17 @@
 \usage{
 to_list(obj, verbose = TRUE)
 }
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{verbose}{Print messages.}
+}
+\value{
+A \link[base]{list} object.
+}
 \description{
-Convert any object to \code{list} format.
+Convert any object to \link[base]{list} format.
 }
 \examples{
 obj <- example_obj("seurat")

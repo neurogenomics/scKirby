@@ -2,7 +2,7 @@
 % Please edit documentation in R/process_seurat.R
 \name{process_seurat}
 \alias{process_seurat}
-\title{Process a \link[SeuratObject]{Seurat} object}
+\title{Process a \code{Seurat} object}
 \usage{
 process_seurat(
   obj = NULL,
@@ -11,22 +11,59 @@ process_seurat(
   vars.to.regress = NULL,
   dims = seq_len(50),
   add_specificity = FALSE,
-  assay_name = "RNA",
   default_assay = NULL,
   n.components = 2L,
   log_norm = FALSE,
   cluster_reduction = "umap",
   workers = 1,
   max_mem = 8000 * 1024^2,
-  seed = 2020
+  seed = 2020,
+  verbose = TRUE
 )
 }
 \arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{meta.data}{Additional cell-level metadata to add to the Seurat object.
+Should be a \code{\link[base]{data.frame}} where the rows are cell names and
+the columns are additional metadata fields. Row names in the metadata need
+to match the column names of the counts matrix.}
+
+\item{nfeatures}{Number of features to select as top variable features;
+only used when \code{selection.method} is set to \code{'dispersion'} or
+\code{'vst'}}
+
+\item{vars.to.regress}{Variables to regress out (previously latent.vars in
+RegressOut). For example, nUMI, or percent.mito.}
+
+\item{dims}{Which dimensions to use as input features, used only if
+\code{features} is NULL}
+
+\item{add_specificity}{Add a new assay called "specificity" by deriving
+specificity scores from the input data.}
+
+\item{default_assay}{Default assay to set with \link[Seurat]{DefaultAssay}.}
+
+\item{n.components}{The dimension of the space to embed into.}
+
+\item{log_norm}{Log-normalise the data with \link[Seurat]{LogNormalize}.}
+
 \item{cluster_reduction}{Recompute neighbors graph based on UMAP
 to get clusters that best reflect UMAP space.
 For this same reason, only cluster in two dimensions,
 because this is the view we most often use.
 That said, this may reduce the generalisability of these clusters/graph.}
+
+\item{workers}{Number of workers (threads) to parallelise processes across
+using \pkg{future}.}
+
+\item{max_mem}{Max limit on memory usage, to be passed to environmental
+variable \code{future.globals.maxSize}.}
+
+\item{seed}{Random seed to set.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 A preprocessed \link[Seurat]{Seurat} object.
@@ -46,6 +83,6 @@ Automatically performs
 }
 }
 \examples{
-obj <- example_obj("matrix")
+obj <- example_obj("list")
 obj2 <- seurat_pipeline(obj = obj)
 }

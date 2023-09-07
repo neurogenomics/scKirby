@@ -1,9 +1,18 @@
 #' Convert: \code{AnnData} ==> \code{CellTypeDataset}
 #'
+#' @param standardise Run \link[EWCE]{standardise_ctd}.
+#' @inheritParams converters
+#' @inheritParams map_data
+#' @inheritParams to_se
 #' @inheritParams orthogene::aggregate_rows
+#' @inheritParams EWCE::generate_celltype_data
+#' @inheritParams EWCE::standardise_ctd
+#' @inheritDotParams EWCE::standardise_ctd
 #'
 #' @export
 #' @import orthogene
+#' @importFrom utils getFromNamespace
+#' @importFrom EWCE generate_celltype_data standardise_ctd
 #' @examples
 #' obj <- example_obj("anndata")
 #' obj2 <- anndata_to_ctd(obj, annotLevels=list(groups=NULL))
@@ -17,7 +26,7 @@ anndata_to_ctd <- function(obj,
                            dropNA = TRUE,
                            standardise = TRUE,
                            as_sparse = TRUE,
-                           as_DelayedArray = FALSE,
+                           as_delayedarray = FALSE,
                            verbose = TRUE,
                            ...){
   # devoptera::args2vars(anndata_to_ctd)
@@ -39,24 +48,24 @@ anndata_to_ctd <- function(obj,
   if(is.null(chunk_size)){
     chunk_size <- rows
   }
-  chunks <- split(seq_len(rows), ceiling(seq_along(seq_len(rows))/chunk_size))
+  chunks <- split(seq(rows), ceiling(seq_along(seq(rows))/chunk_size))
   ctd <- lapply(seq_len(length(annotLevels)), function(ix){
     messager("Generating CTD level:",ix,v=verbose)
     lvl <- annotLevels[[ix]]
     #### Aggregate within chunks ####
-    X_list <- lapply(seq_len(length(chunks)), function(i) {
+    X_list <- lapply(seq(length(chunks)), function(i) {
       messager("Processing chunk: ", i, "/",
                length(chunks),if (verbose > 1) "\n",
                parallel = TRUE,
                v = verbose)
-      if (i == 1) verbose <- 2
+      verbose <- if (i == 1) 2 else 1
       select <- as.integer(chunks[[i]])
       X <- aggregate_rows(X = obj[select,]$X,
                      groupings = as.character(lvl[select]),
                      agg_fun = agg_fun,
                      agg_method = agg_method,
                      as_sparse = as_sparse,
-                     as_DelayedArray = as_DelayedArray,
+                     as_delayedarray = as_delayedarray,
                      dropNA = dropNA,
                      verbose = verbose>1)
       if(isTRUE(as_sparse)){
@@ -72,7 +81,7 @@ anndata_to_ctd <- function(obj,
       agg_fun = agg_fun,
       agg_method = agg_method,
       as_sparse = as_sparse,
-      as_DelayedArray = as_DelayedArray,
+      as_delayedarray = as_delayedarray,
       dropNA = dropNA,
       verbose = verbose) |> Matrix::t()
     ## Check for NAs

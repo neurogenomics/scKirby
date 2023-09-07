@@ -6,6 +6,12 @@
 \usage{
 seurat_to_cds(obj, verbose = TRUE)
 }
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Convert: \code{Seurat} ==> \code{CellDataSet}
 }

@@ -1,10 +1,13 @@
 #' To \code{Seurat}
 #'
 #' @describeIn converters Convert any single-cell object to
-#' \code{Seurat} format.
-#' @param as_h5seurat Convert to the \code{H5Seurat} subclass.
+#' \pkg{Seurat} or \link[SeuratDisk]{h5Seurat} format.
+#' @param as_h5seurat Convert to the \link[SeuratDisk]{h5Seurat} class.
 #' @param update Ensure the object is updated to the latest version of Seurat.
 #' @inheritParams seurat_to_h5seurat
+#' @inheritParams converters
+#' @returns A \pkg{Seurat} or
+#'  \link[SeuratDisk]{h5Seurat} object.
 #'
 #' @export
 #' @examples
@@ -36,8 +39,7 @@ to_seurat <- function(obj,
                verbose=verbose)
       return(obj)
     } else {
-      obj2 <- seurat_to_h5seurat(obj = obj,
-                                 save_path = save_path,
+      obj2 <- h5seurat_to_seurat(obj = obj,
                                  verbose = verbose)
     }
   #### CTD  ####

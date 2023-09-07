@@ -14,10 +14,15 @@ class_dict <- function(group=NULL){
     ewce = c("EWCElist","EWCE_list","SCElist","SCE_list",
              "CellTypeDataset"),
     matrix = c("data.table","data.frame","tbl_df","tbl",
-               "matrix","Matrix","array","DelayedArray",
-               "DelayedMatrix",
-               names(methods::getClass("Matrix")@subclasses)
-               ), # more than 40 ..
+               "matrix","Matrix","array","DelayedArray","DelayedMatrix",
+               names(methods::getClass("Matrix")@subclasses),
+               "Graph"
+               ),
+    matrix_strict=c("matrix","Matrix","array","DelayedArray","DelayedMatrix",
+                    names(methods::getClass("Matrix")@subclasses)
+                    ),
+    sparse_matrix=names(methods::getClass("sparseMatrix")@subclasses),
+    delayed_array=c("DelayedArray","DelayedMatrix"),
     loom = c("loom","H5File","H5RefClass"),
     se = c("SummarizedExperiment",
            "SingleCellLoomExperiment",

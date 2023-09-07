@@ -1,5 +1,6 @@
 #' Convert: \code{Seurat} ==> \code{LoomExperiment}
 #'
+#' @inheritParams converters
 #' @inheritParams se_to_le
 #' @export
 #' @examples

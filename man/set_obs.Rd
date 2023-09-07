@@ -7,8 +7,13 @@
 set_obs(obj, obs, verbose = TRUE)
 }
 \arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
 \item{obs}{Observation metadata
 as a \link[base]{data.frame} with samples as row names.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 Single-cell object.

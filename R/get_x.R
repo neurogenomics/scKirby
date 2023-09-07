@@ -1,16 +1,27 @@
 #' Get data
 #'
 #' Extract expression matrix metadata from any single-cell object.
+#' @param as_sparse Convert to a \link[Matrix]{sparseMatrix}.
+#' @inheritParams converters
+#' @inheritParams get_n_elements
+#' @inheritParams to_sparse
+#' @inheritParams SeuratObject::CreateSeuratObject
+#' @inheritParams SeuratObject::Assays
+#' @returns A named list of matrices.
+#'
 #' @export
+#' @importFrom Matrix t
 #' @examples
-#' obj <- example_obj("loom")
-#' X <- get_data(obj)
-get_data <- function(obj,
-                     transpose=TRUE,
-                     simplify=FALSE,
-                     as_sparse=FALSE,
-                     verbose=TRUE){
-  # devoptera::args2vars(get_data)
+#' obj <- example_obj("seurat")
+#' X <- get_x(obj)
+get_x <- function(obj,
+                  transpose=TRUE,
+                  n=NULL,
+                  assay=NULL,
+                  slot=NULL,
+                  as_sparse=FALSE,
+                  verbose=TRUE){
+  # devoptera::args2vars(get_x)
 
   #### matrix ####
   if(is_class(obj,"matrix")){
@@ -31,10 +42,6 @@ get_data <- function(obj,
         rownames(data[[nm]]) <- get_obs(obj)[[1]]
         colnames(data[[nm]]) <- get_var(obj)[[1]]
       }
-      if(isTRUE(transpose)){
-        messager("Transposing data.",v=verbose)
-        data <- lapply(data, Matrix::t)
-      }
     }
   #### SummarizedExperiment ####
   } else if(is_class(obj,"se")){
@@ -48,9 +55,12 @@ get_data <- function(obj,
                    RNA.scale.data=obj@scale.data)
     ## Seurat V2+
     } else {
-      data <- lapply(obj@assays,function(a){
+      assays <- obj@assays
+      if(!is.null(assay)) assays[assays %in% assay]
+      data <- lapply(assays,function(a){
         slots <- c("counts","data","scale.data")
         slots <- slots[sapply(slots,function(s){methods::.hasSlot(a,s)})]
+        if(!is.null(slot)) slots <- slots[slots %in% slot]
         lapply(stats::setNames(slots,slots), function(s){
           methods::slot(a,s)
         })
@@ -95,10 +105,15 @@ get_data <- function(obj,
   if(isTRUE(as_sparse)){
     data <- lapply(data,to_sparse, verbose=verbose)
   }
-  #### Return as a named list (1 per assay), unless there's only 1 assay ####
-  if(isTRUE(simplify)){
-    data <- simplify_list(l = data)
+  #### Tranpose each matrix ####
+  if(isTRUE(transpose)){
+    messager("Transposing data.",v=verbose)
+    data <- lapply(data, Matrix::t)
   }
+  #### Return as a named list (1 per assay), unless there's only 1 assay ####
+  data <- get_n_elements(l = data,
+                         n = n,
+                         verbose = verbose)
   #### Return ####
   return(data)
 }

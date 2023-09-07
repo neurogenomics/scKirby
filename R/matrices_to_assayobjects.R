@@ -1,10 +1,12 @@
-#' Matrices to AssayObjects
+#' Matrices to \code{AssayObjects}
 #'
 #' Convert a named list of matrices to a named list of \pkg{Seurat}
 #' assay objects (see \link[SeuratObject]{CreateAssayObject}).
 #' @param matrices A named list of matrices.
-#' @param meta.features [Optional] A named list of \code{meta.features}
-#'  (one per unique assay in \code{matrices}).
+#' @param var_features [Optional] A named list of feature metadata data.frames
+#'  (one per unique assay in \code{matrices}) to be put in the
+#'   \code{meta.features} slot of each \code{AssayObject}.
+#' @inheritParams converters
 #' @returns a named list of \pkg{Seurat} assay objects.
 #'
 #' @export

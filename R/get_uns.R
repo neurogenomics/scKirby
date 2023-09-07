@@ -1,11 +1,16 @@
 #' Get unstructured metadata
 #'
-#' Extract unstructuerd metadata from any single-cell object.
+#' Extract unstructured metadata from any single-cell object.
+#' @inheritParams converters
+#' @inheritParams get_n_elements
+#' @returns Named list of unstructured objects.
+#'
 #' @export
 #' @examples
-#' obj <- example_obj("s")
+#' obj <- example_obj("seurat")
 #' uns <- get_uns(obj)
 get_uns <- function(obj,
+                    n=NULL,
                     verbose=TRUE){
   # devoptera::args2vars(get_uns)
 
@@ -53,6 +58,10 @@ get_uns <- function(obj,
   } else {
     messager("Unable to get `uns` from object.",v=verbose)
   }
+  #### Return as a named list (1 per assay), unless there's only 1 assay ####
+  uns <- get_n_elements(l = uns,
+                        n = n,
+                        verbose = verbose)
   #### Return ####
   return(uns)
 }

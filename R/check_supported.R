@@ -1,5 +1,5 @@
 check_supported <- function(obj){
-  if(is)
+
   if(!is_class(obj,"supported") &&
      !is_ctd(obj)){
     stopper("Unsupported class detected: ",

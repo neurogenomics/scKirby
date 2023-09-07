@@ -3,8 +3,23 @@
 \name{anndata_to_seurat}
 \alias{anndata_to_seurat}
 \title{Convert: \code{Anndata} ==> \code{Seurat}}
+\source{
+\code{
+NOTE: Do NOT try to "inheritDotParams sceasy::convertFormat".
+The documentation in that function is empty and this will a
+cryptic error with  devtools::document().
+}
+}
 \usage{
 anndata_to_seurat(obj, verbose = TRUE, ...)
+}
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{verbose}{Print messages.}
+
+\item{...}{Parameters passed to \code{sceasy::convertFormat}.}
 }
 \description{
 Convert: \code{Anndata} ==> \code{Seurat}

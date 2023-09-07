@@ -1,5 +1,8 @@
 #' Convert: \code{loom} ==> \code{SingleCellLoomExperiment}
 #'
+#' @inheritParams converters
+#' @inheritParams to_se
+#' @inheritParams LoomExperiment::SingleCellLoomExperiment
 #' @export
 #' @examples
 #' library(Seurat)
@@ -11,6 +14,7 @@ loom_to_scle <- function(obj,
   requireNamespace("LoomExperiment")
 
   messager("+ loom ==> SingleCellLoomExperiment",v=verbose)
-  obj2 <- LoomExperiment::SingleCellLoomExperiment(obj)
+  obj2 <- LoomExperiment::SingleCellLoomExperiment(obj,
+                                                   ...)
   return(obj2)
 }

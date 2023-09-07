@@ -4,12 +4,20 @@
 \alias{get_graphs}
 \title{Get graphs}
 \usage{
-get_graphs(obj, names = NULL, verbose = TRUE)
+get_graphs(obj, keys = NULL, n = NULL, verbose = TRUE)
 }
 \arguments{
-\item{names}{The names of reductions to extract from.}
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{keys}{The keys of reductions to extract from.}
+
+\item{n}{The maximum number of elements to return from that list.}
 
 \item{verbose}{Print messages.}
+}
+\value{
+Named list of graph objects.
 }
 \description{
 Get graph objects from any single-cell object class.

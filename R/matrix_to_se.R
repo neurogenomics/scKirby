@@ -1,5 +1,7 @@
 #' Convert: \code{matrix} ==> \code{SummarizedExperiment}
 #'
+#' @inheritParams converters
+#' @inheritParams to_se
 #' @export
 #' @examples
 #' obj <- example_obj("matrix")

@@ -18,7 +18,7 @@ map_data(
   agg_fun = "sum",
   mthreshold = Inf,
   as_sparse = TRUE,
-  as_DelayedArray = FALSE,
+  as_delayedarray = FALSE,
   sort_rows = FALSE,
   test_species = NULL,
   chunk_size = NULL,
@@ -33,10 +33,10 @@ following classes:
 \item{\link[SummarizedExperiment]{SummarizedExperiment}}
 \item{\link[SingleCellExperiment]{SingleCellExperiment}}
 \item{\link[SeuratObject]{Seurat}}
-\item{\link[AnnData]{AnnData}}
+\item{\link[anndata]{AnnData}}
 \item{
 \link[Matrix]{Matrix} or
-\link[data.frame]{data.frame} or
+\link[base]{data.frame} or
 \link[data.table]{data.table}
 }
 }}
@@ -140,7 +140,7 @@ If \code{gene_df} is a sparse matrix to begin with,
 it will be returned as a sparse matrix
  (so long as \code{gene_output=} \code{"rownames"} or \code{"colnames"}).}
 
-\item{as_DelayedArray}{Convert aggregated matrix to
+\item{as_delayedarray}{Convert aggregated matrix to
 \link[DelayedArray]{DelayedArray}.}
 
 \item{sort_rows}{Sort \code{gene_df} rows alphanumerically.}
@@ -159,7 +159,7 @@ If set to \code{NULL}, will default to a list of humans and
 
 \item{chunk_size}{An integer indicating number of cells to include per chunk.
 This can be a more memory efficient and scalable way of aggregating on-disk
-data formats like \link[AnnData]{AnnData},
+data formats like \link[anndata]{AnnData},
 rather than reading in the entire matrix into memory at once
  (default: \code{NULL}).}
 

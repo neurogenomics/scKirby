@@ -1,5 +1,6 @@
 #' Convert: \code{list} ==> \code{Seurat}
 #'
+#' @inheritParams converters
 #' @export
 #' @examples
 #' obj <- example_obj("list")
@@ -10,13 +11,8 @@ list_to_seurat <- function(obj,
   #### Activate conda env with anndata installed ####
   activate_conda(verbose=verbose)
   messager("+ list ==> Seurat",v=verbose)
-  if(!is.null(obj$obs)){
-    meta.data <- obj$obs
-  } else {
-    meta.data <- data.frame(cellid = colnames(obj$data),
-                            row.names = colnames(obj$data)
-                            )
-  }
+  obs <- get_obs(obj = obj,
+                 verbose = verbose)
   aobj_list <- matrices_to_assayobjects(matrices = obj$data,
                                         var_features = obj$varm,
                                         verbose = verbose)

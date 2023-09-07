@@ -1,9 +1,8 @@
 #' Convert: \code{Seurat} ==> \code{AnnData}
 #'
-#' @param reimport Save and re-import the \code{AnnData} object into R to ensure
-#' all data has been converted from Python-native to R-native objects
-#' (e.g. pandas data.frames vs. R data.frames).
 #' @param method R package to use when converting object.
+#' @inheritParams converters
+#' @inheritParams to_anndata
 #' @inheritDotParams anndata::write_h5ad
 #' @export
 #' @examples

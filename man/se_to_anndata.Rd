@@ -14,11 +14,23 @@ se_to_anndata(
 )
 }
 \arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
 \item{method}{Which R package to use for the conversion.}
 
 \item{reimport}{Save and re-import the \code{AnnData} object into R to ensure
 all data has been converted from Python-native to R-native objects
 (e.g. pandas data.frames vs. R data.frames).}
+
+\item{save_path}{Path to save the \code{H5Seurat} to.}
+
+\item{verbose}{Print messages.}
+
+\item{...}{Additional arguments passed to the respective converter function.}
+}
+\value{
+\link[anndata]{AnnData} object.
 }
 \description{
 Convert: \code{SummarizedExperiment} ==> \code{AnnData}

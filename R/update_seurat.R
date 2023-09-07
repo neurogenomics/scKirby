@@ -1,6 +1,7 @@
 #' Update Seurat object
 #'
 #' Update a Seurat from V1 --> V3 or V2 --> V3.
+#' @inheritParams converters
 #' @export
 #' @examples
 #' obj <- example_obj("seurat")

@@ -6,6 +6,32 @@
 \usage{
 loom_to_se(obj, as_sce = FALSE, verbose = TRUE, ...)
 }
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{as_sce}{Convert to a \link[SingleCellExperiment]{SingleCellExperiment}
+format.}
+
+\item{verbose}{Print messages.}
+
+\item{...}{
+  Arguments passed on to \code{\link[SeuratDisk:LoadLoom]{SeuratDisk::LoadLoom}}
+  \describe{
+    \item{\code{assay}}{Name of assay to store expression data as; if \code{NULL}, will
+search for an HDF5 attribute named \code{SEURAT_ASSAY} or an attribute
+dataset named \code{/attrs/SEURAT_ASSAY} for assay name. If not found,
+defaults to \dQuote{RNA}}
+    \item{\code{cells}}{Name of dataset in \code{/col_attrs} with cell names}
+    \item{\code{features}}{Name of dataset in \code{/row_attrs} with feature names}
+    \item{\code{normalized}}{Name of matrix in \code{/layers} to store normalized data
+as; pass \dQuote{/matrix} to store \code{/matrix} as normalized data instead
+of raw counts}
+    \item{\code{scaled}}{Name of dataset in \code{/layers} to store scaled data as}
+    \item{\code{filter}}{Keep only selected cells and/or features as specified by
+\code{/col_attrs/Valid} and \code{/row_attrs/Valid}, respectively}
+  }}
+}
 \description{
 Convert: \code{loom} ==> \code{SummarizedExperiment}
 }

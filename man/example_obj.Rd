@@ -5,15 +5,22 @@
 \title{Example single-cell data object}
 \usage{
 example_obj(
-  class = c("SummarizedExperiment", "SingleCellExperiment", "Seurat", "h5Seurat",
+  class = c("Seurat", "h5Seurat", "SummarizedExperiment", "SingleCellExperiment",
     "CellDataSet", "matrix", "data.table", "data.frame", "list", "loom",
     "LoomExperiment", "SingleCellLoomExperiment", "hdf5se", "anndata", "EWCE"),
   save_path = file.path(tempdir(), "example"),
   verbose = TRUE
 )
 }
+\arguments{
+\item{class}{Object class to return.}
+
+\item{save_path}{Path to save on-disk object formats.}
+
+\item{verbose}{Print messages.}
+}
 \value{
-Single-cell object.
+A single-cell object.
 }
 \description{
 Create a small example object
@@ -24,8 +31,9 @@ of scRNA-seq data.
  \code{Error: ModuleNotFoundError: No module named 'anndata'},
  try running \link[anndata]{install_anndata} and
  then restarting your R session.
+ Also, loom files require you to run \code{library(Seurat)} beforehand.
 
-Certain file types (loom, anndata) can't be stored a .rda
+Certain file types (loom, anndata) can't be stored as \emph{.rda} files
  because they need to be set up for on-disk reading.
 }
 \examples{

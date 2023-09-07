@@ -1,5 +1,6 @@
 #' Convert: \code{loom} ==> \code{Seurat}
 #'
+#' @inheritParams converters
 #' @export
 #' @examples
 #' library(Seurat)

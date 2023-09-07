@@ -2,7 +2,7 @@
 % Please edit documentation in R/merge_anndata.R
 \name{merge_anndata}
 \alias{merge_anndata}
-\title{Merge \link[anndata]{AnnData} objects}
+\title{Merge \code{anndata} objects}
 \usage{
 merge_anndata(
   obj_list,
@@ -40,6 +40,8 @@ saved to disk as \emph{.h5ad} files.}
 \item{fill_value}{When \code{join="outer"}, this is the value that will be used to fill the introduced indices. By default, sparse arrays are padded with zeros, while dense arrays and DataFrames are padded with missing values.}
 
 \item{pairwise}{Whether pairwise elements along the concatenated dimension should be included. This is FALSE by default, since the resulting arrays are often not meaningful.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 A merged \link[anndata]{AnnData} object.

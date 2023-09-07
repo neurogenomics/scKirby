@@ -4,11 +4,21 @@
 \alias{get_var}
 \title{Get variable metadata}
 \usage{
-get_var(obj, rownames_col = NULL, simplify = FALSE, verbose = TRUE)
+get_var(obj, rownames_col = NULL, n = NULL, verbose = TRUE)
 }
 \arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
 \item{rownames_col}{Name of the column to use as row names in the metadata
 (i.e. unique gene/transcript IDs).}
+
+\item{n}{The maximum number of elements to return from that list.}
+
+\item{verbose}{Print messages.}
+}
+\value{
+One or more variable (feature) metadata data.frames.
 }
 \description{
 Extract feature variable (i.e. gene) metadata from any single-cell object.

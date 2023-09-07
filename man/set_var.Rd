@@ -7,8 +7,13 @@
 set_var(obj, var, verbose = TRUE)
 }
 \arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
 \item{var}{Variable metadata
 as a \link[base]{data.frame} with features as row names.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 Single-cell object.

@@ -1,8 +1,9 @@
-#' Merge \link[Seurat]{Seurat} objects
+#' Merge \code{Seurat} objects
 #'
 #' Merge a list of Seurat objects efficiently.
 #' @param obj_list A named list of \link[Seurat]{Seurat} objects,
 #' or paths to \link[Seurat]{Seurat} objects saved to disk as \emph{.rds} files.
+#' @inheritParams map_data
 #' @returns A merged \link[Seurat]{Seurat} object.
 #'
 #' @export
@@ -11,7 +12,7 @@
 #' obj_list <- Seurat::SplitObject(obj,split.by = "groups")
 #' obj2 <- merge_seurat(obj_list)
 merge_seurat <- function(obj_list,
-                         batch_size = 5,
+                         chunk_size = 5,
                          verbose = TRUE){
 
   #### Check names ####
@@ -21,7 +22,7 @@ merge_seurat <- function(obj_list,
   }
   #### Create batches ####
   batches <- split(names(obj_list),
-                   ceiling(seq_along( names(obj_list))/batch_size) )
+                   ceiling(seq_along( names(obj_list))/chunk_size) )
   messager("Merging obj_list across",length(batches),"batch(es).",v=verbose)
   ##### Iterate over batches ####
   lapply(batches, function(b){

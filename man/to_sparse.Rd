@@ -2,15 +2,26 @@
 % Please edit documentation in R/to_sparse.R
 \name{to_sparse}
 \alias{to_sparse}
-\title{To sparse matrix}
+\title{To \code{sparseMatrix}}
 \usage{
 to_sparse(obj, transpose = FALSE, allow_delayed_array = TRUE, verbose = TRUE)
 }
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{transpose}{Transpose the matrix with \code{Matrix::t}.}
+
+\item{allow_delayed_array}{Allow \link[DelayedArray]{DelayedArray}.}
+
+\item{verbose}{Print messages.}
+}
 \value{
-Sparse matrix
+A \link[Matrix]{sparseMatrix}.
 }
 \description{
-Convert a matrix or data.frame to a sparse matrix.
+Convert a \code{matrix} or \code{data.frame}
+to a \link[Matrix]{sparseMatrix}.
 }
 \examples{
 obj <- data.frame(gene=paste0("gene",seq_len(10)),

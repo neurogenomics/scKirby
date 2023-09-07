@@ -1,7 +1,11 @@
 #' Convert: \code{SummarizedExperiment} ==> \code{AnnData}
 #'
 #' @param method Which R package to use for the conversion.
+#' @param ... Additional arguments passed to the respective converter function.
+#' @inheritParams converters
 #' @inheritParams seurat_to_anndata
+#' @returns \link[anndata]{AnnData} object.
+#'
 #' @export
 #' @import sceasy
 #' @examples

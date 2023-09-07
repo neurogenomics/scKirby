@@ -4,7 +4,7 @@
 \alias{get_obsm}
 \title{Extract reductions}
 \usage{
-get_obsm(obj, keys = NULL, verbose = TRUE)
+get_obsm(obj, keys = NULL, n = NULL, verbose = TRUE)
 }
 \arguments{
 \item{obj}{Object of class:
@@ -19,6 +19,8 @@ get_obsm(obj, keys = NULL, verbose = TRUE)
 }}
 
 \item{keys}{The keys of reductions to extract from.}
+
+\item{n}{The maximum number of elements to return from that list.}
 
 \item{verbose}{Print messages.}
 }

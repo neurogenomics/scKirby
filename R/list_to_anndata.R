@@ -1,5 +1,7 @@
 #' Convert: \code{list} ==> \code{AnnData}
 #'
+#' @inheritParams converters
+#' @inheritParams to_sparse
 #' @export
 #' @examples
 #' obj <- example_obj("list")
@@ -13,7 +15,7 @@ list_to_anndata <- function(obj,
   activate_conda(verbose=verbose)
   #### Get data ####
   ## Read in
-  X <- get_data(obj = obj)
+  X <- get_x(obj = obj)
   ### Check if list
   if(is_list(X)){
     messager("Only first element in `data` will be used:",names(X)[1],

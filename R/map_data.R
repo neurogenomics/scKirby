@@ -8,16 +8,18 @@
 #' \item{\link[SummarizedExperiment]{SummarizedExperiment}}
 #' \item{\link[SingleCellExperiment]{SingleCellExperiment}}
 #' \item{\link[SeuratObject]{Seurat}}
-#' \item{\link[AnnData]{AnnData}}
+#' \item{\link[anndata]{AnnData}}
 #' \item{
 #' \link[Matrix]{Matrix} or
-#' \link[data.frame]{data.frame} or
+#' \link[base]{data.frame} or
 #' \link[data.table]{data.table}
 #' }
 #' }
+#' @param as_delayedarray Convert aggregated matrix to
+#' \link[DelayedArray]{DelayedArray}.
 #' @param chunk_size An integer indicating number of cells to include per chunk.
 #' This can be a more memory efficient and scalable way of aggregating on-disk
-#' data formats like \link[AnnData]{AnnData},
+#' data formats like \link[anndata]{AnnData},
 #' rather than reading in the entire matrix into memory at once
 #'  (default: \code{NULL}).
 #' @inheritParams orthogene::infer_species
@@ -49,7 +51,7 @@ map_data <- function(obj,
                      agg_fun = "sum",
                      mthreshold = Inf,
                      as_sparse = TRUE,
-                     as_DelayedArray = FALSE,
+                     as_delayedarray = FALSE,
                      sort_rows = FALSE,
                      test_species = NULL,
                      chunk_size = NULL,
@@ -91,7 +93,7 @@ map_data <- function(obj,
           agg_fun = agg_fun,
           mthreshold = mthreshold,
           as_sparse = as_sparse,
-          as_DelayedArray = as_DelayedArray,
+          as_delayedarray = as_delayedarray,
           sort_rows = sort_rows,
           test_species = test_species,
           verbose = verbose)
@@ -110,7 +112,7 @@ map_data <- function(obj,
           agg_fun = agg_fun,
           mthreshold = mthreshold,
           as_sparse = as_sparse,
-          as_DelayedArray = as_DelayedArray,
+          as_delayedarray = as_delayedarray,
           sort_rows = sort_rows,
           test_species = test_species,
           chunk_size = chunk_size,
@@ -130,7 +132,7 @@ map_data <- function(obj,
       agg_fun = agg_fun,
       mthreshold = mthreshold,
       as_sparse = as_sparse,
-      as_DelayedArray = as_DelayedArray,
+      as_delayedarray = as_delayedarray,
       sort_rows = sort_rows,
       test_species = test_species,
       verbose = verbose)
@@ -149,7 +151,7 @@ map_data <- function(obj,
       agg_fun = agg_fun,
       mthreshold = mthreshold,
       as_sparse = as_sparse,
-      as_DelayedArray = as_DelayedArray,
+      as_delayedarray = as_delayedarray,
       sort_rows = sort_rows,
       test_species = test_species,
       verbose = verbose)

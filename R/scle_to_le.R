@@ -1,5 +1,6 @@
 #' Convert: \code{SingleCellLoomExperiment} ==> \code{LoomExperiment}
 #'
+#' @inheritParams converters
 #' @export
 #' @examples
 #' obj <- example_obj("se")

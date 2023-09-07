@@ -1,6 +1,9 @@
 #' Convert: to \code{list}
 #'
-#' Convert any object to \code{list} format.
+#' Convert any object to \link[base]{list} format.
+#' @inheritParams converters
+#' @returns A \link[base]{list} object.
+#'
 #' @export
 #' @examples
 #' obj <- example_obj("seurat")

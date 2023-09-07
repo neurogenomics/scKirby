@@ -4,7 +4,7 @@
 \alias{get_varm}
 \title{Extract variable loadings}
 \usage{
-get_varm(obj, keys = NULL, verbose = TRUE)
+get_varm(obj, keys = NULL, n = NULL, verbose = TRUE)
 }
 \arguments{
 \item{obj}{Object of class:
@@ -20,15 +20,17 @@ get_varm(obj, keys = NULL, verbose = TRUE)
 
 \item{keys}{The keys of reductions to extract from.}
 
+\item{n}{The maximum number of elements to return from that list.}
+
 \item{verbose}{Print messages.}
 }
 \value{
-A matrix of feature embeddings coordinates.
+A named list of matrices containing the feature loadings.
 }
 \description{
 Extract variable feature loadings from any single-cell object class.
 }
 \examples{
-obj <- example_obj("ad")
+obj <- example_obj("seurat")
 varm <- get_varm(obj)
 }

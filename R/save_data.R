@@ -1,18 +1,24 @@
 #' Save data
 #'
 #' Save a variety of single-cell data formats.
+#' @param filetype The file format to write the object as.
+#' @param quicksave_hdf5 When \code{filetype="h5"},
+#' \link[HDF5Array]{quickResaveHDF5SummarizedExperiment} will be used to save
+#' the data.
 #' @inheritParams ingest_data
 #' @export
 #' @examples
 #' obj <- example_obj("cds")
 #' filepath <- save_data(obj)
 save_data <- function(obj,
-                      filetype = c("h5","h5seurat","h5ad","rda","rds","anndata"),
+                      filetype = c("h5","h5seurat","h5ad",
+                                   "rda","rds",
+                                   "anndata"),
                       save_path = file.path(tempdir(),
                                           paste("scKirby_output",
 
                                                 filetype,sep=".")),
-                      quicksave_HDF5 = TRUE,
+                      quicksave_hdf5 = TRUE,
                       overwrite = TRUE,
                       verbose = TRUE){
 
@@ -22,7 +28,7 @@ save_data <- function(obj,
   if(is_filetype(filetype,"h5")){
     save_path <- save_hdf5se(obj=obj,
                              save_dir=save_path,
-                             quicksave_HDF5=quicksave_HDF5,
+                             quicksave_hdf5=quicksave_hdf5,
                              overwrite=overwrite,
                              verbose=verbose)
   #### h5seurat ####

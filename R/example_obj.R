@@ -7,10 +7,14 @@
 #'  \code{Error: ModuleNotFoundError: No module named 'anndata'},
 #'  try running \link[anndata]{install_anndata} and
 #'  then restarting your R session.
+#'  Also, loom files require you to run \code{library(Seurat)} beforehand.
 #'
-#' Certain file types (loom, anndata) can't be stored a .rda
+#' Certain file types (loom, anndata) can't be stored as \emph{.rda} files
 #'  because they need to be set up for on-disk reading.
-#' @returns Single-cell object.
+#' @param class Object class to return.
+#' @param save_path Path to save on-disk object formats.
+#' @inheritParams converters
+#' @returns A single-cell object.
 #'
 #' @export
 #' @importFrom utils data
@@ -23,10 +27,10 @@
 #'
 #' library(Seurat) # necessary
 #' loom <- example_obj("loom")
-example_obj <- function(class=c("SummarizedExperiment",
-                                "SingleCellExperiment",
-                                "Seurat",
+example_obj <- function(class=c("Seurat",
                                 "h5Seurat",
+                                "SummarizedExperiment",
+                                "SingleCellExperiment",
                                 "CellDataSet",
                                 "matrix",
                                 "data.table",

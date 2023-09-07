@@ -24,7 +24,12 @@ made explicit by the user.
 
 \item{custom_reader}{A user-supplied function to read in the data with.}
 
+\item{as_sparse}{Convert to a \link[Matrix]{sparseMatrix}.}
+
 \item{verbose}{Print messages.}
+
+\item{...}{Additional argument passed to the filetype-specific
+reader functions.}
 }
 \value{
 An single-cell data object.

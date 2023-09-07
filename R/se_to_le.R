@@ -1,6 +1,9 @@
 #' Convert: \code{SummarizedExperiment} ==> \code{SingleCellLoomExperiment}
 #'
 #' @param as_scle Convert to \link[LoomExperiment]{LoomExperiment} format.
+#' @inheritParams converters
+#' @returns A \link[LoomExperiment]{LoomExperiment} object.
+#'
 #' @export
 #' @examples
 #' obj <- example_obj("se")

@@ -1,6 +1,6 @@
 save_hdf5se <- function(obj,
                         save_dir,
-                        quicksave_HDF5=TRUE,
+                        quicksave_hdf5=TRUE,
                         overwrite=FALSE,
                         verbose=TRUE){
   if(!is_class(obj,"se")){
@@ -8,7 +8,7 @@ save_hdf5se <- function(obj,
   }
 
   if(!is.null(save_dir)){
-    if(isTRUE(quicksave_HDF5) &&
+    if(isTRUE(quicksave_hdf5) &&
        file.exists(file.path(save_dir,"assays.h5")) &&
        isFALSE(overwrite)){
       messager("+ Updating existing HDF5SummarizedExperiment:",save_dir,

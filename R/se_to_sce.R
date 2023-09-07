@@ -1,5 +1,6 @@
 #' Convert: \code{SummarizedExperiment} ==> \code{SingleCellExperiment}
 #'
+#' @inheritParams converters
 #' @export
 #' @examples
 #' obj <- example_obj("se")

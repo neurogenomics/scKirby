@@ -1,9 +1,10 @@
-#' Merge \link[anndata]{AnnData} objects
+#' Merge \code{anndata} objects
 #'
 #' Merge a list of Seurat objects efficiently.
 #' @param obj_list A named list of \link[anndata]{AnnData} objects,
 #' or paths to \link[anndata]{AnnData} objects
 #' saved to disk as \emph{.h5ad} files.
+#' @inheritParams converters
 #' @inheritParams anndata::concat
 #' @returns A merged \link[anndata]{AnnData} object.
 #'

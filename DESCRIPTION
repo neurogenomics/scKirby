@@ -1,7 +1,7 @@
 Package: scKirby
 Type: Package
 Title: Automated ingestion and conversion of various single-cell data formats.
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: c(person(given = "Brian",
                     family = "Schilder",
                     role = c("cre"),
@@ -52,7 +52,8 @@ Suggests:
   zellkonverter,
   anndataR,
   future,
-  testthat (>= 3.0.0)
+  testthat (>= 3.0.0),
+  WGCNA
 Remotes:
   github::RajLabMSSM/echoconda, 
   github::mojaveazure/seurat-disk, 

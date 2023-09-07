@@ -6,6 +6,18 @@
 \usage{
 seurat_to_se(obj, as_sce = TRUE, verbose = TRUE)
 }
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{as_sce}{Convert to a \link[SingleCellExperiment]{SingleCellExperiment}
+format.}
+
+\item{verbose}{Print messages.}
+}
+\value{
+A \link[SummarizedExperiment]{SummarizedExperiment} object.
+}
 \description{
 Convert: \code{Seurat} ==> \code{SummarizedExperiment}
 }

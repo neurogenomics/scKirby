@@ -1,5 +1,8 @@
 #' Convert: \code{Seurat} ==> \code{list}
 #'
+#' @inheritParams converters
+#' @returns A named list.
+#'
 #' @export
 #' @importFrom methods .hasSlot slot
 #' @importFrom stats setNames
@@ -16,7 +19,7 @@ seurat_to_list <- function(obj,
   } else {
     messager("+ Seurat ==> list",v=verbose)
     list(
-      data = get_data(obj = obj,
+      data = get_x(obj = obj,
                       verbose = verbose),
       obs = get_obs(obj = obj,
                     verbose = verbose),

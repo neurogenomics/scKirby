@@ -6,6 +6,12 @@
 \usage{
 update_seurat(obj, verbose = TRUE)
 }
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Update a Seurat from V1 --> V3 or V2 --> V3.
 }

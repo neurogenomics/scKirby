@@ -3,18 +3,26 @@
 #' Extract feature variable (i.e. gene) metadata from any single-cell object.
 #' @param rownames_col Name of the column to use as row names in the metadata
 #' (i.e. unique gene/transcript IDs).
+#' @inheritParams converters
+#' @inheritParams get_n_elements
+#' @returns One or more variable (feature) metadata data.frames.
+#'
 #' @export
 #' @examples
 #' obj <- example_obj("cds")
 #' var <- get_var(obj)
 get_var <- function(obj,
                     rownames_col=NULL,
-                    simplify=FALSE,
+                    n=NULL,
                     verbose=TRUE){
   # devoptera::args2vars(get_var)
 
+  #### From matrix ####
+  if(is_class(obj,"matrix")){
+    var <- data.frame(variable = rownames(obj),
+                      row.names = rownames(obj))
   #### loom ####
-  if(is_class(obj,"loom")){
+  } else if(is_class(obj,"loom")){
     var <- as.data.frame(obj[["row_attrs"]])
     #### SummarizedExperiment ####
   } else if(is_class(obj,"se")){
@@ -23,7 +31,8 @@ get_var <- function(obj,
   } else if(is_class(obj,"seurat")){
     ## Seurat V1
     if(methods::is(obj,"seurat")){
-      var <- list(RNA=data.frame(row.names = rownames(obj@raw.data)))
+      var <- data.frame(rownames(obj@raw.data),
+                        row.names = rownames(obj@raw.data))
     ## Seurat V2+
     } else {
       assays <- Seurat::Assays(obj)
@@ -48,7 +57,8 @@ get_var <- function(obj,
   } else if(is_class(obj,"cds")){
     var <- obj@featureData@data
     #### list ####
-  } else if(is_class(obj,"list")){
+  } else if(is_class(obj,"list") &&
+            "var" %in% names(obj)){
     #### File path ####
     if(is.character(obj$var)){
       var <- read_data(path = obj$var,
@@ -61,14 +71,14 @@ get_var <- function(obj,
   } else {
     stopper("Unable to get `var` from object.")
   }
-  #### Return as a named list (1 per assay), unless there's only 1 assay ####
-  if(isTRUE(simplify)){
-    var <- simplify_list(l = var)
-  }
   #### Add rownames ####
   var <- check_metadata_rownames(d = var,
                                  rownames_col = rownames_col,
                                  verbose = verbose)
+  #### Return as a named list (1 per assay), unless there's only 1 assay ####
+  var <- get_n_elements(l = var,
+                        n = n,
+                        verbose = verbose)
   #### Return ####
   return(var)
 }

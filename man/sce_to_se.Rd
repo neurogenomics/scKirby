@@ -6,6 +6,12 @@
 \usage{
 sce_to_se(obj, verbose = TRUE)
 }
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Convert: \code{SingleCellExperiment} ==> \code{SummarizedExperiment}
 }

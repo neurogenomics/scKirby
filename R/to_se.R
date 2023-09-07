@@ -1,7 +1,13 @@
 #' Convert: ==> \code{SummarizedExperiment}
 #'
-#' Convert any object to \code{SummarizedExperiment} or
-#' \code{SingleCellExperiment} format.
+#' Convert any object to \link[SummarizedExperiment]{SummarizedExperiment} or
+#' \link[SingleCellExperiment]{SingleCellExperiment} format.
+#' @param as_sce Convert to a \link[SingleCellExperiment]{SingleCellExperiment}
+#'  format.
+#' @param as_delayedarray Convert to \link[DelayedArray]{DelayedArray}.
+#' @inheritParams converters
+#' @returns A \link[SummarizedExperiment]{SummarizedExperiment} or
+#'  \link[SingleCellExperiment]{SingleCellExperiment} object.
 #'
 #' @export
 #' @examples
@@ -9,6 +15,7 @@
 #' obj2 <- to_se(obj)
 to_se <- function(obj,
                   as_sce=FALSE,
+                  as_delayedarray=FALSE,
                   verbose=TRUE){
 
   #### Check if class is supported ####
@@ -16,13 +23,19 @@ to_se <- function(obj,
   #### EWCE ####
   if(is_class(obj,"ewce")){
     obj2 <- ctd_to_se(obj,
-                     as_sce = as_sce,
-                     verbose = verbose)
+                      as_sce = as_sce,
+                      verbose = verbose)
   #### Matrices ####
   } else if(is_class(obj,"matrix")){
     obj2 <- matrix_to_se(obj,
-                        as_sce = as_sce,
-                        verbose = verbose)
+                         as_sce = as_sce,
+                         verbose = verbose)
+    #### CDS ####
+  } else if(is_class(obj,"cds")){
+    obj2 <- cds_to_se(obj,
+                      as_delayedarray = as_delayedarray,
+                      as_sce = as_sce,
+                      verbose = verbose)
   #### Seurat ####
   } else if(is_class(obj,"seurat")){
     obj2 <- seurat_to_se(obj,

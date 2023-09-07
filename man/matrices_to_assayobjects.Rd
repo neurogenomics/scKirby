@@ -2,15 +2,18 @@
 % Please edit documentation in R/matrices_to_assayobjects.R
 \name{matrices_to_assayobjects}
 \alias{matrices_to_assayobjects}
-\title{Matrices to AssayObjects}
+\title{Matrices to \code{AssayObjects}}
 \usage{
 matrices_to_assayobjects(matrices, var_features = NULL, verbose = TRUE)
 }
 \arguments{
 \item{matrices}{A named list of matrices.}
 
-\item{meta.features}{[Optional] A named list of \code{meta.features}
-(one per unique assay in \code{matrices}).}
+\item{var_features}{[Optional] A named list of feature metadata data.frames
+(one per unique assay in \code{matrices}) to be put in the
+ \code{meta.features} slot of each \code{AssayObject}.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 a named list of \pkg{Seurat} assay objects.

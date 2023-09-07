@@ -1,5 +1,6 @@
 #' Convert: \code{matrix} ==> \code{Seurat}
 #'
+#' @inheritParams converters
 #' @export
 #' @examples
 #' obj <- example_obj("matrix")

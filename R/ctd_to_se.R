@@ -1,14 +1,18 @@
 #' Convert: \code{CellTypeDataset} ==> \code{SingleCellExperiment}
 #'
+#' @inheritParams converters
+#' @inheritParams to_se
 #' @export
 #' @examples
 #' obj <- example_obj("ctd")
 #' obj <- ctd_to_sce(obj)
 ctd_to_se <- function(obj,
                       as_sce=FALSE,
+                      as_delayedarray=FALSE,
                       verbose=TRUE){
   if(is_ctd(obj)){
     obj2 <- EWCE::ctd_to_sce(object = obj,
+                             as_DelayedArray = as_delayedarray,
                              verbose = verbose)
   } else{
     stopper("obj must be a CellTypeDataset",

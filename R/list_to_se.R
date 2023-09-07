@@ -1,5 +1,7 @@
 #' Convert: \code{list} ==> \code{SummarizedExperiment}
 #'
+#' @inheritParams converters
+#' @inheritParams to_se
 #' @export
 #' @examples
 #' obj <- example_obj("list")
@@ -7,8 +9,7 @@
 #' obj3 <- list_to_se(obj, as_sce=TRUE)
 list_to_se <- function(obj,
                        as_sce=FALSE,
-                       verbose=TRUE,
-                       ...){
+                       verbose=TRUE){
 
   #### Distinguish data with the same or different number of rows ####
   nrows <- sapply(obj$data, nrow)

@@ -19,7 +19,7 @@ to_seurat(
 \item{obj}{A single-cell object supported by \pkg{scKirby}.
 See \link[scKirby]{converters} for a table of all supported conversions.}
 
-\item{as_h5seurat}{Convert to the \code{H5Seurat} subclass.}
+\item{as_h5seurat}{Convert to the \link[SeuratDisk]{h5Seurat} class.}
 
 \item{update}{Ensure the object is updated to the latest version of Seurat.}
 
@@ -27,13 +27,17 @@ See \link[scKirby]{converters} for a table of all supported conversions.}
 
 \item{verbose}{Print messages.}
 }
+\value{
+A \pkg{Seurat} or
+ \link[SeuratDisk]{h5Seurat} object.
+}
 \description{
 Functions to convert one single-cell format to another.
 }
 \section{Functions}{
 \itemize{
 \item \code{to_seurat()}: Convert any single-cell object to
-\code{Seurat} format.
+\pkg{Seurat} or \link[SeuratDisk]{h5Seurat} format.
 
 }}
 \examples{

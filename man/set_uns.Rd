@@ -7,9 +7,14 @@
 set_uns(obj, uns, key, verbose = TRUE)
 }
 \arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
 \item{uns}{Unstructured data to be stored in object.}
 
 \item{key}{Name of the list element to store \code{uns} in.}
+
+\item{verbose}{Print messages.}
 }
 \value{
 Single-cell object.

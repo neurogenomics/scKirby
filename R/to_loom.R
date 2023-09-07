@@ -1,6 +1,9 @@
 #' Convert: to \code{loom}
 #'
-#' Convert any object to \code{loom} format.
+#' Convert any object to \link[loomR]{loom} format.
+#' @inheritParams converters
+#' @returns A \link[loomR]{loom} object.
+#'
 #' @export
 #' @examples
 #' obj <- example_obj("seurat")

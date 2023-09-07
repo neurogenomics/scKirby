@@ -34,18 +34,26 @@ ingest_data(
 
 \item{custom_reader}{Custom function to read \code{obj} into R.}
 
+\item{save_path}{Path to save the converted \code{obj}.}
+
 \item{overwrite}{If a file of the same name exists, overwrite it.}
 
 \item{return_save_path}{If \code{TRUE}, a list with both the converted object
 and the saved file path will be returned (instead of just the converted object).}
 
-\item{...}{Additional arguments to be passed to \link[scKirby]{read_data}.}
+\item{verbose}{Print messages.}
 
-\item{save_dir}{Directory to save the converted \code{obj}.}
-
-\item{filename}{Name to save the converted \code{obj}.}
-
-\item{save_output}{Whether or not to save the converted \code{obj}.}
+\item{...}{
+  Arguments passed on to \code{\link[=read_data]{read_data}}
+  \describe{
+    \item{\code{path}}{Path to saved single-cell data file,
+or a directory containing the data files.
+If \code{path} is already an R object, it will be returned directly.}
+    \item{\code{filetype}}{The type of file trying to be read in,
+made explicit by the user.
+"guess" (default) will simply infer the most likely file type.}
+    \item{\code{as_sparse}}{Convert to a \link[Matrix]{sparseMatrix}.}
+  }}
 }
 \value{
 Converted single-cell object.
@@ -57,60 +65,40 @@ It then uses the appropriate functions to import that data and convert it to a
 }
 \examples{
 \dontrun{
-library(SummarizedExperiment)
+#### Input: Seurat object ####
+seurat <- example_obj("seurat")
+sce1 <- ingest_data(obj=seurat)
+
+#### Input: Matrix object ####
+sce2 <- ingest_data(obj=seurat@assays$RNA@counts)
+
+#### Input hdf5se object ####
+hdf5se <- example_obj("hdf5se")
+sce3 <- ingest_data(obj=hdf5se)
+
+#### Input anndata object ####
+ad <- example_obj("anndata")
+sce4 <- ingest_data(obj=ad)
+
+#### Input anndata path ####
+sce5 <- ingest_data(obj = ad$filename)
+
+#### Input: h5Seurat object ####
+h5seurat <- example_obj("h5seurat")
+sce6 <- ingest_data(obj=h5seurat)
+
+#### Input: h5Seurat path ####
+sce7 <- ingest_data(obj=h5seurat$path)
+
+#### Input: loom object ####
 library(Seurat)
-data("pbmc_small")
-pbmc_small <- UpdateSeuratObject(pbmc_small)
+loom <- example_obj("loom")
+sce8 <- ingest_data(obj=loom)
 
-#### Ingest expression matrix ####
-sce <- ingest_data(obj=pbmc_small@assays$RNA@counts)
-
-#### Ingest EWCElist ####
+#### Input: EWCE object ####
 \dontrun{
-### Example requires  data from \code{ewceData} package
-cortex_mrna <- ewceData::cortex_mrna()
-sce <- ingest_data(obj=cortex_mrna)
+ewce <- ewceData::cortex_mrna()
+sce10 <- ingest_data(obj=ewce)
 }
-
-#### Ingest Seurat object in memory ####
-sce <- ingest_data(obj=pbmc_small)
-
-#### Ingest HDF5 SingleCellExperiment ####
-sce <- HDF5Array::saveHDF5SummarizedExperiment(sce, dir = "~/Desktop/pbmc_small_h5", replace=T)
-## Read in the sce object directly
-sce <- ingest_data(obj=sce)
-## Read it from disk
-sce <- ingest_data(obj="~/Desktop/pbmc_small_h5")
-
-#### Ingest AnnData ####
-library(anndata)
-## Can point to where anndata is installed (or should be installed)
-## Can also just run anndata::install_anndata() and will install via miniconda
-conda_dir <- dirname(dirname(reticulate::conda_list()[1,]$python))
-reticulate::use_condaenv(condaenv = conda_dir)
-reticulate::conda_install(conda = conda_dir, packages = "loompy", pip = T)
-anndata::install_anndata(method = "conda", conda=conda_dir)
-
-# Convert Seurat object to AnnData for example data
-adata <- anndata::AnnData(X = t(GetAssay(pbmc_small)@counts), obs = pbmc_small@meta.data, var = GetAssay(pbmc_small)@meta.features )
-## In memory
-sce <- ingest_data(obj=adata)
-## On disk
-adata$write_h5ad(filename = "Desktop/pbmc_small.h5ad")
-sce <- ingest_data(obj = "Desktop/pbmc_small.h5ad")
-
-
-#### Ingest H5Seurat ####
-library(SeuratDisk)
-SaveH5Seurat(pbmc_small, filename = "~/Desktop/pbmc_small.h5Seurat", overwrite = T)
-sce <- ingest_data(obj="~/Desktop/pbmc_small.h5Seurat")
-
-#### Ingest loom (from loomR) ####
-library(loomR)
-loom <- loomR::create(data=adata, filename = "~/Desktop/pbmc_small.loom", overwrite = T)
-## In memory
-sce <- ingest_data(obj=loom)
-## From disk
-sce <- ingest_data(obj="~/Desktop/pbmc_small.loom")
 }
 }

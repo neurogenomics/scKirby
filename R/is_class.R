@@ -13,8 +13,14 @@
 #' @examples
 #' obj <- example_obj("Seurat")
 #' is_class(obj,"seurat")
+#'
+#' X <- example_obj("matrix")
+#' obj <- lapply(seq(3), function(...){X})
+#' is_class(obj, "matrix_list")
 is_class <- function(obj,
                      group = NULL){
+  # devoptera::args2vars(is_class)
+
   if(is.null(obj) || is.character(obj)) return(FALSE)
   cdict <- class_dict()
   matches <- lapply(cdict, function(y){
@@ -27,11 +33,15 @@ is_class <- function(obj,
   if(is_list(obj, validate = TRUE)){
     groups <- c(groups,"list")
   }
+  if(is.list(obj) &&
+     all(mapply(obj,FUN=is_class,"matrix"))){
+    groups <- c(groups,"matrix_list")
+  }
   if(is.null(group)){
     return(groups)
   } else {
     #### Exceptions ####
-    if(all(c("loom","h5seurat") %in% groups)) groups <- "h5seurat"
+    # if(all(c("loom","h5seurat") %in% groups)) groups <- "h5seurat"
     return(tolower(group) %in% groups)
   }
 }

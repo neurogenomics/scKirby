@@ -4,6 +4,7 @@
 #'  in any single-cell object that has one.
 #' @param obs Observation metadata
 #' as a \link[base]{data.frame} with samples as row names.
+#' @inheritParams converters
 #' @returns Single-cell object.
 #'
 #' @export

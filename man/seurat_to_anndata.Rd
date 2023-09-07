@@ -14,11 +14,18 @@ seurat_to_anndata(
 )
 }
 \arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
 \item{reimport}{Save and re-import the \code{AnnData} object into R to ensure
 all data has been converted from Python-native to R-native objects
 (e.g. pandas data.frames vs. R data.frames).}
 
+\item{save_path}{Path to save the \code{H5Seurat} to.}
+
 \item{method}{R package to use when converting object.}
+
+\item{verbose}{Print messages.}
 
 \item{...}{
   Arguments passed on to \code{\link[anndata:write_h5ad]{anndata::write_h5ad}}

@@ -7,8 +7,16 @@
 get_obs(obj, rownames_col = NULL, verbose = TRUE)
 }
 \arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
 \item{rownames_col}{Name of the column to use as row names in the metadata
 (i.e. unique cell IDs/barcodes).}
+
+\item{verbose}{Print messages.}
+}
+\value{
+An observation (sample) metadata data.frame.
 }
 \description{
 Extract sample observations (i.e. cell) metadata from any single-cell object.

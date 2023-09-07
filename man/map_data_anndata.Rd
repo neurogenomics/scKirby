@@ -18,7 +18,7 @@ map_data_anndata(
   agg_fun = "sum",
   mthreshold = Inf,
   as_sparse = TRUE,
-  as_DelayedArray = FALSE,
+  as_delayedarray = FALSE,
   sort_rows = FALSE,
   test_species = NULL,
   chunk_size = NULL,
@@ -109,9 +109,6 @@ Return only the most "popular" interspecies ortholog mappings.
 \item{mthreshold}{maximum number of results per initial alias to show. Shows all by default.}
 
 \item{as_sparse}{Convert aggregated matrix to sparse matrix.}
-
-\item{as_DelayedArray}{Convert aggregated matrix to
-\link[DelayedArray]{DelayedArray}.}
 
 \item{sort_rows}{Sort \code{gene_df} rows alphanumerically.}
 

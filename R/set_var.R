@@ -4,6 +4,7 @@
 #' in any single-cell object that has one.
 #' @param var Variable metadata
 #' as a \link[base]{data.frame} with features as row names.
+#' @inheritParams converters
 #' @returns Single-cell object.
 #'
 #' @export

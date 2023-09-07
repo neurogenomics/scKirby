@@ -10,6 +10,14 @@ se_to_loom(
   verbose = TRUE
 )
 }
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{save_path}{Path to save the \code{H5Seurat} to.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Convert: \code{SummarizedExperiment} ==> \code{loom}
 }

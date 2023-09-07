@@ -12,12 +12,23 @@ seurat_to_h5seurat(
 )
 }
 \arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
 \item{save_path}{Path to save the \code{H5Seurat} to.}
+
+\item{verbose}{Print messages.}
+
+\item{...}{
+  Arguments passed on to \code{\link[SeuratDisk:SaveH5Seurat]{SeuratDisk::as.h5Seurat}}
+  \describe{
+    \item{\code{}}{}
+  }}
 }
 \description{
 Convert: \code{Seurat} ==> \code{H5Seurat}
 }
 \examples{
 obj <- example_obj("seurat")
-seurat <- seurat_to_h5seurat(obj)
+h5seurat <- seurat_to_h5seurat(obj)
 }

@@ -12,27 +12,33 @@
 #' \item{\code{matrix/data.frame}}
 #' }
 #' @param keys The keys of reductions to extract from.
-#' @param verbose Print messages.
-#' @returns A matrix of feature embeddings coordinates.
+#' @inheritParams get_n_elements
+#' @returns A named list of matrices containing the feature loadings.
 #'
 #' @export
 #' @importFrom methods is
 #' @examples
-#' obj <- example_obj("ad")
+#' obj <- example_obj("seurat")
 #' varm <- get_varm(obj)
 get_varm <- function(obj,
                      keys = NULL,
+                     n = NULL,
                      verbose = TRUE) {
 
+  #### MOFA2: model ####
+  if(methods::is(obj,"MOFA")){
+    messager("Extracting varm from MOFA", v = verbose)
+    varm <- get_varm_mofa(obj = obj,
+                          verbose = verbose)
   #### Seurat: DimReduc ####
-  if (methods::is(obj, "DimReduc")) {
+  } else if (methods::is(obj, "DimReduc")) {
     messager("Extracting varm from DimReduc.", v = verbose)
-    varm <- dimreduc_to_list(r = obj)$varm
+    varm <- dimreduc_to_list(obj = obj)$varm
   #### Seurat ####
   } else if (is_class(obj,"seurat")) {
     ## Seurat V1
     if(methods::is(obj,"seurat")){
-      ### Need a way to figure which slot names are availabe a priori ####
+      ### Need a way to figure which slot names are available a priori ####
       # messager("Extracting varm from Seurat (V1).",v = verbose)
       # varm <- list(PCA=list(embeddings=as.matrix(obj@pca.x),
       #                             loadings=as.matrix(obj@pca.rot)))
@@ -45,9 +51,21 @@ get_varm <- function(obj,
                          keys = keys)
       varm <- lapply(stats::setNames(keys,keys),
                      function(nm){
-                       dimreduc_to_list(r = obj@reductions[[nm]])$varm
+                       dimreduc_to_list(obj = obj@reductions[[nm]])$varm
                      })
     }
+  #### AssayData ####
+  } else if (methods::is(obj,"AssayData")) {
+      varm <- if ("pca_models" %in% names(obj)) {
+        list(pca=obj$pca_models[[1]]$rotation)
+      } else if ("v" %in% names(obj)) {
+        list(v=obj["v"])
+      } else if ("V" %in% names(obj)) {
+        list(V=obj$V)
+      } else {
+        messager("No varm could be identified.","Returning NULL.", v=verbose)
+        NULL
+      }
   #### anndata ####
   } else if(is_class(obj,"anndata")){
     all_keys <- obj$varm_keys()
@@ -63,7 +81,7 @@ get_varm <- function(obj,
   #### prcomp ####
   } else if (methods::is(obj, "prcomp")) {
     messager("Extracting varm from prcomp.", v = verbose)
-    varm <- obj$rotation
+    varm <- list(pca=obj$rotation)
   #### cds ####
   } else if (is_class(obj,"cds")){
     # key <- c(
@@ -83,11 +101,14 @@ get_varm <- function(obj,
     #   loadings="reducedDimA")
     varm <- if (methods::.hasSlot(obj,"reducedDimA") &&
                ncol(obj@reducedDimA)==nrow(obj) ) {
-      t(methods::slot(obj, "reducedDimA"))
+      list(reducedDimA=t(methods::slot(obj, "reducedDimA")))
     } else {
-      NULL
+      return(NULL)
     }
   #### list ####
+  } else if (is_class(obj,"matrix_list")){
+    messager("Interpretting obj as matrix list of varm.",v=verbose)
+    return(obj)
   } else if (is_class(obj,"list")) {
     messager("Extracting varm from list", v = verbose)
     if(is.character(obj$varm)){
@@ -95,14 +116,20 @@ get_varm <- function(obj,
                         as_sparse = FALSE,
                         verbose = verbose)
     } else {
-      varm <- obj$varm
+      varm <- obj["varm"]
     }
   } else if (is_class(obj,"matrix") ){
     messager("Interpretting obj as matrix with trait varm.",
              v=verbose)
-    varm <- obj
+    varm <- list(varm=obj)
   } else {
-    stopper("No varm could be identified.")
+    messager("No varm could be identified.","Returning NULL.", v=verbose)
+    return(NULL)
   }
+  if(is.null(NULL)) return(NULL)
+  #### Return as a named list (1 per assay), unless there's only 1 assay ####
+  varm <- get_n_elements(l = varm,
+                         n = n,
+                         verbose = verbose)
   return(varm)
 }

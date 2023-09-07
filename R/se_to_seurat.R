@@ -1,5 +1,6 @@
 #' Convert: \code{SummarizedExperiment} ==> \code{Seurat}
 #'
+#' @inheritParams converters
 #' @export
 #' @examples
 #' obj <- example_obj("se")

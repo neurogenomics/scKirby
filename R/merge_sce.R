@@ -10,14 +10,15 @@
 #' with the list of SCE objects combined.
 #'
 #' @export
-#' @import SingleCellExperiment
+#' @importFrom SingleCellExperiment colData
+#' @importFrom EWCE merge_sce
 #' @examples
 #' obj <- example_obj("sce")
-#' batch_names<-unique(obj$batch)
-#' sce_list<-list(obj[,obj$batch=='batch2'],
-#'                obj[,obj$batch=='batch3'])
-#' obj2 <- sce_merge(sce_list, batch_names = batch_names)
-sce_merge <- function(sce_list,
+#' batch_names <- unique(obj$groups)
+#' sce_list <- list(obj[,obj$groups=='g1'],
+#'                  obj[,obj$groups=='g2'])
+#' obj2 <- merge_sce(sce_list, batch_names = batch_names)
+merge_sce <- function(sce_list,
                       method = "union",
                       cut_off_batch = 0.01,
                       cut_off_overall = 0.01,
@@ -25,6 +26,7 @@ sce_merge <- function(sce_list,
                       colData_names = intersect,
                       batch_names = names(sce_list),
                       verbose = TRUE) {
+  # devoptera::args2vars(sce_merge)
 
   if(is.function(colData_names)){
     colData_names <- lapply(sce_list, function(sce){

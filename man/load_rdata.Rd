@@ -4,9 +4,15 @@
 \alias{load_rdata}
 \title{load RData}
 \usage{
-load_rdata(fileName)
+load_rdata(file)
+}
+\arguments{
+\item{file}{a (readable binary-mode) \link[base]{connection} or a character string
+    giving the name of the file to load (when \link[base]{tilde expansion}
+    is done).}
 }
 \description{
 Load processed data using a function that assigns it
-to a specific variable (so you don't have to guess what the loaded variable name is).
+to a specific variable
+(so you don't have to guess what the loaded variable name is).
 }

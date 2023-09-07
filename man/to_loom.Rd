@@ -6,8 +6,19 @@
 \usage{
 to_loom(obj, save_path = file.path(tempdir(), "scKirby.loom"), verbose = TRUE)
 }
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{save_path}{Path to save the \code{H5Seurat} to.}
+
+\item{verbose}{Print messages.}
+}
+\value{
+A \link[loomR]{loom} object.
+}
 \description{
-Convert any object to \code{loom} format.
+Convert any object to \link[loomR]{loom} format.
 }
 \examples{
 obj <- example_obj("seurat")

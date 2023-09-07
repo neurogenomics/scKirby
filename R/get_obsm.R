@@ -12,7 +12,8 @@
 #' \item{\code{matrix/data.frame}}
 #' }
 #' @param keys The keys of reductions to extract from.
-#' @param verbose Print messages.
+#' @inheritParams converters
+#' @inheritParams get_n_elements
 #' @returns A matrix of cell embeddings coordinates.
 #'
 #' @export
@@ -22,13 +23,19 @@
 #' obsm <- get_obsm(obj)
 get_obsm <- function(obj,
                      keys = NULL,
+                     n = NULL,
                      verbose = TRUE) {
   # devoptera::args2vars(get_obsm)
 
+  #### MOFA2: model ####
+  if(methods::is(obj,"MOFA")){
+    messager("Extracting obsm from MOFA", v = verbose)
+    obsm <- get_obsm_mofa(obj = obj,
+                          verbose = verbose)
   #### Seurat: DimReduc ####
-  if (methods::is(obj, "DimReduc")) {
+  } else if (methods::is(obj, "DimReduc")) {
     messager("Extracting obsm from DimReduc.", v = verbose)
-    obsm <- dimreduc_to_list(r = obj)$obsm
+    obsm <- dimreduc_to_list(obj = obj)$obsm
   #### Seurat ####
   } else if (is_class(obj,"seurat")) {
     ## Seurat V1
@@ -46,7 +53,7 @@ get_obsm <- function(obj,
                               keys = keys)
       obsm <- lapply(stats::setNames(keys,keys),
                      function(nm){
-                       dimreduc_to_list(r = obj@reductions[[nm]])$obsm
+                       dimreduc_to_list(obj = obj@reductions[[nm]])$obsm
                        })
     }
   #### anndata ####
@@ -64,7 +71,7 @@ get_obsm <- function(obj,
   #### prcomp ####
   } else if (methods::is(obj, "prcomp")) {
     messager("Extracting obsm from prcomp.", v = verbose)
-    obsm <- obj$x
+    obsm <- list(pca=obj$x)
   #### cds ####
   } else if (is_class(obj,"cds")){
     # key <- c(
@@ -84,34 +91,42 @@ get_obsm <- function(obj,
     #   loadings="reducedDimA")
     obsm <- if(methods::.hasSlot(obj,"reducedDimS") &&
                ncol(obj@reducedDimS)==ncol(obj) ){
-      t(methods::slot(obj, "reducedDimS"))
+      list(reducedDimS=t(methods::slot(obj, "reducedDimS")))
     } else if (methods::.hasSlot(obj,"reducedDimA") &&
                ncol(obj@reducedDimA)==ncol(obj) ) {
-      t(methods::slot(obj, "reducedDimA"))
+      list(reducedDimA=t(methods::slot(obj, "reducedDimA")))
     } else {
       NULL
     }
   #### list ####
   } else if (is_class(obj,"list")) {
     messager("Extracting obsm from list", v = verbose)
-    if(is.character(obj$obsm)){
-      obsm <- read_data(path = obj$obsm,
+    opts <- c("obsm","embedding","u","U")
+    obsm_slots <- opts[opts %in% names(obj)]
+    if(length(opts)==0){
+      stopper("No obsm could be identified.")
+    } else if(is.character(obj[[obsm_slots]])){
+      obsm <- read_data(path = obj[[obsm_slots]],
                         as_sparse = FALSE,
                         verbose = verbose)
     } else {
-      obsm <- obj$obsm
-    }
-    #### Get keys ####
-    if(!is.null(obsm)) {
-      if(is.null(keys)) keys <- names(obsm)
-      obsm <- obsm[keys]
+      obsm <- obj[obsm_slots]
     }
   } else if (is_class(obj,"matrix") ){
     messager("Interpretting obj as matrix with trait obsm.",
              v=verbose)
-    obsm <- obj
+    obsm <- list(obsm=obj)
   } else {
     stopper("No obsm could be identified.")
   }
+  #### Get keys ####
+  if(!is.null(obsm)) {
+    if(is.null(keys)) keys <- names(obsm)
+    obsm <- obsm[keys]
+  }
+  #### Return as a named list (1 per assay), unless there's only 1 assay ####
+  obsm <- get_n_elements(l = obsm,
+                         n = n,
+                         verbose = verbose)
   return(obsm)
 }

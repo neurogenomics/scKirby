@@ -2,13 +2,21 @@
 % Please edit documentation in R/merge_seurat.R
 \name{merge_seurat}
 \alias{merge_seurat}
-\title{Merge \link[Seurat]{Seurat} objects}
+\title{Merge \code{Seurat} objects}
 \usage{
-merge_seurat(obj_list, batch_size = 5, verbose = TRUE)
+merge_seurat(obj_list, chunk_size = 5, verbose = TRUE)
 }
 \arguments{
 \item{obj_list}{A named list of \link[Seurat]{Seurat} objects,
 or paths to \link[Seurat]{Seurat} objects saved to disk as \emph{.rds} files.}
+
+\item{chunk_size}{An integer indicating number of cells to include per chunk.
+This can be a more memory efficient and scalable way of aggregating on-disk
+data formats like \link[anndata]{AnnData},
+rather than reading in the entire matrix into memory at once
+ (default: \code{NULL}).}
+
+\item{verbose}{Print messages.}
 }
 \value{
 A merged \link[Seurat]{Seurat} object.

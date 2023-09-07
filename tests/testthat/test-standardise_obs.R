@@ -1,8 +1,8 @@
-test_that("prepare_metadata works", {
+test_that("standardise_obs works", {
 
   level_cols <- list(level1="")
 
   obj <- example_obj("anndata")
-  obj2 <- prepare_metadata(obj = obj,
+  obj2 <- standardise_obs(obj = obj,
                            level_cols = level_cols)
 })

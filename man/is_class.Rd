@@ -23,4 +23,8 @@ See \link[scKirby]{class_dict} for details.
 \examples{
 obj <- example_obj("Seurat")
 is_class(obj,"seurat")
+
+X <- example_obj("matrix")
+obj <- lapply(seq(3), function(...){X})
+is_class(obj, "matrix_list")
 }

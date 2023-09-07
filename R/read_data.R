@@ -9,7 +9,10 @@
 #'  made explicit by the user.
 #'  "guess" (default) will simply infer the most likely file type.
 #' @param custom_reader A user-supplied function to read in the data with.
-#' @param verbose Print messages.
+#' @inheritParams converters
+#' @inheritParams get_x
+#' @param ... Additional argument passed to the filetype-specific
+#' reader functions.
 #' @returns An single-cell data object.
 #'  The object class that the data gets imported as depends on file type.
 #'
@@ -35,7 +38,6 @@ read_data <- function(path,
   }
   #### Return object directly ####
   if(!is.null(path) &&
-     !is.na(path) &&
      !methods::is(path,"character")){
     messager("+ Returning object directly.",v=verbose)
     return(path)

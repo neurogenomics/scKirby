@@ -3,6 +3,9 @@
 #' Extract sample observations (i.e. cell) metadata from any single-cell object.
 #' @param rownames_col Name of the column to use as row names in the metadata
 #' (i.e. unique cell IDs/barcodes).
+#' @inheritParams converters
+#' @returns An observation (sample) metadata data.frame.
+#'
 #' @export
 #' @examples
 #' obj <- example_obj("scle")
@@ -12,8 +15,12 @@ get_obs <- function(obj,
                     verbose=TRUE){
   # devoptera::args2vars(get_obs)
 
+  #### matrix ####
+  if(is_class(obj,"matrix")){
+    obs <- data.frame(variable = colnames(obj),
+                      row.names = colnames(obj))
   #### loom ####
-  if(is_class(obj,"loom")){
+  } else if(is_class(obj,"loom")){
     obs <- as.data.frame(obj[["col_attrs"]])
   #### SummarizedExperiment ####
   } else if(is_class(obj,"se")){
@@ -31,6 +38,15 @@ get_obs <- function(obj,
   } else if(is_class(obj,"h5seurat")){
   obs <- as.data.frame(obj[["meta.data"]])
   #### anndata ####
+  } else if (methods::is(obj,"DimReduc")) {
+    messager("Using embedding rownames as metadata.",v=verbose)
+    obs <- data.frame(
+      id = rownames(obj@cell.embeddings),
+      ## Redundant but extra column prevents df
+      ## from turning into list sometimes.
+      label_phe_code = rownames(obj@cell.embeddings),
+      row.names = rownames(obj@cell.embeddings)
+    )
   } else if(is_class(obj,"anndata")){
     obs <- obj$obs
   #### CellDataSet ####

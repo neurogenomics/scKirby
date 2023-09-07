@@ -7,7 +7,15 @@
 se_to_le(obj, as_scle = FALSE, verbose = TRUE)
 }
 \arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
 \item{as_scle}{Convert to \link[LoomExperiment]{LoomExperiment} format.}
+
+\item{verbose}{Print messages.}
+}
+\value{
+A \link[LoomExperiment]{LoomExperiment} object.
 }
 \description{
 Convert: \code{SummarizedExperiment} ==> \code{SingleCellLoomExperiment}

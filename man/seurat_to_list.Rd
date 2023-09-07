@@ -6,6 +6,15 @@
 \usage{
 seurat_to_list(obj, verbose = TRUE)
 }
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{verbose}{Print messages.}
+}
+\value{
+A named list.
+}
 \description{
 Convert: \code{Seurat} ==> \code{list}
 }

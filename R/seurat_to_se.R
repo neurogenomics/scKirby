@@ -1,5 +1,9 @@
 #' Convert: \code{Seurat} ==> \code{SummarizedExperiment}
 #'
+#' @inheritParams converters
+#' @inheritParams to_se
+#' @returns A \link[SummarizedExperiment]{SummarizedExperiment} object.
+#'
 #' @export
 #' @examples
 #' obj <- example_obj("seurat")

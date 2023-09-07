@@ -1,5 +1,6 @@
 #' Convert: \code{CellTypeDataSet} ==> \code{Seurat}
 #'
+#' @inheritParams converters
 #' @export
 #' @examples
 #' obj <- example_obj("ctd")

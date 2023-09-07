@@ -4,11 +4,26 @@
 \alias{to_se}
 \title{Convert: ==> \code{SummarizedExperiment}}
 \usage{
-to_se(obj, as_sce = FALSE, verbose = TRUE)
+to_se(obj, as_sce = FALSE, as_delayedarray = FALSE, verbose = TRUE)
+}
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{as_sce}{Convert to a \link[SingleCellExperiment]{SingleCellExperiment}
+format.}
+
+\item{as_delayedarray}{Convert to \link[DelayedArray]{DelayedArray}.}
+
+\item{verbose}{Print messages.}
+}
+\value{
+A \link[SummarizedExperiment]{SummarizedExperiment} or
+ \link[SingleCellExperiment]{SingleCellExperiment} object.
 }
 \description{
-Convert any object to \code{SummarizedExperiment} or
-\code{SingleCellExperiment} format.
+Convert any object to \link[SummarizedExperiment]{SummarizedExperiment} or
+\link[SingleCellExperiment]{SingleCellExperiment} format.
 }
 \examples{
 obj <- example_obj("seurat")

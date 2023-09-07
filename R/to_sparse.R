@@ -1,7 +1,11 @@
-#' To sparse matrix
+#' To \code{sparseMatrix}
 #'
-#' Convert a matrix or data.frame to a sparse matrix.
-#' @returns Sparse matrix
+#' Convert a \code{matrix} or \code{data.frame}
+#' to a \link[Matrix]{sparseMatrix}.
+#' @param allow_delayed_array Allow \link[DelayedArray]{DelayedArray}.
+#' @inheritParams converters
+#' @param transpose Transpose the matrix with \code{Matrix::t}.
+#' @returns A \link[Matrix]{sparseMatrix}.
 #'
 #' @export
 #' @examples

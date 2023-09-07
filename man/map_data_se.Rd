@@ -18,7 +18,7 @@ map_data_se(
   agg_fun = "sum",
   mthreshold = Inf,
   as_sparse = TRUE,
-  as_DelayedArray = FALSE,
+  as_delayedarray = FALSE,
   sort_rows = TRUE,
   test_species = NULL,
   verbose = TRUE
@@ -111,9 +111,6 @@ Return only the most "popular" interspecies ortholog mappings.
 
 \item{as_sparse}{Convert aggregated matrix to sparse matrix.}
 
-\item{as_DelayedArray}{Convert aggregated matrix to
-\link[DelayedArray]{DelayedArray}.}
-
 \item{sort_rows}{Sort \code{gene_df} rows alphanumerically.}
 
 \item{verbose}{Print messages.}
@@ -160,6 +157,8 @@ are input_gene and the values are ortholog_gene}.
 \item{\code{"dict_rev"} : \cr}{As a reversed dictionary (named list)
 where the names are ortholog_gene and the values are input_gene}.
 }}
+    \item{\code{as_DelayedArray}}{Convert aggregated matrix to
+\link[DelayedArray]{DelayedArray}.}
   }}
 }
 \value{

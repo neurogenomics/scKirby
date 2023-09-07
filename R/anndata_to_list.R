@@ -1,5 +1,6 @@
 #' Convert: \code{AnnData} ==> \code{list}
 #'
+#' @inheritParams converters
 #' @export
 #' @examples
 #' obj <- example_obj("anndata")
@@ -8,7 +9,7 @@ anndata_to_list <- function(obj,
                             verbose=TRUE){
 
   messager("+ AnnData ==> list",v=verbose)
-  list(data = get_data(obj = obj,
+  list(data = get_x(obj = obj,
                        verbose = verbose),
        obs = get_obs(obj = obj,
                      verbose = verbose),

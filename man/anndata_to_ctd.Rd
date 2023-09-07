@@ -14,24 +14,117 @@ anndata_to_ctd(
   dropNA = TRUE,
   standardise = TRUE,
   as_sparse = TRUE,
-  as_DelayedArray = FALSE,
+  as_delayedarray = FALSE,
   verbose = TRUE,
   ...
 )
 }
 \arguments{
-\item{agg_fun}{Aggregation function.}
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{annotLevels}{List with arrays of strings containing the cell type
+names associated with each column in \code{exp}.}
+
+\item{dataset}{CellTypeData. name.}
+
+\item{chunk_size}{An integer indicating number of cells to include per chunk.
+This can be a more memory efficient and scalable way of aggregating on-disk
+data formats like \link[anndata]{AnnData},
+rather than reading in the entire matrix into memory at once
+ (default: \code{NULL}).}
+
+\item{agg_fun}{Aggregation function passed to 
+ \link[orthogene]{aggregate_mapped_genes}. 
+Set to \code{NULL} to skip aggregation step (default).}
 
 \item{agg_method}{Aggregation method.}
 
 \item{dropNA}{Drop genes assigned to \code{NA} in \code{groupings}.}
 
-\item{as_sparse}{Convert aggregated matrix to sparse matrix.}
+\item{standardise}{Run \link[EWCE]{standardise_ctd}.}
 
-\item{as_DelayedArray}{Convert aggregated matrix to
+\item{as_sparse}{Convert \code{gene_df} to a sparse matrix.
+Only works if \code{gene_df} is one of the following classes:\cr
+\itemize{
+\item{\code{matrix}}
+\item{\code{Matrix}}
+\item{\code{data.frame}}
+\item{\code{data.table}}
+\item{\code{tibble}}
+}
+If \code{gene_df} is a sparse matrix to begin with,
+it will be returned as a sparse matrix
+ (so long as \code{gene_output=} \code{"rownames"} or \code{"colnames"}).}
+
+\item{as_delayedarray}{Convert aggregated matrix to
 \link[DelayedArray]{DelayedArray}.}
 
 \item{verbose}{Print messages.}
+
+\item{...}{
+  Arguments passed on to \code{\link[EWCE:standardise_ctd]{EWCE::standardise_ctd}}
+  \describe{
+    \item{\code{ctd}}{Input CellTypeData.}
+    \item{\code{input_species}}{Which species the gene names in \code{exp} come from.
+See \link[EWCE]{list_species} for all available species.}
+    \item{\code{output_species}}{Which species' genes names to convert \code{exp} to.
+See \link[EWCE]{list_species} for all available species.}
+    \item{\code{sctSpecies_origin}}{Species that the \code{sct_data} 
+originally came from, regardless of its current gene format 
+(e.g. it was previously converted from mouse to human gene orthologs).
+ This is used for computing an appropriate backgrund.}
+    \item{\code{non121_strategy}}{How to handle genes that don't have
+1:1 mappings between \code{input_species}:\code{output_species}.
+Options include:\cr
+\itemize{
+\item{\code{"drop_both_species" or "dbs" or 1} : \cr}{
+Drop genes that have duplicate
+mappings in either the \code{input_species} or \code{output_species} \cr
+(\emph{DEFAULT}).}
+\item{\code{"drop_input_species" or "dis" or 2} : \cr}{
+Only drop genes that have duplicate
+mappings in the \code{input_species}.}
+\item{\code{"drop_output_species" or "dos" or 3} : \cr}{
+Only drop genes that have duplicate
+mappings in the \code{output_species}.}
+\item{\code{"keep_both_species" or "kbs" or 4} : \cr}{
+Keep all genes regardless of whether
+they have duplicate mappings in either species.}
+\item{\code{"keep_popular" or "kp" or 5} : \cr}{
+Return only the most "popular" interspecies ortholog mappings.
+ This procedure tends to yield a greater number of returned genes
+ but at the cost of many of them not being true biological 1:1 orthologs.}
+ \item{\code{"sum","mean","median","min" or "max"} : \cr}{
+ When \code{gene_df} is a matrix and \code{gene_output="rownames"},
+  these options will aggregate many-to-one gene mappings
+  (\code{input_species}-to-\code{output_species})
+  after dropping any duplicate genes in the \code{output_species}.
+ }
+}}
+    \item{\code{method}}{R package to use for gene mapping:
+\itemize{
+\item{\code{"gprofiler"} : Slower but more species and genes.}
+\item{\code{"homologene"} : Faster but fewer species and genes.}
+\item{\code{"babelgene"} : Faster but fewer species and genes.
+Also gives consensus scores for each gene mapping based on a
+ several different data sources.}
+}}
+    \item{\code{force_new_quantiles}}{By default, quantile computation is
+skipped if they have already been computed.
+Set \code{=TRUE} to override this and generate new quantiles.}
+    \item{\code{force_standardise}}{If \code{ctd} has already been standardised, whether
+to rerun standardisation anyway (Default: \code{FALSE}).}
+    \item{\code{remove_unlabeled_clusters}}{Remove any samples that have
+numeric column names.}
+    \item{\code{numberOfBins}}{Number of non-zero quantile bins.}
+    \item{\code{keep_annot}}{Keep the column annotation data if provided.}
+    \item{\code{keep_plots}}{Keep the dendrograms if provided.}
+    \item{\code{as_DelayedArray}}{Convert to \code{DelayedArray}.}
+    \item{\code{rename_columns}}{Remove \code{replace_chars} from column names.}
+    \item{\code{make_columns_unique}}{Rename each columns with the prefix
+\code{dataset.species.celltype}.}
+  }}
 }
 \description{
 Convert: \code{AnnData} ==> \code{CellTypeDataset}

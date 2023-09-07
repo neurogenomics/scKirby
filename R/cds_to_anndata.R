@@ -1,5 +1,6 @@
 #' Convert: \code{CellDataSet} ==> \code{AnnData}
 #'
+#' @inheritParams converters
 #' @inheritParams seurat_to_anndata
 #' @export
 #' @examples

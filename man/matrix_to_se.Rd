@@ -6,6 +6,15 @@
 \usage{
 matrix_to_se(obj, as_sce = FALSE, verbose = TRUE)
 }
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{as_sce}{Convert to a \link[SingleCellExperiment]{SingleCellExperiment}
+format.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Convert: \code{matrix} ==> \code{SummarizedExperiment}
 }

@@ -1,5 +1,8 @@
 #' Convert: \code{loom} ==> \code{SummarizedExperiment}
 #'
+#' @inheritParams converters
+#' @inheritParams to_se
+#' @inheritDotParams SeuratDisk::LoadLoom
 #' @export
 #' @examples
 #' library(Seurat)
@@ -11,7 +14,9 @@ loom_to_se <- function(obj,
                         ...){
   messager("+ loom ==> SummarizedExperiment",v=verbose)
   #### Import as a Seurat obj first for convenience ####
-  obj <- SeuratDisk::LoadLoom(file = obj$filename)
+  obj <- SeuratDisk::LoadLoom(file = obj$filename,
+                              verbose = verbose,
+                              ...)
   #### Then convert to se/sce ####
   obj2 <- seurat_to_se(obj,
                        as_sce = as_sce,

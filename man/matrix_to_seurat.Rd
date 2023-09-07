@@ -6,6 +6,12 @@
 \usage{
 matrix_to_seurat(obj, verbose = TRUE)
 }
+\arguments{
+\item{obj}{A single-cell object supported by \pkg{scKirby}.
+See \link[scKirby]{converters} for a table of all supported conversions.}
+
+\item{verbose}{Print messages.}
+}
 \description{
 Convert: \code{matrix} ==> \code{Seurat}
 }
