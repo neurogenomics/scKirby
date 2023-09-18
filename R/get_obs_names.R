@@ -7,7 +7,7 @@
 #' @export
 #' @examples
 #' obj <- example_obj()
-#' onames <- get_obs_names(obj)
+#' obs_names <- get_obs_names(obj)
 get_obs_names <- function(obj) {
   rownames(get_obs(obj))
 }

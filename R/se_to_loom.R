@@ -1,6 +1,11 @@
 #' Convert: \code{SummarizedExperiment} ==> \code{loom}
 #'
+#' @describeIn converters Convert
+#' \link[SummarizedExperiment]{SummarizedExperiment} to
+#' \link[SeuratDisk]{loom}
 #' @inheritParams converters
+#' @inheritDotParams SeuratDisk::SaveLoom
+#' @returns description
 #' @export
 #' @examples
 #' obj <- example_obj("se")
@@ -8,12 +13,13 @@
 se_to_loom <- function(obj,
                        save_path = file.path(tempdir(),
                                              "scKirby.loom"),
-                       verbose=TRUE){
-  messager("+ SummarizedExperiment ==> loom",v=verbose)
+                       verbose=TRUE,
+                       ...){
+  messager_to_()
   dir.create(dirname(save_path), showWarnings = FALSE, recursive = TRUE)
-  l <- to_list(obj)
-  SeuratDisk::SaveLoom(object = obj)
-  obj2 <- loomR::create(data = l$data,
-                        filename = save_path)
+  obj2 <- SeuratDisk::SaveLoom(object = obj,
+                               filename = save_path,
+                               verbose = verbose,
+                               ...)
   return(obj2)
 }

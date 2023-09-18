@@ -1,10 +1,11 @@
 #' Merge \code{Seurat} objects
 #'
 #' Merge a list of Seurat objects efficiently.
-#' @param obj_list A named list of \link[Seurat]{Seurat} objects,
-#' or paths to \link[Seurat]{Seurat} objects saved to disk as \emph{.rds} files.
+#' @param obj_list A named list of \link[SeuratObject]{Seurat} objects,
+#' or paths to \link[SeuratObject]{Seurat} objects saved to disk
+#' as \emph{.rds} files.
 #' @inheritParams map_data
-#' @returns A merged \link[Seurat]{Seurat} object.
+#' @returns A merged \link[SeuratObject]{Seurat} object.
 #'
 #' @export
 #' @examples

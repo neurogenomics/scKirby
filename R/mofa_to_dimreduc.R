@@ -7,11 +7,12 @@
 #' @returns A named list of a \pkg{Seurat} \code{DimReducObject}.
 #'
 #' @export
-mofa_to_dro <- function(obj,
-                        keys=NULL,
-                        assay=NULL,
-                        verbose=TRUE){
+mofa_to_dimreduc <- function(obj,
+                             keys=NULL,
+                             assay=NULL,
+                             verbose=TRUE){
 
+  messager_to_()
   if(is.null(keys)){
     keys <- tolower(c("mofa",paste0("mofa_",names(obj@dim_red))))
   }

@@ -1,4 +1,4 @@
-#' Convert \link[SeuratObject]{Seurat}
+#' Convert \code{Seurat}
 #'
 #' Convert a \link[SeuratObject]{Seurat} object
 #' across-species (gene orthologs) or within-species (gene synonyms).

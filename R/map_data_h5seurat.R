@@ -1,4 +1,4 @@
-#' Convert \link[SeuratDisk]{h5Seurat}
+#' Convert \code{h5Seurat}
 #'
 #' Convert a \link[SeuratDisk]{h5Seurat} object
 #' across-species (gene orthologs) or within-species (gene synonyms).
@@ -6,7 +6,7 @@
 #' @inheritParams orthogene::aggregate_mapped_genes
 #' @inheritParams orthogene::convert_orthologs
 #' @inheritDotParams orthogene::convert_orthologs
-#' @returns \link[SeuratDisk]{h5Seurat}
+#' @returns A \link[SeuratDisk]{h5Seurat} object.
 #'
 #' @keywords internal
 #' @import orthogene

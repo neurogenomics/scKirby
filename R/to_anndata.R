@@ -1,10 +1,14 @@
 #' To \code{AnnData}
 #'
-#' Convert any single-cell object to \code{AnnData} format.
-#' @param reimport Save and re-import the \code{AnnData} object into R to ensure
-#' all data has been converted from Python-native to R-native objects
-#' (e.g. pandas data.frames vs. R data.frames).
+#' @describeIn converters
+#' Convert any single-cell object to \link[anndata]{AnnData} format.
+#' @param reimport Save and re-import the \link[anndata]{AnnData} object
+#' into R to ensure all data has been converted from Python-native to
+#' R-native objects
+#' (e.g. pandas data.frames vs. R \link[base]{data.frames}).
 #' @inheritParams converters
+#' @returns An \link[anndata]{AnnData} object.
+#'
 #' @export
 #' @examples
 #' obj <- example_obj("cds")

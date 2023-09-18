@@ -43,7 +43,7 @@ merge_anndata <- function(obj_list,
     #### Import data #####
     if(is.character(obj) &&
        grepl("\\.h5ad$",obj,ignore.case = TRUE)){
-      cat("Importing:",basename(obj),"\n")
+      messager("Importing:",basename(obj),"\n",parallel = TRUE)
       obj <- anndata::read_h5ad(obj)
     }
     #### Make cell names unique across objects ####

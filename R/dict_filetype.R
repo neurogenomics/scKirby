@@ -1,5 +1,5 @@
-filetype_dict <- function(){
-  sdict <- suffix_dict()
+dict_filetype <- function(){
+  sdict <- dict_suffix()
   list(rds=c(sdict$rds,
              gsub("^\\.","",sdict$rds)
              ),

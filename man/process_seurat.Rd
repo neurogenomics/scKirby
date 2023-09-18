@@ -9,7 +9,7 @@ process_seurat(
   meta.data = NULL,
   nfeatures = 2000,
   vars.to.regress = NULL,
-  dims = seq_len(50),
+  dims = seq(50),
   add_specificity = FALSE,
   default_assay = NULL,
   n.components = 2L,
@@ -84,5 +84,5 @@ Automatically performs
 }
 \examples{
 obj <- example_obj("list")
-obj2 <- seurat_pipeline(obj = obj)
+obj2 <- process_seurat(obj = obj)
 }

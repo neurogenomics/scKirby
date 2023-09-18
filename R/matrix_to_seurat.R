@@ -7,7 +7,7 @@
 #' obj2 <- matrix_to_seurat(obj)
 matrix_to_seurat <- function(obj,
                           verbose=TRUE){
-  messager("+ Matrix ==> Seurat",v=verbose)
+  messager_to_()
   obj2 <- Seurat::CreateSeuratObject(
     counts = obj,
     meta.data = data.frame(cellid=colnames(object),

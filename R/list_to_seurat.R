@@ -8,9 +8,7 @@
 list_to_seurat <- function(obj,
                            verbose=TRUE){
 
-  #### Activate conda env with anndata installed ####
-  activate_conda(verbose=verbose)
-  messager("+ list ==> Seurat",v=verbose)
+  messager_to_()
   obs <- get_obs(obj = obj,
                  verbose = verbose)
   aobj_list <- matrices_to_assayobjects(matrices = obj$data,
@@ -19,7 +17,7 @@ list_to_seurat <- function(obj,
   obj2 <- SeuratObject::CreateSeuratObject(
     counts = aobj_list[[1]],
     assay = names(aobj_list)[[1]],
-    meta.data = obj$obs)
+    meta.data = obs)
   #### Add extra assays ####
   if(length(aobj_list)>1){
     for(nm in names(aobj_list)[-1])

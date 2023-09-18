@@ -1,5 +1,6 @@
 #' Convert: ==> \code{SummarizedExperiment}
 #'
+#' @describeIn converters
 #' Convert any object to \link[SummarizedExperiment]{SummarizedExperiment} or
 #' \link[SingleCellExperiment]{SingleCellExperiment} format.
 #' @param as_sce Convert to a \link[SingleCellExperiment]{SingleCellExperiment}

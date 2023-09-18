@@ -11,7 +11,7 @@ list_to_anndata <- function(obj,
                             verbose=TRUE){
   # devoptera::args2vars(list_to_anndata)
 
-  messager("+ list ==> AnnData",v=verbose)
+  messager_to_()
   activate_conda(verbose=verbose)
   #### Get data ####
   ## Read in

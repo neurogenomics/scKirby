@@ -1,6 +1,6 @@
 is_suffix <- function(x,
                       group=NULL){
-  dict <- suffix_dict()
+  dict <- dict_suffix()
   matches <- lapply(dict, function(y){
     grepl(paste(paste0(y,"$"),collapse = "|"),x)
   })
@@ -10,7 +10,7 @@ is_suffix <- function(x,
   } else {
     group <- tolower(group)
     if(!group %in% names(dict)){
-      stopper(group,"is not a name in suffix_dict.")
+      stopper(group,"is not a name in dict_suffix.")
     }
     return(group %in% groups)
   }

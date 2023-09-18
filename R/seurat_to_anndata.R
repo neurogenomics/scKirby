@@ -15,7 +15,7 @@ seurat_to_anndata <- function(obj,
                               verbose = TRUE,
                               ...){
 
-  messager("+ Seurat ==> AnnData",v=verbose)
+  messager_to_()
   method <- tolower(method)[1]
   #### Convert ####
   # Method: anndatar

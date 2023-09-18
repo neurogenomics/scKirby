@@ -1,6 +1,6 @@
 test_that("is_class works", {
 
-  dict <- class_dict()
+  dict <- dict_class()
   names(dict)
   #### ewce ####
   obj <- example_obj("ctd")

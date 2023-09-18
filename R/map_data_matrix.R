@@ -6,7 +6,7 @@
 #' @inheritParams orthogene::aggregate_mapped_genes
 #' @inheritParams orthogene::convert_orthologs
 #' @inheritDotParams orthogene::convert_orthologs
-#' @returns matrix
+#' @returns A nmatrix object.
 #'
 #' @keywords internal
 #' @import orthogene

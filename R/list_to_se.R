@@ -15,10 +15,9 @@ list_to_se <- function(obj,
   nrows <- sapply(obj$data, nrow)
   same_dim <- nrows==nrows[1]
   diff_dim <- nrows!=nrows[1]
-
   #### Construct objects ####
   if(isTRUE(as_sce)){
-    messager("+ list ==> SingleCellExperiment",v=verbose)
+    messager("Converting: list ==> SingleCellExperiment",v=verbose)
     if(sum(diff_dim)>0){
       altExps <- lapply(obj$data[diff_dim],matrix_to_se, verbose=verbose)
     } else {
@@ -30,7 +29,7 @@ list_to_se <- function(obj,
       colData = if(is.null(obj$obs)) list() else obj$obs,
       altExps = altExps)
   } else {
-    messager("+ list ==> SummarizedExperiment",v=verbose)
+    messager("Converting: list ==> SummarizedExperiment",v=verbose)
     obj2 <- SummarizedExperiment::SummarizedExperiment(
       assays = obj$data[same_dim],
       rowData = if(is.null(obj$var)) list() else obj$var,

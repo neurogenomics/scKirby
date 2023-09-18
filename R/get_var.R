@@ -14,6 +14,7 @@
 get_var <- function(obj,
                     rownames_col=NULL,
                     n=NULL,
+                    simplify=TRUE,
                     verbose=TRUE){
   # devoptera::args2vars(get_var)
 
@@ -78,6 +79,7 @@ get_var <- function(obj,
   #### Return as a named list (1 per assay), unless there's only 1 assay ####
   var <- get_n_elements(l = var,
                         n = n,
+                        simplify = simplify,
                         verbose = verbose)
   #### Return ####
   return(var)

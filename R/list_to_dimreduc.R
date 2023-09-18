@@ -1,4 +1,4 @@
-#' Convert: \link[base]{list} ==> \code{DimReducObject}
+#' Convert: \code{list} ==> \code{DimReducObject}
 #'
 #' Create a \pkg{Seurat} \code{DimReducObject}
 #' from embeddings and loadings.

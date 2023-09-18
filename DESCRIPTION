@@ -14,7 +14,7 @@ BugReports: https://github.com/neurogenomics/scKirby/issues
 Encoding: UTF-8
 LazyData: true 
 Depends: R (>= 3.6.0)
-SystemRequirements: Python (>= 3.7.0)
+SystemRequirements: Python (>= 3.7.0) 
 biocViews:
   Software, SingleCell
 Imports: 
@@ -65,5 +65,5 @@ Remotes:
   github::aertslab/SCopeLoomR,
   github::scverse/anndataR
 VignetteBuilder: knitr
-RoxygenNote: 7.2.3
+RoxygenNote: 7.2.3.9000
 Config/testthat/edition: 3

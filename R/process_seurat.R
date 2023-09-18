@@ -23,7 +23,8 @@
 #' @param seed Random seed to set.
 #' @param add_specificity Add a new assay called "specificity" by deriving
 #' specificity scores from the input data.
-#' @param default_assay Default assay to set with \link[Seurat]{DefaultAssay}.
+#' @param default_assay Default assay to set with
+#'  \link[SeuratObject]{DefaultAssay}.
 #' @param workers Number of workers (threads) to parallelise processes across
 #' using \pkg{future}.
 #' @inheritParams converters
@@ -31,7 +32,7 @@
 #' @inheritParams Seurat::FindVariableFeatures
 #' @inheritParams Seurat::ScaleData
 #' @inheritParams Seurat::RunUMAP
-#' @returns A preprocessed \link[Seurat]{Seurat} object.
+#' @returns A preprocessed \link[SeuratObject]{Seurat} object.
 #'
 #' @export
 #' @importFrom Seurat CreateSeuratObject GetAssayData CreateAssayObject
@@ -93,10 +94,10 @@ process_seurat <- function(obj = NULL,
   #### Clustering ####
   if(!isFALSE(cluster_reduction)){
     obj2 <- Seurat::FindNeighbors(obj2,
-                                    reduction = cluster_reduction,
-                                    dims = seq_len(n.components))
+                                  reduction = cluster_reduction,
+                                  dims = seq_len(n.components))
     obj2 <- Seurat::FindClusters(obj2,
-                                   reduction = cluster_reduction)
+                                 reduction = cluster_reduction)
   } else {
     obj2 <- Seurat::FindClusters(obj2)
   }

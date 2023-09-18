@@ -7,8 +7,8 @@
 #'
 #' @export
 #' @examples
-#' classes <- class_dict()
-class_dict <- function(group=NULL){
+#' classes <- dict_class()
+dict_class <- function(group=NULL){
 
   classes <- list(
     ewce = c("EWCElist","EWCE_list","SCElist","SCE_list",

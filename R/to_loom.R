@@ -1,5 +1,6 @@
 #' Convert: to \code{loom}
 #'
+#' @describeIn converters
 #' Convert any object to \link[loomR]{loom} format.
 #' @inheritParams converters
 #' @returns A \link[loomR]{loom} object.
@@ -11,9 +12,20 @@
 to_loom <- function(obj,
                     save_path = file.path(tempdir(),
                                           "scKirby.loom"),
-                    verbose=TRUE){
+                    verbose=TRUE,
+                    ...){
   if(is_class(obj,"loom")){
     return(obj)
+  #### Seurat ####
+  } else if(is_class(obj,"seurat")){
+    if(!is.null(save_path)){
+      obj <- SeuratDisk::as.loom(x = obj,
+                                 filename = save_path,
+                                 ...)
+    } else {
+      obj <- SeuratDisk::as.loom(x = obj,
+                                 ...)
+    }
   #### OTHER ####
   } else {
   obj <- ingest_data(obj = obj,

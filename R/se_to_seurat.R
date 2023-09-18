@@ -7,7 +7,7 @@
 #' obj2 <- se_to_seurat(obj)
 se_to_seurat <- function(obj,
                          verbose=TRUE){
-  messager("+ SummarizedExperiment ==> Seurat",v=verbose)
+  messager_to_()
   obj <- se_to_sce(obj = obj,
                    verbose = verbose)
   #### Ensure "counts" assay is present ####

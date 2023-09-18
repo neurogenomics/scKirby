@@ -1,17 +1,22 @@
 Automated ingestion and conversion of various single-cell data formats
 ================
-NULL [![License: GPL (\>=
+<img src='https://github.com/neurogenomics/scKirby/raw/main/inst/hex/hex.png' title='Hex sticker for scKirby' height='300'><br>
+[![License: GPL (\>=
 3)](https://img.shields.io/badge/license-GPL%20(%3E=%203)-blue.svg)](https://cran.r-project.org/web/licenses/GPL%20(%3E=%203))
-[![](https://img.shields.io/badge/devel%20version-0.1.2-black.svg)](https://github.com/neurogenomics/scKirby)
+[![](https://img.shields.io/badge/devel%20version-0.1.4-black.svg)](https://github.com/neurogenomics/scKirby)
 [![](https://img.shields.io/github/languages/code-size/neurogenomics/scKirby.svg)](https://github.com/neurogenomics/scKirby)
-[![](https://img.shields.io/github/last-commit/neurogenomics/scKirby.svg)](https://github.com/neurogenomics/scKirby/commits/master)
+[![](https://img.shields.io/github/last-commit/neurogenomics/scKirby.svg)](https://github.com/neurogenomics/scKirby/commits/main)
 <br> [![R build
 status](https://github.com/neurogenomics/scKirby/workflows/rworkflows/badge.svg)](https://github.com/neurogenomics/scKirby/actions)
-[![](https://codecov.io/gh/neurogenomics/scKirby/branch/master/graph/badge.svg)](https://codecov.io/gh/neurogenomics/scKirby)
+[![](https://codecov.io/gh/neurogenomics/scKirby/branch/main/graph/badge.svg)](https://app.codecov.io/gh/neurogenomics/scKirby)
 <br>
-<a href='https://app.codecov.io/gh/neurogenomics/scKirby/tree/master' target='_blank'><img src='https://codecov.io/gh/neurogenomics/scKirby/branch/master/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>
-¶ <h4> ¶ Authors: <i>Brian Schilder</i> ¶ </h4>
-<h4> ¶ Most recent update: <i>May-05-2023</i> ¶ </h4>
+<a href='https://app.codecov.io/gh/neurogenomics/scKirby/tree/main' target='_blank'><img src='https://codecov.io/gh/neurogenomics/scKirby/branch/main/graphs/icicle.svg' title='Codecov icicle graph' width='200' height='50' style='vertical-align: top;'></a>  
+<h4>  
+Authors: <i>Brian Schilder</i>  
+</h4>
+<h4>  
+Most recent update: <i>Sep-13-2023</i>  
+</h4>
 
 # Intro
 
@@ -48,7 +53,7 @@ any of these steps separately using the designated sub-functions.
 - [loomR](https://satijalab.org/loomR/loomR_tutorial.html)
 - [CellDataSet/monocle](http://cole-trapnell-lab.github.io/monocle-release/docs/#getting-started-with-monocle)
 - [ExpressionSet](https://www.rdocumentation.org/packages/Biobase/versions/2.32.0/topics/ExpressionSet)
-- [list](https://github.com/NathanSkene/EWCE)
+- list
 - [EWCE](https://github.com/NathanSkene/EWCE)
 - [matrix](https://cran.r-project.org/web/packages/Matrix/index.html)
 - [sparseMatrix
@@ -62,10 +67,10 @@ any of these steps separately using the designated sub-functions.
 - [Seurat](https://satijalab.org/seurat/index.html)  
 - [H5Seurat](https://mojaveazure.github.io/seurat-disk/articles/convert-anndata.html)  
 - [anndata](https://github.com/rcannood/anndata)
+- list
 
 ## Planned output formats
 
-- [anndata](https://github.com/rcannood/anndata)
 - [loom](http://loompy.org/)
 - [CellDataSet/monocle](http://cole-trapnell-lab.github.io/monocle-release/docs/#getting-started-with-monocle)
 
@@ -126,35 +131,21 @@ utils::sessionInfo()
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] here_1.0.1          rprojroot_2.0.3     digest_0.6.31      
-    ##  [4] utf8_1.2.3          BiocFileCache_2.6.1 R6_2.5.1           
-    ##  [7] stats4_4.2.1        RSQLite_2.3.1       evaluate_0.20      
-    ## [10] httr_1.4.5          ggplot2_3.4.2       pillar_1.9.0       
-    ## [13] yulab.utils_0.0.6   rworkflows_0.99.9   biocViews_1.66.3   
-    ## [16] rlang_1.1.0         curl_5.0.0          data.table_1.14.8  
-    ## [19] rstudioapi_0.14     whisker_0.4.1       blob_1.2.4         
-    ## [22] DT_0.27             RUnit_0.4.32        rmarkdown_2.21     
-    ## [25] desc_1.4.2          readr_2.1.4         stringr_1.5.0      
-    ## [28] htmlwidgets_1.6.2   dlstats_0.1.6       BiocPkgTools_1.16.1
-    ## [31] igraph_1.4.2        RCurl_1.98-1.12     bit_4.0.5          
-    ## [34] munsell_0.5.0       compiler_4.2.1      xfun_0.38          
-    ## [37] pkgconfig_2.0.3     BiocGenerics_0.44.0 rorcid_0.7.0       
-    ## [40] htmltools_0.5.5     tidyselect_1.2.0    tibble_3.2.1       
-    ## [43] httpcode_0.3.0      XML_3.99-0.14       fansi_1.0.4        
-    ## [46] dplyr_1.1.1         tzdb_0.3.0          dbplyr_2.3.2       
-    ## [49] bitops_1.0-7        rappdirs_0.3.3      crul_1.3           
-    ## [52] grid_4.2.1          RBGL_1.74.0         jsonlite_1.8.4     
-    ## [55] gtable_0.3.3        lifecycle_1.0.3     DBI_1.1.3          
-    ## [58] magrittr_2.0.3      scales_1.2.1        graph_1.76.0       
-    ## [61] cli_3.6.1           stringi_1.7.12      cachem_1.0.7       
-    ## [64] renv_0.17.3         fauxpas_0.5.0       xml2_1.3.3         
-    ## [67] rvcheck_0.2.1       filelock_1.0.2      generics_0.1.3     
-    ## [70] vctrs_0.6.1         gh_1.4.0            RColorBrewer_1.1-3 
-    ## [73] tools_4.2.1         bit64_4.0.5         Biobase_2.58.0     
-    ## [76] glue_1.6.2          hms_1.1.3           fastmap_1.1.1      
-    ## [79] yaml_2.3.7          colorspace_2.1-0    BiocManager_1.30.20
-    ## [82] rvest_1.0.3         memoise_2.0.1       badger_0.2.3       
-    ## [85] knitr_1.42
+    ##  [1] pillar_1.9.0        compiler_4.2.1      RColorBrewer_1.1-3 
+    ##  [4] BiocManager_1.30.20 yulab.utils_0.0.6   tools_4.2.1        
+    ##  [7] digest_0.6.31       jsonlite_1.8.4      evaluate_0.21      
+    ## [10] lifecycle_1.0.3     tibble_3.2.1        gtable_0.3.3       
+    ## [13] pkgconfig_2.0.3     rlang_1.1.1         cli_3.6.1          
+    ## [16] rstudioapi_0.14     rvcheck_0.2.1       yaml_2.3.7         
+    ## [19] xfun_0.40           fastmap_1.1.1       dplyr_1.1.2        
+    ## [22] knitr_1.44          generics_0.1.3      desc_1.4.2         
+    ## [25] vctrs_0.6.3         dlstats_0.1.7       rprojroot_2.0.3    
+    ## [28] grid_4.2.1          tidyselect_1.2.0    here_1.0.1         
+    ## [31] data.table_1.14.8   glue_1.6.2          R6_2.5.1           
+    ## [34] fansi_1.0.4         rmarkdown_2.22      ggplot2_3.4.2      
+    ## [37] badger_0.2.3        magrittr_2.0.3      scales_1.2.1       
+    ## [40] htmltools_0.5.5     rworkflows_0.99.13  colorspace_2.1-0   
+    ## [43] renv_0.17.3         utf8_1.2.3          munsell_0.5.0
 
 </details>
 <hr>

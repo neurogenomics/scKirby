@@ -13,18 +13,20 @@ cds_to_se <- function(obj,
                       as_delayedarray=FALSE,
                       verbose=TRUE){
 
-  messager("+ CellDataSet ==> SummarizedExperiment",v=verbose)
-  X <- Biobase::exprs(obj)
-  obs <- Biobase::pData(obj)
-  var <- Biobase::fData(obj)
+  messager_to_()
+  obj1 <- cds_to_list(obj = obj,
+                      as_sparse = as_sparse,
+                      verbose = verbose)
   #### Convert matrix ####
-  if(isTRUE(as_sparse)) X <- to_sparse(obj = X, verbose = verbose)
-  if(isTRUE(as_delayedarray)) X <- to_delayedarray(obj = X , verbose = verbose)
+  if(isTRUE(as_delayedarray)) {
+    obj1$data <- to_delayedarray(obj = obj1$data,
+                                 verbose = verbose)
+  }
   #### Create se object ####
   obj2 <- SummarizedExperiment::SummarizedExperiment(
-    assays = list(raw = X),
-    colData = obs,
-    rowData = var
+    assays = obj1$data,
+    colData = obj1$obs,
+    rowData = obj1$var
   )
   obj2 <- check_se_rownames(obj2, verbose = verbose)
   return(obj2)

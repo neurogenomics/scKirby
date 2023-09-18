@@ -17,6 +17,7 @@
 get_x <- function(obj,
                   transpose=TRUE,
                   n=NULL,
+                  simplify=TRUE,
                   assay=NULL,
                   slot=NULL,
                   as_sparse=FALSE,
@@ -28,7 +29,9 @@ get_x <- function(obj,
     data <- to_sparse(obj = obj,
                       verbose = verbose)
     #### loom ####
-  } else if(is_class(obj,"loom")){
+  } else if(is_class(obj,"matrix_list")){
+    data <- obj
+  }else if(is_class(obj,"loom")){
     data <- list()
     if("matrix" %in% names(obj)){
       data$X <- Seurat::as.sparse(obj[["matrix"]])
@@ -103,7 +106,9 @@ get_x <- function(obj,
   }
   #### Conver to sparse matrices ####
   if(isTRUE(as_sparse)){
-    data <- lapply(data,to_sparse, verbose=verbose)
+    data <- lapply(data, to_sparse, verbose=verbose)
+  } else {
+    data <- lapply(data, as.matrix)
   }
   #### Tranpose each matrix ####
   if(isTRUE(transpose)){
@@ -113,6 +118,7 @@ get_x <- function(obj,
   #### Return as a named list (1 per assay), unless there's only 1 assay ####
   data <- get_n_elements(l = data,
                          n = n,
+                         simplify = simplify,
                          verbose = verbose)
   #### Return ####
   return(data)

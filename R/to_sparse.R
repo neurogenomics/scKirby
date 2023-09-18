@@ -1,5 +1,6 @@
 #' To \code{sparseMatrix}
 #'
+#' @describeIn converters
 #' Convert a \code{matrix} or \code{data.frame}
 #' to a \link[Matrix]{sparseMatrix}.
 #' @param allow_delayed_array Allow \link[DelayedArray]{DelayedArray}.

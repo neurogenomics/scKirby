@@ -1,6 +1,7 @@
 #' To \code{Seurat}
 #'
-#' @describeIn converters Convert any single-cell object to
+#' @describeIn converters
+#' Convert any single-cell object to
 #' \pkg{Seurat} or \link[SeuratDisk]{h5Seurat} format.
 #' @param as_h5seurat Convert to the \link[SeuratDisk]{h5Seurat} class.
 #' @param update Ensure the object is updated to the latest version of Seurat.
@@ -79,8 +80,8 @@ to_seurat <- function(obj,
   }
   #### Update object ####
   if(isTRUE(update)){
-    obj <- update_seurat(obj = obj,
-                         verbose = verbose)
+    obj2 <- update_seurat(obj = obj2,
+                          verbose = verbose)
   }
   #### Convert to h5seurat ####
   if(isTRUE(as_h5seurat)){

@@ -7,7 +7,7 @@
 #' @returns \link[anndata]{AnnData} object.
 #'
 #' @export
-#' @import sceasy
+#' @importFrom sceasy convertFormat
 #' @examples
 #' obj <- example_obj("se")
 #' obj2 <- se_to_anndata(obj)

@@ -1,20 +1,11 @@
 #' Import and standardize scRNAseq data across different formats
 #'
-#' Automatically infers data format of scRNAseq object, or a path to that object.
-#' It then uses the appropriate functions to import that data and convert it to a
-#' \pkg{SingleCellExperiment}, which is recognized by other \pkg{EWCE} functions.
+#' Automatically infers data format of scRNAseq object,
+#' or a path to that object.
+#' It then uses the appropriate functions to import that data and convert
+#'  it to a \pkg{SingleCellExperiment},
+#'  which is recognized by other \pkg{EWCE} functions.
 #'
-#' @param obj A single-cell data object, or a path to saved single-cell data.
-#' @param input_type Format of \code{obj}. By default, the type will be inferred.
-#' @param output_class Format to convert \code{obj} to.
-#' @param custom_reader Custom function to read \code{obj} into R.
-#' @param save_path Path to save the converted \code{obj}.
-#' @param overwrite If a file of the same name exists, overwrite it.
-#' @param return_save_path If \code{TRUE}, a list with both the converted object
-#'  and the saved file path will be returned (instead of just the converted object).
-#' @inheritParams converters
-#' @inheritDotParams read_data
-#' @source
 #' \href{https://mojaveazure.github.io/seurat-disk/articles/convert-anndata.html}{SeuratDisk}
 #' \href{https://github.com/rcannood/anndata}{anndata (R)}
 #' \href{https://anndata.readthedocs.io/en/latest/}{anndata (python)}
@@ -22,6 +13,17 @@
 #' \href{https://bioconductor.org/packages/release/bioc/vignettes/SingleCellExperiment/inst/doc/intro.html}{SingleCellExperiment}
 #' \href{https://petehaitch.github.io/BioC2020_DelayedArray_workshop/articles/Effectively_using_the_DelayedArray_framework_for_users.html}{DelayedArray workshop}
 #' \href{https://theislab.github.io/zellkonverter/articles/zellkonverter.html}{zellkonverter}
+#' @param obj A single-cell data object, or a path to saved single-cell data.
+#' @param input_type Format of \code{obj}. By default, the type will be inferred.
+#' @param output_class Format to convert \code{obj} to.
+#' @param custom_reader Custom function to read \code{obj} into R.
+#' @param save_path Path to save the converted \code{obj}.
+#' @param overwrite If a file of the same name exists, overwrite it.
+#' @param return_save_path If \code{TRUE}, a list with both the converted object
+#'  and the saved file path will be returned
+#'  (instead of just the converted object).
+#' @inheritParams converters
+#' @inheritDotParams read_data
 #' @returns Converted single-cell object.
 #'
 #' @export
@@ -78,7 +80,7 @@ ingest_data <- function(obj,
   # devoptera::args2vars(ingest_data)
 
   #### Select output type ####
-  output_class <- output_dict(output_class = output_class)
+  output_class <- dict_output(output_class = output_class)
   #### Read ####
   obj <- read_data(path=obj,
                    filetype=input_type,
@@ -86,7 +88,7 @@ ingest_data <- function(obj,
                    verbose=verbose,
                    ...)
   #### Convert ####
-  cdict <- class_dict()
+  cdict <- dict_class()
   #### to SummarizedExperiment / SingleCellExperiment ####
   if(output_class %in% tolower(cdict$se)){
       obj_out <- to_se(obj = obj,

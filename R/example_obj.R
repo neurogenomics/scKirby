@@ -43,85 +43,102 @@ example_obj <- function(class=c("Seurat",
                                 "anndata",
                                 "EWCE"),
                         save_path = file.path(tempdir(),"example"),
-                        verbose = TRUE){
+                        verbose = TRUE,
+                        ...){
+  # devoptera::args2vars(example_obj)
 
   class <- tolower(class[[1]])
+  base_obj <- SeuratObject::pbmc_small
   #### matrix ####
   if(class %in% c("matrix","m")){
-    obj <- SeuratObject::pbmc_small@assays$RNA@counts
+    obj <- get_x(obj = base_obj,
+                 n = 1,
+                 verbose = verbose,
+                 ...)
   #### data.frame ####
+  } else  if(class %in% c("matrix_list","ml")){
+    obj <- get_x(obj = base_obj,
+                 verbose = verbose,
+                 ...)
   } else if(class %in% c("data.frame","df")){
-    obj <- as.data.frame(
-      x = SeuratObject::pbmc_small@assays$RNA@counts,
-      keep.rownames = TRUE)
+    obj <- to_dataframe(obj = obj,
+                        verbose = verbose,
+                        ...)
   #### data.table ####
   } else if(class %in% c("data.table","dt")){
-    obj <- data.table::as.data.table(
-      x = as.matrix(
-        SeuratObject::pbmc_small@assays$RNA@counts
-      ),
-      keep.rownames = TRUE)
+    obj <- to_datatable(obj = obj,
+                        verbose = verbose,
+                        ...)
   #### SummarizedExperiment ####
   } else if(class %in% c("summarizedexperiment","se")){
-    obj <- seurat_to_se(SeuratObject::pbmc_small,
-                        as_sce = FALSE,
-                        verbose = verbose)
+    obj <- to_se(obj = base_obj,
+                 as_sce = FALSE,
+                 verbose = verbose,
+                 ...)
   } else if(class %in% c("singellcellexperiment","sce")){
-    obj <- seurat_to_se(SeuratObject::pbmc_small)
+    obj <- to_se(obj = base_obj,
+                 as_sce = TRUE,
+                 verbose = verbose,
+                 ...)
   #### SingleCellExperiment ####
   } else if(class %in% c("seurat","s")){
-      obj <- SeuratObject::pbmc_small
+      obj <- base_obj
   #### hdf5se ####
   } else if(class %in% c("hdf5se")){
-    obj <- seurat_to_se(SeuratObject::pbmc_small)
-    obj <- save_hdf5se(obj = obj,
-                       save_dir = tempfile())
+    obj <- seurat_to_hdf5se(obj = base_obj,
+                            verbose = verbose,
+                            save_path = save_path,
+                            ...)
     #### SeuratDisk ####
   } else if(class %in% c("h5seurat","h5s")){
-    obj <- save_h5seurat(obj = SeuratObject::pbmc_small,
-                         save_path =  paste0(save_path,".h5Seurat"),
-                         verbose = verbose)$obj
+    obj <- to_seurat(obj = obj,
+                     as_h5seurat = TRUE,
+                     save_path = paste0(save_path,".h5Seurat"),
+                     verbose = verbose,
+                     ...)
   #### CellDataSet ####
   } else if(class %in% c("celldataset","cds")){
-    obj <- seurat_to_cds(obj = SeuratObject::pbmc_small)
+    obj <- seurat_to_cds(obj = base_obj,
+                         verbose = verbose)
   #### loom ####
   } else if(class %in% c("loom")){
-    if(!is.null(save_path)){
-      obj <- SeuratDisk::as.loom(x = SeuratObject::pbmc_small,
-                                 overwrite = TRUE,
-                                 filename = save_path)
-    } else {
-      obj <- SeuratDisk::as.loom(x = SeuratObject::pbmc_small)
-    }
+    obj <- to_loom(obj = obj,
+                   save_path = save_path,
+                   verbose = verbose,
+                   ...)
   #### LoomExperiment ####
   } else if(class %in% c("LoomExperiment","le")){
-    obj <- seurat_to_le(obj =  SeuratObject::pbmc_small,
+    obj <- seurat_to_le(obj =  base_obj,
                         as_scle = FALSE,
                         verbose = verbose)
   #### SingleCellLoomExperiment ####
   } else if(class %in% c("SingleCellLoomExperiment","scle")){
-    obj <- seurat_to_le(obj =  SeuratObject::pbmc_small,
+    obj <- seurat_to_le(obj =  base_obj,
                         as_scle = TRUE,
                         verbose = verbose)
   #### hdf5array ####
   } else if(class %in% c("hdf5array","h5")){
-    obj <- seurat_to_se(SeuratObject::pbmc_small)
-    obj <- save_hdf5se(obj = obj,
-                       save_dir = paste0(save_path,"_h5"),
-                       verbose = verbose)
+    obj <- seurat_to_hdf5se(obj = obj,
+                            save_path = save_path,
+                            verbose = verbose)
   #### anndata ####
   } else if(class %in% c("anndata","ad")){
-      obj <- example_anndata(save_path = save_path,
-                             verbose = verbose)
+      obj <- example_anndata(obj = base_obj,
+                             save_path = save_path,
+                             verbose = verbose,
+                             ...)
   #### EWCE CelltypeDataset ####
   } else if(class %in% c("celltypedataset","celltypedata","ctd","ewce")){
     obj <- ewceData::ctd()
   #### list ####
   } else if(class %in% c("list","l")){
-    obj <- example_list(verbose = verbose)
+    obj <- example_list(obj = base_obj,
+                        verbose = verbose,
+                        ...)
   #### list paths ####
   }  else if(class %in% c("list_paths","lp")){
-    obj <- example_list(as_paths = TRUE,
+    obj <- example_list(obj = base_obj,
+                        as_paths = TRUE,
                         verbose = verbose)
   #### ERROR ####
   } else {

@@ -5,7 +5,7 @@
 seurat1_to_list <- function(obj,
                             verbose=TRUE){
 
-  messager("+ Seurat (V1) ==> list",v=verbose)
+  messager("Converting: Seurat (V1) ==> list",v=verbose)
   list(data = get_x(obj = obj, verbose = verbose),
        obs = get_obs(obj = obj, verbose = verbose),
        var = get_var(obj = obj, verbose = verbose),

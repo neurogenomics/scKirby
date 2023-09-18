@@ -8,10 +8,10 @@
 #'
 #' @export
 #' @examples
-#' output_class <- output_dict(output_class="seurat")
-output_dict <- function(output_class=NULL){
+#' output_class <- dict_output(output_class="seurat")
+dict_output <- function(output_class=NULL){
 
-  cdict <- class_dict()
+  cdict <- dict_class()
   output_classes <- list(se=tolower(cdict$se),
                        hdf5se=tolower(cdict$hdf5se),
                        seurat=tolower(cdict$seurat),

@@ -3,7 +3,7 @@
 #' @inheritParams converters
 #' @inheritParams to_anndata
 #' @inheritParams SeuratDisk::Convert
-#' @inheritDotParams anndata::write_h5ad
+#' @inheritDotParams read_anndata
 #' @export
 #' @examples
 #' obj <- example_obj("h5seurat")
@@ -12,14 +12,19 @@ h5seurat_to_anndata <- function(obj,
                                 reimport = TRUE,
                                 save_path = tempfile(fileext = ".h5ad"),
                                 overwrite = FALSE,
+                                assay=NULL,
                                 verbose = TRUE,
                                 ...){
+  messager_to_()
   SeuratDisk::Convert(obj$filename,
                       dest = save_path,
                       overwrite = overwrite,
-                      verbose = verbose)
+                      assay = assay,
+                      verbose = verbose,
+                      ...)
   adat <- read_anndata(path = save_path,
-                       verbose = verbose)
+                       verbose = verbose,
+                       ...)
   #### Return ###
   return(adat)
 }

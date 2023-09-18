@@ -1,4 +1,4 @@
-#' Convert \link[anndata]{AnnData}
+#' Convert \code{anndata}
 #'
 #' Convert an \link[anndata]{AnnData} object
 #' across-species (gene orthologs) or within-species (gene synonyms).

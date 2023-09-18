@@ -12,7 +12,8 @@
 #' \item{
 #' \link[Matrix]{Matrix} or
 #' \link[base]{data.frame} or
-#' \link[data.table]{data.table}
+#' \link[data.table]{data.table} or
+#' \link[data.frame]{data.table}
 #' }
 #' }
 #' @param as_delayedarray Convert aggregated matrix to

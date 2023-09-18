@@ -12,7 +12,7 @@
   - `normalise`
   - `yeojohnson`
   - `is_installed`
-* `class_dict`
+* `dict_class`
   - Add "Graph" to "matrix" class.
 * New exported functions:
   - `set_graph`
@@ -31,7 +31,7 @@ and avoid conflicts with piggyback-oriented functions.
 * New funcs: 
   - `get_obs_names`
   - `get_var_names`
-  - `mofa_to_dro`
+  - `mofa_to_dimreduc`
 * `get_obsm`: can now handle MOFA models.
 * `get_varm`: can now handle MOFA models.
 * `get_obs`/ `get_var` can now take matrices.

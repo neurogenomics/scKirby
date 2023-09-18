@@ -1,13 +1,10 @@
 #' Convert: \code{Anndata} ==> \code{Seurat}
 #'
-#'
-#' @inheritParams converters
-#' @param ... Parameters passed to \code{sceasy::convertFormat}.
-#' @source \code{
-#' NOTE: Do NOT try to "inheritDotParams sceasy::convertFormat".
+#' NOTE: Do NOT try to \code{inheritDotParams sceasy::convertFormat}.
 #' The documentation in that function is empty and this will a
-#' cryptic error with  devtools::document().
-#' }
+#' cryptic error with \link[devtools]{document}.
+#' @param ... Parameters passed to \code{sceasy::convertFormat}.
+#' @inheritParams converters
 #'
 #' @export
 #' @importFrom sceasy convertFormat
@@ -17,7 +14,7 @@
 anndata_to_seurat <- function(obj,
                               verbose=TRUE,
                               ...){
-  messager("+ AnnData ==> Seurat",v=verbose)
+  messager_to_()
   sceasy::convertFormat(obj = obj,
                         from = "anndata",
                         to = "seurat",

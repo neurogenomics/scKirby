@@ -1,5 +1,6 @@
 #' Convert: to \code{list}
 #'
+#' @describeIn converters
 #' Convert any object to \link[base]{list} format.
 #' @inheritParams converters
 #' @returns A \link[base]{list} object.
@@ -45,8 +46,8 @@ to_list <- function(obj,
                      verbose = verbose)
   #### OTHER ####
   } else {
-    obj <- ingest_data(obj = obj,
-                       verbose = verbose)
+    obj <- to_se(obj = obj,
+                 verbose = verbose)
     l <- se_to_list(obj = obj,
                     verbose = verbose)
   }

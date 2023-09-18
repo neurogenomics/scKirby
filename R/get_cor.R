@@ -6,7 +6,7 @@
 #' @param graph_key Name of the graph to extract.
 #' @param method Pairwise correlation method.
 #' @param as_graph Convert the correlation matrix to the
-#' \link[SeuratObject]{Graphs} class.
+#' \link[SeuratObject]{Graph} class.
 #' @param return_obj Whether to return the single-cell object with a new
 #' \code{graph}, or to simply return the sparse correlation matrix.
 #' @inheritParams converters

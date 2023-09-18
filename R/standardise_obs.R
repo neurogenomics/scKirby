@@ -87,10 +87,10 @@ standardise_obs <- function(obj,
                  obs = obs,
                  verbose = verbose)
   #### Make levels dictionary ####
-  lvls_dict <- make_levels_dict(obs = obs,
+  dict_lvls <- make_levels_dict(obs = obs,
                                 level_cols = level_cols)
   obj <- set_uns(obj = obj,
-                 uns = lvls_dict,
+                 uns = dict_lvls,
                  key = "levels_key",
                  verbose = verbose)
   #### Save ####

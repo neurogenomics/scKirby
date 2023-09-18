@@ -12,7 +12,7 @@ loom_to_se <- function(obj,
                        as_sce=FALSE,
                        verbose=TRUE,
                         ...){
-  messager("+ loom ==> SummarizedExperiment",v=verbose)
+  messager_to_()
   #### Import as a Seurat obj first for convenience ####
   obj <- SeuratDisk::LoadLoom(file = obj$filename,
                               verbose = verbose,

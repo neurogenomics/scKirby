@@ -1,4 +1,4 @@
-#' Convert: \code{AnnData} ==> \code{list}
+#' Convert: \code{DimReduc} ==> \code{list}
 #'
 #' @inheritParams converters
 #' @export
@@ -6,6 +6,7 @@
 #' obj <- example_obj("anndata")
 #' obj2 <- anndata_to_list(obj)
 dimreduc_to_list <- function(obj){
+  messager_to_()
   res <- list()
   slots <- methods::slotNames(obj)
   if("cell.embeddings" %in% slots) {

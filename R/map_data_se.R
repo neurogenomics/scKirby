@@ -1,4 +1,4 @@
-#' Convert \link[SummarizedExperiment]{SummarizedExperiment}
+#' Convert \code{SummarizedExperiment}
 #'
 #' Convert a \link[SummarizedExperiment]{SummarizedExperiment} object
 #' across-species (gene orthologs) or within-species (gene synonyms).

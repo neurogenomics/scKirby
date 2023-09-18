@@ -7,7 +7,7 @@
 #'  (one per unique assay in \code{matrices}) to be put in the
 #'   \code{meta.features} slot of each \code{AssayObject}.
 #' @inheritParams converters
-#' @returns a named list of \pkg{Seurat} assay objects.
+#' @returns A named list of \pkg{Seurat} assay objects.
 #'
 #' @export
 #' @examples
@@ -19,7 +19,7 @@ matrices_to_assayobjects <- function(matrices,
                                      var_features=NULL,
                                      verbose=TRUE){
 
-  messager("Constructing AssayObjects from matrices.",v=verbose)
+  messager_to_()
   assay_names <- unique(
     stringr::str_split(names(matrices),"\\.", n = 2,simplify = TRUE)[,1]
   )

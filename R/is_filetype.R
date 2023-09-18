@@ -1,7 +1,7 @@
 is_filetype <- function(x,
                         group=NULL){
   if(is.null(x)) return(FALSE)
-  dict <- filetype_dict()
+  dict <- dict_filetype()
   matches <- lapply(dict, function(y){
     grepl(paste(paste0(gsub("\\.","\\.",y),"$"),collapse = "|"),x)
   })
@@ -11,7 +11,7 @@ is_filetype <- function(x,
   } else {
     group <- tolower(group)
     if(!group %in% names(dict)){
-      stopper(group,"is not a name in filetype_dict.")
+      stopper(group,"is not a name in dict_filetype.")
     }
     return(group %in% groups)
   }

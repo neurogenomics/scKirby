@@ -12,7 +12,7 @@ se_to_sce <- function(obj,
                               verbose = verbose)
     return(obj2)
   }
-  messager("+ SummarizedExperiment ==> SingleCellExperiment",v=verbose)
+  messager_to_()
   obj2 <- methods::as(obj,"SingleCellExperiment")
   obj2 <- check_se_rownames(obj2, verbose = verbose)
   return(obj2)

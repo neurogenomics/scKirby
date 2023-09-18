@@ -1,15 +1,21 @@
 #' To graph
 #'
-#' Convert a matrix to a Graph object (using \link[Seurat]{as.Graph}).
+#' @describeIn converters
+#' Convert a matrix to a Graph object (using \link[SeuratObject]{as.Graph}).
 #' @inheritParams converters
-#' @returns A sparse \link[Seurat]{as.Graph} object.
+#' @inheritDotParams get_x
+#' @returns A sparse \link[SeuratObject]{as.Graph} object.
 #'
 #' @export
-#' @importFrom Seurat as.Graph
+#' @importFrom SeuratObject as.Graph
 #' @examples
 #' obj <- example_obj("matrix")
 #' obj2 <- to_graph(obj)
 to_graph <- function(obj,
-                     verbose = TRUE){
-  Seurat::as.Graph(obj)
+                     verbose = TRUE,
+                     ...){
+  Xl <- get_x(obj = obj,
+              verbose = verbose,
+              ...)
+  lapply(Xl,Seurat::as.Graph)
 }

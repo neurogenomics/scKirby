@@ -5,9 +5,9 @@
 #' When \code{group} is supplied,
 #' determine whether a single-cell object belongs to a particular group of
 #' object classes.
-#' See \link[scKirby]{class_dict} for details.
-#' @param obj Data object.
-#' @inheritParams class_dict
+#' See \linkp[scKirby]{dict_class} for details.
+#' @inheritParams converters
+#' @inheritParams dict_class
 #'
 #' @export
 #' @examples
@@ -22,7 +22,7 @@ is_class <- function(obj,
   # devoptera::args2vars(is_class)
 
   if(is.null(obj) || is.character(obj)) return(FALSE)
-  cdict <- class_dict()
+  cdict <- dict_class()
   matches <- lapply(cdict, function(y){
     any(sapply(y, function(z){methods::is(obj,z)}))
   })
