@@ -15,7 +15,7 @@ get_obs <- function(obj,
                     verbose=TRUE){
   # devoptera::args2vars(get_obs)
 
-  #### matrix ####
+  #### Matrix ####
   if(is_class(obj,"matrix")){
     obs <- data.frame(variable = colnames(obj),
                       row.names = colnames(obj))

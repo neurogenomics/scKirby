@@ -25,8 +25,13 @@ get_varm <- function(obj,
                      n = NULL,
                      verbose = TRUE) {
 
+  #### Matrix ####
+  if (is_class(obj,"matrix") ){
+    messager("Interpretting obj as matrix with trait varm.",
+             v=verbose)
+    varm <- list(varm=obj)
   #### MOFA2: model ####
-  if(methods::is(obj,"MOFA")){
+  } else if(methods::is(obj,"MOFA")){
     messager("Extracting varm from MOFA", v = verbose)
     varm <- get_varm_mofa(obj = obj,
                           verbose = verbose)
@@ -116,12 +121,8 @@ get_varm <- function(obj,
                         as_sparse = FALSE,
                         verbose = verbose)
     } else {
-      varm <- obj["varm"]
+      varm <- obj[["varm"]]
     }
-  } else if (is_class(obj,"matrix") ){
-    messager("Interpretting obj as matrix with trait varm.",
-             v=verbose)
-    varm <- list(varm=obj)
   } else {
     messager("No varm could be identified.","Returning NULL.", v=verbose)
     return(NULL)

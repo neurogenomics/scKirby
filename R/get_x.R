@@ -15,7 +15,7 @@
 #' obj <- example_obj("seurat")
 #' X <- get_x(obj)
 get_x <- function(obj,
-                  transpose=TRUE,
+                  transpose=FALSE,
                   n=NULL,
                   simplify=TRUE,
                   assay=NULL,

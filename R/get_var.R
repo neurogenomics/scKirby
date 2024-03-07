@@ -18,7 +18,7 @@ get_var <- function(obj,
                     verbose=TRUE){
   # devoptera::args2vars(get_var)
 
-  #### From matrix ####
+  #### Matrix ####
   if(is_class(obj,"matrix")){
     var <- data.frame(variable = rownames(obj),
                       row.names = rownames(obj))

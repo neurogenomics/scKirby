@@ -1,6 +1,5 @@
-#' Convert: \code{AnnData} ==> \code{list}
+#' @describeIn anndata_to anndata_to
 #'
-#' @inheritParams converters
 #' @export
 #' @examples
 #' obj <- example_obj("anndata")

@@ -15,7 +15,7 @@ se_to_loom <- function(obj,
                                              "scKirby.loom"),
                        verbose=TRUE,
                        ...){
-  messager_to_()
+  messager_to()
   dir.create(dirname(save_path), showWarnings = FALSE, recursive = TRUE)
   obj2 <- SeuratDisk::SaveLoom(object = obj,
                                filename = save_path,

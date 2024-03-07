@@ -15,7 +15,7 @@
 * `dict_class`
   - Add "Graph" to "matrix" class.
 * New exported functions:
-  - `set_graph`
+  - `set_obsp`
   - `to_delayedarray`
 
 # scKirby 0.1.4

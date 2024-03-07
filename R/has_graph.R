@@ -7,7 +7,7 @@ has_graph <- function(obj,
                       graph_keys,
                       verbose = TRUE){
 
-    g <- get_graphs(obj = obj,
+    g <- get_obsp(obj = obj,
                     verbose = verbose)
     graph_keys %in% names(g)
 }

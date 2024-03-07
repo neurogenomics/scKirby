@@ -12,7 +12,7 @@ mofa_to_dimreduc <- function(obj,
                              assay=NULL,
                              verbose=TRUE){
 
-  messager_to_()
+  messager_to()
   if(is.null(keys)){
     keys <- tolower(c("mofa",paste0("mofa_",names(obj@dim_red))))
   }

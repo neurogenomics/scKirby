@@ -15,7 +15,7 @@ h5seurat_to_anndata <- function(obj,
                                 assay=NULL,
                                 verbose = TRUE,
                                 ...){
-  messager_to_()
+  messager_to()
   SeuratDisk::Convert(obj$filename,
                       dest = save_path,
                       overwrite = overwrite,

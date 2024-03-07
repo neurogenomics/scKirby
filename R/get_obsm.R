@@ -27,8 +27,13 @@ get_obsm <- function(obj,
                      verbose = TRUE) {
   # devoptera::args2vars(get_obsm)
 
+  #### Matrix ####
+  if (is_class(obj,"matrix") ){
+    messager("Interpretting obj as matrix with trait obsm.",
+             v=verbose)
+    obsm <- list(obsm=obj)
   #### MOFA2: model ####
-  if(methods::is(obj,"MOFA")){
+   } else if(methods::is(obj,"MOFA")){
     messager("Extracting obsm from MOFA", v = verbose)
     obsm <- get_obsm_mofa(obj = obj,
                           verbose = verbose)
@@ -103,21 +108,19 @@ get_obsm <- function(obj,
     messager("Extracting obsm from list", v = verbose)
     opts <- c("obsm","embedding","u","U")
     obsm_slots <- opts[opts %in% names(obj)]
-    if(length(opts)==0){
-      stopper("No obsm could be identified.")
+    if(length(obsm_slots)==0){
+      messager("No obsm could be identified.","Returning NULL.",v=verbose)
+      return(NULL)
     } else if(is.character(obj[[obsm_slots]])){
       obsm <- read_data(path = obj[[obsm_slots]],
                         as_sparse = FALSE,
                         verbose = verbose)
     } else {
-      obsm <- obj[obsm_slots]
+      obsm <- obj[[obsm_slots]]
     }
-  } else if (is_class(obj,"matrix") ){
-    messager("Interpretting obj as matrix with trait obsm.",
-             v=verbose)
-    obsm <- list(obsm=obj)
   } else {
-    stopper("No obsm could be identified.")
+    messager("No obsm could be identified.","Returning NULL.",v=verbose)
+    return(NULL)
   }
   #### Get keys ####
   if(!is.null(obsm)) {

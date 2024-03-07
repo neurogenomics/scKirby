@@ -12,7 +12,7 @@ loom_to_scle <- function(obj,
                          ...){
   requireNamespace("LoomExperiment")
 
-  messager_to_()
+  messager_to()
   obj2 <- LoomExperiment::SingleCellLoomExperiment(obj,
                                                    ...)
   return(obj2)

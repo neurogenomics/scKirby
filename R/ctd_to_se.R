@@ -14,7 +14,7 @@ ctd_to_se <- function(obj,
 
   requireNamespace("EWCE")
 
-  messager_to_()
+  messager_to()
   if(is_ctd(obj)){
     obj2 <- EWCE::ctd_to_sce(object = obj,
                              as_sparse = as_sparse,

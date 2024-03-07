@@ -10,16 +10,25 @@
 #' @importFrom methods is
 #' @examples
 #' obj <- example_obj("seurat")
-#' g <- get_graphs(obj)
-get_graphs <- function(obj,
-                       keys = NULL,
-                       n = NULL,
-                       verbose = TRUE) {
-
-  if (is_class(obj,"seurat")) {
+#' g <- get_obsp(obj)
+get_obsp <- function(obj,
+                     keys = NULL,
+                     n = NULL,
+                     as_graph = FALSE,
+                     verbose = TRUE) {
+  if(is_class(obj,"matrix")){
+    obsp <- list(obsp=obj)
+  } else if(is_class(obj,"matrix_list")){
+    obsp <- obj
+  } else if (methods::is(obj, "Graph")) {
+    messager("Using obj as graph.", v = verbose)
+    obsp <- list("graph"=obj)
+  } else if (is_class(obj,"list")){
+    obsp <- obj$obsp
+  } else if (is_class(obj,"seurat")) {
     ## Seurat V1
     if(methods::is(obj,"seurat")){
-      g <- list(snn.sparse=obj@snn.sparse)
+      obsp <- list(snn.sparse=obj@snn.sparse)
     ## Seurat V2+
     } else {
       all_keys <- rev(names(obj@graphs))
@@ -31,19 +40,21 @@ get_graphs <- function(obj,
                  "Returning NULL.",v=verbose)
         return(NULL)
       }
-      g <- obj@graphs[all_keys]
+      obsp <- obj@graphs[all_keys]
     }
-
-  } else if (methods::is(obj, "Graph")) {
-    messager("Using obj as graph.", v = verbose)
-    g <- obj
-  } else {
+  } else if(is_class(obj,"anndata")){
+    obsp <- obj$obsp
+  }else {
     messager("No graph found. Returning NULL.", v = verbose)
     return(NULL)
   }
+  ### Convert to graphs
+  if(isTRUE(as_graph)){
+    obsp <- to_graph(obsp)
+  }
   #### Return as a named list (1 per assay), unless there's only 1 assay ####
-  g <- get_n_elements(l = g,
-                      n = n,
-                      verbose = verbose)
-  return(g)
+  obsp <- get_n_elements(l = obsp,
+                         n = n,
+                         verbose = verbose)
+  return(obsp)
 }

@@ -1,7 +1,5 @@
-#' Convert: \code{Anndata} ==> \code{SummarizedExperiment}
+#' @describeIn anndata_to anndata_to
 #'
-#' @inheritParams converters
-#' @inheritParams to_se
 #' @export
 #' @examples
 #' obj <- example_obj("anndata")

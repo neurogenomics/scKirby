@@ -8,6 +8,6 @@
 cds_to_seurat <- function(obj,
                           verbose=TRUE,
                           ...){
-  messager_to_()
+  messager_to()
   Seurat::as.Seurat(obj)
 }

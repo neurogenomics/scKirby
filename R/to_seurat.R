@@ -7,19 +7,17 @@
 #' @param update Ensure the object is updated to the latest version of Seurat.
 #' @inheritParams seurat_to_h5seurat
 #' @inheritParams converters
-#' @returns A \pkg{Seurat} or
-#'  \link[SeuratDisk]{h5Seurat} object.
+#' @returns A \pkg{Seurat} or \link[SeuratDisk]{h5Seurat} object.
 #'
 #' @export
 #' @examples
-#' obj <- example_obj("cds")
+#' obj <- example_obj("list")
 #' obj2 <- to_seurat(obj)
 to_seurat <- function(obj,
                       as_h5seurat = FALSE,
                       update = TRUE,
                       save_path = tempfile(fileext = ".h5seurat"),
                       verbose = TRUE){
-
   #### Check if class is supported ####
   check_supported(obj)
   #### seurat ####

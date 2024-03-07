@@ -1,6 +1,11 @@
-messager_to_ <- function(element=c("name","link")){
+#' Messager to
+#'
+#' Automated messager that automatically infers the function from which it's
+#'  being called.
+#' @keywords internal
+messager_to <- function(element=c("name","link")){
 
-  envir <- parent.frame()
+  envir <- parent.frame(n = 2L)
   v <- if("verbose" %in% ls(envir = envir)){
     get("verbose",envir = envir)
   } else {

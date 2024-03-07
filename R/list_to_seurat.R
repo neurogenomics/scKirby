@@ -8,10 +8,11 @@
 list_to_seurat <- function(obj,
                            verbose=TRUE){
 
-  messager_to_()
+  messager_to()
   obs <- get_obs(obj = obj,
                  verbose = verbose)
-  aobj_list <- matrices_to_assayobjects(matrices = obj$data,
+  X_list <- get_x(obj)
+  aobj_list <- matrices_to_assayobjects(X_list = X_list,
                                         var_features = obj$varm,
                                         verbose = verbose)
   obj2 <- SeuratObject::CreateSeuratObject(
@@ -29,9 +30,11 @@ list_to_seurat <- function(obj,
   varm <- get_varm(obj = obj,
                    verbose = verbose)
   for(nm in names(obj$obsm)){
-    obj2[[nm]] <- Seurat::CreateDimReducObject(
+    messager("Creating DimReducObject:",shQuote(nm),v=verbose)
+    obj2[[nm]] <- SeuratObject::CreateDimReducObject(
       embeddings = obsm[[nm]],
-      loadings = varm[[nm]],
+      loadings = if(is.null(varm[[nm]])) new(Class = "matrix") else varm[[nm]],
+      assay = names(aobj_list)[[1]],
       key = nm)
   }
   #### Add variable feature ####

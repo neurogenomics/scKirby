@@ -13,7 +13,7 @@ cds_to_se <- function(obj,
                       as_delayedarray=FALSE,
                       verbose=TRUE){
 
-  messager_to_()
+  messager_to()
   obj1 <- cds_to_list(obj = obj,
                       as_sparse = as_sparse,
                       verbose = verbose)

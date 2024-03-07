@@ -12,7 +12,7 @@
 seurat_to_list <- function(obj,
                            verbose=TRUE){
 
-  messager_to_()
+  messager_to()
   if(methods::is(obj,"seurat")){
     seurat1_to_list(obj = obj,
                     verbose = verbose)
@@ -29,7 +29,7 @@ seurat_to_list <- function(obj,
                       verbose = verbose),
       varm = get_varm(obj = obj,
                       verbose = verbose),
-      graphs = get_graphs(obj = obj,
+      graphs = get_obsp(obj = obj,
                           verbose = verbose),
       uns = get_uns(obj = obj,
                     verbose = verbose)

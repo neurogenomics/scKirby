@@ -46,7 +46,7 @@ get_cor <- function(obj,
                                ignore_has_graph = TRUE,
                                verbose = verbose)
   #### Check if graph exists ####
-  Xcor <- get_graphs(obj = obj,
+  Xcor <- get_obsp(obj = obj,
                     keys = graph_key,
                     verbose = verbose)
   #### if not, compute new _cor graph ####
@@ -71,15 +71,14 @@ get_cor <- function(obj,
                                  ignore_has_graph = TRUE,
                                  verbose = FALSE)
     messager("Adding new graph to obj:", graph_key, v = verbose)
-    obj <- set_graph(obj = obj,
-                     g = Xcor,
-                     key =  graph_key,
-                     verbose = verbose)
+    obj <- set_obsp(obj = obj,
+                    obsp = Xcor,
+                    key =  graph_key,
+                    verbose = verbose)
     return(obj)
   } else {
     #### Return directly ####
     messager("Returning sparse correlation matrix.", v = verbose)
     return(Xcor)
   }
-  return(obj2)
 }

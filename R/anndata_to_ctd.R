@@ -1,18 +1,7 @@
-#' Convert: \code{AnnData} ==> \code{CellTypeDataset}
+#' @describeIn anndata_to anndata_to
 #'
-#' @param standardise Run \link[EWCE]{standardise_ctd}.
-#' @inheritParams converters
-#' @inheritParams map_data
-#' @inheritParams to_se
-#' @inheritParams orthogene::aggregate_rows
-#' @inheritParams EWCE::generate_celltype_data
-#' @inheritParams EWCE::standardise_ctd
 #' @inheritDotParams EWCE::standardise_ctd
-#'
 #' @export
-#' @import orthogene
-#' @importFrom utils getFromNamespace
-#' @importFrom EWCE generate_celltype_data standardise_ctd
 #' @examples
 #' obj <- example_obj("anndata")
 #' obj2 <- anndata_to_ctd(obj, annotLevels=list(groups=NULL))
@@ -32,7 +21,7 @@ anndata_to_ctd <- function(obj,
   # devoptera::args2vars(anndata_to_ctd)
   # annotLevels <- list(groups=NULL)
 
-  messager_to_()
+  messager_to()
   #### Read data ####
   if(is.character(obj)){
     obj <- read_data(obj, backed="r")

@@ -56,7 +56,6 @@ process_seurat <- function(obj = NULL,
                            max_mem = 8000*1024^2,
                            seed = 2020,
                            verbose = TRUE){
-  # devoptera::args2vars(process_seurat)
   requireNamespace("future")
   set.seed(seed)
 
@@ -80,7 +79,7 @@ process_seurat <- function(obj = NULL,
   obj2 <- Seurat::FindVariableFeatures(obj2,
                                        nfeatures = nfeatures)
   obj2 <- Seurat::NormalizeData(obj2)
-  if(isTRUE(log_norm)) logged <- Seurat::LogNormalize(obj2)
+  # if(isTRUE(log_norm)) logged <- Seurat::LogNormalize(obj2)
   obj2 <- Seurat::ScaleData(obj2,
                             vars.to.regress = vars.to.regress)
 

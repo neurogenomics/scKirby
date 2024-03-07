@@ -11,7 +11,7 @@
 seurat_to_se <- function(obj,
                           as_sce=TRUE,
                           verbose=TRUE){
-  messager_to_()
+  messager_to()
   obj2 <- Seurat::as.SingleCellExperiment(obj)
   if(isFALSE(as_sce)){
     obj2 <- sce_to_se(obj = obj2,

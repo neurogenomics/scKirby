@@ -6,7 +6,7 @@
 #' obj <- example_obj("anndata")
 #' obj2 <- anndata_to_list(obj)
 dimreduc_to_list <- function(obj){
-  messager_to_()
+  messager_to()
   res <- list()
   slots <- methods::slotNames(obj)
   if("cell.embeddings" %in% slots) {

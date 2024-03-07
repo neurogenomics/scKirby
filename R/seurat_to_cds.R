@@ -23,10 +23,7 @@ seurat_to_cds <- function(obj,
     Seurat::as.CellDataSet(obj)
   #### cell_data_set ####
   } else if(version=="monocle3"){
-    l <- to_list(obj = obj, verbose = verbose)
-    list_to_cds(obj = l,
-                verbose = verbose,
-                ...)
+    SeuratWrappers::as.cell_data_set(obj)
   } else {
     stopper("verision must be one of",
             paste("\n -",shQuote(eval(formals(seurat_to_cds)$version)),

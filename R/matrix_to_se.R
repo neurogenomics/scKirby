@@ -9,7 +9,7 @@
 matrix_to_se <- function(obj,
                          as_sce=FALSE,
                          verbose=TRUE){
-  messager_to_()
+  messager_to()
   obj2 <- SummarizedExperiment::SummarizedExperiment(
     assays = list(raw = DelayedArray::DelayedArray(
       methods::as(as.matrix(obj), "sparseMatrix"))
