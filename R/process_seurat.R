@@ -12,12 +12,12 @@
 #' \item{\code{FindNeighbors}}{K-nearest neighbors}
 #' \item{\code{FindClusters}}{Clustering}
 #' }
-#' @param cluster_reduction Recompute neighbors graph based on UMAP
+#' @param cluster_reduction Recompute neighbours graph based on UMAP
 #' to get clusters that best reflect UMAP space.
 #' For this same reason, only cluster in two dimensions,
 #' because this is the view we most often use.
 #' That said, this may reduce the generalisability of these clusters/graph.
-#' @param log_norm Log-normalise the data with \link[Seurat]{LogNormalize}.
+#' @param log_normalize Log-normalise the data with \link[Seurat]{LogNormalize}.
 #' @param max_mem Max limit on memory usage, to be passed to environmental
 #'  variable \code{future.globals.maxSize}.
 #' @param seed Random seed to set.
@@ -40,17 +40,20 @@
 #' RunPCA FindNeighbors RunUMAP FindClusters
 #' @importFrom future plan
 #' @examples
-#' obj <- example_obj("list")
+#' obj <- example_obj("seurat")
 #' obj2 <- process_seurat(obj = obj)
 process_seurat <- function(obj = NULL,
                            meta.data = NULL,
                            nfeatures = 2000,
-                           vars.to.regress = NULL,
-                           dims = seq(50),
+                           dims = seq(100),
                            add_specificity = FALSE,
                            default_assay = NULL,
                            n.components = 2L,
-                           log_norm = FALSE,
+                           find_variable_features=TRUE,
+                           log_normalize = FALSE,
+                           normalize_data=TRUE,
+                           scale_data=TRUE,
+                           vars.to.regress = NULL,
                            cluster_reduction = "umap",
                            workers = 1,
                            max_mem = 8000*1024^2,
@@ -76,16 +79,26 @@ process_seurat <- function(obj = NULL,
   }
   #### Select variable features ####
   if(is.null(nfeatures)) nfeatures <- nrow(obj2)
-  obj2 <- Seurat::FindVariableFeatures(obj2,
-                                       nfeatures = nfeatures)
-  obj2 <- Seurat::NormalizeData(obj2)
-  # if(isTRUE(log_norm)) logged <- Seurat::LogNormalize(obj2)
-  obj2 <- Seurat::ScaleData(obj2,
-                            vars.to.regress = vars.to.regress)
+  if(isTRUE(find_variable_features)){
+    obj2 <- Seurat::FindVariableFeatures(obj2,
+                                         nfeatures = nfeatures)
+  }
+  if(isTRUE(normalize_data)){
+    obj2 <- Seurat::NormalizeData(obj2)
+  }
+  if(isTRUE(log_normalize)) {
+    logged <- Seurat::LogNormalize(obj2)
+  }
+  if(isTRUE(scale_data)){
+    obj2 <- Seurat::ScaleData(obj2,
+                              vars.to.regress = vars.to.regress)
+  }
 
   #### Dimensionality reduction ####
-  obj2 <- Seurat::RunPCA(obj2)
-  obj2 <- Seurat::FindNeighbors(obj2)
+  obj2 <- Seurat::RunPCA(obj2,
+                         npcs = max(dims))
+  obj2 <- Seurat::FindNeighbors(obj2,
+                                dims = dims)
   obj2 <- Seurat::RunUMAP(obj2,
                           dims = dims,
                           n.components = n.components,
