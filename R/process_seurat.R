@@ -45,6 +45,7 @@
 process_seurat <- function(obj = NULL,
                            meta.data = NULL,
                            nfeatures = 2000,
+                           reduction="pca",
                            dims = seq(100),
                            add_specificity = FALSE,
                            default_assay = NULL,
@@ -95,24 +96,27 @@ process_seurat <- function(obj = NULL,
   }
 
   #### Dimensionality reduction ####
-  obj2 <- Seurat::RunPCA(obj2,
-                         npcs = max(dims))
+  if(reduction=="pca"){
+    obj2 <- Seurat::RunPCA(obj2,
+                           npcs = max(dims))
+  }
   obj2 <- Seurat::FindNeighbors(obj2,
+                                reduction = reduction,
                                 dims = dims)
   obj2 <- Seurat::RunUMAP(obj2,
+                          reduction=reduction,
                           dims = dims,
                           n.components = n.components,
                           return.model = TRUE)
   #### Clustering ####
   if(!isFALSE(cluster_reduction)){
+    ## Recompute neighbours graph based on UMAP
+    ## FindNeighbors doesn't take reduction or dims as args
     obj2 <- Seurat::FindNeighbors(obj2,
                                   reduction = cluster_reduction,
                                   dims = seq_len(n.components))
-    obj2 <- Seurat::FindClusters(obj2,
-                                 reduction = cluster_reduction)
-  } else {
-    obj2 <- Seurat::FindClusters(obj2)
   }
+  obj2 <- Seurat::FindClusters(obj2)
   #### Return ####
   return(obj2)
 }
