@@ -14,7 +14,6 @@
 #' @inheritDotParams SeuratObject::CreateDimReducObject
 #'
 #' @export
-#' @importFrom SeuratObject CreateDimReducObject
 list_to_dimreduc <- function(obj,
                              assay,
                              key,

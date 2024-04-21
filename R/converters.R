@@ -1,18 +1,16 @@
 #' Converters
 #'
-#' @describeIn converters
 #' Functions to convert one single-cell format to another.
 #' @param obj A single-cell object supported by \pkg{scKirby}.
-#'  See \link[scKirby]{converters} for a table of all supported conversions.
+#'  See \link{converters} for a table of all supported conversions.
 #' @param verbose Print messages.
-#' @param ... Additional arguments passed to the respective
-#' \link[scKirby]{converters} function.
+#' @param ... Additional arguments passed to the respective converter function.
+#' \link{converters} function.
 #'
 #' @export
-#' @importFrom data.table data.table tstrsplit setkeyv
 #' @examples
 #' map_dt <- converters()
-converters <- function(){
+converters <- function(obj, verbose, ...){
   func <- NULL;
 
   ns <- getNamespaceExports("scKirby")

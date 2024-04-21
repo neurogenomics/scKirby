@@ -11,7 +11,7 @@
 #' @inheritParams converters
 #' @inheritParams map_data
 #' @inheritParams to_se
-#' @inheritParams orthogene::aggregate_rows
+#' @inheritParams orthogene::aggregate_mapped_genes
 #' @inheritParams EWCE::generate_celltype_data
 #' @inheritParams EWCE::standardise_ctd
 #' @returns Converted object.

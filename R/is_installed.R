@@ -7,7 +7,6 @@
 #' @returns Boolean
 #'
 #' @keywords internal
-#' @importFrom utils installed.packages
 is_installed <- function(pkg,
                          error=FALSE) {
   bool <- requireNamespace(pkg, quietly = TRUE)

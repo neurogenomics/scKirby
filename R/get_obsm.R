@@ -17,7 +17,6 @@
 #' @returns A matrix of cell embeddings coordinates.
 #'
 #' @export
-#' @importFrom methods is
 #' @examples
 #' obj <- example_obj("cds")
 #' obsm <- get_obsm(obj)

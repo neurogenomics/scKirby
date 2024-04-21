@@ -16,7 +16,6 @@
 #' @returns A named list of matrices containing the feature loadings.
 #'
 #' @export
-#' @importFrom methods is
 #' @examples
 #' obj <- example_obj("seurat")
 #' varm <- get_varm(obj)

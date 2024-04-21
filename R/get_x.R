@@ -10,7 +10,6 @@
 #' @returns A named list of matrices.
 #'
 #' @export
-#' @importFrom Matrix t
 #' @examples
 #' obj <- example_obj("seurat")
 #' X <- get_x(obj)

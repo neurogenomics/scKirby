@@ -1,6 +1,5 @@
 #' To \code{AnnData}
 #'
-#' @describeIn converters
 #' Convert any single-cell object to \link[anndata]{AnnData} format.
 #' @param reimport Save and re-import the \link[anndata]{AnnData} object
 #' into R to ensure all data has been converted from Python-native to

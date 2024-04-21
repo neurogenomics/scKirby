@@ -1,6 +1,5 @@
 #' Convert: to \code{CellDataSet}
 #'
-#' @describeIn converters
 #' Convert any object to \code{CellDataSet} format.
 #' @inheritParams converters
 #' @returns A \code{CellDataSet} object.

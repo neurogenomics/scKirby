@@ -17,9 +17,6 @@
 #' @returns A single-cell object.
 #'
 #' @export
-#' @importFrom utils data
-#' @importClassesFrom SeuratObject Graph
-#' @importFrom SeuratObject Graphs
 #' @examples
 #' se <- example_obj("se")
 #' sce <- example_obj("sce")

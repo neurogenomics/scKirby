@@ -8,7 +8,6 @@
 #' \link[monocle]{CellDataSet} object.
 #'
 #' @export
-#' @importFrom Seurat as.CellDataSet
 #' @examples
 #' obj <- example_obj("seurat")
 #' obj2 <- seurat_to_cds(obj)

@@ -1,6 +1,5 @@
 #' Convert: \code{SummarizedExperiment} ==> \code{loom}
 #'
-#' @describeIn converters Convert
 #' \link[SummarizedExperiment]{SummarizedExperiment} to
 #' \link[SeuratDisk]{loom}
 #' @inheritParams converters

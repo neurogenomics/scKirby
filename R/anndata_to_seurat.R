@@ -2,7 +2,6 @@
 #'
 #' @param ... Parameters passed to \code{sceasy::convertFormat}.
 #' @export
-#' @importFrom sceasy convertFormat
 #' @examples
 #' obj <- example_obj("anndata")
 #' seurat <- anndata_to_seurat(obj)

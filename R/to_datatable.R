@@ -8,7 +8,6 @@
 #' @returns A \code{data.table} object.
 #'
 #' @export
-#' @importFrom data.table as.data.table
 #' @examples
 #' obj <- example_obj("cds")
 #' obj2 <- to_dataframe(obj)

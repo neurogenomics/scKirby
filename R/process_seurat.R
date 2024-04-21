@@ -32,19 +32,18 @@
 #' @inheritParams Seurat::FindVariableFeatures
 #' @inheritParams Seurat::ScaleData
 #' @inheritParams Seurat::RunUMAP
+#' @inheritParams Seurat::FindClusters
 #' @returns A preprocessed \link[SeuratObject]{Seurat} object.
 #'
 #' @export
-#' @importFrom Seurat CreateSeuratObject GetAssayData CreateAssayObject
-#' DefaultAssay FindVariableFeatures NormalizeData LogNormalize ScaleData
-#' RunPCA FindNeighbors RunUMAP FindClusters
+#' @import Seurat
 #' @importFrom future plan
 #' @examples
 #' obj <- example_obj("seurat")
 #' obj2 <- process_seurat(obj = obj)
 process_seurat <- function(obj = NULL,
                            meta.data = NULL,
-                           nfeatures = 2000,
+                           nfeatures = NULL,
                            reduction="pca",
                            dims = seq(100),
                            add_specificity = FALSE,
@@ -56,6 +55,8 @@ process_seurat <- function(obj = NULL,
                            scale_data=TRUE,
                            vars.to.regress = NULL,
                            cluster_reduction = "umap",
+                           algorithm = 1,
+                           resolution = 0.8,
                            workers = 1,
                            max_mem = 8000*1024^2,
                            seed = 2020,
@@ -116,7 +117,10 @@ process_seurat <- function(obj = NULL,
                                   reduction = cluster_reduction,
                                   dims = seq_len(n.components))
   }
-  obj2 <- Seurat::FindClusters(obj2)
+  obj2 <- Seurat::FindClusters(obj2,
+                               algorithm=algorithm,
+                               resolution=resolution,
+                               random.seed=seed)
   #### Return ####
   return(obj2)
 }

@@ -9,8 +9,6 @@
 #' @returns A single-cell object with a graph.
 #'
 #' @keywords internal
-#' @importFrom Matrix t
-#' @importFrom methods as slot
 calc_cor <- function(obj,
                      keys = NULL,
                      graph_key = NULL,

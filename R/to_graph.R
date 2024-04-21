@@ -8,7 +8,6 @@
 #' @returns A sparse \link[SeuratObject]{as.Graph} object.
 #'
 #' @export
-#' @importFrom SeuratObject as.Graph
 #' @examples
 #' obj <- example_obj("matrix")
 #' obj2 <- to_graph(obj)

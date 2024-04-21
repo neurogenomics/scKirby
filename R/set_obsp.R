@@ -7,7 +7,6 @@
 #' @returns Named list of graph objects.
 #'
 #' @export
-#' @importFrom methods is
 #' @examples
 #' obj <- example_obj("seurat")
 #' g <- get_cor(obj)

@@ -5,7 +5,7 @@
 #' When \code{group} is supplied,
 #' determine whether a single-cell object belongs to a particular group of
 #' object classes.
-#' See \linkp[scKirby]{dict_class} for details.
+#' See \link{dict_class} for details.
 #' @inheritParams converters
 #' @inheritParams dict_class
 #'
