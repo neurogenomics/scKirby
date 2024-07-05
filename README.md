@@ -33,11 +33,11 @@ any of these steps separately using the designated sub-functions.
 3.  **Save**: Saves the converted file/object (sub-function:
     `save_data()`).
 
-## [Documentation website](https://bschilder.github.io/scKirby)
+## [Documentation website](https://neurogenomics.github.io/scKirby)
 
-## [Vignette: data ingestion](https://bschilder.github.io/scKirby/articles/scKirby.html)
+## [Vignette: data ingestion](https://neurogenomics.github.io/scKirby/articles/scKirby.html)
 
-## [Vignette: conda environments](https://bschilder.github.io/scKirby/articles/conda.html)
+## [Vignette: conda environments](https://neurogenomics.github.io/scKirby/articles/conda.html)
 
 # i/o formats
 
