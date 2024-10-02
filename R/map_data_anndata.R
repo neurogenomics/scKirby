@@ -78,7 +78,7 @@ map_data_anndata <- function(obj,
     genes = rownames(assays[[1]]),
     original_rowdata = obj$var)
   #### Construct new SummarizedExperiment ####
-  ## Remove PC slot to avoid error:
+  ## Remove PC layer to avoid error:
   ## Error: ValueError: Value passed for key 'PCs' is of incorrect shape.
   obj$obsm$X_pca <- NULL
   obj$varm$PCs <- NULL

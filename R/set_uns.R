@@ -1,6 +1,6 @@
 #' Set unstructured data
 #'
-#' Set the unstructured data slot in any single-cell object that has one.
+#' Set the unstructured data layer in any single-cell object that has one.
 #' @param uns Unstructured data to be stored in object.
 #' @param key Name of the list element to store \code{uns} in.
 #' @inheritParams converters

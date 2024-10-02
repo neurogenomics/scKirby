@@ -42,7 +42,7 @@ get_varm <- function(obj,
   } else if (is_class(obj,"seurat")) {
     ## Seurat V1
     if(methods::is(obj,"seurat")){
-      ### Need a way to figure which slot names are available a priori ####
+      ### Need a way to figure which layer names are available a priori ####
       # messager("Extracting varm from Seurat (V1).",v = verbose)
       # varm <- list(PCA=list(embeddings=as.matrix(obj@pca.x),
       #                             loadings=as.matrix(obj@pca.rot)))
@@ -105,7 +105,7 @@ get_varm <- function(obj,
     #   loadings="reducedDimA")
     varm <- if (methods::.hasSlot(obj,"reducedDimA") &&
                ncol(obj@reducedDimA)==nrow(obj) ) {
-      list(reducedDimA=t(methods::slot(obj, "reducedDimA")))
+      list(reducedDimA=t(methods::layer(obj, "reducedDimA")))
     } else {
       return(NULL)
     }

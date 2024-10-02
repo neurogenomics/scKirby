@@ -44,7 +44,7 @@ get_obsm <- function(obj,
   } else if (is_class(obj,"seurat")) {
     ## Seurat V1
     if(methods::is(obj,"seurat")){
-      ### Need a way to figure which slot names are availabe a priori ####
+      ### Need a way to figure which layer names are availabe a priori ####
       # messager("Extracting obsm from Seurat (V1).",v = verbose)
       # obsm <- list(PCA=list(embeddings=as.matrix(obj@pca.x),
       #                             loadings=as.matrix(obj@pca.rot)))
@@ -95,10 +95,10 @@ get_obsm <- function(obj,
     #   loadings="reducedDimA")
     obsm <- if(methods::.hasSlot(obj,"reducedDimS") &&
                ncol(obj@reducedDimS)==ncol(obj) ){
-      list(reducedDimS=t(methods::slot(obj, "reducedDimS")))
+      list(reducedDimS=t(methods::layer(obj, "reducedDimS")))
     } else if (methods::.hasSlot(obj,"reducedDimA") &&
                ncol(obj@reducedDimA)==ncol(obj) ) {
-      list(reducedDimA=t(methods::slot(obj, "reducedDimA")))
+      list(reducedDimA=t(methods::layer(obj, "reducedDimA")))
     } else {
       NULL
     }

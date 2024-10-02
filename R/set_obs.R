@@ -1,6 +1,6 @@
 #' Set unstructured data
 #'
-#' Set the sample observations slot (i.e. cell metadata)
+#' Set the sample observations layer (i.e. cell metadata)
 #'  in any single-cell object that has one.
 #' @param obs Observation metadata
 #' as a \link[base]{data.frame} with samples as row names.

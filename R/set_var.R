@@ -1,6 +1,6 @@
 #' Set unstructured data
 #'
-#' Set the feature variable slot (i.e. gene metadata)
+#' Set the feature variable layer (i.e. gene metadata)
 #' in any single-cell object that has one.
 #' @param var Variable metadata
 #' as a \link[base]{data.frame} with features as row names.

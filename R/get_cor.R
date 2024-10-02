@@ -24,7 +24,7 @@
 get_cor <- function(obj,
                     keys = NULL,
                     assay = NULL,
-                    slot = NULL,
+                    layer = NULL,
                     graph_key = NULL,
                     method = "pearson",
                     return_obj = FALSE,
@@ -53,7 +53,7 @@ get_cor <- function(obj,
   if(is.null(Xcor)){
     Xcor <- calc_cor(obj = obj,
                      assay = assay,
-                     slot = slot,
+                     layer = layer,
                      keys = keys,
                      method = method)
   }

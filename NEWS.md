@@ -27,7 +27,7 @@ and avoid conflicts with piggyback-oriented functions.
 - `is_class`
   - Add new classes: "matrix_strict", "matrix_sparse", "delayed_array"
 * `get_x`
-    - Add new args `slot` and `assay`
+    - Add new args `layer` and `assay`
 * New funcs: 
   - `get_obs_names`
   - `get_var_names`

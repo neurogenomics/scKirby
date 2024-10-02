@@ -18,7 +18,7 @@ get_x <- function(obj,
                   n=NULL,
                   simplify=TRUE,
                   assay=NULL,
-                  slot=NULL,
+                  layer=NULL,
                   as_sparse=FALSE,
                   verbose=TRUE){
   # devoptera::args2vars(get_x)
@@ -55,16 +55,27 @@ get_x <- function(obj,
       data <- list(RNA.counts=obj@raw.data,
                    RNA.data=obj@data,
                    RNA.scale.data=obj@scale.data)
-    ## Seurat V2+
-    } else {
+    ## Seurat V2-5
+    } else if(packageVersion("Seurat")<"5") {
       assays <- obj@assays
       if(!is.null(assay)) assays[assays %in% assay]
       data <- lapply(assays,function(a){
         slots <- c("counts","data","scale.data")
         slots <- slots[sapply(slots,function(s){methods::.hasSlot(a,s)})]
-        if(!is.null(slot)) slots <- slots[slots %in% slot]
+        if(!is.null(layer)) slots <- slots[slots %in% layer]
         lapply(stats::setNames(slots,slots), function(s){
-          methods::slot(a,s)
+          methods::layer(a,s)
+        })
+      }) |> unlist(recursive = FALSE)
+    ## Seurat V5+
+    } else{
+      assays <- obj@assays
+      if(!is.null(assay)) assays <- assays[names(assays) %in% assay]
+      data <- lapply(assays,function(a){
+        layers <- SeuratObject::Layers(obj)
+        if(!is.null(layer)) layers <- intersect(layers,layer)
+        lapply(stats::setNames(layers,layers), function(s){
+          SeuratObject::LayerData(a,s)
         })
       }) |> unlist(recursive = FALSE)
     }

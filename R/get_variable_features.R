@@ -25,7 +25,7 @@ get_variable_features <- function(obj,
   }
   #### Check if empty ####
   if(length(Reduce(union,feat))==0){
-    messager("Warning:","Variable features slot was empty. Returning NULL.")
+    messager("Warning:","Variable features layer was empty. Returning NULL.")
     return(NULL)
   }
   #### Reduce list ####

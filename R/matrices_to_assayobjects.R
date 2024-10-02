@@ -3,11 +3,11 @@
 #' Convert a named list of X_list to a named list of \pkg{Seurat}
 #' assay objects (see \link[SeuratObject]{CreateAssayObject}).
 #' @param X_list A named list of matrices (one per unique assay in
-#' \code{X_list}) to be put in the \code{counts} slot of each
+#' \code{X_list}) to be put in the \code{counts} layer of each
 #' \code{AssayObject}.
 #' @param var_features (Optional) A named list of feature metadata data.frames
 #'  (one per unique assay in \code{X_list}) to be put in the
-#'   \code{meta.features} slot of each \code{AssayObject}.
+#'   \code{meta.features} layer of each \code{AssayObject}.
 #' @inheritParams converters
 #' @returns A named list of \pkg{Seurat} assay objects.
 #'

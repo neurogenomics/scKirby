@@ -7,17 +7,18 @@
 #' @export
 #' @examples
 #' obj <- example_obj("seurat")
-#' obj2 <- seurat_to_anndata(obj)
+#' obj2 <- seurat_to_anndata(obj, method="seuratdisk")
 seurat_to_anndata <- function(obj,
                               reimport = TRUE,
                               save_path = tempfile(fileext = ".h5ad"),
-                              method = c("sceasy","anndatar"),
+                              method = c("sceasy","anndatar","seuratdisk"),
                               verbose = TRUE,
                               ...){
 
   messager_to()
   method <- tolower(method)[1]
   #### Convert ####
+  if(!is.null(save_path)) save_path <- path.expand(save_path)
   # Method: anndatar
   if(method=="anndatar"){
     adat <- anndataR::from_Seurat(
@@ -29,7 +30,7 @@ seurat_to_anndata <- function(obj,
       },
       file = save_path
     )
-  } else {
+  } else if(method=="sceasy"){
     # Method: sceasy
     activate_conda(verbose=verbose)
     adat <- sceasy::convertFormat(obj = obj,
@@ -48,6 +49,12 @@ seurat_to_anndata <- function(obj,
                                save_path = save_path,
                                verbose = verbose)
     }
+  } else{
+    messager("Saving ==>",save_path)
+    h5Seurat_path <- gsub("\\.h5ad$",".h5Seurat",save_path)
+    SeuratDisk::SaveH5Seurat(obj, filename = h5Seurat_path)
+    SeuratDisk::Convert(h5Seurat_path, dest = "h5ad")
+    adat <- anndata::read_h5ad(save_path)
   }
   #### Return ###
   return(adat)
