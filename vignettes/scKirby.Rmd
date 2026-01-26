@@ -11,11 +11,6 @@ vignette: >
 
 ```{r setup}
 library(scKirby)
-if(requireNamespace("reticulate", quietly=TRUE)){
-  tryCatch({
-    reticulate::use_condaenv("sckirby", required = FALSE)
-  }, error = function(e) message("Conda env not available, using default Python"))
-}
 ```
 
 # Intro 
