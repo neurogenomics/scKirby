@@ -27,9 +27,10 @@ activate_conda <- function(conda_env = Sys.getenv("CONDA_ENV"),
   #### Set default conda env ####
   if(conda_env=="") conda_env <- "r-reticulate"
   #### Only activate if not already activated ####
-  ## Use get() to avoid parse-time namespace lookup
-  which_env <- get("which_env", asNamespace("echoconda"))
-  activate_env <- get("activate_env", asNamespace("echoconda"))
+  ## Use getFromNamespace() to avoid parse-time namespace lookup
+  ## This is safer than asNamespace() during byte compilation
+  which_env <- utils::getFromNamespace("which_env", "echoconda")
+  activate_env <- utils::getFromNamespace("activate_env", "echoconda")
   if(which_env()!=conda_env){
     activate_env(conda_env = conda_env,
                  method = method,
