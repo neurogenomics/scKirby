@@ -57,7 +57,7 @@ Suggests:
   SeuratWrappers
 Remotes:
   github::RajLabMSSM/echoconda,
-  github::mojaveazure/seurat-disk@v0.0.0.9020,
+  github::mojaveazure/seurat-disk,
   github::mojaveazure/loomR,
   github::cellgeni/sceasy,
   github::cole-trapnell-lab/leidenbase,
