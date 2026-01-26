@@ -18,6 +18,9 @@ HAS_ANNDATA <- tryCatch({
   requireNamespace("basilisk.utils", quietly=TRUE) &&
   "activateEnvironment" %in% getNamespaceExports("basilisk.utils")
 }, error = function(e) FALSE)
+
+# Check if monocle is available for CDS examples
+HAS_MONOCLE <- requireNamespace("monocle", quietly=TRUE)
 ```
 
 # Intro 
@@ -36,7 +39,7 @@ h5seurat <- example_obj("h5seurat")
 sce <- example_obj("sce")
 se <- example_obj("se")
 h5 <- example_obj("h5")
-cds <- example_obj("cds")
+if(HAS_MONOCLE) cds <- example_obj("cds")
 ctd <- example_obj("ctd")
 if(HAS_ANNDATA) adat <- example_obj("anndata")
 library(Seurat)
@@ -134,11 +137,11 @@ h5.4 <- ingest_data(obj = h5,
                     output_type = "Seurat") 
 ```
 
-## Ingest CellDataSet 
+## Ingest CellDataSet
 
-```{r}  
+```{r, eval=HAS_MONOCLE}
 seurat.2 <- ingest_data(obj=cds,
-                        output_type = "Seurat") 
+                        output_type = "Seurat")
 ```
 
 
