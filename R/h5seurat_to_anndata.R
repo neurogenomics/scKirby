@@ -6,8 +6,10 @@
 #' @inheritDotParams read_anndata
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("h5seurat")
 #' obj2 <- h5seurat_to_anndata(obj)
+#' }
 h5seurat_to_anndata <- function(obj,
                                 reimport = TRUE,
                                 save_path = tempfile(fileext = ".h5ad"),

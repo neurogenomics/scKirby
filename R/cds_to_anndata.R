@@ -5,8 +5,10 @@
 #' @inheritDotParams seurat_to_anndata
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("cds")
 #' obj2 <- cds_to_anndata(obj)
+#' }
 cds_to_anndata <- function(obj,
                            reimport=TRUE,
                            save_path= tempfile(fileext = ".h5ad"),

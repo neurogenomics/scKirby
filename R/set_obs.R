@@ -9,11 +9,13 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("ad")
 #' obs <- get_obs(obj)
 #' obs$new_col <- c(1,2)
 #' obj2 <- set_obs(obj = obj,
 #'                 obs = obs)
+#' }
 set_obs <- function(obj,
                     obs,
                     verbose=TRUE){

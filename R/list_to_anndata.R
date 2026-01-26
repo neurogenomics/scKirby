@@ -4,8 +4,10 @@
 #' @inheritParams to_sparse
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("list")
 #' obj2 <- list_to_anndata(obj)
+#' }
 list_to_anndata <- function(obj,
                             transpose=TRUE,
                             verbose=TRUE){
