@@ -26,7 +26,8 @@ HAS_MONOCLE <- requireNamespace("monocle", quietly=TRUE)
 # SeuratDisk uses deprecated 'slot' argument in GetAssayData, which is defunct in Seurat v5
 HAS_SEURATDISK <- tryCatch({
   requireNamespace("SeuratDisk", quietly=TRUE) &&
-  packageVersion("Seurat") < "5"
+  requireNamespace("Seurat", quietly=TRUE) &&
+  utils::packageVersion("Seurat") < package_version("5.0.0")
 }, error = function(e) FALSE)
 ```
 
