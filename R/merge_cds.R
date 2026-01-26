@@ -7,11 +7,13 @@
 #' @export
 #' @importFrom SummarizedExperiment assay assayNames
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("cds")
 #' batch_names <- unique(obj$groups)
 #' obj_list <- list(obj[,obj$groups=='g1'],
 #'                  obj[,obj$groups=='g2'])
 #' obj2 <- merge_cds(obj_list, batch_names = batch_names)
+#' }
 merge_cds <- function(obj_list,
                       by = c("assays","obs","var"),
                       verbose = TRUE) {
@@ -33,10 +35,12 @@ merge_cds <- function(obj_list,
       messager("Merging CellDataSet objects as multiple obs (samples).",
                v=verbose)
 
-      Seurat::as.CellDataSet(obj_list[[1]])
-      methods::setClass(obj_list[[1]],"cell_data_set")
-      class(obj_list[[1]])
-      monocle3::combine_cds(cds_list = obj_list)
+      if(!requireNamespace("monocle3", quietly = TRUE)){
+        stopper("monocle3 required for merging by obs.\n",
+                "Install with: remotes::install_github('cole-trapnell-lab/monocle3')")
+      }
+      combine_cds <- utils::getFromNamespace("combine_cds", "monocle3")
+      combine_cds(cds_list = obj_list)
     }
 
   }

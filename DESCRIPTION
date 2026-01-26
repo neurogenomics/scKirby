@@ -43,27 +43,21 @@ Suggests:
   knitr,
   loomR,
   sceasy,
-  leidenbase,
   speedglm,
-  monocle3,
   monocle,
   SCopeLoomR,
   zellkonverter,
   anndataR,
   future,
   testthat (>= 3.0.0),
-  WGCNA,
-  SeuratWrappers
+  WGCNA
 Remotes:
   github::mojaveazure/seurat-disk,
   github::mojaveazure/loomR,
   github::cellgeni/sceasy,
-  github::cole-trapnell-lab/leidenbase,
   github::cran/speedglm,
-  github::cole-trapnell-lab/monocle3,
   github::aertslab/SCopeLoomR,
-  github::scverse/anndataR,
-  github::satijalab/seurat-wrappers
+  github::scverse/anndataR
 VignetteBuilder: knitr
 RoxygenNote: 7.3.3
 Config/testthat/edition: 3

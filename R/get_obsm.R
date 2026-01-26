@@ -18,8 +18,10 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("cds")
 #' obsm <- get_obsm(obj)
+#' }
 get_obsm <- function(obj,
                      keys = NULL,
                      n = NULL,

@@ -9,8 +9,10 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("cds")
 #' var <- get_var(obj)
+#' }
 get_var <- function(obj,
                     rownames_col=NULL,
                     n=NULL,

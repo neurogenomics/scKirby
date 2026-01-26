@@ -9,10 +9,12 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("seurat")
 #' obj2 <- seurat_to_cds(obj)
+#' }
 seurat_to_cds <- function(obj,
-                          version=c("monocle3","monocle"),
+                          version=c("monocle","monocle3"),
                           verbose=TRUE,
                           ...){
 
@@ -26,7 +28,8 @@ seurat_to_cds <- function(obj,
       stopper("SeuratWrappers required for monocle3 conversion.\n",
               "Install with: remotes::install_github('satijalab/seurat-wrappers')")
     }
-    SeuratWrappers::as.cell_data_set(obj)
+    as_cell_data_set <- utils::getFromNamespace("as.cell_data_set", "SeuratWrappers")
+    as_cell_data_set(obj)
   } else {
     stopper("verision must be one of",
             paste("\n -",shQuote(eval(formals(seurat_to_cds)$version)),

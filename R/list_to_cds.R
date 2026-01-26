@@ -6,15 +6,20 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("list")
 #' obj2 <- list_to_cds(obj)
+#' }
 list_to_cds <- function(obj,
                         n = NULL,
                         merge_assays = TRUE,
                         verbose = TRUE,
                         ...){
 
-  requireNamespace("monocle3")
+  if(!requireNamespace("monocle3", quietly = TRUE)){
+    stopper("monocle3 required for this conversion.\n",
+            "Install with: remotes::install_github('cole-trapnell-lab/monocle3')")
+  }
 
   Xl <- get_x(obj = obj,
               n = n,
@@ -53,7 +58,8 @@ list_to_cds <- function(obj,
       var_i$gene_short_name <- rownames(var_i)
     }
     #### Create CDS #####
-    cds <- monocle3::new_cell_data_set(
+    new_cell_data_set <- utils::getFromNamespace("new_cell_data_set", "monocle3")
+    cds <- new_cell_data_set(
       expression_data = Xl[[nm]],
       cell_metadata = get_obs(obj = obj,
                               verbose = verbose),
