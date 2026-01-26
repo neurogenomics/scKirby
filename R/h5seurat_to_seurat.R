@@ -5,8 +5,10 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("h5seurat")
 #' seurat <- h5seurat_to_seurat(obj)
+#' }
 h5seurat_to_seurat <- function(obj,
                                verbose = TRUE,
                                ...){

@@ -22,8 +22,10 @@
 #' sce <- example_obj("sce")
 #' seurat <- example_obj("seurat")
 #'
+#' \dontrun{
 #' library(Seurat) # necessary
 #' loom <- example_obj("loom")
+#' }
 example_obj <- function(class=c("Seurat",
                                 "h5Seurat",
                                 "SummarizedExperiment",
