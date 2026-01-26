@@ -64,7 +64,7 @@ get_x <- function(obj,
         slots <- slots[sapply(slots,function(s){methods::.hasSlot(a,s)})]
         if(!is.null(layer)) slots <- slots[slots %in% layer]
         lapply(stats::setNames(slots,slots), function(s){
-          methods::layer(a,s)
+          methods::slot(a,s)
         })
       }) |> unlist(recursive = FALSE)
     ## Seurat V5+

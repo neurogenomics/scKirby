@@ -42,7 +42,7 @@ get_uns <- function(obj,
     uns <- lapply(stats::setNames(methods::slotNames(obj@experimentData),
                                   methods::slotNames(obj@experimentData)),
                   function(x){
-                    methods::layer(obj@experimentData,x)
+                    methods::slot(obj@experimentData,x)
                   })
     #### list ####
   } else if(is_class(obj,"list")){

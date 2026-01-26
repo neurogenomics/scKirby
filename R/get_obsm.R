@@ -97,10 +97,10 @@ get_obsm <- function(obj,
     #   loadings="reducedDimA")
     obsm <- if(methods::.hasSlot(obj,"reducedDimS") &&
                ncol(obj@reducedDimS)==ncol(obj) ){
-      list(reducedDimS=t(methods::layer(obj, "reducedDimS")))
+      list(reducedDimS=t(methods::slot(obj, "reducedDimS")))
     } else if (methods::.hasSlot(obj,"reducedDimA") &&
                ncol(obj@reducedDimA)==ncol(obj) ) {
-      list(reducedDimA=t(methods::layer(obj, "reducedDimA")))
+      list(reducedDimA=t(methods::slot(obj, "reducedDimA")))
     } else {
       NULL
     }
