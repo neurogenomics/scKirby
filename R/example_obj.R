@@ -58,12 +58,12 @@ example_obj <- function(class=c("Seurat",
                  verbose = verbose,
                  ...)
   } else if(class %in% c("data.frame","df")){
-    obj <- to_dataframe(obj = obj,
+    obj <- to_dataframe(obj = base_obj,
                         verbose = verbose,
                         ...)
   #### data.table ####
   } else if(class %in% c("data.table","dt")){
-    obj <- to_datatable(obj = obj,
+    obj <- to_datatable(obj = base_obj,
                         verbose = verbose,
                         ...)
   #### SummarizedExperiment ####
@@ -88,7 +88,7 @@ example_obj <- function(class=c("Seurat",
                             ...)
     #### SeuratDisk ####
   } else if(class %in% c("h5seurat","h5s")){
-    obj <- to_seurat(obj = obj,
+    obj <- to_seurat(obj = base_obj,
                      as_h5seurat = TRUE,
                      save_path = paste0(save_path,".h5Seurat"),
                      verbose = verbose,
@@ -99,7 +99,7 @@ example_obj <- function(class=c("Seurat",
                          verbose = verbose)
   #### loom ####
   } else if(class %in% c("loom")){
-    obj <- to_loom(obj = obj,
+    obj <- to_loom(obj = base_obj,
                    save_path = save_path,
                    verbose = verbose,
                    ...)
@@ -115,7 +115,7 @@ example_obj <- function(class=c("Seurat",
                         verbose = verbose)
   #### hdf5array ####
   } else if(class %in% c("hdf5array","h5")){
-    obj <- seurat_to_hdf5se(obj = obj,
+    obj <- seurat_to_hdf5se(obj = base_obj,
                             save_path = save_path,
                             verbose = verbose)
   #### anndata ####
