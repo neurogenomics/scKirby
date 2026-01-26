@@ -20,11 +20,11 @@ biocViews:
 Imports:
   orthogene,
   EWCE,
-  ewceData, 
+  ewceData,
   data.table,
-  Matrix,  
+  Matrix,
   reticulate,
-  S4Vectors, 
+  S4Vectors,
   Seurat,
   SeuratObject,
   SeuratDisk,
@@ -35,7 +35,8 @@ Imports:
   BiocParallel,
   parallel,
   HDF5Array,
-  tidyr
+  tidyr,
+  future
 Suggests:
   anndata,
   rworkflows,
@@ -48,7 +49,6 @@ Suggests:
   SCopeLoomR,
   zellkonverter,
   anndataR,
-  future,
   testthat (>= 3.0.0),
   WGCNA
 Remotes:
