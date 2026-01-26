@@ -38,7 +38,7 @@ Imports:
   parallel,
   HDF5Array,
   tidyr
-Suggests: 
+Suggests:
   rworkflows,
   rmarkdown,
   knitr,
@@ -53,17 +53,19 @@ Suggests:
   anndataR,
   future,
   testthat (>= 3.0.0),
-  WGCNA
+  WGCNA,
+  SeuratWrappers
 Remotes:
-  github::RajLabMSSM/echoconda, 
-  github::mojaveazure/seurat-disk, 
+  github::RajLabMSSM/echoconda,
+  github::mojaveazure/seurat-disk@v0.0.0.9020,
   github::mojaveazure/loomR,
   github::cellgeni/sceasy,
-  github::cole-trapnell-lab/leidenbase, 
+  github::cole-trapnell-lab/leidenbase,
   github::cran/speedglm,
   github::cole-trapnell-lab/monocle3,
   github::aertslab/SCopeLoomR,
-  github::scverse/anndataR
+  github::scverse/anndataR,
+  github::satijalab/seurat-wrappers
 VignetteBuilder: knitr
 RoxygenNote: 7.3.2
 Config/testthat/edition: 3

@@ -1,0 +1,12 @@
+name: sckirby
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - python>=3.9
+  - anndata>=0.10
+  - pandas
+  - numpy
+  - scipy
+  - pip

@@ -11,6 +11,11 @@ vignette: >
 
 ```{r setup}
 library(scKirby)
+if(requireNamespace("reticulate", quietly=TRUE)){
+  tryCatch({
+    reticulate::use_condaenv("sckirby", required = FALSE)
+  }, error = function(e) message("Conda env not available, using default Python"))
+}
 ```
 
 # Intro 
@@ -49,8 +54,9 @@ sce2 <- ingest_data(obj = seurat,
 ### As `Seurat` 
 
 ```{r}
-seurat <- ingest_data(obj=seurat@assays$RNA@counts, 
-                      output_type = "Seurat") 
+counts <- get_x(seurat, n=1)[[1]]
+seurat <- ingest_data(obj=counts,
+                      output_type = "Seurat")
 ```
 
 
