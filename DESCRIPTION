@@ -17,9 +17,8 @@ Depends: R (>= 3.6.0)
 SystemRequirements: Python (>= 3.7.0) 
 biocViews:
   Software, SingleCell
-Imports: 
-  orthogene, 
-  echoconda,
+Imports:
+  orthogene,
   EWCE,
   ewceData, 
   data.table,
@@ -39,6 +38,7 @@ Imports:
   tidyr
 Suggests:
   anndata,
+  echoconda,
   rworkflows,
   rmarkdown,
   knitr,

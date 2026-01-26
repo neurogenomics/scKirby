@@ -20,7 +20,6 @@
 #'   If \code{NULL}, load into memory.
 #'
 #' @keywords internal
-#' @importFrom echoconda activate_env
 example_anndata <- function(obj = SeuratObject::pbmc_small,
                             save_path = file.path(tempdir(),"example.h5ad"),
                             backed = "r",
