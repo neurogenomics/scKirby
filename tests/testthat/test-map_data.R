@@ -1,5 +1,4 @@
-test_that("map_data works", {
-
+test_that("map_data works for SE and SCE", {
   #### SummarizedExperiment ####
   obj <- example_obj("se")
   obj2 <- map_data(obj = obj,
@@ -14,6 +13,19 @@ test_that("map_data works", {
                    output_species = "mouse")
   testthat::expect_lt(nrow(obj2),
                       nrow(obj))
+})
+
+test_that("map_data works for Seurat", {
+  obj <- example_obj("seurat")
+  obj2 <- map_data(obj = obj,
+                   input_species = "human",
+                   output_species = "mouse")
+  testthat::expect_lt(nrow(obj2),
+                      nrow(obj))
+})
+
+test_that("map_data works for anndata", {
+  skip_if_no_anndata()
   #### anndata ####
   obj <- example_obj("ad")
   obj2 <- map_data(obj = obj,
@@ -23,7 +35,10 @@ test_that("map_data works", {
   testthat::expect_lt(ncol(obj2),
                       ncol(obj))
   testthat::expect_false(is(obj2$X,"dgCMatrix"))
-  #### anndata: chunked ####
+})
+
+test_that("map_data works for anndata chunked", {
+  skip_if_no_anndata()
   obj <- example_obj("ad")
   obj2 <- map_data(obj = obj,
                    input_species = "human",
@@ -33,16 +48,10 @@ test_that("map_data works", {
   testthat::expect_lt(ncol(obj2),
                       ncol(obj))
   testthat::expect_true(is(obj2$X,"dgCMatrix"))
-  #### seurat ####
-  obj <- example_obj("seurat")
-  obj2 <- map_data(obj = obj,
-                   input_species = "human",
-                   output_species = "mouse")
-  testthat::expect_lt(nrow(obj2),
-                      nrow(obj))
+})
 
-
-  #### anndata: using gene_map across species ####
+test_that("map_data works for anndata with gene_map across species", {
+  skip_if_no_anndata()
   obj <- example_obj("ad")
   gene_map <- orthogene::map_orthologs(genes = colnames(obj),
                                        input_species = "human",
@@ -53,8 +62,10 @@ test_that("map_data works", {
                    output_species = "mouse")
   testthat::expect_lt(ncol(obj2),
                       ncol(obj))
+})
 
-  #### anndata: using gene_map within species ####
+test_that("map_data works for anndata with gene_map within species", {
+  skip_if_no_anndata()
   ### Simply renames the genes if the number is equal
   obj <- example_obj("ad")
   gene_map <- data.frame(input=paste("gene",
@@ -82,5 +93,4 @@ test_that("map_data works", {
                    output_col = "output")
   testthat::expect_lte(ncol(obj2),
                        ncol(obj))
-
 })
