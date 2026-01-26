@@ -127,12 +127,14 @@ seurat.2 <- ingest_data(obj = h5seurat,
 
 ### As `SingleCellExperiment`  
 
-```{r HDF5}   
+```{r HDF5}
 ## Read in the sce object directly
 h5.2 <- ingest_data(obj=h5)
+```
 
-## Read it from disk
-sce_dir <- dirname(se_filepath(h5.2))
+```{r HDF5-disk, eval=FALSE}
+## Read from disk (requires knowing the HDF5 directory path)
+sce_dir <- dirname(path(assay(h5.2)))
 h5.3 <- ingest_data(obj=sce_dir)
 ```
 
