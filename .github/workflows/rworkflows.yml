@@ -43,7 +43,7 @@ jobs:
         run_docker: true
         docker_registry: ghcr.io
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        miniforge_variant: Mambaforge
+        miniforge_variant: Miniforge3
         environment_file: inst/conda/environment.yml
         activate_environment: sckirby
         cache_version: cache-v2
