@@ -21,6 +21,13 @@ HAS_ANNDATA <- tryCatch({
 
 # Check if monocle is available for CDS examples
 HAS_MONOCLE <- requireNamespace("monocle", quietly=TRUE)
+
+# Check if SeuratDisk is compatible with current Seurat version
+# SeuratDisk uses deprecated 'slot' argument in GetAssayData, which is defunct in Seurat v5
+HAS_SEURATDISK <- tryCatch({
+  requireNamespace("SeuratDisk", quietly=TRUE) &&
+  packageVersion("Seurat") < "5"
+}, error = function(e) FALSE)
 ```
 
 # Intro 
@@ -35,7 +42,7 @@ HAS_MONOCLE <- requireNamespace("monocle", quietly=TRUE)
 
 ```{r}
 seurat <- example_obj("seurat")
-h5seurat <- example_obj("h5seurat")
+if(HAS_SEURATDISK) h5seurat <- example_obj("h5seurat")
 sce <- example_obj("sce")
 se <- example_obj("se")
 h5 <- example_obj("h5")
@@ -103,13 +110,12 @@ In-memory
 sce.2 <- ingest_data(obj=seurat)
 ```
 
-### Ingest H5Seurat  
+### Ingest H5Seurat
 
-On-disk 
+On-disk (requires SeuratDisk compatible with current Seurat version)
 
-```{r H5Seurat}   
-
-seurat.2 <- ingest_data(obj = h5seurat, 
+```{r H5Seurat, eval=HAS_SEURATDISK}
+seurat.2 <- ingest_data(obj = h5seurat,
                         output_class = "seurat")
 ```
 
