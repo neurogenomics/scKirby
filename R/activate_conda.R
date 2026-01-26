@@ -27,10 +27,13 @@ activate_conda <- function(conda_env = Sys.getenv("CONDA_ENV"),
   #### Set default conda env ####
   if(conda_env=="") conda_env <- "r-reticulate"
   #### Only activate if not already activated ####
-  if(echoconda::which_env()!=conda_env){
-    echoconda::activate_env(conda_env = conda_env,
-                            method = method,
-                            verbose = verbose)
+  ## Use get() to avoid parse-time namespace lookup
+  which_env <- get("which_env", asNamespace("echoconda"))
+  activate_env <- get("activate_env", asNamespace("echoconda"))
+  if(which_env()!=conda_env){
+    activate_env(conda_env = conda_env,
+                 method = method,
+                 verbose = verbose)
   }
   return(invisible(NULL))
 }
