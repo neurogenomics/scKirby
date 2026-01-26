@@ -2,8 +2,10 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("anndata")
 #' sce <- anndata_to_se(obj)
+#' }
 anndata_to_se <- function(obj,
                            as_sce=FALSE,
                            verbose=TRUE){

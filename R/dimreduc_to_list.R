@@ -3,8 +3,10 @@
 #' @inheritParams converters
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("anndata")
 #' obj2 <- anndata_to_list(obj)
+#' }
 dimreduc_to_list <- function(obj){
   messager_to()
   res <- list()

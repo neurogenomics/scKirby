@@ -3,8 +3,10 @@
 #' @inheritDotParams EWCE::standardise_ctd
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("anndata")
 #' obj2 <- anndata_to_ctd(obj, annotLevels=list(groups=NULL))
+#' }
 anndata_to_ctd <- function(obj,
                            annotLevels,
                            dataset = basename(tempfile()),

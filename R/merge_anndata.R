@@ -10,9 +10,11 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("anndata")
 #' obj_list <- Seurat::SplitObject(obj,split.by = "groups")
 #' obj2 <- merge_seurat(obj_list)
+#' }
 merge_anndata <- function(obj_list,
                           axis = 0L,
                           join = "outer",
