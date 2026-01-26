@@ -15,7 +15,9 @@
 #' #### Usage ####
 #' adata <- example_anndata()
 #' }
-#' @inheritParams anndata::read_h5ad
+#' @param backed If \code{'r'}, load AnnData in backed mode (read-only).
+#'   If \code{'r+'}, load in backed mode with write permission.
+#'   If \code{NULL}, load into memory.
 #'
 #' @keywords internal
 #' @importFrom echoconda activate_env

@@ -3,7 +3,7 @@
 #' @param method R package to use when converting object.
 #' @inheritParams converters
 #' @inheritParams to_anndata
-#' @inheritDotParams anndata::write_h5ad
+#' @param ... Additional arguments passed to write functions.
 #' @export
 #' @examples
 #' obj <- example_obj("seurat")

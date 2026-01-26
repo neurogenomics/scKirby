@@ -5,7 +5,15 @@
 #' or paths to \link[anndata]{AnnData} objects
 #' saved to disk as \emph{.h5ad} files.
 #' @inheritParams converters
-#' @inheritParams anndata::concat
+#' @param axis Which axis to concatenate along (0 = obs, 1 = var).
+#' @param join How to join the obs/var (outer, inner).
+#' @param merge How to resolve duplicate keys in uns.
+#' @param uns_merge How to merge uns.
+#' @param label Column in obs to place batch info.
+#' @param keys Use these as keys for labels instead of object names.
+#' @param index_unique Make indices unique by appending a number.
+#' @param fill_value Fill value for missing entries.
+#' @param pairwise Whether to concatenate pairwise.
 #' @returns A merged \link[anndata]{AnnData} object.
 #'
 #' @export

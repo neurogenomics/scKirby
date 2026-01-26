@@ -7,14 +7,18 @@ skip_if_no_python <- function() {
 }
 
 skip_if_no_anndata <- function() {
-  # Check R anndata package is available with working basilisk
+  # Check basilisk.utils compatibility first (required by anndata)
+  # Do NOT load anndata - check basilisk.utils independently
+  if (!requireNamespace("basilisk.utils", quietly = TRUE)) {
+    testthat::skip("basilisk.utils not installed")
+  }
+  # Check the function exists before loading anndata
+  if (!"activateEnvironment" %in% getNamespaceExports("basilisk.utils")) {
+    testthat::skip("basilisk.utils activateEnvironment not available (version mismatch)")
+  }
+  # Now safe to check if anndata R package is installed
   if (!requireNamespace("anndata", quietly = TRUE)) {
     testthat::skip("anndata R package not installed")
-  }
-  # Check basilisk.utils compatibility (required by anndata)
-  if (!requireNamespace("basilisk.utils", quietly = TRUE) ||
-      !"activateEnvironment" %in% getNamespaceExports("basilisk.utils")) {
-    testthat::skip("basilisk.utils activateEnvironment not available")
   }
   # Also check Python anndata module
   skip_if_no_python()
