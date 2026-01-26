@@ -51,7 +51,7 @@ if(HAS_MONOCLE) cds <- example_obj("cds")
 ctd <- example_obj("ctd")
 if(HAS_ANNDATA) adat <- example_obj("anndata")
 library(Seurat)
-loom <- example_obj("loom")
+if(HAS_SEURATDISK) loom <- example_obj("loom")
 ```
 
 
@@ -183,20 +183,20 @@ From [loomR](https://github.com/mojaveazure/loomR) package
 
 ### As `SingleCellExperiment`  
 
-```{r loom}   
-## In memory 
+```{r loom, eval=HAS_SEURATDISK}
+## In memory
 sce2 <- ingest_data(obj=loom) 
 
 ## From disk 
 sce3 <- ingest_data(obj=loom$filename)
 ```
 
-### As `Seurat`  
+### As `Seurat`
 
-```{r}  
-## In memory 
-seurat2 <- ingest_data(obj=loom, 
-                       output_type = "Seurat") 
+```{r loom-seurat, eval=HAS_SEURATDISK}
+## In memory
+seurat2 <- ingest_data(obj=loom,
+                       output_type = "Seurat")
 
 ## From disk
 print(loom$filename)
