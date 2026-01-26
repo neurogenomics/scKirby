@@ -67,7 +67,7 @@ sce2 <- ingest_data(obj = seurat,
 ### As `Seurat` 
 
 ```{r}
-counts <- get_x(seurat, n=1)[[1]]
+counts <- get_x(seurat, n=1)
 seurat <- ingest_data(obj=counts,
                       output_type = "Seurat")
 ```
