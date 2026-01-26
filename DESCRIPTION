@@ -28,8 +28,7 @@ Imports:
   S4Vectors, 
   Seurat,
   SeuratObject,
-  SeuratDisk, 
-  anndata,
+  SeuratDisk,
   SummarizedExperiment,
   SingleCellExperiment,
   LoomExperiment,
@@ -39,6 +38,7 @@ Imports:
   HDF5Array,
   tidyr
 Suggests:
+  anndata,
   rworkflows,
   rmarkdown,
   knitr,
