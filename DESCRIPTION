@@ -38,7 +38,6 @@ Imports:
   tidyr
 Suggests:
   anndata,
-  echoconda,
   rworkflows,
   rmarkdown,
   knitr,
@@ -56,7 +55,6 @@ Suggests:
   WGCNA,
   SeuratWrappers
 Remotes:
-  github::RajLabMSSM/echoconda,
   github::mojaveazure/seurat-disk,
   github::mojaveazure/loomR,
   github::cellgeni/sceasy,
