@@ -9,8 +9,10 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("cds")
 #' obj2 <- to_dataframe(obj)
+#' }
 to_dataframe <- function(obj,
                          n = 1,
                          verbose = TRUE,

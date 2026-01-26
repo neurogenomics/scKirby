@@ -105,7 +105,7 @@ get_varm <- function(obj,
     #   loadings="reducedDimA")
     varm <- if (methods::.hasSlot(obj,"reducedDimA") &&
                ncol(obj@reducedDimA)==nrow(obj) ) {
-      list(reducedDimA=t(methods::layer(obj, "reducedDimA")))
+      list(reducedDimA=t(methods::slot(obj, "reducedDimA")))
     } else {
       return(NULL)
     }

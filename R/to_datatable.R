@@ -9,8 +9,10 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("cds")
-#' obj2 <- to_dataframe(obj)
+#' obj2 <- to_datatable(obj)
+#' }
 to_datatable <- function(obj,
                          n = 1,
                          verbose = TRUE,
@@ -18,7 +20,7 @@ to_datatable <- function(obj,
 
   #### Check if class is supported ####
   check_supported(obj)
-  ata.table::as.data.table(
+  data.table::as.data.table(
     x = get_x(obj = obj,
               n = n,
               verbose = verbose,

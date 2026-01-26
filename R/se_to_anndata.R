@@ -8,8 +8,10 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("se")
 #' obj2 <- se_to_anndata(obj)
+#' }
 se_to_anndata <- function(obj,
                           method = c("zellkonverter","sceasy"),
                           reimport = TRUE,

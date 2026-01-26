@@ -17,7 +17,6 @@
 #'  The object class that the data gets imported as depends on file type.
 #'
 #' @export
-#' @importFrom echoconda activate_env
 #' @examples
 #' library(Seurat)
 #' obj <- example_obj("loom")

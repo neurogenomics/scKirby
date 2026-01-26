@@ -31,10 +31,12 @@
 #' @export
 #' @import orthogene
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("ad")
 #' obj2 <- map_data(obj = obj,
 #'                  input_species = "human",
 #'                  output_species = "mouse")
+#' }
 map_data <- function(obj,
                      gene_map = NULL,
                      input_col = "input_gene",

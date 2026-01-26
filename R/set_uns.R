@@ -8,11 +8,13 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("ad")
 #' uns <- list("extra_info"=mtcars)
 #' obj2 <- set_uns(obj = obj,
 #'                 uns = mtcars,
 #'                 key = "extra_info")
+#' }
 set_uns <- function(obj,
                     uns,
                     key,

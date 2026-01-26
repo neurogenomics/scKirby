@@ -17,19 +17,17 @@ Depends: R (>= 3.6.0)
 SystemRequirements: Python (>= 3.7.0) 
 biocViews:
   Software, SingleCell
-Imports: 
-  orthogene, 
-  echoconda,
+Imports:
+  orthogene,
   EWCE,
-  ewceData, 
+  ewceData,
   data.table,
-  Matrix,  
+  Matrix,
   reticulate,
-  S4Vectors, 
+  S4Vectors,
   Seurat,
   SeuratObject,
-  SeuratDisk, 
-  anndata,
+  SeuratDisk,
   SummarizedExperiment,
   SingleCellExperiment,
   LoomExperiment,
@@ -37,33 +35,29 @@ Imports:
   BiocParallel,
   parallel,
   HDF5Array,
-  tidyr
-Suggests: 
+  tidyr,
+  future
+Suggests:
+  anndata,
   rworkflows,
   rmarkdown,
   knitr,
   loomR,
   sceasy,
-  leidenbase,
   speedglm,
-  monocle3,
   monocle,
   SCopeLoomR,
   zellkonverter,
   anndataR,
-  future,
   testthat (>= 3.0.0),
   WGCNA
 Remotes:
-  github::RajLabMSSM/echoconda, 
-  github::mojaveazure/seurat-disk, 
+  github::mojaveazure/seurat-disk,
   github::mojaveazure/loomR,
   github::cellgeni/sceasy,
-  github::cole-trapnell-lab/leidenbase, 
   github::cran/speedglm,
-  github::cole-trapnell-lab/monocle3,
   github::aertslab/SCopeLoomR,
   github::scverse/anndataR
 VignetteBuilder: knitr
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Config/testthat/edition: 3

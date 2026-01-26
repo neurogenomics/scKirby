@@ -8,8 +8,10 @@
 #' @inheritParams ingest_data
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("cds")
 #' filepath <- save_data(obj)
+#' }
 save_data <- function(obj,
                       filetype = c("h5","h5seurat","h5ad",
                                    "rda","rds",

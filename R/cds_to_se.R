@@ -5,8 +5,10 @@
 #' @inheritParams get_x
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("cds")
 #' obj2 <- cds_to_se(obj)
+#' }
 cds_to_se <- function(obj,
                       as_sce=FALSE,
                       as_sparse=TRUE,

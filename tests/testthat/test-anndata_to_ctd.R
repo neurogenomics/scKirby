@@ -1,5 +1,5 @@
 test_that("anndata_to_ctd works", {
-
+  skip_if_no_anndata()
   obj <- example_obj("anndata")
   testthat::expect_error(
     anndata_to_ctd(obj)

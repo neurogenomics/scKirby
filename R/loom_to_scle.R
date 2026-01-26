@@ -4,9 +4,11 @@
 #' @inheritDotParams LoomExperiment::SingleCellLoomExperiment
 #' @export
 #' @examples
+#' \dontrun{
 #' library(Seurat)
 #' obj <-  example_obj("loom")
 #' sce <- loom_to_scle(obj)
+#' }
 loom_to_scle <- function(obj,
                          verbose=TRUE,
                          ...){

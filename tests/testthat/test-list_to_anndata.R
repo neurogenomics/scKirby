@@ -1,5 +1,5 @@
 test_that("list_to_anndata works", {
-
+  skip_if_no_anndata()
   #### From obj ####
   obj <- example_obj("list")
   obj2 <- list_to_anndata(obj)

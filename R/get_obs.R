@@ -8,7 +8,7 @@
 #'
 #' @export
 #' @examples
-#' obj <- example_obj("scle")
+#' obj <- example_obj("seurat")
 #' obs <- get_obs(obj)
 get_obs <- function(obj,
                     rownames_col=NULL,

@@ -5,9 +5,11 @@
 #' @inheritDotParams SeuratDisk::LoadLoom
 #' @export
 #' @examples
+#' \dontrun{
 #' library(Seurat)
 #' obj <- example_obj("loom")
 #' obj2 <- loom_to_se(obj)
+#' }
 loom_to_se <- function(obj,
                        as_sce=FALSE,
                        verbose=TRUE,

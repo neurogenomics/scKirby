@@ -2,8 +2,10 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("anndata")
 #' obj2 <- anndata_to_list(obj)
+#' }
 anndata_to_list <- function(obj,
                             verbose=TRUE){
 

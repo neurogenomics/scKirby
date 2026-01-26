@@ -10,8 +10,10 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("cds")
 #' obj2 <- to_anndata(obj)
+#' }
 to_anndata <- function(obj,
                        save_path = tempfile(fileext = ".h5ad"),
                        reimport = FALSE,

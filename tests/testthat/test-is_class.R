@@ -1,5 +1,4 @@
-test_that("is_class works", {
-
+test_that("is_class works for basic types", {
   dict <- dict_class()
   names(dict)
   #### ewce ####
@@ -11,12 +10,6 @@ test_that("is_class works", {
   obj <- example_obj("matrix")
   testthat::expect_true(
     is_class(obj,"matrix")
-  )
-  #### loom ####
-  library(Seurat)
-  obj <- example_obj("loom")
-  testthat::expect_true(
-    is_class(obj,"loom")
   )
   #### se ####
   obj <- example_obj("se")
@@ -31,27 +24,40 @@ test_that("is_class works", {
   testthat::expect_true(
     is_class(obj,"se")
   )
-  #### anndata ####
-  obj <- example_obj("anndata")
-  testthat::expect_true(
-    is_class(obj,"anndata")
-  )
   #### seurat ####
   obj <- example_obj("Seurat")
   testthat::expect_true(
     is_class(obj,"seurat")
   )
-  #### h5Seurat ####
+})
+
+test_that("is_class works for loom", {
+  skip_if_no_loomr()
+  library(Seurat)
+  obj <- example_obj("loom")
+  testthat::expect_true(
+    is_class(obj,"loom")
+  )
+})
+
+test_that("is_class works for anndata", {
+  skip_if_no_anndata()
+  obj <- example_obj("anndata")
+  testthat::expect_true(
+    is_class(obj,"anndata")
+  )
+})
+
+test_that("is_class works for h5Seurat", {
+  skip_if_no_seuratdisk()
   obj <- example_obj("h5Seurat")
   testthat::expect_true(
     is_class(obj,"h5Seurat")
   )
-  #### cds ####
-  obj <- example_obj("cds")
-  testthat::expect_true(
-    is_class(obj,"cds")
-  )
-  #### cds ####
+})
+
+test_that("is_class works for cds", {
+  skip_if_no_monocle3()
   obj <- example_obj("cds")
   testthat::expect_true(
     is_class(obj,"cds")

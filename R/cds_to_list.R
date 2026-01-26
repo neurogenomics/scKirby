@@ -3,8 +3,10 @@
 #' @inheritParams converters
 #' @export
 #' @examples
+#' \dontrun{
 #' obj <- example_obj("cds")
 #' obj2 <- cds_to_list(obj)
+#' }
 cds_to_list <- function(obj,
                         as_sparse = TRUE,
                         verbose = TRUE){

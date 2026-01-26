@@ -11,6 +11,24 @@ vignette: >
 
 ```{r setup}
 library(scKirby)
+# Check if anndata is available (basilisk compatibility varies by platform)
+# Using simple namespace check - don't actually load the package
+HAS_ANNDATA <- tryCatch({
+  requireNamespace("anndata", quietly=TRUE) &&
+  requireNamespace("basilisk.utils", quietly=TRUE) &&
+  "activateEnvironment" %in% getNamespaceExports("basilisk.utils")
+}, error = function(e) FALSE)
+
+# Check if monocle is available for CDS examples
+HAS_MONOCLE <- requireNamespace("monocle", quietly=TRUE)
+
+# Check if SeuratDisk is compatible with current Seurat version
+# SeuratDisk uses deprecated 'slot' argument in GetAssayData, which is defunct in Seurat v5
+HAS_SEURATDISK <- tryCatch({
+  requireNamespace("SeuratDisk", quietly=TRUE) &&
+  requireNamespace("Seurat", quietly=TRUE) &&
+  utils::packageVersion("Seurat") < package_version("5.0.0")
+}, error = function(e) FALSE)
 ```
 
 # Intro 
@@ -25,15 +43,15 @@ library(scKirby)
 
 ```{r}
 seurat <- example_obj("seurat")
-h5seurat <- example_obj("h5seurat")
+if(HAS_SEURATDISK) h5seurat <- example_obj("h5seurat")
 sce <- example_obj("sce")
 se <- example_obj("se")
 h5 <- example_obj("h5")
-cds <- example_obj("cds")
+if(HAS_MONOCLE) cds <- example_obj("cds")
 ctd <- example_obj("ctd")
-adat <- example_obj("anndata")
+if(HAS_ANNDATA) adat <- example_obj("anndata")
 library(Seurat)
-loom <- example_obj("loom")
+if(HAS_SEURATDISK) loom <- example_obj("loom")
 ```
 
 
@@ -49,8 +67,9 @@ sce2 <- ingest_data(obj = seurat,
 ### As `Seurat` 
 
 ```{r}
-seurat <- ingest_data(obj=seurat@assays$RNA@counts, 
-                      output_type = "Seurat") 
+counts <- get_x(seurat, n=1)
+seurat <- ingest_data(obj=counts,
+                      output_type = "Seurat")
 ```
 
 
@@ -92,13 +111,12 @@ In-memory
 sce.2 <- ingest_data(obj=seurat)
 ```
 
-### Ingest H5Seurat  
+### Ingest H5Seurat
 
-On-disk 
+On-disk (requires SeuratDisk compatible with current Seurat version)
 
-```{r H5Seurat}   
-
-seurat.2 <- ingest_data(obj = h5seurat, 
+```{r H5Seurat, eval=HAS_SEURATDISK}
+seurat.2 <- ingest_data(obj = h5seurat,
                         output_class = "seurat")
 ```
 
@@ -109,12 +127,14 @@ seurat.2 <- ingest_data(obj = h5seurat,
 
 ### As `SingleCellExperiment`  
 
-```{r HDF5}   
+```{r HDF5}
 ## Read in the sce object directly
 h5.2 <- ingest_data(obj=h5)
+```
 
-## Read it from disk
-sce_dir <- dirname(se_filepath(h5.2))
+```{r HDF5-disk, eval=FALSE}
+## Read from disk (requires knowing the HDF5 directory path)
+sce_dir <- dirname(path(assay(h5.2)))
 h5.3 <- ingest_data(obj=sce_dir)
 ```
 
@@ -126,22 +146,22 @@ h5.4 <- ingest_data(obj = h5,
                     output_type = "Seurat") 
 ```
 
-## Ingest CellDataSet 
+## Ingest CellDataSet
 
-```{r}  
+```{r, eval=HAS_MONOCLE}
 seurat.2 <- ingest_data(obj=cds,
-                        output_type = "Seurat") 
+                        output_type = "Seurat")
 ```
 
 
 
-## Ingest AnnData 
+## Ingest AnnData
 
-### As `SingleCellExperiment`  
+### As `SingleCellExperiment`
 
-```{r AnnData}
-# ### Set condaenv= to the name of a conda env you've made 
-# reticulate::use_condaenv(condaenv = "echoR") 
+```{r AnnData, eval=HAS_ANNDATA}
+# ### Set condaenv= to the name of a conda env you've made
+# reticulate::use_condaenv(condaenv = "echoR")
 ## In memory
 sce.2 <- ingest_data(obj=adat)
 
@@ -151,10 +171,10 @@ path <- save_data(obj = adat,
 sce.3 <- ingest_data(obj = path)
 ```
 
-### As `Seurat` 
+### As `Seurat`
 
-```{r}
-seurat.2 <- ingest_data(obj=adat, 
+```{r eval=HAS_ANNDATA}
+seurat.2 <- ingest_data(obj=adat,
                       output_type = "Seurat")
 ```
 
@@ -165,20 +185,20 @@ From [loomR](https://github.com/mojaveazure/loomR) package
 
 ### As `SingleCellExperiment`  
 
-```{r loom}   
-## In memory 
+```{r loom, eval=HAS_SEURATDISK}
+## In memory
 sce2 <- ingest_data(obj=loom) 
 
 ## From disk 
 sce3 <- ingest_data(obj=loom$filename)
 ```
 
-### As `Seurat`  
+### As `Seurat`
 
-```{r}  
-## In memory 
-seurat2 <- ingest_data(obj=loom, 
-                       output_type = "Seurat") 
+```{r loom-seurat, eval=HAS_SEURATDISK}
+## In memory
+seurat2 <- ingest_data(obj=loom,
+                       output_type = "Seurat")
 
 ## From disk
 print(loom$filename)
